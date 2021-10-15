@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 山河远阔">
+    <meta name="keywords" content="阿里云视频点播(sdk)的使用姿势, 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 山河远阔</title>
+    <title>阿里云视频点播(sdk)的使用姿势 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">阿里云视频点播(sdk)的使用姿势</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/sdk/">
+                                <span class="chip bg-color">sdk</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
+                                阿里云服务
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -445,7 +458,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-14
+                    2021-05-20
                 </div>
                 
 
@@ -466,19 +479,106 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+                <h1 id="视频点播（SDK）"><a href="#视频点播（SDK）" class="headerlink" title="视频点播（SDK）"></a>视频点播（SDK）</h1><p><strong>阿里云文档地址：</strong></p>
+<pre><code>https://help.aliyun.com/document_detail/57756.html?spm=a2c4g.11186623.6.1037.2bd84e28xsVzg2
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖:"></a>1、引入依赖:</h2><pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.5.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-vod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.15.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-sdk-vod-upload<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.4.13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>fastjson<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.62<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+<h2 id="2、初始化对象："><a href="#2、初始化对象：" class="headerlink" title="2、初始化对象："></a>2、初始化对象：</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InitObject</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> DefaultAcsClient <span class="token function">initVodClient</span><span class="token punctuation">(</span>String accessKeyId<span class="token punctuation">,</span> String accessKeySecret<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClientException <span class="token punctuation">{</span>
+        String regionId <span class="token operator">=</span> <span class="token string">"cn-shanghai"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 点播服务接入区域</span>
+        DefaultProfile profile <span class="token operator">=</span> DefaultProfile<span class="token punctuation">.</span><span class="token function">getProfile</span><span class="token punctuation">(</span>regionId<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        DefaultAcsClient client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultAcsClient</span><span class="token punctuation">(</span>profile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> client<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+<h2 id="3、获取视频相关信息："><a href="#3、获取视频相关信息：" class="headerlink" title="3、获取视频相关信息："></a>3、获取视频相关信息：</h2><h3 id="3-1、根据视频id获取视频的播放地址："><a href="#3-1、根据视频id获取视频的播放地址：" class="headerlink" title="3.1、根据视频id获取视频的播放地址："></a>3.1、根据视频id获取视频的播放地址：</h3><p>注：加密后的视频不能直接通过地址访问</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestVod</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClientException <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//  1、根据是视频id获取视频的播放地址</span>
+        <span class="token comment" spellcheck="true">//（1）创建初始化对象 参数：阿里云oss的上传密钥（此处替换成你自己的）</span>
+        DefaultAcsClient client <span class="token operator">=</span> InitObject<span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (2) 创建获取视频地址request 和response</span>
+        GetPlayInfoRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GetPlayInfoResponse response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (3) 向request对象里面设置视频id</span>
+        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
+        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        List<span class="token operator">&lt;</span>GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo<span class="token operator">></span> playInfoList <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getPlayInfoList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//播放地址</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo playInfo <span class="token operator">:</span> playInfoList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"PlayInfo.PlayURL = "</span> <span class="token operator">+</span> playInfo<span class="token punctuation">.</span><span class="token function">getPlayURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">//Base信息</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoBase.Title = "</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoBase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="3-2、根据视频id获取视频的播放凭证："><a href="#3-2、根据视频id获取视频的播放凭证：" class="headerlink" title="3.2、根据视频id获取视频的播放凭证："></a>3.2、根据视频id获取视频的播放凭证：</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//  2、根据视频id获取视频播放凭证</span>
+        <span class="token comment" spellcheck="true">//（1）创建初始化对象 参数：阿里云oss的上传密钥</span>
+        DefaultAcsClient client <span class="token operator">=</span> InitObject<span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (2) 创建获取视频凭证request 和response</span>
+        GetVideoPlayAuthRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GetVideoPlayAuthResponse response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (3) 向request对象里面设置视频id</span>
+        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment" spellcheck="true">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
+        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"视频播放凭证为："</span><span class="token operator">+</span>response<span class="token punctuation">.</span><span class="token function">getPlayAuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="4、视频上传"><a href="#4、视频上传" class="headerlink" title="4、视频上传"></a>4、视频上传</h2><h3 id="4-1、本地视频上传"><a href="#4-1、本地视频上传" class="headerlink" title="4.1、本地视频上传"></a>4.1、本地视频上传</h3><pre class=" language-java"><code class="language-java"> String accessKeyId <span class="token operator">=</span> <span class="token string">"LTAI4GHiEnHDNfi7aLPsPEGR"</span><span class="token punctuation">;</span>
+        String accessKeySecret <span class="token operator">=</span> <span class="token string">"8mBDhpBVdSVpA6RNWbUDjnH4ZLQags"</span><span class="token punctuation">;</span>
+
+        String title <span class="token operator">=</span> <span class="token string">"6 - What If I Want to Move Faster - upload by sdk"</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//上传之后文件名称</span>
+        String fileName <span class="token operator">=</span> <span class="token string">"D:/Project/项目资料/1-阿里云上传测试视频/test.mp4"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//本地文件路径和名称</span>
+        <span class="token comment" spellcheck="true">//上传视频的方法</span>
+        UploadVideoRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoRequest</span><span class="token punctuation">(</span>accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">,</span> title<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* 可指定分片上传时每个分片的大小，默认为2M字节 */</span>
+        request<span class="token punctuation">.</span><span class="token function">setPartSize</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">*</span> 1024L<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* 可指定分片上传时的并发线程数，默认为1，(注：该配置会占用服务器CPU资源，需根据服务器情况指定）*/</span>
+        request<span class="token punctuation">.</span><span class="token function">setTaskNum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        UploadVideoImpl uploader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        UploadVideoResponse response <span class="token operator">=</span> uploader<span class="token punctuation">.</span><span class="token function">uploadVideo</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">isSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">/* 如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因 */</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorCode="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorMessage="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+</code></pre>
 
                 
             </div>
@@ -495,7 +595,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">wumangeng</a>
+                    <a href="/about" rel="external nofollow noreferrer">吴漫耕</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -505,7 +605,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/10/14/hello-world/">http://wumangeng.github.io/2021/10/14/hello-world/</a>
+                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/">http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -518,7 +618,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">wumangeng</a>
+                    <a href="/about" target="_blank">吴漫耕</a>
                     !
                 </span>
             </div>
@@ -542,7 +642,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/sdk/">
+                                    <span class="chip bg-color">sdk</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -712,10 +816,9 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2021/10/14/hello-world/">
                     <div class="card-image">
@@ -733,9 +836,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -744,7 +847,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
@@ -755,18 +857,18 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-shi-pin-dian-bo/">
+                <a href="/2021/05/20/a-li-yun-oss/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto" class="responsive-img" alt="阿里云视频点播(sdk)的使用姿势">
+                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
                         
-                        <span class="card-title">阿里云视频点播(sdk)的使用姿势</span>
+                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示sdk在java服务端的使用方式。
+                            本文将演示oss在java服务端的使用方式。
                         
                     </div>
                     <div class="publish-info">
@@ -788,8 +890,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sdk/">
-                        <span class="chip bg-color">sdk</span>
+                    <a href="/tags/oss/">
+                        <span class="chip bg-color">oss</span>
                     </a>
                     
                 </div>

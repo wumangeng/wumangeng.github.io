@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 山河远阔">
+    <meta name="keywords" content="阿里云对象存储(oss)的使用姿势, 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 山河远阔</title>
+    <title>阿里云对象存储(oss)的使用姿势 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">阿里云对象存储(oss)的使用姿势</h1>
                 </div>
             </div>
         </div>
@@ -431,12 +431,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/oss/">
+                                <span class="chip bg-color">oss</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
+                                阿里云服务
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -445,7 +458,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-14
+                    2021-05-20
                 </div>
                 
 
@@ -466,19 +479,138 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span>
+                <h1 id="阿里云OSS使用"><a href="#阿里云OSS使用" class="headerlink" title="阿里云OSS使用"></a>阿里云OSS使用</h1><ul>
+<li>首先在使用之前请先确保你已经申请了阿里云的oss对象存储服务（如果没有请先申请）</li>
+<li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
+</ul>
+<h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
+<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">#服务名</span>
+<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">service-oss</span>
+
+<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8086</span>
+
+<span class="token attr-name">spring.profiles.active</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
+
+<span class="token comment" spellcheck="true">#阿里云oss配置 （以下信息替换成你自己的）</span>
+<span class="token attr-name">aliyun.oss.file.endpoint</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
+<span class="token attr-name">aliyun.oss.file.keyid</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
+<span class="token attr-name">aliyun.oss.file.keysecret</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
+<span class="token comment" spellcheck="true">#bucket可以在控制台创建，也可以使用java代码创建</span>
+<span class="token attr-name">aliyun.oss.file.bucketname</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server
+<h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span><span class="token punctuation">(</span>exclude <span class="token operator">=</span> DataSourceAutoConfiguration<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类不加载数据库</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"com.hscs"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//扫描包</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssApplication</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>OssApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate
+<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConstantPropertiesUtlis</span> <span class="token keyword">implements</span> <span class="token class-name">InitializingBean</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.endpoint}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String endpoint<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.keyid}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String keyId<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.keysecret}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String keySecret<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.bucketname}"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String bucketName<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String END_POINT<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_ID<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_SECRET<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String BUCKET_NAME<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afterPropertiesSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
+        END_POINT<span class="token operator">=</span>endpoint<span class="token punctuation">;</span>
+        KEY_ID<span class="token operator">=</span>keyId<span class="token punctuation">;</span>
+        KEY_SECRET<span class="token operator">=</span>keySecret<span class="token punctuation">;</span>
+        BUCKET_NAME<span class="token operator">=</span>bucketName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy
+<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"oss/fileoss"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@CrossOrigin</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> OssService ossService<span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 上传头像
+     * */</span>
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> R <span class="token function">uploadFileOss</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        String url<span class="token operator">=</span>ossService<span class="token punctuation">.</span><span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> R<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"url"</span><span class="token punctuation">,</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
 </code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//接口</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OssService</span> <span class="token punctuation">{</span>
+    String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//类</span>
+<span class="token comment" spellcheck="true">/**
+ * @author wmg
+ *  文件上传业务实现
+ */</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">OssService</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String endpoint <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>END_POINT<span class="token punctuation">;</span>
+        String accessKeyId <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_ID<span class="token punctuation">;</span>
+        String accessKeySecret <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_SECRET<span class="token punctuation">;</span>
+        String bucketName<span class="token operator">=</span>ConstantPropertiesUtlis<span class="token punctuation">.</span>BUCKET_NAME<span class="token punctuation">;</span>
+
+        <span class="token keyword">try</span><span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 创建OSSClient实例。</span>
+            OSS ossClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OSSClientBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span>endpoint<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">//获取文件名称</span>
+            String fileName <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getOriginalFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖</span>
+            String uuid <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            fileName<span class="token operator">=</span>uuid<span class="token operator">+</span>fileName<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//将文件按日期分类</span>
+            String datePath <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            fileName<span class="token operator">=</span>datePath<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 上传文件流。</span>
+            InputStream inputStream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//第一个参数为bucket名  第二个参数为上传文件路径</span>
+            ossClient<span class="token punctuation">.</span><span class="token function">putObject</span><span class="token punctuation">(</span>bucketName<span class="token punctuation">,</span> fileName<span class="token punctuation">,</span> inputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment" spellcheck="true">//将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg</span>
+            String url<span class="token operator">=</span><span class="token string">"https://"</span><span class="token operator">+</span>bucketName<span class="token operator">+</span><span class="token string">"."</span><span class="token operator">+</span>endpoint<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
+
+
+            <span class="token comment" spellcheck="true">// 关闭OSSClient。</span>
+            ossClient<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> url<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"图片上传失败！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre>
 
                 
             </div>
@@ -495,7 +627,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">wumangeng</a>
+                    <a href="/about" rel="external nofollow noreferrer">吴漫耕</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -505,7 +637,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/10/14/hello-world/">http://wumangeng.github.io/2021/10/14/hello-world/</a>
+                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/">http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -518,7 +650,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">wumangeng</a>
+                    <a href="/about" target="_blank">吴漫耕</a>
                     !
                 </span>
             </div>
@@ -542,7 +674,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/oss/">
+                                    <span class="chip bg-color">oss</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -712,48 +848,9 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
-            <div class="card">
-                <a href="/2021/10/14/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-14
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            wumangeng
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-            </div>
-        </div>
-        
-        
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
                 <a href="/2021/05/20/a-li-yun-shi-pin-dian-bo/">
                     <div class="card-image">
@@ -770,9 +867,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -790,6 +887,58 @@
                     
                     <a href="/tags/sdk/">
                         <span class="chip bg-color">sdk</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/02/25/jwt/">
+                    <div class="card-image">
+                        
+                        <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/jwt.jpeg" class="responsive-img" alt="JWT的使用姿势">
+                        
+                        <span class="card-title">JWT的使用姿势</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            通过本文你将认识jwt，并且学会使用jwt。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-02-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Security/" class="post-category">
+                                    Security
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/jwt/">
+                        <span class="chip bg-color">jwt</span>
+                    </a>
+                    
+                    <a href="/tags/token/">
+                        <span class="chip bg-color">token</span>
                     </a>
                     
                 </div>
