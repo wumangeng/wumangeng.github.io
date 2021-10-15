@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-10-15T04:06:47.462Z</updated>
+  <updated>2021-10-15T09:44:46.204Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://wumangeng.github.io/2021/10/14/hello-world/"/>
-    <id>http://wumangeng.github.io/2021/10/14/hello-world/</id>
-    <published>2021-10-14T06:51:25.218Z</published>
-    <updated>2021-10-15T04:06:47.462Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>NIO</title>
