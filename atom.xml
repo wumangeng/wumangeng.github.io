@@ -38,6 +38,61 @@
   </entry>
   
   <entry>
+    <title>NIO</title>
+    <link href="http://wumangeng.github.io/2021/10/02/nio/"/>
+    <id>http://wumangeng.github.io/2021/10/02/nio/</id>
+    <published>2021-10-02T07:10:30.000Z</published>
+    <updated>2021-10-15T09:44:46.204Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;NIO-编程&quot;&gt;&lt;a href=&quot;#NIO-编程&quot; class=&quot;headerlink&quot; title=&quot;NIO 编程&quot;&gt;&lt;/a&gt;NIO 编程&lt;/h1&gt;&lt;h2 id=&quot;1-NIO-基本介绍&quot;&gt;&lt;a href=&quot;#1-NIO-基本介绍&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="NIO" scheme="http://wumangeng.github.io/tags/NIO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BIO</title>
+    <link href="http://wumangeng.github.io/2021/10/01/bio/"/>
+    <id>http://wumangeng.github.io/2021/10/01/bio/</id>
+    <published>2021-10-01T07:10:30.000Z</published>
+    <updated>2021-10-15T09:17:29.596Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、-I-O-模型&quot;&gt;&lt;a href=&quot;#1、-I-O-模型&quot; class=&quot;headerlink&quot; title=&quot;1、 I/O 模型&quot;&gt;&lt;/a&gt;1、 I/O 模型&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;I/O&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
+    
+  </entry>
+  
+  <entry>
     <title>阿里云视频点播(sdk)的使用姿势</title>
     <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/"/>
     <id>http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</id>
