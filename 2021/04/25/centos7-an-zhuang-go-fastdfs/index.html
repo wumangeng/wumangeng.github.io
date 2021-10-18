@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="BIO, 山河远阔">
+    <meta name="keywords" content="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web, 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>BIO | 山河远阔</title>
+    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">BIO</h1>
+                    <h1 class="description center-align post-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +433,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                                <span class="chip bg-color">IO网络编程</span>
+                            <a href="/tags/CentOS7/">
+                                <span class="chip bg-color">CentOS7</span>
                             </a>
                         
-                            <a href="/tags/BIO/">
-                                <span class="chip bg-color">BIO</span>
+                            <a href="/tags/go-fastdfs/">
+                                <span class="chip bg-color">go-fastdfs</span>
                             </a>
                         
                     </div>
@@ -449,8 +449,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
-                                IO网络编程
+                            <a href="/categories/go-fastdfs/" class="post-category">
+                                go-fastdfs
                             </a>
                         
                     </div>
@@ -471,7 +471,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-01
+                    2021-04-25
                 </div>
                 
 
@@ -492,115 +492,62 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、-I-O-模型"><a href="#1、-I-O-模型" class="headerlink" title="1、 I/O 模型"></a>1、 I/O 模型</h2><ol>
-<li><code>I/O</code> 模型简单的理解：就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能。</li>
-<li><code>Java</code> 共支持 <code>3</code> 种网络编程模型 <code>I/O</code> 模式：<code>BIO</code>、<code>NIO</code>、<code>AIO</code>。</li>
-<li><code>Java BIO</code>：同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。【简单示意图】</li>
-</ol>
-<p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_01.png" alt="img"></p>
-<ol>
-<li><code>Java NIO</code>：同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 <code>I/O</code> 请求就进行处理。【简单示意图】</li>
-</ol>
-<p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_02.png" alt="img"></p>
-<ol>
-<li><code>Java AIO(NIO.2)</code>：异步非阻塞，<code>AIO</code> 引入异步通道的概念，采用了 <code>Proactor</code> 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</li>
-<li>我们依次展开讲解。</li>
-</ol>
-<h2 id="2-、BIO、NIO、AIO-使用场景分析"><a href="#2-、BIO、NIO、AIO-使用场景分析" class="headerlink" title="2 、BIO、NIO、AIO 使用场景分析"></a>2 、BIO、NIO、AIO 使用场景分析</h2><ol>
-<li><code>BIO</code> 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，<code>JDK1.4</code> 以前的唯一选择，但程序简单易理解。</li>
-<li><code>NIO</code> 方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，弹幕系统，服务器间通讯等。编程比较复杂，<code>JDK1.4</code> 开始支持。</li>
-<li><code>AIO</code> 方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 <code>OS</code> 参与并发操作，编程比较复杂，<code>JDK7</code> 开始支持。</li>
-</ol>
-<h2 id="3、-BIO-基本介绍"><a href="#3、-BIO-基本介绍" class="headerlink" title="3、 BIO 基本介绍"></a>3、 BIO 基本介绍</h2><ol>
-<li><code>Java BIO</code> 就是传统的 <code>Java I/O</code> 编程，其相关的类和接口在 <code>java.io</code>。</li>
-<li><code>BIO(BlockingI/O)</code>：同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善（实现多个客户连接服务器）。【后有应用实例】</li>
-<li><code>BIO</code> 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，<code>JDK1.4</code> 以前的唯一选择，程序简单易理解。</li>
-</ol>
-<h2 id="4、-BIO-工作机制"><a href="#4、-BIO-工作机制" class="headerlink" title="4、 BIO 工作机制"></a>4、 BIO 工作机制</h2><p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_03.png" alt="img"></p>
-<p>对 <code>BIO</code> 编程流程的梳理</p>
-<ol>
-<li>服务器端启动一个 <code>ServerSocket</code>。</li>
-<li>客户端启动 <code>Socket</code> 对服务器进行通信，默认情况下服务器端需要对每个客户建立一个线程与之通讯。</li>
-<li>客户端发出请求后，先咨询服务器是否有线程响应，如果没有则会等待，或者被拒绝。</li>
-<li>如果有响应，客户端线程会等待请求结束后，在继续执行。</li>
-</ol>
-<h2 id="5、-BIO-应用实例"><a href="#5、-BIO-应用实例" class="headerlink" title="5、 BIO 应用实例"></a>5、 BIO 应用实例</h2><p>实例说明：</p>
-<ol>
-<li>使用 <code>BIO</code> 模型编写一个服务器端，监听 <code>6666</code> 端口，当有客户端连接时，就启动一个线程与之通讯。</li>
-<li>要求使用线程池机制改善，可以连接多个客户端。</li>
-<li>服务器端可以接收客户端发送的数据（<code>telnet</code> 方式即可）。</li>
-<li>代码演示：</li>
-</ol>
-<pre class=" language-java"><code class="language-java">
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>InputStream<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>ServerSocket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>Socket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>ExecutorService<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>Executors<span class="token punctuation">;</span>
+                <h3 id="1、安装go-fastdfs"><a href="#1、安装go-fastdfs" class="headerlink" title="1、安装go-fastdfs"></a>1、安装go-fastdfs</h3><h4 id="1-1-下载go-fastdfs相关文件并且授予执行权限"><a href="#1-1-下载go-fastdfs相关文件并且授予执行权限" class="headerlink" title="1.1 下载go-fastdfs相关文件并且授予执行权限"></a>1.1 下载go-fastdfs相关文件并且授予执行权限</h4><pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#创建文件夹</span>
+cd <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>
+mkdir go<span class="token operator">-</span>fastdfs
+mkdir go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web
+cd go<span class="token operator">-</span>fastdfs
 
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BIOServer</span> <span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">#如果无法连接github可以换成gitee </span>
+wget https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>releases<span class="token operator">/</span>download<span class="token operator">/</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>0<span class="token operator">/</span>fileserver
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//线程池机制</span>
-        <span class="token comment" spellcheck="true">//思路</span>
-        <span class="token comment" spellcheck="true">//1. 创建一个线程池</span>
-        <span class="token comment" spellcheck="true">//2. 如果有客户端连接，就创建一个线程，与之通讯(单独写一个方法)</span>
-        ExecutorService newCachedThreadPool <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//创建ServerSocket</span>
-        ServerSocket serverSocket <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token number">6666</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"服务器启动了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//监听，等待客户端连接</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"等待连接...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">final</span> Socket socket <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接到一个客户端"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//就创建一个线程，与之通讯(单独写一个方法)</span>
-            newCachedThreadPool<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//我们重写</span>
-                    <span class="token comment" spellcheck="true">//可以和客户端通讯</span>
-                    <span class="token function">handler</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
+wget  https:<span class="token operator">/</span><span class="token operator">/</span>raw<span class="token punctuation">.</span>githubusercontent<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>master<span class="token operator">/</span>control
 
-    <span class="token comment" spellcheck="true">//编写一个handler方法，和客户端通讯</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">handler</span><span class="token punctuation">(</span>Socket socket<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//通过socket获取输入流</span>
-            InputStream inputStream <span class="token operator">=</span> socket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//循环的读取客户端发送的数据</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"read...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> read <span class="token operator">=</span> inputStream<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>read <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> read<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出客户端发送的数据</span>
-                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"关闭和client的连接"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                socket<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>Copy to clipboardErrorCopied
+<span class="token comment" spellcheck="true">#下载完毕进行授权，否则无法执行</span>
+chmod 755 fileserver
+
+chmod 755 control
+
+<span class="token comment" spellcheck="true">#启动（看到running..即为成功，运行成功之后会生成一些文件 ll 可查看）</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span>
+
+<span class="token comment" spellcheck="true"># 放行服务器端口8080后使用如下指令访问</span>
+http:<span class="token operator">/</span><span class="token operator">/</span>你的ip:8080
+<span class="token comment" spellcheck="true">#出现如下页面即可</span>
 </code></pre>
-<h2 id="6、-BIO-问题分析"><a href="#6、-BIO-问题分析" class="headerlink" title="6、 BIO 问题分析"></a>6、 BIO 问题分析</h2><ol>
-<li>每个请求都需要创建独立的线程，与对应的客户端进行数据 <code>Read</code>，业务处理，数据 <code>Write</code>。</li>
-<li>当并发数较大时，需要创建大量线程来处理连接，系统资源占用较大。</li>
-<li>连接建立后，如果当前线程暂时没有数据可读，则线程就阻塞在 <code>Read</code> 操作上，造成线程资源浪费。</li>
-</ol>
+<p><img src="https://img-blog.csdnimg.cn/04a1ac263f4e4813bba05093a239a54e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><strong>修改配置文件</strong><br>go-fastdfs的配置文件在 conf下的cfg.json文件里面 直接 vim conf/cfg.json 进入修改保存即可，配置文件全部有中文注释，白名单中添加本机ip,或者你想放行的ip即可<br><img src="https://img-blog.csdnimg.cn/62dd2b930d1f4ce98847b294d5f273ca.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述">修改完毕保存重启即可</p>
+<pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#启动/停止/重启/查看状态/查看日志</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span><span class="token punctuation">|</span>stop<span class="token punctuation">|</span>restart<span class="token punctuation">|</span>status<span class="token punctuation">|</span>tail
+</code></pre>
+<h3 id="1-2-安装可视化工具go-fastdfs-web"><a href="#1-2-安装可视化工具go-fastdfs-web" class="headerlink" title="1.2 安装可视化工具go-fastdfs-web"></a>1.2 安装可视化工具go-fastdfs-web</h3><p><strong>注：可视化工具需java环境(jdk)未安装可参考以下教程进行安装</strong></p>
+<blockquote>
+<p>安装jdk 教程<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sxdcgaq8080/p/7492426.html">https://www.cnblogs.com/sxdcgaq8080/p/7492426.html</a></p>
+</blockquote>
+<pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#下载可视化资源包（.tar.gz）</span>
+https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>perfree<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">/</span>releases
+
+<span class="token comment" spellcheck="true">#下载完毕上传到go-fastdfs-web目录下解压</span>
+tar <span class="token operator">-</span>zxvf go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">-</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>6<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz
+
+<span class="token comment" spellcheck="true">#进入go-fastdfs-web目录下 分配权限</span>
+chmod <span class="token operator">+</span>x goFastDfsWeb<span class="token punctuation">.</span>sh
+
+<span class="token comment" spellcheck="true">#运行</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
+
+<span class="token comment" spellcheck="true">#开放服务器8088端口 运行成功后</span>
+http:<span class="token operator">/</span><span class="token operator">/</span>ip:8088    <span class="token comment" spellcheck="true">#访问</span>
+
+<span class="token comment" spellcheck="true">#如果启动报  -bash: ./goFastDfsWeb.sh: /bin/bash^M: bad interpreter: No such file or directory</span>
+<span class="token comment" spellcheck="true">#解决方法：</span>
+vim goFastDfsWeb<span class="token punctuation">.</span>sh
+:<span class="token function">set</span> fileformat=unix
+<span class="token comment" spellcheck="true">#保存退出即可</span>
+
+<span class="token comment" spellcheck="true">#运行</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
+</code></pre>
+<p>成功运行后按照界面文字说明注册即可(“注：连接的ip 要在go-fastdfs配置文件的白名单中”)</p>
 
                 
             </div>
@@ -627,7 +574,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/10/01/bio/">http://wumangeng.github.io/2021/10/01/bio/</a>
+                    <a href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/">http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -665,12 +612,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                                    <span class="chip bg-color">IO网络编程</span>
+                                <a href="/tags/CentOS7/">
+                                    <span class="chip bg-color">CentOS7</span>
                                 </a>
                             
-                                <a href="/tags/BIO/">
-                                    <span class="chip bg-color">BIO</span>
+                                <a href="/tags/go-fastdfs/">
+                                    <span class="chip bg-color">go-fastdfs</span>
                                 </a>
                             
                         </div>
@@ -846,30 +793,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/02/nio/">
+                <a href="/2021/05/20/a-li-yun-oss/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=2522228296,3251344747&fm=26&fmt=auto" class="responsive-img" alt="NIO">
+                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
                         
-                        <span class="card-title">NIO</span>
+                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将简述NIO的原理和使用。
+                            本文将演示oss在java服务端的使用方式。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-02
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    IO网络编程
+                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
+                                    阿里云服务
                                 </a>
                             
                             
@@ -879,12 +826,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                        <span class="chip bg-color">IO网络编程</span>
-                    </a>
-                    
-                    <a href="/tags/NIO/">
-                        <span class="chip bg-color">NIO</span>
+                    <a href="/tags/oss/">
+                        <span class="chip bg-color">oss</span>
                     </a>
                     
                 </div>
@@ -898,30 +841,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/">
+                <a href="/2021/04/01/docker-an-zhuang-fu-wu/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto" class="responsive-img" alt="基于java的大疆弓形航线生成算法实现">
+                        <img src="https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto" class="responsive-img" alt="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)">
                         
-                        <span class="card-title">基于java的大疆弓形航线生成算法实现</span>
+                        <span class="card-title">docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将介绍给定任意两个坐标，在这坐标之间生成一些列有序点的坐标的算法。
+                            本文将介绍在docker中安装mysql等服务
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/dji/" class="post-category">
-                                    dji
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
                                 </a>
                             
                             
@@ -931,12 +874,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/dji/">
-                        <span class="chip bg-color">dji</span>
+                    <a href="/tags/CentOS7/">
+                        <span class="chip bg-color">CentOS7</span>
                     </a>
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>

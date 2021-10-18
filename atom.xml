@@ -72,6 +72,33 @@
   </entry>
   
   <entry>
+    <title>基于java的大疆弓形航线生成算法实现</title>
+    <link href="http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/"/>
+    <id>http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/</id>
+    <published>2021-05-25T01:10:20.000Z</published>
+    <updated>2021-10-18T02:40:30.983Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;问题背景：本人在开发过程中，遇到给定两个点的坐标，需要生成大量的有规律的坐标（实际上就是大疆无人机的航线）。查询相关资料发现国内的博客基本都是计算两点距离，计算点到线距离的距离等，有几篇也都是C语言形式。在这些资料的基础上本人继续研究深入，最终调试出了符合本</summary>
+        
+      
+    
+    
+    
+    <category term="dji" scheme="http://wumangeng.github.io/categories/dji/"/>
+    
+    
+    <category term="dji" scheme="http://wumangeng.github.io/tags/dji/"/>
+    
+    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>阿里云视频点播(sdk)的使用姿势</title>
     <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/"/>
     <id>http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</id>
@@ -122,6 +149,33 @@
   </entry>
   
   <entry>
+    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</title>
+    <link href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/"/>
+    <id>http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</id>
+    <published>2021-04-25T01:10:20.000Z</published>
+    <updated>2021-10-18T02:30:33.879Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1、安装go-fastdfs&quot;&gt;&lt;a href=&quot;#1、安装go-fastdfs&quot; class=&quot;headerlink&quot; title=&quot;1、安装go-fastdfs&quot;&gt;&lt;/a&gt;1、安装go-fastdfs&lt;/h3&gt;&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="go-fastdfs" scheme="http://wumangeng.github.io/categories/go-fastdfs/"/>
+    
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="go-fastdfs" scheme="http://wumangeng.github.io/tags/go-fastdfs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</title>
     <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
     <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
@@ -142,9 +196,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
     
   </entry>
   
