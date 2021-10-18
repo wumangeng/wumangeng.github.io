@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="BIO, 山河远阔">
+    <meta name="keywords" content="ping">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>BIO | 山河远阔</title>
+    <title>ping命令的7种基本用法 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=2499935896,3761383705&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">BIO</h1>
+                    <h1 class="description center-align post-title">ping命令的7种基本用法</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +433,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                                <span class="chip bg-color">IO网络编程</span>
-                            </a>
-                        
-                            <a href="/tags/BIO/">
-                                <span class="chip bg-color">BIO</span>
+                            <a href="/tags/ping/">
+                                <span class="chip bg-color">ping</span>
                             </a>
                         
                     </div>
@@ -449,8 +445,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
-                                IO网络编程
+                            <a href="/categories/TCP-IP/" class="post-category">
+                                TCP/IP
                             </a>
                         
                     </div>
@@ -471,7 +467,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-01
+                    2021-05-25
                 </div>
                 
 
@@ -492,115 +488,59 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="1、-I-O-模型"><a href="#1、-I-O-模型" class="headerlink" title="1、 I/O 模型"></a>1、 I/O 模型</h2><ol>
-<li><code>I/O</code> 模型简单的理解：就是用什么样的通道进行数据的发送和接收，很大程度上决定了程序通信的性能。</li>
-<li><code>Java</code> 共支持 <code>3</code> 种网络编程模型 <code>I/O</code> 模式：<code>BIO</code>、<code>NIO</code>、<code>AIO</code>。</li>
-<li><code>Java BIO</code>：同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。【简单示意图】</li>
-</ol>
-<p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_01.png" alt="img"></p>
-<ol>
-<li><code>Java NIO</code>：同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 <code>I/O</code> 请求就进行处理。【简单示意图】</li>
-</ol>
-<p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_02.png" alt="img"></p>
-<ol>
-<li><code>Java AIO(NIO.2)</code>：异步非阻塞，<code>AIO</code> 引入异步通道的概念，采用了 <code>Proactor</code> 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。</li>
-<li>我们依次展开讲解。</li>
-</ol>
-<h2 id="2-、BIO、NIO、AIO-使用场景分析"><a href="#2-、BIO、NIO、AIO-使用场景分析" class="headerlink" title="2 、BIO、NIO、AIO 使用场景分析"></a>2 、BIO、NIO、AIO 使用场景分析</h2><ol>
-<li><code>BIO</code> 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，<code>JDK1.4</code> 以前的唯一选择，但程序简单易理解。</li>
-<li><code>NIO</code> 方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，弹幕系统，服务器间通讯等。编程比较复杂，<code>JDK1.4</code> 开始支持。</li>
-<li><code>AIO</code> 方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用 <code>OS</code> 参与并发操作，编程比较复杂，<code>JDK7</code> 开始支持。</li>
-</ol>
-<h2 id="3、-BIO-基本介绍"><a href="#3、-BIO-基本介绍" class="headerlink" title="3、 BIO 基本介绍"></a>3、 BIO 基本介绍</h2><ol>
-<li><code>Java BIO</code> 就是传统的 <code>Java I/O</code> 编程，其相关的类和接口在 <code>java.io</code>。</li>
-<li><code>BIO(BlockingI/O)</code>：同步阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，可以通过线程池机制改善（实现多个客户连接服务器）。【后有应用实例】</li>
-<li><code>BIO</code> 方式适用于连接数目比较小且固定的架构，这种方式对服务器资源要求比较高，并发局限于应用中，<code>JDK1.4</code> 以前的唯一选择，程序简单易理解。</li>
-</ol>
-<h2 id="4、-BIO-工作机制"><a href="#4、-BIO-工作机制" class="headerlink" title="4、 BIO 工作机制"></a>4、 BIO 工作机制</h2><p><img src="https://dongzl.github.io/netty-handbook/_media/chapter02/chapter02_03.png" alt="img"></p>
-<p>对 <code>BIO</code> 编程流程的梳理</p>
-<ol>
-<li>服务器端启动一个 <code>ServerSocket</code>。</li>
-<li>客户端启动 <code>Socket</code> 对服务器进行通信，默认情况下服务器端需要对每个客户建立一个线程与之通讯。</li>
-<li>客户端发出请求后，先咨询服务器是否有线程响应，如果没有则会等待，或者被拒绝。</li>
-<li>如果有响应，客户端线程会等待请求结束后，在继续执行。</li>
-</ol>
-<h2 id="5、-BIO-应用实例"><a href="#5、-BIO-应用实例" class="headerlink" title="5、 BIO 应用实例"></a>5、 BIO 应用实例</h2><p>实例说明：</p>
-<ol>
-<li>使用 <code>BIO</code> 模型编写一个服务器端，监听 <code>6666</code> 端口，当有客户端连接时，就启动一个线程与之通讯。</li>
-<li>要求使用线程池机制改善，可以连接多个客户端。</li>
-<li>服务器端可以接收客户端发送的数据（<code>telnet</code> 方式即可）。</li>
-<li>代码演示：</li>
-</ol>
-<pre class=" language-java"><code class="language-java">
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>InputStream<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>ServerSocket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>Socket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>ExecutorService<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>Executors<span class="token punctuation">;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BIOServer</span> <span class="token punctuation">{</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//线程池机制</span>
-        <span class="token comment" spellcheck="true">//思路</span>
-        <span class="token comment" spellcheck="true">//1. 创建一个线程池</span>
-        <span class="token comment" spellcheck="true">//2. 如果有客户端连接，就创建一个线程，与之通讯(单独写一个方法)</span>
-        ExecutorService newCachedThreadPool <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//创建ServerSocket</span>
-        ServerSocket serverSocket <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token number">6666</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"服务器启动了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//监听，等待客户端连接</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"等待连接...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">final</span> Socket socket <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接到一个客户端"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//就创建一个线程，与之通讯(单独写一个方法)</span>
-            newCachedThreadPool<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//我们重写</span>
-                    <span class="token comment" spellcheck="true">//可以和客户端通讯</span>
-                    <span class="token function">handler</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token comment" spellcheck="true">//编写一个handler方法，和客户端通讯</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">handler</span><span class="token punctuation">(</span>Socket socket<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">try</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//通过socket获取输入流</span>
-            InputStream inputStream <span class="token operator">=</span> socket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//循环的读取客户端发送的数据</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"read...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> read <span class="token operator">=</span> inputStream<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>read <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> read<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出客户端发送的数据</span>
-                <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token punctuation">}</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"关闭和client的连接"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token punctuation">{</span>
-                socket<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>Copy to clipboardErrorCopied
-</code></pre>
-<h2 id="6、-BIO-问题分析"><a href="#6、-BIO-问题分析" class="headerlink" title="6、 BIO 问题分析"></a>6、 BIO 问题分析</h2><ol>
-<li>每个请求都需要创建独立的线程，与对应的客户端进行数据 <code>Read</code>，业务处理，数据 <code>Write</code>。</li>
-<li>当并发数较大时，需要创建大量线程来处理连接，系统资源占用较大。</li>
-<li>连接建立后，如果当前线程暂时没有数据可读，则线程就阻塞在 <code>Read</code> 操作上，造成线程资源浪费。</li>
-</ol>
+                <p><strong>一、ping基本使用详解</strong></p>
+<p>在网络中ping是一个十分强大的TCP/IP工具。它的作用主要为：</p>
+<p>1、用来检测网络的连通情况和分析网络速度</p>
+<p>2、根据域名得到服务器IP</p>
+<p>3、根据ping返回的TTL值来判断对方所使用的操作系统及数据包经过路由器数量。</p>
+<p>我们通常会用它来直接ping ip地址，来测试网络的连通情况。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UibD6XuuSpKiao1ib7cSDf5Ke3BB2RSVPGdKBOoVrGiatUjPVblK7HPw8Cg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>类如这种，直接ping ip地址或网关，ping通会显示出以上数据，有朋友可能会问，bytes=32；time&lt;1ms；TTL=128 这些是什么意思。</p>
+<p><strong>bytes值：</strong>数据包大小，也就是字节。</p>
+<p><strong>time值：</strong>响应时间，这个时间越小，说明你连接这个地址速度越快。</p>
+<p><strong>TTL值：</strong>Time To Live,表示DNS记录在DNS服务器上存在的时间，它是IP协议包的一个值，告诉路由器该数据包何时需要被丢弃。可以通过Ping返回的TTL值大小，粗略地判断目标系统类型是Windows系列还是UNIX/Linux系列。</p>
+<p>默认情况下，Linux系统的TTL值为64或255，WindowsNT/2000/XP系统的TTL值为128，Windows98系统的TTL值为32，UNIX主机的TTL值为255。</p>
+<p>因此一般TTL值：</p>
+<p>100~130之间，Windows系统 ；</p>
+<p>240~255之间，UNIX/Linux系统。</p>
+<p>当然，我们今天主要了解并不是这些，而是ping的其它参考。</p>
+<p>ping命令除了直接ping网络的ip地址，验证网络畅通和速度之外，它还有这些用法。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UFg5P5jzuMtJiaRZ019e8RictyS4xxOFFKJTH7OtXztG6iaGJ6YTSo87Gg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p><strong>二、ping -t的使用</strong></p>
+<p>不间断地Ping指定计算机，直到管理员中断。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UlGuSMOVbiaKjTzkcdl7yv0kdkWZlwJ4ONEY0bVkL0y4BWSI942KMApg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>这就说明电脑连接路由器是通的，网络效果很好。下面按按住键盘的Ctrl+c终止它继续ping下去，就会停止了，会总结出运行的数据包有多少，通断的有多少了。</p>
+<p><strong>三、ping -a的使用</strong></p>
+<p>ping-a解析计算机名与NetBios名。就是可以通过ping它的ip地址，可以解析出主机名。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UwutC3hwAcVLIbeRQH6Iibgp4WC41M1pjgOaVeusGFiceMibP8gnr4OfzA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>四、ping -n的使用</p>
+<p>在默认情况下，一般都只发送四个数据包，通过这个命令可以自己定义发送的个数，对衡量网络速度很有帮助，比如我想测试发送10个数据包的返回的平均时间为多少，最快时间为多少，最慢时间为多少就可以通过以下获知：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UWTaCic6muTRZ9iaWHEyaOh05MC7lPlUD5LickDTcIgxJUxM1mOX1TN9uw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>从以上我就可以知道在给47.93.187.142发送10个数据包的过程当中，返回了10个，没有丢失，这10个数据包当中返回速度最快为32ms，最慢为55ms，平均速度为37ms。说明我的网络良好。</p>
+<p>如果对于一些不好的网络，比如监控系统中非常卡顿，这样测试，返回的结果可能会显示出丢失出一部分，如果丢失的比较多的话，那么就说明网络不好，可以很直观的判断出网络的情况。</p>
+<p><strong>五、ping -l size的使用</strong></p>
+<p>-l size：发送size指定大小的到目标主机的数据包。</p>
+<p>在默认的情况下Windows的ping发送的数据包大小为32byt，最大能发送65500byt。当一次发送的数据包大于或等于65500byt时，将可能导致接收方计算机宕机。所以微软限制了这一数值；这个参数配合其它参数以后危害非常强大，比如攻击者可以结合-t参数实施DOS攻击。（所以它具有危险性，不要轻易向别人计算机使用）。</p>
+<p><strong>例如：ping -l 65500 -t 211.84.7.46</strong></p>
+<p>会连续对IP地址执行ping命令，直到被用户以Ctrl+C中断.</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UjkZ6pLDARvb9DIeppauMGq8LcIiat2og8bE26eWrgycT4WT1OS8RRibw/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>这样它就会不停的向211.84.7.46计算机发送大小为65500byt的数据包，如果你只有一台计算机也许没有什么效果，但如果有很多计算机那么就可以使对方完全瘫痪，网络严重堵塞，由此可见威力非同小可。</p>
+<p><strong>六、ping -r count的使用</strong></p>
+<p>在“记录路由”字段中记录传出和返回数据包的路由，探测经过的</p>
+<p>路由个数，但最多只能跟踪到9个路由。</p>
+<p>ping -n 1 -r 9 202.102.224.25 （发送一个数据包，最多记录9个路由）</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UDufSOsWZzhHkp08Crib1HuBdqI2TYVet1IAODibj0LmhYFqdv019VKVg/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>将经过 9个路由都显示出来了，可以看上图。</p>
+<p>ping命令用的较多的就这6类的，大家有可能在项目中会用到的。</p>
+<p><strong>七、批量Ping网段</strong></p>
+<p>对于一个网段ip地址众多，如果单个检测实在麻烦，那么我们可以直接批量ping网段检测，那个ip地址出了问题，一目了然。</p>
+<p>先看代码，直接在命令行窗口输入：</p>
+<p><strong>for /L %D in (1,1,255) do ping 10.168.1.%D</strong></p>
+<p>IP地址段修改成你要检查的IP地址段。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_jpg/WKtM9X8hT27BLFtbXrwemyDjcKpBkS2UGqwYNwePUh4iaq5WfHSahmiakuIcBeuJ2a2rd4RVQJIQjaPgDhO2pyEA/640?wx_fmt=jpeg&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片"></p>
+<p>当输入批量命令后，那么它就自动把网段内所有的ip地址都ping完为止。</p>
+<p>那么这段“for /L %D in(1,1,255) do ping 10.168.1.%D” 代码是什么意思呢？</p>
+<p>代码中的这个**(1,1,255)**就是网段起与始，就是检测网段192.168.1.1到192.168.1.255之间的所有的ip地址，每次逐增1，直接到1到255这255个ip检测完为止。</p>
 
                 
             </div>
@@ -627,7 +567,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/10/01/bio/">http://wumangeng.github.io/2021/10/01/bio/</a>
+                    <a href="http://wumangeng.github.io/2021/05/25/ping-ming-ling-de-7-chong-ji-ben-yong-fa/">http://wumangeng.github.io/2021/05/25/ping-ming-ling-de-7-chong-ji-ben-yong-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -665,12 +605,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                                    <span class="chip bg-color">IO网络编程</span>
-                                </a>
-                            
-                                <a href="/tags/BIO/">
-                                    <span class="chip bg-color">BIO</span>
+                                <a href="/tags/ping/">
+                                    <span class="chip bg-color">ping</span>
                                 </a>
                             
                         </div>
@@ -846,23 +782,23 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/02/nio/">
+                <a href="/2021/10/01/bio/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=2522228296,3251344747&fm=26&fmt=auto" class="responsive-img" alt="NIO">
+                        <img src="https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto" class="responsive-img" alt="BIO">
                         
-                        <span class="card-title">NIO</span>
+                        <span class="card-title">BIO</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将简述NIO的原理和使用。
+                            本文将简述BIO的原理和使用。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-02
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-01
                         </span>
                         <span class="publish-author">
                             
@@ -883,8 +819,8 @@
                         <span class="chip bg-color">IO网络编程</span>
                     </a>
                     
-                    <a href="/tags/NIO/">
-                        <span class="chip bg-color">NIO</span>
+                    <a href="/tags/BIO/">
+                        <span class="chip bg-color">BIO</span>
                     </a>
                     
                 </div>
@@ -898,18 +834,18 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/25/ping-ming-ling-de-7-chong-ji-ben-yong-fa/">
+                <a href="/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=2499935896,3761383705&fm=26&fmt=auto" class="responsive-img" alt="ping命令的7种基本用法">
+                        <img src="https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto" class="responsive-img" alt="基于java的大疆弓形航线生成算法实现">
                         
-                        <span class="card-title">ping命令的7种基本用法</span>
+                        <span class="card-title">基于java的大疆弓形航线生成算法实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            ping命令的7种基本用法
+                            本文将介绍给定任意两个坐标，在这坐标之间生成一些列有序点的坐标的算法
                         
                     </div>
                     <div class="publish-info">
@@ -920,8 +856,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/TCP-IP/" class="post-category">
-                                    TCP/IP
+                            <a href="/categories/dji/" class="post-category">
+                                    dji
                                 </a>
                             
                             
@@ -931,8 +867,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/ping/">
-                        <span class="chip bg-color">ping</span>
+                    <a href="/tags/dji/">
+                        <span class="chip bg-color">dji</span>
+                    </a>
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
                 </div>
