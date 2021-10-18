@@ -122,6 +122,60 @@
   </entry>
   
   <entry>
+    <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</title>
+    <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
+    <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
+    <published>2021-04-01T01:10:20.000Z</published>
+    <updated>2021-10-18T01:44:27.935Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;docker安装服务&quot;&gt;&lt;a href=&quot;#docker安装服务&quot; class=&quot;headerlink&quot; title=&quot;docker安装服务&quot;&gt;&lt;/a&gt;docker安装服务&lt;/h1&gt;&lt;h3 id=&quot;设置yum源&quot;&gt;&lt;a href=&quot;#设置yum源&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
+    
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目的常用组件集成（swagger、统一返回结果、异常、日志、包扫描）</title>
+    <link href="http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/"/>
+    <id>http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/</id>
+    <published>2021-03-01T01:10:20.000Z</published>
+    <updated>2021-10-18T01:36:09.724Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;swagger2配置&quot;&gt;&lt;a href=&quot;#swagger2配置&quot; class=&quot;headerlink&quot; title=&quot;swagger2配置&quot;&gt;&lt;/a&gt;swagger2配置&lt;/h2&gt;&lt;pre class=&quot; language-xml&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="springboot" scheme="http://wumangeng.github.io/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JWT的使用姿势</title>
     <link href="http://wumangeng.github.io/2021/02/25/jwt/"/>
     <id>http://wumangeng.github.io/2021/02/25/jwt/</id>
