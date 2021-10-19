@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云对象存储(oss)的使用姿势, 山河远阔">
+    <meta name="keywords" content="大疆航线">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阿里云对象存储(oss)的使用姿势 | 山河远阔</title>
+    <title>基于java的生成大疆弓形航线算法实现 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -30,10 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
@@ -312,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云对象存储(oss)的使用姿势</h1>
+                    <h1 class="description center-align post-title">基于java的生成大疆弓形航线算法实现</h1>
                 </div>
             </div>
         </div>
@@ -433,8 +430,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/oss/">
-                                <span class="chip bg-color">oss</span>
+                            <a href="/tags/dji/">
+                                <span class="chip bg-color">dji</span>
+                            </a>
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -445,8 +446,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                阿里云服务
+                            <a href="/categories/dji/" class="post-category">
+                                dji
                             </a>
                         
                     </div>
@@ -467,7 +468,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-20
+                    2021-05-25
                 </div>
                 
 
@@ -488,138 +489,335 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="阿里云OSS使用"><a href="#阿里云OSS使用" class="headerlink" title="阿里云OSS使用"></a>阿里云OSS使用</h1><ul>
-<li>首先在使用之前请先确保你已经申请了阿里云的oss对象存储服务（如果没有请先申请）</li>
-<li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
-</ul>
-<h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
-<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">#服务名</span>
-<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">service-oss</span>
+                <p><strong>问题背景：本人在开发过程中，遇到给定两个点的坐标，需要生成大量的有规律的坐标（实际上就是大疆无人机的航线）。查询相关资料发现国内的博客基本都是计算两点距离，计算点到线距离的距离等，有几篇也都是C语言形式。在这些资料的基础上本人继续研究深入，最终调试出了符合本人的业务场景的算法，在这里分享给予大家参考，算法精度到米级别</strong></p>
+<h4 id="下面是算法实现的生成两张效果图："><a href="#下面是算法实现的生成两张效果图：" class="headerlink" title="下面是算法实现的生成两张效果图："></a>下面是算法实现的生成两张效果图：</h4><p>A点为起始坐标   B点为终点坐标   S为开始点   G为终点  下图为横向的方式生成 本文称为 短边方向  </p>
+<p><img src="https://img-blog.csdnimg.cn/42b43ac8ec5f4d5c983820bd31b4e8fc.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>按照 长边 的方向生成的效果图为</p>
+<p><img src="https://img-blog.csdnimg.cn/25be718d32134dd68a8b606882869af0.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h4 id="下面为算法的主要实现代码："><a href="#下面为算法的主要实现代码：" class="headerlink" title="下面为算法的主要实现代码："></a>下面为算法的主要实现代码：</h4><pre><code class="java">import com.jzi.cloud.api.entity.vo.CoordinateVo;
+import org.springframework.stereotype.Component;
 
-<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8086</span>
+import java.util.ArrayList;
+import java.util.List;
 
-<span class="token attr-name">spring.profiles.active</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
+/**
+ * 地理坐标处理工具类
+ * */
+@Component
+public class GeographicalCoordinatesUtils &#123;
 
-<span class="token comment" spellcheck="true">#阿里云oss配置 （以下信息替换成你自己的）</span>
-<span class="token attr-name">aliyun.oss.file.endpoint</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keyid</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keysecret</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token comment" spellcheck="true">#bucket可以在控制台创建，也可以使用java代码创建</span>
-<span class="token attr-name">aliyun.oss.file.bucketname</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
+    /**
+     * 地球半径（这里取的是平均半径）
+     */
+    private static final double EARTH_RADIUS = 6.371229 * 1e6;
+
+    /**
+     * 角度弧度计算公式 rad:()
+     * 360度=2π π=Math.PI
+     * x度 = x*π/360 弧度
+     */
+    private static double getRadian(double degree) &#123;
+        return degree * Math.PI / 180.0;
+    &#125;
+
+    /**
+     * 弧度换成度
+     * @param radian 弧度
+     * @return degree 度
+     */
+    public static double getDegree(double radian) &#123; return radian * 180 / Math.PI; &#125;
+
+    /**
+     * 依据经纬度计算两点之间的距离 GetDistance:()
+     * @param lng1 地点A的经度
+     * @param lat1 地点A的纬度
+     * @param lng2 地点B的经度
+     * @param lat2 地点B的纬度
+     * @return 返参 double 单米（m）
+     */
+    public static double getDistance(double lng1, double lat1, double lng2, double lat2) &#123;
+        double radLat1 = getRadian(lat1);
+        double radLat2 = getRadian(lat2);
+        double a = radLat1 - radLat2;// 两点纬度差
+        double b = getRadian(lng1) - getRadian(lng2);// 两点的经度差
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1)
+                * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+        return s;
+    &#125;
+
+    /*
+     * 大地坐标系资料WGS-84 长半径a=6378137 短半径b=6356752.3142 扁率f=1/298.2572236
+     */
+    /** 长半径a=6378137 */
+    private static final double a = 6378137;
+    /** 短半径b=6356752.3142 */
+    private static final double b = 6356752.3142;
+    /** 扁率f=1/298.2572236 */
+    private static final double f = 1 / 298.2572236;
+
+    /**
+     * 通过一个点坐标计算另一点经纬度
+     * @param lon  经度
+     * @param lat  维度
+     * @param brng 方位角(传入角度)
+     * @param dist 距离（米）
+     * @return  double[] 经纬度
+     */
+    public static double[] computerThatLonLat(double lon, double lat, double brng, double dist) &#123;
+
+        double alpha1 = getRadian(brng);
+        double sinAlpha1 = Math.sin(alpha1);
+        double cosAlpha1 = Math.cos(alpha1);
+
+        double tanU1 = (1 - f) * Math.tan(getRadian(lat));
+        double cosU1 = 1 / Math.sqrt((1 + tanU1 * tanU1));
+        double sinU1 = tanU1 * cosU1;
+        double sigma1 = Math.atan2(tanU1, cosAlpha1);
+        double sinAlpha = cosU1 * sinAlpha1;
+        double cosSqAlpha = 1 - sinAlpha * sinAlpha;
+        double uSq = cosSqAlpha * (a * a - b * b) / (b * b);
+        double A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)));
+        double B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)));
+
+        double cos2SigmaM=0;
+        double sinSigma=0;
+        double cosSigma=0;
+        double sigma = dist / (b * A), sigmaP = 2 * Math.PI;
+        while (Math.abs(sigma - sigmaP) &gt; 1e-12) &#123;
+            cos2SigmaM = Math.cos(2 * sigma1 + sigma);
+            sinSigma = Math.sin(sigma);
+            cosSigma = Math.cos(sigma);
+            double deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)
+                    - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
+            sigmaP = sigma;
+            sigma = dist / (b * A) + deltaSigma;
+        &#125;
+
+        double tmp = sinU1 * sinSigma - cosU1 * cosSigma * cosAlpha1;
+        double lat2 = Math.atan2(sinU1 * cosSigma + cosU1 * sinSigma * cosAlpha1,
+                (1 - f) * Math.sqrt(sinAlpha * sinAlpha + tmp * tmp));
+        double lambda = Math.atan2(sinSigma * sinAlpha1, cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1);
+        double C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha));
+        double L = lambda - (1 - C) * f * sinAlpha
+                * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
+        // final bearing
+        double revAz = Math.atan2(sinAlpha, -tmp);
+
+        double[] coordinates = new double[2];
+        coordinates[0] = lon+getDegree(L);
+        coordinates[1] = getDegree(lat2);
+        return coordinates;
+    &#125;
+
+    //传入两点，使用默认的宽度(10m)、间隔（10m）、高度200、长边生成航点
+    public static List&lt;CoordinateVo&gt; defaultGenerateCoordinates(double lng1, double lat1, double lng2, double lat2)&#123;
+        return coordinateProcessing(lng1, lat1, lng2, lat2, 10, 10,200,true);
+    &#125;
+
+    //传入两点，自定义的宽度、间隔、高度、长（短）边生成航点
+    public static List&lt;CoordinateVo&gt; customGenerateCoordinates(double lng1, double lat1, double lng2, double lat2,
+                                                                float width,float interval,float high,boolean direction)&#123;
+        return coordinateProcessing(lng1, lat1, lng2, lat2, width, interval,high,direction);
+    &#125;
+
+
+    /**
+     * 返回处理后的航点坐标的集合
+     * width  宽度
+     * interval 间隔距离
+     * high 航点高度
+     * direction true为长边，false为短边
+     */
+    private static List&lt;CoordinateVo&gt; coordinateProcessing(double lng1, double lat1, double lng2, double lat2,
+                                                           float width,float interval,float high,boolean direction )&#123;
+        //两点间距离
+        double distance = getDistance(lng1, lat1, lng2, lat2);
+        //计算偏移角
+        double offsetAngle= Math.toDegrees(Math.atan((lng1-lng2)/(lat1-lat2)));
+        //计算单边的航点数量
+        int divisionNum;
+        List&lt;CoordinateVo&gt; oneCoordinateVoList;
+        List&lt;CoordinateVo&gt; twoCoordinateVoList;
+        List&lt;CoordinateVo&gt; coordinateVos;
+        CoordinateVo coordinateVo1 ;
+        CoordinateVo coordinateVo2 ;
+        
+        if (direction)&#123;
+            //长边
+            divisionNum = (int) Math.ceil( (width*2) / interval) + 1;
+            oneCoordinateVoList = new ArrayList&lt;&gt;(divisionNum); //上
+            twoCoordinateVoList = new ArrayList&lt;&gt;(divisionNum); //下
+            coordinateVos = new ArrayList&lt;&gt;(divisionNum * 2);
+
+            int temp = divisionNum / 2 ;
+            //处理点左边
+            for (int i = temp; i &gt;= 0; i--) &#123;
+                coordinateVo1 = new CoordinateVo();
+                coordinateVo2 = new CoordinateVo();
+                //上面左边
+                double[] leftCoordinateVo = computerThatLonLat(lng2, lat2, -90+offsetAngle, i*interval);
+                coordinateVo1.setLongitude(leftCoordinateVo[0]);
+                coordinateVo1.setLatitude(leftCoordinateVo[1]);
+                coordinateVo1.setAltitude((double) high);
+                oneCoordinateVoList.add(coordinateVo1);
+                //下面左边
+                double[] rightCoordinateVo = computerThatLonLat(lng1, lat1, -90+offsetAngle, i*interval);
+                coordinateVo2.setLongitude(rightCoordinateVo[0]);
+                coordinateVo2.setLatitude(rightCoordinateVo[1]);
+                coordinateVo2.setAltitude((double) high);
+                twoCoordinateVoList.add(coordinateVo2);
+            &#125;
+            //处理点右边
+            for (int i = 1; i &lt;= temp ; i++) &#123;
+                coordinateVo1 = new CoordinateVo();
+                coordinateVo2 = new CoordinateVo();
+                //上
+                double[] leftCoordinateVo = computerThatLonLat(lng2, lat2, 90+offsetAngle, i*interval);
+                coordinateVo1.setLongitude(leftCoordinateVo[0]);
+                coordinateVo1.setLatitude(leftCoordinateVo[1]);
+                coordinateVo1.setAltitude((double) high);
+                oneCoordinateVoList.add(coordinateVo1);
+                //下
+                double[] rightCoordinateVo = computerThatLonLat(lng1, lat1, 90+offsetAngle, i*interval);
+                coordinateVo2.setLongitude(rightCoordinateVo[0]);
+                coordinateVo2.setLatitude(rightCoordinateVo[1]);
+                coordinateVo2.setAltitude((double) high);
+                twoCoordinateVoList.add(coordinateVo2);
+            &#125;
+            //如果A点在上面则交换两个集合的数据
+            if (lat1&gt;lat2)&#123;
+                List&lt;CoordinateVo&gt; tempList=new ArrayList&lt;&gt;(oneCoordinateVoList);
+                oneCoordinateVoList = new ArrayList&lt;&gt;(twoCoordinateVoList);
+                twoCoordinateVoList = new ArrayList&lt;&gt;(tempList);
+            &#125;
+            //点排序
+            boolean flag=false;
+            for (int i = 0; i &lt; oneCoordinateVoList.size(); i++) &#123;
+                if (flag)&#123;
+                    //从下往上
+                    coordinateVos.add(twoCoordinateVoList.get(i));
+                    coordinateVos.add(oneCoordinateVoList.get(i));
+                    flag =false;
+                &#125;else &#123;
+                    //从上往下
+                    coordinateVos.add(oneCoordinateVoList.get(i));
+                    coordinateVos.add(twoCoordinateVoList.get(i));
+                    flag = true;
+                &#125;
+            &#125;
+        &#125;else &#123;
+            //短边
+            divisionNum = (int) Math.ceil(distance / interval) + 1;
+            oneCoordinateVoList = new ArrayList&lt;&gt;(divisionNum); //保存左侧的所有点
+            twoCoordinateVoList = new ArrayList&lt;&gt;(divisionNum); //保存右侧的所有点
+            coordinateVos = new ArrayList&lt;&gt;(divisionNum * 2);
+
+            //计算第一个点左边的坐标
+            double[] leftCoordinate = computerThatLonLat(lng1, lat1, -90+offsetAngle, width);
+            //计算第一个点右边的坐标
+            double[] rightCoordinate = computerThatLonLat(lng1, lat1, 90+offsetAngle, width);
+
+            //判断哪个点在上方
+            if (lat1&lt;lat2)&#123; //A下B上
+                //计算出所有点并且进行左右分类
+                for (int i = 0; i &lt; divisionNum; i++) &#123;
+                    coordinateVo1 = new CoordinateVo();
+                    coordinateVo2 = new CoordinateVo();
+                    //左边
+                    double[] leftCoordinateVo = computerThatLonLat(leftCoordinate[0], leftCoordinate[1], 0+offsetAngle, i*interval);
+                    coordinateVo1.setLongitude(leftCoordinateVo[0]);
+                    coordinateVo1.setLatitude(leftCoordinateVo[1]);
+                    coordinateVo1.setAltitude((double) high);
+                    oneCoordinateVoList.add(coordinateVo1);
+                    //右边
+                    double[] rightCoordinateVo = computerThatLonLat(rightCoordinate[0], rightCoordinate[1], 0+offsetAngle, i*interval);
+                    coordinateVo2.setLongitude(rightCoordinateVo[0]);
+                    coordinateVo2.setLatitude(rightCoordinateVo[1]);
+                    coordinateVo2.setAltitude((double) high);
+                    twoCoordinateVoList.add(coordinateVo2);
+                &#125;
+            &#125;else &#123;//A上B下
+                for (int i = 0; i &lt; divisionNum; i++) &#123;
+                    coordinateVo1 = new CoordinateVo();
+                    coordinateVo2 = new CoordinateVo();
+                    //左边
+                    double[] leftCoordinateVo = computerThatLonLat(leftCoordinate[0], leftCoordinate[1], 180+offsetAngle, i*interval);
+                    coordinateVo1.setLongitude(leftCoordinateVo[0]);
+                    coordinateVo1.setLatitude(leftCoordinateVo[1]);
+                    coordinateVo1.setAltitude((double) high);
+                    oneCoordinateVoList.add(coordinateVo1);
+                    //右边
+                    double[] rightCoordinateVo = computerThatLonLat(rightCoordinate[0], rightCoordinate[1], 180+offsetAngle, i*interval);
+                    coordinateVo2.setLongitude(rightCoordinateVo[0]);
+                    coordinateVo2.setLatitude(rightCoordinateVo[1]);
+                    coordinateVo2.setAltitude((double) high);
+                    twoCoordinateVoList.add(coordinateVo2);
+                &#125;
+            &#125;
+            //点排序
+            boolean flag=false;
+            for (int i = 0; i &lt; oneCoordinateVoList.size(); i++) &#123;
+                if (flag)&#123;
+                    //从右往左
+                    coordinateVos.add(twoCoordinateVoList.get(i));
+                    coordinateVos.add(oneCoordinateVoList.get(i));
+                    flag =false;
+                &#125;else &#123;
+                    //从左往右
+                    coordinateVos.add(oneCoordinateVoList.get(i));
+                    coordinateVos.add(twoCoordinateVoList.get(i));
+                    flag = true;
+                &#125;
+            &#125;
+        &#125;
+        
+        return coordinateVos;
+    &#125;
+
+&#125;
 </code></pre>
-<h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span><span class="token punctuation">(</span>exclude <span class="token operator">=</span> DataSourceAutoConfiguration<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类不加载数据库</span>
-<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"com.hscs"</span><span class="token punctuation">}</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//扫描包</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssApplication</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>OssApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-<span class="token punctuation">}</span>
+<p>CoordinateVo对象为：</p>
+<pre><code class="java">@Data
+public class CoordinateVo &#123;
+    private Double altitude;
+    private Double latitude;
+    private Double longitude;
+&#125;
 </code></pre>
-<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConstantPropertiesUtlis</span> <span class="token keyword">implements</span> <span class="token class-name">InitializingBean</span> <span class="token punctuation">{</span>
+<h4 id="使用方式："><a href="#使用方式：" class="headerlink" title="使用方式："></a>使用方式：</h4><p><strong>此工具类主要有两个方法：</strong></p>
+<pre><code>    defaultGenerateCoordinates：传入两个坐标点的经纬度，其余参数使用，默认值
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.endpoint}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String endpoint<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.keyid}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String keyId<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.keysecret}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String keySecret<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"${aliyun.oss.file.bucketname}"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String bucketName<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String END_POINT<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_ID<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_SECRET<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String BUCKET_NAME<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afterPropertiesSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token punctuation">{</span>
-        END_POINT<span class="token operator">=</span>endpoint<span class="token punctuation">;</span>
-        KEY_ID<span class="token operator">=</span>keyId<span class="token punctuation">;</span>
-        KEY_SECRET<span class="token operator">=</span>keySecret<span class="token punctuation">;</span>
-        BUCKET_NAME<span class="token operator">=</span>bucketName<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-
-<span class="token punctuation">}</span>
+    customGenerateCoordinates：传入两点，自定义的宽度、间隔、高度、长（短）边生成点
 </code></pre>
-<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
-<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"oss/fileoss"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@CrossOrigin</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssController</span> <span class="token punctuation">{</span>
+<p><strong>参数说明：</strong></p>
+<pre><code> lng1   经度,     lat1    纬度, 
 
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> OssService ossService<span class="token punctuation">;</span>
+ lng2    经度,     lat2    纬度,
 
-    <span class="token comment" spellcheck="true">/**
-     * 上传头像
-     * */</span>
-    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> R <span class="token function">uploadFileOss</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        String url<span class="token operator">=</span>ossService<span class="token punctuation">.</span><span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> R<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"url"</span><span class="token punctuation">,</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+ width  宽度,     interval 间距
 
-<span class="token punctuation">}</span>
+ high  航点高度,direction  长短边 （true为长边方向，false为短边方向）
 </code></pre>
-<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//接口</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OssService</span> <span class="token punctuation">{</span>
-    String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<p>测试：</p>
+<pre><code class="java">double long1=120.09675077317218;
+        double lat1=30.24381935736484;
+        double long2=120.09748061125909;
+        double lat2=30.24408250042433;
 
-<span class="token comment" spellcheck="true">//类</span>
-<span class="token comment" spellcheck="true">/**
- * @author wmg
- *  文件上传业务实现
- */</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">OssService</span> <span class="token punctuation">{</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        String endpoint <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>END_POINT<span class="token punctuation">;</span>
-        String accessKeyId <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_ID<span class="token punctuation">;</span>
-        String accessKeySecret <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_SECRET<span class="token punctuation">;</span>
-        String bucketName<span class="token operator">=</span>ConstantPropertiesUtlis<span class="token punctuation">.</span>BUCKET_NAME<span class="token punctuation">;</span>
+        System.err.println(&quot;传入坐标A(&quot;+long1+&quot;,&quot;+lat1+&quot;)  坐标B(&quot;+long2+&quot;,&quot;+lat2+&quot;)&quot;);
 
-        <span class="token keyword">try</span><span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// 创建OSSClient实例。</span>
-            OSS ossClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OSSClientBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span>endpoint<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        double distance = GeographicalCoordinatesUtils.getDistance(long1, lat1, long2, lat2);
+        System.err.println(&quot;两点间距离--&gt;&quot;+distance);
 
-            <span class="token comment" spellcheck="true">//获取文件名称</span>
-            String fileName <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getOriginalFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖</span>
-            String uuid <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>uuid<span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//将文件按日期分类</span>
-            String datePath <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>datePath<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">// 上传文件流。</span>
-            InputStream inputStream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//第一个参数为bucket名  第二个参数为上传文件路径</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">putObject</span><span class="token punctuation">(</span>bucketName<span class="token punctuation">,</span> fileName<span class="token punctuation">,</span> inputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment" spellcheck="true">//将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg</span>
-            String url<span class="token operator">=</span><span class="token string">"https://"</span><span class="token operator">+</span>bucketName<span class="token operator">+</span><span class="token string">"."</span><span class="token operator">+</span>endpoint<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-
-
-            <span class="token comment" spellcheck="true">// 关闭OSSClient。</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> url<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">{</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"图片上传失败！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
+        List&lt;CoordinateVo&gt; coordinateVos = GeographicalCoordinatesUtils.customGenerateCoordinates(
+                long1, lat1, long2, lat2,10,10,100,false);
 </code></pre>
+<p>下面这些图为我前端测试的效果图，仅供大家参考</p>
+<p><img src="https://img-blog.csdnimg.cn/4d3280a253ea493b9624bbd9c60f5bcc.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/a3411993864c41d2bc397639e815d2c9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/ad8dbe3279564667a8761a9b5b78605b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/d909d1238ffb4ffe9609b1322cb7dff9.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNTMzMTgz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
 
                 
             </div>
@@ -646,7 +844,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/">http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</a>
+                    <a href="http://wumangeng.github.io/2021/05/25/%E5%A4%A7%E7%96%86%E7%94%9F%E6%88%90%E5%BC%93%E5%BD%A2%E8%88%AA%E7%82%B9%E7%AE%97%E6%B3%95java%E5%AE%9E%E7%8E%B0/">http://wumangeng.github.io/2021/05/25/%E5%A4%A7%E7%96%86%E7%94%9F%E6%88%90%E5%BC%93%E5%BD%A2%E8%88%AA%E7%82%B9%E7%AE%97%E6%B3%95java%E5%AE%9E%E7%8E%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -684,8 +882,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/oss/">
-                                    <span class="chip bg-color">oss</span>
+                                <a href="/tags/dji/">
+                                    <span class="chip bg-color">dji</span>
+                                </a>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -861,7 +1063,55 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-shi-pin-dian-bo/">
+                <a href="/2021/05/25/ping%E5%91%BD%E4%BB%A4%E7%9A%847%E7%A7%8D%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/">
+                    <div class="card-image">
+                        
+                        <img src="https://img0.baidu.com/it/u=2499935896,3761383705&fm=26&fmt=auto" class="responsive-img" alt="ping命令的7种基本用法">
+                        
+                        <span class="card-title">ping命令的7种基本用法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            ping命令的7种基本用法
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/TCP-IP/" class="post-category">
+                                    TCP/IP
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ping/">
+                        <span class="chip bg-color">ping</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91%E8%A7%86%E9%A2%91%E7%82%B9%E6%92%AD/">
                     <div class="card-image">
                         
                         <img src="https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto" class="responsive-img" alt="阿里云视频点播(sdk)的使用姿势">
@@ -876,9 +1126,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -896,58 +1146,6 @@
                     
                     <a href="/tags/sdk/">
                         <span class="chip bg-color">sdk</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/04/25/centos7-an-zhuang-go-fastdfs/">
-                    <div class="card-image">
-                        
-                        <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">
-                        
-                        <span class="card-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            本文将介绍在CentOS 7 中安装go-fastdfs及可视化界面go-fastdfs-web。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/go-fastdfs/" class="post-category">
-                                    go-fastdfs
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/CentOS7/">
-                        <span class="chip bg-color">CentOS7</span>
-                    </a>
-                    
-                    <a href="/tags/go-fastdfs/">
-                        <span class="chip bg-color">go-fastdfs</span>
                     </a>
                     
                 </div>

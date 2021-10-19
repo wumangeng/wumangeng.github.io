@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web, 山河远阔">
+    <meta name="keywords" content="阿里云对象存储(oss)的使用姿势, 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web | 山河远阔</title>
+    <title>阿里云对象存储(oss)的使用姿势 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -30,10 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
@@ -312,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</h1>
+                    <h1 class="description center-align post-title">阿里云对象存储(oss)的使用姿势</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +430,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CentOS7/">
-                                <span class="chip bg-color">CentOS7</span>
-                            </a>
-                        
-                            <a href="/tags/go-fastdfs/">
-                                <span class="chip bg-color">go-fastdfs</span>
+                            <a href="/tags/oss/">
+                                <span class="chip bg-color">oss</span>
                             </a>
                         
                     </div>
@@ -449,8 +442,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/go-fastdfs/" class="post-category">
-                                go-fastdfs
+                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
+                                阿里云服务
                             </a>
                         
                     </div>
@@ -471,7 +464,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-25
+                    2021-05-20
                 </div>
                 
 
@@ -492,62 +485,138 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1、安装go-fastdfs"><a href="#1、安装go-fastdfs" class="headerlink" title="1、安装go-fastdfs"></a>1、安装go-fastdfs</h3><h4 id="1-1-下载go-fastdfs相关文件并且授予执行权限"><a href="#1-1-下载go-fastdfs相关文件并且授予执行权限" class="headerlink" title="1.1 下载go-fastdfs相关文件并且授予执行权限"></a>1.1 下载go-fastdfs相关文件并且授予执行权限</h4><pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#创建文件夹</span>
-cd <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>
-mkdir go<span class="token operator">-</span>fastdfs
-mkdir go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web
-cd go<span class="token operator">-</span>fastdfs
+                <h1 id="阿里云OSS使用"><a href="#阿里云OSS使用" class="headerlink" title="阿里云OSS使用"></a>阿里云OSS使用</h1><ul>
+<li>首先在使用之前请先确保你已经申请了阿里云的oss对象存储服务（如果没有请先申请）</li>
+<li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
+</ul>
+<h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
+<pre><code class="properties">#服务名
+spring.application.name=service-oss
 
-<span class="token comment" spellcheck="true">#如果无法连接github可以换成gitee </span>
-wget https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>releases<span class="token operator">/</span>download<span class="token operator">/</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>0<span class="token operator">/</span>fileserver
+server.port=8086
 
-wget  https:<span class="token operator">/</span><span class="token operator">/</span>raw<span class="token punctuation">.</span>githubusercontent<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>master<span class="token operator">/</span>control
+spring.profiles.active=dev
 
-<span class="token comment" spellcheck="true">#下载完毕进行授权，否则无法执行</span>
-chmod 755 fileserver
-
-chmod 755 control
-
-<span class="token comment" spellcheck="true">#启动（看到running..即为成功，运行成功之后会生成一些文件 ll 可查看）</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span>
-
-<span class="token comment" spellcheck="true"># 放行服务器端口8080后使用如下指令访问</span>
-http:<span class="token operator">/</span><span class="token operator">/</span>你的ip:8080
-<span class="token comment" spellcheck="true">#出现如下页面即可</span>
+#阿里云oss配置 （以下信息替换成你自己的）
+aliyun.oss.file.endpoint=***
+aliyun.oss.file.keyid=***
+aliyun.oss.file.keysecret=***
+#bucket可以在控制台创建，也可以使用java代码创建
+aliyun.oss.file.bucketname=***
 </code></pre>
-<p><img src="https://img-blog.csdnimg.cn/04a1ac263f4e4813bba05093a239a54e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><strong>修改配置文件</strong><br>go-fastdfs的配置文件在 conf下的cfg.json文件里面 直接 vim conf/cfg.json 进入修改保存即可，配置文件全部有中文注释，白名单中添加本机ip,或者你想放行的ip即可<br><img src="https://img-blog.csdnimg.cn/62dd2b930d1f4ce98847b294d5f273ca.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述">修改完毕保存重启即可</p>
-<pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#启动/停止/重启/查看状态/查看日志</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span><span class="token punctuation">|</span>stop<span class="token punctuation">|</span>restart<span class="token punctuation">|</span>status<span class="token punctuation">|</span>tail
+<h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
+<pre><code class="java">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)  //配置启动类不加载数据库
+@ComponentScan(basePackages = &#123;&quot;com.hscs&quot;&#125;)        //扫描包
+public class OssApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(OssApplication.class, args);
+    &#125;
+
+&#125;
 </code></pre>
-<h3 id="1-2-安装可视化工具go-fastdfs-web"><a href="#1-2-安装可视化工具go-fastdfs-web" class="headerlink" title="1.2 安装可视化工具go-fastdfs-web"></a>1.2 安装可视化工具go-fastdfs-web</h3><p><strong>注：可视化工具需java环境(jdk)未安装可参考以下教程进行安装</strong></p>
-<blockquote>
-<p>安装jdk 教程<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sxdcgaq8080/p/7492426.html">https://www.cnblogs.com/sxdcgaq8080/p/7492426.html</a></p>
-</blockquote>
-<pre class=" language-powershell"><code class="language-powershell"><span class="token comment" spellcheck="true">#下载可视化资源包（.tar.gz）</span>
-https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>perfree<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">/</span>releases
+<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre><code class="java">@Component
+public class ConstantPropertiesUtlis implements InitializingBean &#123;
 
-<span class="token comment" spellcheck="true">#下载完毕上传到go-fastdfs-web目录下解压</span>
-tar <span class="token operator">-</span>zxvf go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">-</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>6<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz
+    @Value(&quot;$&#123;aliyun.oss.file.endpoint&#125;&quot;)
+    private String endpoint;
 
-<span class="token comment" spellcheck="true">#进入go-fastdfs-web目录下 分配权限</span>
-chmod <span class="token operator">+</span>x goFastDfsWeb<span class="token punctuation">.</span>sh
+    @Value(&quot;$&#123;aliyun.oss.file.keyid&#125;&quot;)
+    private String keyId;
 
-<span class="token comment" spellcheck="true">#运行</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
+    @Value(&quot;$&#123;aliyun.oss.file.keysecret&#125;&quot;)
+    private String keySecret;
 
-<span class="token comment" spellcheck="true">#开放服务器8088端口 运行成功后</span>
-http:<span class="token operator">/</span><span class="token operator">/</span>ip:8088    <span class="token comment" spellcheck="true">#访问</span>
+    @Value(&quot;$&#123;aliyun.oss.file.bucketname&#125;&quot;)
+    private String bucketName;
 
-<span class="token comment" spellcheck="true">#如果启动报  -bash: ./goFastDfsWeb.sh: /bin/bash^M: bad interpreter: No such file or directory</span>
-<span class="token comment" spellcheck="true">#解决方法：</span>
-vim goFastDfsWeb<span class="token punctuation">.</span>sh
-:<span class="token function">set</span> fileformat=unix
-<span class="token comment" spellcheck="true">#保存退出即可</span>
+    public static String END_POINT;
+    public static String KEY_ID;
+    public static String KEY_SECRET;
+    public static String BUCKET_NAME;
 
-<span class="token comment" spellcheck="true">#运行</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
+    @Override
+    public void afterPropertiesSet() throws Exception &#123;
+        END_POINT=endpoint;
+        KEY_ID=keyId;
+        KEY_SECRET=keySecret;
+        BUCKET_NAME=bucketName;
+    &#125;
+
+
+&#125;
 </code></pre>
-<p>成功运行后按照界面文字说明注册即可(“注：连接的ip 要在go-fastdfs配置文件的白名单中”)</p>
+<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre><code class="java">@Controller
+@RequestMapping(&quot;oss/fileoss&quot;)
+@CrossOrigin
+public class OssController &#123;
+
+    @Autowired
+    private OssService ossService;
+
+    /**
+     * 上传头像
+     * */
+    @PostMapping()
+    public R uploadFileOss(MultipartFile file)&#123;
+        String url=ossService.uploadFileAvatar(file);
+        return R.ok().data(&quot;url&quot;,url);
+    &#125;
+
+&#125;
+</code></pre>
+<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre><code class="java">//接口
+public interface OssService &#123;
+    String uploadFileAvatar(MultipartFile file);
+&#125;
+
+//类
+/**
+ * @author wmg
+ *  文件上传业务实现
+ */
+@Service
+public class OssServiceImpl implements OssService &#123;
+    @Override
+    public String uploadFileAvatar(MultipartFile file) &#123;
+        String endpoint = ConstantPropertiesUtlis.END_POINT;
+        String accessKeyId = ConstantPropertiesUtlis.KEY_ID;
+        String accessKeySecret = ConstantPropertiesUtlis.KEY_SECRET;
+        String bucketName=ConstantPropertiesUtlis.BUCKET_NAME;
+
+        try&#123;
+            // 创建OSSClient实例。
+            OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+            //获取文件名称
+            String fileName = file.getOriginalFilename();
+            //在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖
+            String uuid = UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;);
+            fileName=uuid+fileName;
+            //将文件按日期分类
+            String datePath = new DateTime().toString(&quot;yyyy/MM/dd&quot;);
+            fileName=datePath+&quot;/&quot;+fileName;
+            // 上传文件流。
+            InputStream inputStream = file.getInputStream();
+            //第一个参数为bucket名  第二个参数为上传文件路径
+            ossClient.putObject(bucketName, fileName, inputStream);
+
+            //将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg
+            String url=&quot;https://&quot;+bucketName+&quot;.&quot;+endpoint+&quot;/&quot;+fileName;
+
+
+            // 关闭OSSClient。
+            ossClient.shutdown();
+            return url;
+        &#125;catch (Exception e)&#123;
+            System.out.println(&quot;图片上传失败！&quot;);
+            e.printStackTrace();
+            return null;
+        &#125;
+
+    &#125;
+&#125;
+
+</code></pre>
 
                 
             </div>
@@ -574,7 +643,7 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/">http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</a>
+                    <a href="http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91OSS/">http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91OSS/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -612,12 +681,8 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CentOS7/">
-                                    <span class="chip bg-color">CentOS7</span>
-                                </a>
-                            
-                                <a href="/tags/go-fastdfs/">
-                                    <span class="chip bg-color">go-fastdfs</span>
+                                <a href="/tags/oss/">
+                                    <span class="chip bg-color">oss</span>
                                 </a>
                             
                         </div>
@@ -793,18 +858,18 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-oss/">
+                <a href="/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91%E8%A7%86%E9%A2%91%E7%82%B9%E6%92%AD/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
+                        <img src="https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto" class="responsive-img" alt="阿里云视频点播(sdk)的使用姿势">
                         
-                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
+                        <span class="card-title">阿里云视频点播(sdk)的使用姿势</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示oss在java服务端的使用方式。
+                            本文将演示sdk在java服务端的使用方式。
                         
                     </div>
                     <div class="publish-info">
@@ -826,8 +891,8 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/oss/">
-                        <span class="chip bg-color">oss</span>
+                    <a href="/tags/sdk/">
+                        <span class="chip bg-color">sdk</span>
                     </a>
                     
                 </div>
@@ -841,30 +906,30 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/01/docker-an-zhuang-fu-wu/">
+                <a href="/2021/04/25/centos7%E5%AE%89%E8%A3%85go-fastdfs/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto" class="responsive-img" alt="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)">
+                        <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">
                         
-                        <span class="card-title">docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</span>
+                        <span class="card-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将介绍在docker中安装mysql等服务
+                            本文将介绍在CentOS 7 中安装go-fastdfs及可视化界面go-fastdfs-web。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/docker/" class="post-category">
-                                    docker
+                            <a href="/categories/go-fastdfs/" class="post-category">
+                                    go-fastdfs
                                 </a>
                             
                             
@@ -878,8 +943,8 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                         <span class="chip bg-color">CentOS7</span>
                     </a>
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/go-fastdfs/">
+                        <span class="chip bg-color">go-fastdfs</span>
                     </a>
                     
                 </div>

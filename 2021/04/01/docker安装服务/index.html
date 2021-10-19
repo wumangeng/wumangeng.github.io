@@ -30,10 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
@@ -492,8 +489,8 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="docker安装服务"><a href="#docker安装服务" class="headerlink" title="docker安装服务"></a>docker安装服务</h1><h3 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h3><pre class=" language-sh"><code class="language-sh">sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
-         -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
+                <h1 id="docker安装服务"><a href="#docker安装服务" class="headerlink" title="docker安装服务"></a>docker安装服务</h1><h3 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h3><pre><code class="sh">sudo sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \
+         -e &#39;s|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g&#39; \
          -i.bak \
          /etc/yum.repos.d/CentOS-*.repo
          
@@ -503,7 +500,7 @@
  yum -y install lrzsz
  #上传  rz  下载 sz
 </code></pre>
-<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre class=" language-shell"><code class="language-shell">#卸载系统之前的docker 
+<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre><code class="shell">#卸载系统之前的docker 
 sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -535,10 +532,10 @@ sudo docker images
 # 配置（阿里云）镜像加速
 sudo mkdir -p /etc/docker
 
-sudo tee /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://pacmlq67.mirror.aliyuncs.com"]
-}
+sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;
+&#123;
+  &quot;registry-mirrors&quot;: [&quot;https://pacmlq67.mirror.aliyuncs.com&quot;]
+&#125;
 EOF
 
 
@@ -549,11 +546,11 @@ vim /lib/systemd/system/docker.service
 ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H fd:// --containerd=/run/containerd/containerd.sock 
 
 #重启
-sudo systemctl daemon-reload && sudo systemctl restart docker
+sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker
 
 
 </code></pre>
-<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre class=" language-shell"><code class="language-shell">#拉取镜像
+<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre><code class="shell">#拉取镜像
 sudo docker pull mysql:5.7
 
 # --name指定容器名字 -v目录挂载 -p指定端口映射  -e设置mysql参数 -d后台运行
@@ -576,17 +573,17 @@ default-character-set=utf8
 [mysql]
 default-character-set=utf8
 [mysqld]
-init_connect='SET collation_connection = utf8_unicode_ci'
-init_connect='SET NAMES utf8'
+init_connect=&#39;SET collation_connection = utf8_unicode_ci&#39;
+init_connect=&#39;SET NAMES utf8&#39;
 character-set-server=utf8
 collation-server=utf8_unicode_ci
-default-time-zone = '+08:00'
+default-time-zone = &#39;+08:00&#39;
 skip-character-set-client-handshake
 skip-name-resolve
 
 docker restart mysql
 </code></pre>
-<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre class=" language-shell"><code class="language-shell"># 在虚拟机中
+<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre><code class="shell"># 在虚拟机中
 mkdir -p /mydata/redis/conf
 touch /mydata/redis/conf/redis.conf
 
@@ -611,14 +608,14 @@ docker restart redis
 docker update redis --restart=always
 
 </code></pre>
-<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre class=" language-shell"><code class="language-shell">docker pull portainer/portainer
+<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre><code class="shell">docker pull portainer/portainer
 
 docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer  portainer/portainer
 
 #访问
 http://ip:9000/
 </code></pre>
-<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre class=" language-shell"><code class="language-shell">#拉取镜像
+<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre><code class="shell">#拉取镜像
 docker pull sjqzhang/go-fastdfs:latest
 
 #创建保存目录
@@ -651,7 +648,7 @@ http://ip:9090/
 └── static
     └── uppy.html
 </code></pre>
-<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre class=" language-shell"><code class="language-shell">#下载镜像文件
+<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre><code class="shell">#下载镜像文件
 docker pull perfree/fastdfsweb
 
 #运行容器
@@ -665,7 +662,7 @@ http://本地ip:8088
 组：对应本地映射中文件夹conf/cfg.json 文件内容中的group
 访问地址：http://本地ip:8080
 </code></pre>
-<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre class=" language-shell"><code class="language-shell">#查找镜像
+<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre><code class="shell">#查找镜像
 docker search rocketmq
 
 #下载并且启动NameServer
@@ -674,15 +671,15 @@ docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server-4.5.1
 #启动broker    Broker容器中默认的配置文件的路径为：/etc/rocketmq/broker.conf
 docker run -d -p 10911:10911 -p 10909:10909\
  --name rmqbroker --link rmqserver:namesrv\
- -e "NAMESRV_ADDR=namesrv:9876" -e "JAVA_OPTS=-Duser.home=/opt"\
- -e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m"\
+ -e &quot;NAMESRV_ADDR=namesrv:9876&quot; -e &quot;JAVA_OPTS=-Duser.home=/opt&quot;\
+ -e &quot;JAVA_OPT_EXT=-server -Xms128m -Xmx128m&quot;\
  -v /conf/broker.conf:/etc/rocketmq/broker.conf \
  foxiswho/rocketmq:broker-4.5.1
  
 #下载并且启动 rocketmq console
 docker run -d --name rmqconsole -p 8180:8080 --link rmqserver:namesrv\
- -e "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
- -Dcom.rocketmq.sendMessageWithVIPChannel=false"\
+ -e &quot;JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
+ -Dcom.rocketmq.sendMessageWithVIPChannel=false&quot;\
  -t styletang/rocketmq-console-ng
  
  #命令检查一下启动情况
@@ -691,7 +688,7 @@ docker ps|grep rocketmq
 #通过浏览器访问console页面
 ip：8180/
 </code></pre>
-<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class=" language-shell"><code class="language-shell">#查看运行容器的宿主机进程
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre><code class="shell">#查看运行容器的宿主机进程
 ps aux|grep sleep|grep -v grep
 
 #进入容器内部
@@ -731,7 +728,7 @@ netstat -luntp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/">http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</a>
+                    <a href="http://wumangeng.github.io/2021/04/01/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/">http://wumangeng.github.io/2021/04/01/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -950,7 +947,7 @@ netstat -luntp
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/25/centos7-an-zhuang-go-fastdfs/">
+                <a href="/2021/04/25/centos7%E5%AE%89%E8%A3%85go-fastdfs/">
                     <div class="card-image">
                         
                         <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">

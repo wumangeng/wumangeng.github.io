@@ -30,10 +30,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 
 
@@ -492,418 +489,418 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="swagger2配置"><a href="#swagger2配置" class="headerlink" title="swagger2配置"></a>swagger2配置</h2><pre class=" language-xml"><code class="language-xml">        <span class="token comment" spellcheck="true">&lt;!-- swagger--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.springfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>springfox-swagger2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.9.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--UI展示页面--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>io.springfox<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>springfox-swagger-ui<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.9.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+                <h2 id="swagger2配置"><a href="#swagger2配置" class="headerlink" title="swagger2配置"></a>swagger2配置</h2><pre><code class="xml">        &lt;!-- swagger--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+            &lt;version&gt;2.9.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--UI展示页面--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+            &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;
+            &lt;version&gt;2.9.2&lt;/version&gt;
+        &lt;/dependency&gt;
 </code></pre>
 <p>1、创建swaggerConfig配置类</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
-<span class="token annotation punctuation">@EnableSwagger2</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwaggerConfig</span> <span class="token punctuation">{</span>
+<pre><code class="java">@Configuration
+@EnableSwagger2
+public class SwaggerConfig &#123;
 
-    <span class="token annotation punctuation">@Bean</span>
-    <span class="token keyword">public</span> Docket <span class="token function">webApiConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Docket</span><span class="token punctuation">(</span>DocumentationType<span class="token punctuation">.</span>SWAGGER_2<span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">groupName</span><span class="token punctuation">(</span><span class="token string">"webApi"</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">apiInfo</span><span class="token punctuation">(</span><span class="token function">webApiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token comment" spellcheck="true">//若路径中包含/admin/  或  /error 则不显示</span>
-                <span class="token punctuation">.</span><span class="token function">paths</span><span class="token punctuation">(</span>Predicates<span class="token punctuation">.</span><span class="token function">not</span><span class="token punctuation">(</span>PathSelectors<span class="token punctuation">.</span><span class="token function">regex</span><span class="token punctuation">(</span><span class="token string">"/admin/.*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">paths</span><span class="token punctuation">(</span>Predicates<span class="token punctuation">.</span><span class="token function">not</span><span class="token punctuation">(</span>PathSelectors<span class="token punctuation">.</span><span class="token function">regex</span><span class="token punctuation">(</span><span class="token string">"/error.*"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">private</span> ApiInfo <span class="token function">webApiInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    @Bean
+    public Docket webApiConfig()&#123;
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName(&quot;webApi&quot;)
+                .apiInfo(webApiInfo())
+                .select()
+                //若路径中包含/admin/  或  /error 则不显示
+                .paths(Predicates.not(PathSelectors.regex(&quot;/admin/.*&quot;)))
+                .paths(Predicates.not(PathSelectors.regex(&quot;/error.*&quot;)))
+                .build();
+    &#125;
+    private ApiInfo webApiInfo()&#123;
 
-        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ApiInfoBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">title</span><span class="token punctuation">(</span><span class="token string">"网站-课程中心API文档"</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">description</span><span class="token punctuation">(</span><span class="token string">"本文档描述了课程中心微服务接口定义"</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">version</span><span class="token punctuation">(</span><span class="token string">"1.0"</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">contact</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Contact</span><span class="token punctuation">(</span><span class="token string">"java"</span><span class="token punctuation">,</span> <span class="token string">"http://aliyun.com"</span><span class="token punctuation">,</span> <span class="token string">"1123@qq.com"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-                <span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+        return new ApiInfoBuilder()
+                .title(&quot;网站-课程中心API文档&quot;)
+                .description(&quot;本文档描述了课程中心微服务接口定义&quot;)
+                .version(&quot;1.0&quot;)
+                .contact(new Contact(&quot;java&quot;, &quot;http://aliyun.com&quot;, &quot;1123@qq.com&quot;))
+                .build();
+    &#125;
+&#125;
 </code></pre>
 <p>2、在启动类上添加扫描包注解</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"com.painter"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token comment" spellcheck="true">//路径到所有配置类的父级包名之前</span>
+<pre><code class="java">@ComponentScan(basePackages = &#123;&quot;com.painter&quot;&#125;)//路径到所有配置类的父级包名之前
 </code></pre>
 <p>3、使用swagger注解</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Api</span><span class="token punctuation">(</span><span class="token string">"讲师管理"</span><span class="token punctuation">)</span>            <span class="token comment" spellcheck="true">//放在@Controller相同的地方</span>
-<span class="token annotation punctuation">@ApiOperation</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"获取所有讲师列表"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//放在controller层的方法接口上</span>
+<pre><code class="java">@Api(&quot;讲师管理&quot;)            //放在@Controller相同的地方
+@ApiOperation(value = &quot;获取所有讲师列表&quot;)  //放在controller层的方法接口上
 
 
-<span class="token annotation punctuation">@ApiModel</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">"EduTeacher对象"</span><span class="token punctuation">,</span> description<span class="token operator">=</span><span class="token string">"讲师"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//放在实体类上与@Data相同的地方</span>
-<span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"讲师ID"</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//放实体类属性名上</span>
+@ApiModel(value=&quot;EduTeacher对象&quot;, description=&quot;讲师&quot;)  //放在实体类上与@Data相同的地方
+@ApiModelProperty(value = &quot;讲师ID&quot;)  //放实体类属性名上
 </code></pre>
 <p>4、访问</p>
 <pre><code>http://localhost:8080/swagger-ui.html
 </code></pre>
-<h2 id="统一结果返回"><a href="#统一结果返回" class="headerlink" title="统一结果返回"></a>统一结果返回</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//1、在config包中新建一个接口（定义返回状态码）</span>
+<h2 id="统一结果返回"><a href="#统一结果返回" class="headerlink" title="统一结果返回"></a>统一结果返回</h2><pre><code class="java">//1、在config包中新建一个接口（定义返回状态码）
 
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ResultCode</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//成功</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Integer SUCCESS<span class="token operator">=</span><span class="token number">200</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//失败</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Integer ERROR<span class="token operator">=</span><span class="token number">400</span><span class="token punctuation">;</span>
+public interface ResultCode &#123;
+    //成功
+    public static Integer SUCCESS=200;
+    //失败
+    public static Integer ERROR=400;
 
-<span class="token punctuation">}</span>
+&#125;
 
-<span class="token comment" spellcheck="true">//2、创建返回结果类</span>
+//2、创建返回结果类
 
-<span class="token annotation punctuation">@Data</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">R</span> <span class="token punctuation">{</span>
+@Data
+public class R &#123;
 
-    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"是否成功"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> Boolean success<span class="token punctuation">;</span>
+    @ApiModelProperty(value = &quot;是否成功&quot;)
+    private Boolean success;
 
-    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回码"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> Integer code<span class="token punctuation">;</span>
+    @ApiModelProperty(value = &quot;返回码&quot;)
+    private Integer code;
 
-    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回消息"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String message<span class="token punctuation">;</span>
+    @ApiModelProperty(value = &quot;返回消息&quot;)
+    private String message;
 
-    <span class="token annotation punctuation">@ApiModelProperty</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">"返回数据"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> data <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    @ApiModelProperty(value = &quot;返回数据&quot;)
+    private Map&lt;String, Object&gt; data = new HashMap&lt;String, Object&gt;();
 
-    <span class="token comment" spellcheck="true">//把构造方法私有</span>
-    <span class="token keyword">private</span> <span class="token function">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    //把构造方法私有
+    private R() &#123;&#125;
 
-    <span class="token comment" spellcheck="true">//成功静态方法</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCode<span class="token punctuation">.</span>SUCCESS<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token comment" spellcheck="true">//失败静态方法</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> R <span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        R r <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">R</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>ResultCode<span class="token punctuation">.</span>ERROR<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        r<span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span><span class="token string">"失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> r<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    //成功静态方法
+    public static R ok() &#123;
+        R r = new R();
+        r.setSuccess(true);
+        r.setCode(ResultCode.SUCCESS);
+        r.setMessage(&quot;成功&quot;);
+        return r;
+    &#125;
+    //失败静态方法
+    public static R error() &#123;
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(ResultCode.ERROR);
+        r.setMessage(&quot;失败&quot;);
+        return r;
+    &#125;
 
-    <span class="token keyword">public</span> R <span class="token function">success</span><span class="token punctuation">(</span>Boolean success<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setSuccess</span><span class="token punctuation">(</span>success<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public R success(Boolean success)&#123;
+        this.setSuccess(success);
+        return this;
+    &#125;
 
-    <span class="token keyword">public</span> R <span class="token function">message</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setMessage</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public R message(String message)&#123;
+        this.setMessage(message);
+        return this;
+    &#125;
 
-    <span class="token keyword">public</span> R <span class="token function">code</span><span class="token punctuation">(</span>Integer code<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setCode</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public R code(Integer code)&#123;
+        this.setCode(code);
+        return this;
+    &#125;
 
-    <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>String key<span class="token punctuation">,</span> Object value<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+    public R data(String key, Object value)&#123;
+        this.data.put(key, value);
+        return this;
+    &#125;
 
-    <span class="token keyword">public</span> R <span class="token function">data</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> map<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setData</span><span class="token punctuation">(</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+    public R data(Map&lt;String, Object&gt; map)&#123;
+        this.setData(map);
+        return this;
+    &#125;
+&#125;
 
 </code></pre>
-<h2 id="统一异常处理"><a href="#统一异常处理" class="headerlink" title="统一异常处理"></a>统一异常处理</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//1、创建统一异常处理类</span>
+<h2 id="统一异常处理"><a href="#统一异常处理" class="headerlink" title="统一异常处理"></a>统一异常处理</h2><pre><code class="java">//1、创建统一异常处理类
 
-<span class="token annotation punctuation">@ControllerAdvice</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExceptionHandler</span> <span class="token punctuation">{</span>
+@ControllerAdvice
+public class ExceptionHandler &#123;
 
-    <span class="token comment" spellcheck="true">/**
+    /**
      * 指定出现什么异常执行此方法  此方法为全局异常处理
-     * */</span>
-    <span class="token annotation punctuation">@org</span><span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span><span class="token function">ExceptionHandler</span><span class="token punctuation">(</span>Exception<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-    <span class="token annotation punctuation">@ResponseBody</span>
-    <span class="token keyword">public</span> Result <span class="token function">error</span><span class="token punctuation">(</span>GuliException e<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> Result<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">code</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+     * */
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Result error(GuliException e)&#123;
+        e.printStackTrace();
+        return Result.error().code(e.getCode()).message(e.getMsg());
+    &#125;
+&#125;
 
-<span class="token comment" spellcheck="true">//2、自定义异常处理类</span>
-<span class="token annotation punctuation">@Data</span>
-<span class="token annotation punctuation">@Accessors</span><span class="token punctuation">(</span>chain <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@AllArgsConstructor</span>
-<span class="token annotation punctuation">@NoArgsConstructor</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GuliException</span> <span class="token keyword">extends</span> <span class="token class-name">RuntimeException</span><span class="token punctuation">{</span>
+//2、自定义异常处理类
+@Data
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
+public class GuliException extends RuntimeException&#123;
 
-    <span class="token keyword">private</span> Integer code<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String msg<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+    private Integer code;
+    private String msg;
+&#125;
 
-<span class="token comment" spellcheck="true">//3、测试使用</span>
-<span class="token keyword">try</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">GuliException</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span><span class="token string">"出现自定义异常"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
+//3、测试使用
+try &#123;
+        int a = 10/0;
+    &#125;catch(Exception e) &#123;
+        throw new GuliException(200,&quot;出现自定义异常&quot;);
+    &#125;
 </code></pre>
 <h2 id="统一日志处理"><a href="#统一日志处理" class="headerlink" title="统一日志处理"></a>统一日志处理</h2><p>一、日志</p>
 <p>1、配置日志级别</p>
 <p>日志记录器（Logger）的行为是分等级的。如下表所示：</p>
 <p>分为：OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL</p>
 <p>默认情况下，spring boot从控制台打印出来的日志级别只有INFO及以上级别，可以配置日志级别</p>
-<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true"># 设置日志级别</span>
-<span class="token attr-name">logging.level.root</span><span class="token punctuation">=</span><span class="token attr-value">WARN</span>
+<pre><code class="properties"># 设置日志级别
+logging.level.root=WARN
 </code></pre>
 <p><strong>二、Logback日志</strong></p>
-<pre class=" language-pox"><code class="language-pox"><dependency>
-     <groupId>ch.qos.logback</groupId>
-     <artifactId>logback-classic</artifactId>
-</dependency>
+<pre><code class="pox">&lt;dependency&gt;
+     &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+     &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+&lt;/dependency&gt;
 </code></pre>
 <p>1、配置logback日志</p>
 <p>删除application.properties中的日志配置</p>
 <p>安装idea彩色日志插件：grep-console</p>
 <p>resources 中创建  logback-spring.xml </p>
-<pre class=" language-xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
-<span class="token comment" spellcheck="true">&lt;!-- 日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出 --></span>
-<span class="token comment" spellcheck="true">&lt;!-- scan:当此属性设置为true时，配置文档如果发生改变，将会被重新加载，默认值为true --></span>
-<span class="token comment" spellcheck="true">&lt;!-- scanPeriod:设置监测配置文档是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。
-                 当scan为true时，此属性生效。默认的时间间隔为1分钟。 --></span>
-<span class="token comment" spellcheck="true">&lt;!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 --></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span>  <span class="token attr-name">scan</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">scanPeriod</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>10 seconds<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>contextName</span><span class="token punctuation">></span></span>logback<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>contextName</span><span class="token punctuation">></span></span>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!-- 日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出 --&gt;
+&lt;!-- scan:当此属性设置为true时，配置文档如果发生改变，将会被重新加载，默认值为true --&gt;
+&lt;!-- scanPeriod:设置监测配置文档是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。
+                 当scan为true时，此属性生效。默认的时间间隔为1分钟。 --&gt;
+&lt;!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 --&gt;
+&lt;configuration  scan=&quot;true&quot; scanPeriod=&quot;10 seconds&quot;&gt;
+    &lt;contextName&gt;logback&lt;/contextName&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“${}”来使用变量。 --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>log.path<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>G:/logs/pmp<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+    &lt;!-- name的值是变量的名称，value的值时变量定义的值。通过定义的值会被插入到logger上下文中。定义后，可以使“$&#123;&#125;”来使用变量。 --&gt;
+    &lt;property name=&quot;log.path&quot; value=&quot;G:/logs/pmp&quot; /&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--0. 日志格式和颜色渲染 --></span>
-    <span class="token comment" spellcheck="true">&lt;!-- 彩色日志依赖的渲染类 --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>conversionRule</span> <span class="token attr-name">conversionWord</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>clr<span class="token punctuation">"</span></span> <span class="token attr-name">converterClass</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>org.springframework.boot.logging.logback.ColorConverter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>conversionRule</span> <span class="token attr-name">conversionWord</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wex<span class="token punctuation">"</span></span> <span class="token attr-name">converterClass</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>conversionRule</span> <span class="token attr-name">conversionWord</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wEx<span class="token punctuation">"</span></span> <span class="token attr-name">converterClass</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token comment" spellcheck="true">&lt;!-- 彩色日志格式 --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>CONSOLE_LOG_PATTERN<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+    &lt;!--0. 日志格式和颜色渲染 --&gt;
+    &lt;!-- 彩色日志依赖的渲染类 --&gt;
+    &lt;conversionRule conversionWord=&quot;clr&quot; converterClass=&quot;org.springframework.boot.logging.logback.ColorConverter&quot; /&gt;
+    &lt;conversionRule conversionWord=&quot;wex&quot; converterClass=&quot;org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter&quot; /&gt;
+    &lt;conversionRule conversionWord=&quot;wEx&quot; converterClass=&quot;org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter&quot; /&gt;
+    &lt;!-- 彩色日志格式 --&gt;
+    &lt;property name=&quot;CONSOLE_LOG_PATTERN&quot; value=&quot;$&#123;CONSOLE_LOG_PATTERN:-%clr(%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125;)&#123;faint&#125; %clr($&#123;LOG_LEVEL_PATTERN:-%5p&#125;) %clr($&#123;PID:- &#125;)&#123;magenta&#125; %clr(---)&#123;faint&#125; %clr([%15.15t])&#123;faint&#125; %clr(%-40.40logger&#123;39&#125;)&#123;cyan&#125; %clr(:)&#123;faint&#125; %m%n$&#123;LOG_EXCEPTION_CONVERSION_WORD:-%wEx&#125;&#125;&quot;/&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--1. 输出到控制台--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>CONSOLE<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.ConsoleAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.classic.filter.ThresholdFilter<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>debug<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Pattern</span><span class="token punctuation">></span></span>${CONSOLE_LOG_PATTERN}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Pattern</span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!-- 设置字符集 --></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>charset</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>charset</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+    &lt;!--1. 输出到控制台--&gt;
+    &lt;appender name=&quot;CONSOLE&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+        &lt;!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息--&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;
+            &lt;level&gt;debug&lt;/level&gt;
+        &lt;/filter&gt;
+        &lt;encoder&gt;
+            &lt;Pattern&gt;$&#123;CONSOLE_LOG_PATTERN&#125;&lt;/Pattern&gt;
+            &lt;!-- 设置字符集 --&gt;
+            &lt;charset&gt;UTF-8&lt;/charset&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--2. 输出到文档--></span>
-    <span class="token comment" spellcheck="true">&lt;!-- 2.1 level为 DEBUG 日志，时间滚动输出  --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>DEBUG_FILE<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.RollingFileAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 正在记录的日志文档的路径及文档名 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>file</span><span class="token punctuation">></span></span>${log.path}/web_debug.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>file</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--日志文档输出格式--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>charset</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>charset</span><span class="token punctuation">></span></span> <span class="token comment" spellcheck="true">&lt;!-- 设置字符集 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rollingPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!-- 日志归档 --></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fileNamePattern</span><span class="token punctuation">></span></span>${log.path}/web-debug-%d{yyyy-MM-dd}.%i.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fileNamePattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeBasedFileNamingAndTriggeringPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxFileSize</span><span class="token punctuation">></span></span>100MB<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxFileSize</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeBasedFileNamingAndTriggeringPolicy</span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!--日志文档保留天数--></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxHistory</span><span class="token punctuation">></span></span>15<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxHistory</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rollingPolicy</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 此日志文档只记录debug级别的 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.classic.filter.LevelFilter<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>debug<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMatch</span><span class="token punctuation">></span></span>ACCEPT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMatch</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMismatch</span><span class="token punctuation">></span></span>DENY<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMismatch</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+    &lt;!--2. 输出到文档--&gt;
+    &lt;!-- 2.1 level为 DEBUG 日志，时间滚动输出  --&gt;
+    &lt;appender name=&quot;DEBUG_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;!-- 正在记录的日志文档的路径及文档名 --&gt;
+        &lt;file&gt;$&#123;log.path&#125;/web_debug.log&lt;/file&gt;
+        &lt;!--日志文档输出格式--&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n&lt;/pattern&gt;
+            &lt;charset&gt;UTF-8&lt;/charset&gt; &lt;!-- 设置字符集 --&gt;
+        &lt;/encoder&gt;
+        &lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 日志归档 --&gt;
+            &lt;fileNamePattern&gt;$&#123;log.path&#125;/web-debug-%d&#123;yyyy-MM-dd&#125;.%i.log&lt;/fileNamePattern&gt;
+            &lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+                &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
+            &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
+            &lt;!--日志文档保留天数--&gt;
+            &lt;maxHistory&gt;15&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;!-- 此日志文档只记录debug级别的 --&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;debug&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+    &lt;/appender&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- 2.2 level为 INFO 日志，时间滚动输出  --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>INFO_FILE<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.RollingFileAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 正在记录的日志文档的路径及文档名 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>file</span><span class="token punctuation">></span></span>${log.path}/web_info.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>file</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--日志文档输出格式--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>charset</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>charset</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rollingPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!-- 每天日志归档路径以及格式 --></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fileNamePattern</span><span class="token punctuation">></span></span>${log.path}/web-info-%d{yyyy-MM-dd}.%i.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fileNamePattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeBasedFileNamingAndTriggeringPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxFileSize</span><span class="token punctuation">></span></span>100MB<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxFileSize</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeBasedFileNamingAndTriggeringPolicy</span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!--日志文档保留天数--></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxHistory</span><span class="token punctuation">></span></span>15<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxHistory</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rollingPolicy</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 此日志文档只记录info级别的 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.classic.filter.LevelFilter<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>info<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMatch</span><span class="token punctuation">></span></span>ACCEPT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMatch</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMismatch</span><span class="token punctuation">></span></span>DENY<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMismatch</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+    &lt;!-- 2.2 level为 INFO 日志，时间滚动输出  --&gt;
+    &lt;appender name=&quot;INFO_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;!-- 正在记录的日志文档的路径及文档名 --&gt;
+        &lt;file&gt;$&#123;log.path&#125;/web_info.log&lt;/file&gt;
+        &lt;!--日志文档输出格式--&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n&lt;/pattern&gt;
+            &lt;charset&gt;UTF-8&lt;/charset&gt;
+        &lt;/encoder&gt;
+        &lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;!-- 每天日志归档路径以及格式 --&gt;
+            &lt;fileNamePattern&gt;$&#123;log.path&#125;/web-info-%d&#123;yyyy-MM-dd&#125;.%i.log&lt;/fileNamePattern&gt;
+            &lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+                &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
+            &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
+            &lt;!--日志文档保留天数--&gt;
+            &lt;maxHistory&gt;15&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;!-- 此日志文档只记录info级别的 --&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;info&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+    &lt;/appender&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- 2.3 level为 WARN 日志，时间滚动输出  --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>WARN_FILE<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.RollingFileAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 正在记录的日志文档的路径及文档名 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>file</span><span class="token punctuation">></span></span>${log.path}/web_warn.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>file</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--日志文档输出格式--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>charset</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>charset</span><span class="token punctuation">></span></span> <span class="token comment" spellcheck="true">&lt;!-- 此处设置字符集 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rollingPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fileNamePattern</span><span class="token punctuation">></span></span>${log.path}/web-warn-%d{yyyy-MM-dd}.%i.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fileNamePattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeBasedFileNamingAndTriggeringPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxFileSize</span><span class="token punctuation">></span></span>100MB<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxFileSize</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeBasedFileNamingAndTriggeringPolicy</span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!--日志文档保留天数--></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxHistory</span><span class="token punctuation">></span></span>15<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxHistory</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rollingPolicy</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 此日志文档只记录warn级别的 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.classic.filter.LevelFilter<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>warn<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMatch</span><span class="token punctuation">></span></span>ACCEPT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMatch</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMismatch</span><span class="token punctuation">></span></span>DENY<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMismatch</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+    &lt;!-- 2.3 level为 WARN 日志，时间滚动输出  --&gt;
+    &lt;appender name=&quot;WARN_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;!-- 正在记录的日志文档的路径及文档名 --&gt;
+        &lt;file&gt;$&#123;log.path&#125;/web_warn.log&lt;/file&gt;
+        &lt;!--日志文档输出格式--&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n&lt;/pattern&gt;
+            &lt;charset&gt;UTF-8&lt;/charset&gt; &lt;!-- 此处设置字符集 --&gt;
+        &lt;/encoder&gt;
+        &lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;fileNamePattern&gt;$&#123;log.path&#125;/web-warn-%d&#123;yyyy-MM-dd&#125;.%i.log&lt;/fileNamePattern&gt;
+            &lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+                &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
+            &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
+            &lt;!--日志文档保留天数--&gt;
+            &lt;maxHistory&gt;15&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;!-- 此日志文档只记录warn级别的 --&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;warn&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+    &lt;/appender&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- 2.4 level为 ERROR 日志，时间滚动输出  --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ERROR_FILE<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.RollingFileAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 正在记录的日志文档的路径及文档名 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>file</span><span class="token punctuation">></span></span>${log.path}/web_error.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>file</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!--日志文档输出格式--></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>charset</span><span class="token punctuation">></span></span>UTF-8<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>charset</span><span class="token punctuation">></span></span> <span class="token comment" spellcheck="true">&lt;!-- 此处设置字符集 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rollingPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.TimeBasedRollingPolicy<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>fileNamePattern</span><span class="token punctuation">></span></span>${log.path}/web-error-%d{yyyy-MM-dd}.%i.log<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>fileNamePattern</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>timeBasedFileNamingAndTriggeringPolicy</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxFileSize</span><span class="token punctuation">></span></span>100MB<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxFileSize</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>timeBasedFileNamingAndTriggeringPolicy</span><span class="token punctuation">></span></span>
-            <span class="token comment" spellcheck="true">&lt;!--日志文档保留天数--></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>maxHistory</span><span class="token punctuation">></span></span>15<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>maxHistory</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rollingPolicy</span><span class="token punctuation">></span></span>
-        <span class="token comment" spellcheck="true">&lt;!-- 此日志文档只记录ERROR级别的 --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filter</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ch.qos.logback.classic.filter.LevelFilter<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>level</span><span class="token punctuation">></span></span>ERROR<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>level</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMatch</span><span class="token punctuation">></span></span>ACCEPT<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMatch</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>onMismatch</span><span class="token punctuation">></span></span>DENY<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>onMismatch</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filter</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+    &lt;!-- 2.4 level为 ERROR 日志，时间滚动输出  --&gt;
+    &lt;appender name=&quot;ERROR_FILE&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;
+        &lt;!-- 正在记录的日志文档的路径及文档名 --&gt;
+        &lt;file&gt;$&#123;log.path&#125;/web_error.log&lt;/file&gt;
+        &lt;!--日志文档输出格式--&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n&lt;/pattern&gt;
+            &lt;charset&gt;UTF-8&lt;/charset&gt; &lt;!-- 此处设置字符集 --&gt;
+        &lt;/encoder&gt;
+        &lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;
+        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;
+            &lt;fileNamePattern&gt;$&#123;log.path&#125;/web-error-%d&#123;yyyy-MM-dd&#125;.%i.log&lt;/fileNamePattern&gt;
+            &lt;timeBasedFileNamingAndTriggeringPolicy class=&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP&quot;&gt;
+                &lt;maxFileSize&gt;100MB&lt;/maxFileSize&gt;
+            &lt;/timeBasedFileNamingAndTriggeringPolicy&gt;
+            &lt;!--日志文档保留天数--&gt;
+            &lt;maxHistory&gt;15&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;!-- 此日志文档只记录ERROR级别的 --&gt;
+        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;
+            &lt;level&gt;ERROR&lt;/level&gt;
+            &lt;onMatch&gt;ACCEPT&lt;/onMatch&gt;
+            &lt;onMismatch&gt;DENY&lt;/onMismatch&gt;
+        &lt;/filter&gt;
+    &lt;/appender&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--
-        &lt;logger>用来设置某一个包或者具体的某一个类的日志打印级别、
-        以及指定&lt;appender>。&lt;logger>仅有一个name属性，
+    &lt;!--
+        &lt;logger&gt;用来设置某一个包或者具体的某一个类的日志打印级别、
+        以及指定&lt;appender&gt;。&lt;logger&gt;仅有一个name属性，
         一个可选的level和一个可选的addtivity属性。
         name:用来指定受此logger约束的某一个包或者具体的某一个类。
         level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
               还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。
               如果未设置此属性，那么当前logger将会继承上级的级别。
         addtivity:是否向上级logger传递打印信息。默认是true。
-        &lt;logger name="org.springframework.web" level="info"/>
-        &lt;logger name="org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor" level="INFO"/>
-    --></span>
+        &lt;logger name=&quot;org.springframework.web&quot; level=&quot;info&quot;/&gt;
+        &lt;logger name=&quot;org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor&quot; level=&quot;INFO&quot;/&gt;
+    --&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--
+    &lt;!--
         使用mybatis的时候，sql语句是debug下才会打印，而这里我们只配置了info，所以想要查看sql语句的话，有以下两种操作：
-        第一种把&lt;root level="info">改成&lt;root level="DEBUG">这样就会打印sql，不过这样日志那边会出现很多其他消息
+        第一种把&lt;root level=&quot;info&quot;&gt;改成&lt;root level=&quot;DEBUG&quot;&gt;这样就会打印sql，不过这样日志那边会出现很多其他消息
         第二种就是单独给dao下目录配置debug模式，代码如下，这样配置sql语句会打印，其他还是正常info级别：
         【logging.level.org.mybatis=debug logging.level.dao=debug】
-     --></span>
+     --&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!--
+    &lt;!--
         root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性
         level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
         不能设置为INHERITED或者同义词NULL。默认是DEBUG
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
-    --></span>
+    --&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- 4. 最终的策略 --></span>
-    <span class="token comment" spellcheck="true">&lt;!-- 4.1 开发环境:打印控制台--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>springProfile</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>dev<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>logger</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>com.sdcm.pmp<span class="token punctuation">"</span></span> <span class="token attr-name">level</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>debug<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>springProfile</span><span class="token punctuation">></span></span>
+    &lt;!-- 4. 最终的策略 --&gt;
+    &lt;!-- 4.1 开发环境:打印控制台--&gt;
+    &lt;springProfile name=&quot;dev&quot;&gt;
+        &lt;logger name=&quot;com.sdcm.pmp&quot; level=&quot;debug&quot;/&gt;
+    &lt;/springProfile&gt;
 
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span> <span class="token attr-name">level</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>CONSOLE<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>DEBUG_FILE<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>INFO_FILE<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>WARN_FILE<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ERROR_FILE<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span>
+    &lt;root level=&quot;info&quot;&gt;
+        &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;
+        &lt;appender-ref ref=&quot;DEBUG_FILE&quot; /&gt;
+        &lt;appender-ref ref=&quot;INFO_FILE&quot; /&gt;
+        &lt;appender-ref ref=&quot;WARN_FILE&quot; /&gt;
+        &lt;appender-ref ref=&quot;ERROR_FILE&quot; /&gt;
+    &lt;/root&gt;
 
-    <span class="token comment" spellcheck="true">&lt;!-- 4.2 生产环境:输出到文档
-    &lt;springProfile name="pro">
-        &lt;root level="info">
-            &lt;appender-ref ref="CONSOLE" />
-            &lt;appender-ref ref="DEBUG_FILE" />
-            &lt;appender-ref ref="INFO_FILE" />
-            &lt;appender-ref ref="ERROR_FILE" />
-            &lt;appender-ref ref="WARN_FILE" />
-        &lt;/root>
-    &lt;/springProfile> --></span>
+    &lt;!-- 4.2 生产环境:输出到文档
+    &lt;springProfile name=&quot;pro&quot;&gt;
+        &lt;root level=&quot;info&quot;&gt;
+            &lt;appender-ref ref=&quot;CONSOLE&quot; /&gt;
+            &lt;appender-ref ref=&quot;DEBUG_FILE&quot; /&gt;
+            &lt;appender-ref ref=&quot;INFO_FILE&quot; /&gt;
+            &lt;appender-ref ref=&quot;ERROR_FILE&quot; /&gt;
+            &lt;appender-ref ref=&quot;WARN_FILE&quot; /&gt;
+        &lt;/root&gt;
+    &lt;/springProfile&gt; --&gt;
 
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span>
+&lt;/configuration&gt;
 </code></pre>
 <p>2、将异常信息输出到日志文件</p>
-<pre class=" language-java"><code class="language-java"><span class="token number">1</span>、在统一异常处理类上添加注解
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token number">2</span>、在类里面设置需要加入的内容
+<pre><code class="java">1、在统一异常处理类上添加注解
+@Slf4j
+2、在类里面设置需要加入的内容
 
-<span class="token annotation punctuation">@ControllerAdvice</span>
-<span class="token annotation punctuation">@Slf4j</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExceptionHandler</span> <span class="token punctuation">{</span>
+@ControllerAdvice
+@Slf4j
+public class ExceptionHandler &#123;
 
-    <span class="token comment" spellcheck="true">/**
+    /**
      * 指定出现什么异常执行此方法  此方法为全局异常处理
-     * */</span>
-    <span class="token annotation punctuation">@org</span><span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>bind<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span><span class="token function">ExceptionHandler</span><span class="token punctuation">(</span>Exception<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-    <span class="token annotation punctuation">@ResponseBody</span>
-    <span class="token keyword">public</span> Result <span class="token function">error</span><span class="token punctuation">(</span>GuliException e<span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//将错误信息写到日志文件里</span>
-        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// log.info(e.getMessage());</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> Result<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">code</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">message</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span><span class="token function">getMsg</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+     * */
+    @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Result error(GuliException e)&#123;
+        //将错误信息写到日志文件里
+        log.error(e.getMessage());
+        // log.info(e.getMessage());
+        e.printStackTrace();
+        return Result.error().code(e.getCode()).message(e.getMsg());
+    &#125;
+&#125;
 </code></pre>
-<h2 id="扫描java目录下xml文件配置"><a href="#扫描java目录下xml文件配置" class="headerlink" title="扫描java目录下xml文件配置"></a>扫描java目录下xml文件配置</h2><pre class=" language-xml"><code class="language-xml">#配置mapper xml文件的路径
+<h2 id="扫描java目录下xml文件配置"><a href="#扫描java目录下xml文件配置" class="headerlink" title="扫描java目录下xml文件配置"></a>扫描java目录下xml文件配置</h2><pre><code class="xml">#配置mapper xml文件的路径
 mybatis-plus.mapper-locations=classpath:com/painter/eduservice/mapper/xml/*.xml 
 
-<span class="token comment" spellcheck="true">&lt;!-- 项目打包时会将java目录中的*.xml文件也进行打包 --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resource</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>directory</span><span class="token punctuation">></span></span>src/main/java<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>directory</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>includes</span><span class="token punctuation">></span></span>
-                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span><span class="token punctuation">></span></span>**/*.xml<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>include</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>includes</span><span class="token punctuation">></span></span>
-                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>filtering</span><span class="token punctuation">></span></span>false<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>filtering</span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resource</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span>
+&lt;!-- 项目打包时会将java目录中的*.xml文件也进行打包 --&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;false&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
 </code></pre>
 
                 
@@ -1150,7 +1147,7 @@ mybatis-plus.mapper-locations=classpath:com/painter/eduservice/mapper/xml/*.xml
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/01/docker-an-zhuang-fu-wu/">
+                <a href="/2021/04/01/docker%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1/">
                     <div class="card-image">
                         
                         <img src="https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto" class="responsive-img" alt="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)">
@@ -1202,7 +1199,7 @@ mybatis-plus.mapper-locations=classpath:com/painter/eduservice/mapper/xml/*.xml
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/02/25/jwt/">
+                <a href="/2021/02/25/JWT/">
                     <div class="card-image">
                         
                         <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/jwt.jpeg" class="responsive-img" alt="JWT的使用姿势">
