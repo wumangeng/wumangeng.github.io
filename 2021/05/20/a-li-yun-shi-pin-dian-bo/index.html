@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云对象存储(oss)的使用姿势, 山河远阔">
+    <meta name="keywords" content="阿里云视频点播(sdk)的使用姿势, 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阿里云对象存储(oss)的使用姿势 | 山河远阔</title>
+    <title>阿里云视频点播(sdk)的使用姿势 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -30,7 +30,10 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -309,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云对象存储(oss)的使用姿势</h1>
+                    <h1 class="description center-align post-title">阿里云视频点播(sdk)的使用姿势</h1>
                 </div>
             </div>
         </div>
@@ -430,8 +433,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/oss/">
-                                <span class="chip bg-color">oss</span>
+                            <a href="/tags/sdk/">
+                                <span class="chip bg-color">sdk</span>
                             </a>
                         
                     </div>
@@ -485,137 +488,105 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="阿里云OSS使用"><a href="#阿里云OSS使用" class="headerlink" title="阿里云OSS使用"></a>阿里云OSS使用</h1><ul>
-<li>首先在使用之前请先确保你已经申请了阿里云的oss对象存储服务（如果没有请先申请）</li>
-<li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
-</ul>
-<h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
-<pre><code class="properties">#服务名
-spring.application.name=service-oss
-
-server.port=8086
-
-spring.profiles.active=dev
-
-#阿里云oss配置 （以下信息替换成你自己的）
-aliyun.oss.file.endpoint=***
-aliyun.oss.file.keyid=***
-aliyun.oss.file.keysecret=***
-#bucket可以在控制台创建，也可以使用java代码创建
-aliyun.oss.file.bucketname=***
+                <h1 id="视频点播（SDK）"><a href="#视频点播（SDK）" class="headerlink" title="视频点播（SDK）"></a>视频点播（SDK）</h1><p><strong>阿里云文档地址：</strong></p>
+<pre><code>https://help.aliyun.com/document_detail/57756.html?spm=a2c4g.11186623.6.1037.2bd84e28xsVzg2
 </code></pre>
-<h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
-<pre><code class="java">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)  //配置启动类不加载数据库
-@ComponentScan(basePackages = &#123;&quot;com.hscs&quot;&#125;)        //扫描包
-public class OssApplication &#123;
-    public static void main(String[] args) &#123;
-        SpringApplication.run(OssApplication.class, args);
-    &#125;
-
-&#125;
+<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖:"></a>1、引入依赖:</h2><pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.5.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-vod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.15.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-sdk-vod-upload<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.4.13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>fastjson<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.62<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
 </code></pre>
-<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre><code class="java">@Component
-public class ConstantPropertiesUtlis implements InitializingBean &#123;
-
-    @Value(&quot;$&#123;aliyun.oss.file.endpoint&#125;&quot;)
-    private String endpoint;
-
-    @Value(&quot;$&#123;aliyun.oss.file.keyid&#125;&quot;)
-    private String keyId;
-
-    @Value(&quot;$&#123;aliyun.oss.file.keysecret&#125;&quot;)
-    private String keySecret;
-
-    @Value(&quot;$&#123;aliyun.oss.file.bucketname&#125;&quot;)
-    private String bucketName;
-
-    public static String END_POINT;
-    public static String KEY_ID;
-    public static String KEY_SECRET;
-    public static String BUCKET_NAME;
-
-    @Override
-    public void afterPropertiesSet() throws Exception &#123;
-        END_POINT=endpoint;
-        KEY_ID=keyId;
-        KEY_SECRET=keySecret;
-        BUCKET_NAME=bucketName;
-    &#125;
-
-
-&#125;
+<h2 id="2、初始化对象："><a href="#2、初始化对象：" class="headerlink" title="2、初始化对象："></a>2、初始化对象：</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InitObject</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> DefaultAcsClient <span class="token function">initVodClient</span><span class="token punctuation">(</span>String accessKeyId<span class="token punctuation">,</span> String accessKeySecret<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClientException <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String regionId <span class="token operator">=</span> <span class="token string">"cn-shanghai"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 点播服务接入区域</span>
+        DefaultProfile profile <span class="token operator">=</span> DefaultProfile<span class="token punctuation">.</span><span class="token function">getProfile</span><span class="token punctuation">(</span>regionId<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        DefaultAcsClient client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultAcsClient</span><span class="token punctuation">(</span>profile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> client<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre><code class="java">@Controller
-@RequestMapping(&quot;oss/fileoss&quot;)
-@CrossOrigin
-public class OssController &#123;
+<h2 id="3、获取视频相关信息："><a href="#3、获取视频相关信息：" class="headerlink" title="3、获取视频相关信息："></a>3、获取视频相关信息：</h2><h3 id="3-1、根据视频id获取视频的播放地址："><a href="#3-1、根据视频id获取视频的播放地址：" class="headerlink" title="3.1、根据视频id获取视频的播放地址："></a>3.1、根据视频id获取视频的播放地址：</h3><p>注：加密后的视频不能直接通过地址访问</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestVod</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> ClientException <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//  1、根据是视频id获取视频的播放地址</span>
+        <span class="token comment" spellcheck="true">//（1）创建初始化对象 参数：阿里云oss的上传密钥（此处替换成你自己的）</span>
+        DefaultAcsClient client <span class="token operator">=</span> InitObject<span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    @Autowired
-    private OssService ossService;
+        <span class="token comment" spellcheck="true">// (2) 创建获取视频地址request 和response</span>
+        GetPlayInfoRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GetPlayInfoResponse response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    /**
-     * 上传头像
-     * */
-    @PostMapping()
-    public R uploadFileOss(MultipartFile file)&#123;
-        String url=ossService.uploadFileAvatar(file);
-        return R.ok().data(&quot;url&quot;,url);
-    &#125;
+        <span class="token comment" spellcheck="true">// (3) 向request对象里面设置视频id</span>
+        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-&#125;
+        <span class="token comment" spellcheck="true">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
+        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        List<span class="token operator">&lt;</span>GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo<span class="token operator">></span> playInfoList <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getPlayInfoList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//播放地址</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo playInfo <span class="token operator">:</span> playInfoList<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"PlayInfo.PlayURL = "</span> <span class="token operator">+</span> playInfo<span class="token punctuation">.</span><span class="token function">getPlayURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//Base信息</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoBase.Title = "</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoBase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre><code class="java">//接口
-public interface OssService &#123;
-    String uploadFileAvatar(MultipartFile file);
-&#125;
+<h3 id="3-2、根据视频id获取视频的播放凭证："><a href="#3-2、根据视频id获取视频的播放凭证：" class="headerlink" title="3.2、根据视频id获取视频的播放凭证："></a>3.2、根据视频id获取视频的播放凭证：</h3><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//  2、根据视频id获取视频播放凭证</span>
+        <span class="token comment" spellcheck="true">//（1）创建初始化对象 参数：阿里云oss的上传密钥</span>
+        DefaultAcsClient client <span class="token operator">=</span> InitObject<span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-//类
-/**
- * @author wmg
- *  文件上传业务实现
- */
-@Service
-public class OssServiceImpl implements OssService &#123;
-    @Override
-    public String uploadFileAvatar(MultipartFile file) &#123;
-        String endpoint = ConstantPropertiesUtlis.END_POINT;
-        String accessKeyId = ConstantPropertiesUtlis.KEY_ID;
-        String accessKeySecret = ConstantPropertiesUtlis.KEY_SECRET;
-        String bucketName=ConstantPropertiesUtlis.BUCKET_NAME;
+        <span class="token comment" spellcheck="true">// (2) 创建获取视频凭证request 和response</span>
+        GetVideoPlayAuthRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        GetVideoPlayAuthResponse response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-        try&#123;
-            // 创建OSSClient实例。
-            OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        <span class="token comment" spellcheck="true">// (3) 向request对象里面设置视频id</span>
+        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            //获取文件名称
-            String fileName = file.getOriginalFilename();
-            //在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖
-            String uuid = UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;);
-            fileName=uuid+fileName;
-            //将文件按日期分类
-            String datePath = new DateTime().toString(&quot;yyyy/MM/dd&quot;);
-            fileName=datePath+&quot;/&quot;+fileName;
-            // 上传文件流。
-            InputStream inputStream = file.getInputStream();
-            //第一个参数为bucket名  第二个参数为上传文件路径
-            ossClient.putObject(bucketName, fileName, inputStream);
+        <span class="token comment" spellcheck="true">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
+        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            //将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg
-            String url=&quot;https://&quot;+bucketName+&quot;.&quot;+endpoint+&quot;/&quot;+fileName;
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"视频播放凭证为："</span><span class="token operator">+</span>response<span class="token punctuation">.</span><span class="token function">getPlayAuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="4、视频上传"><a href="#4、视频上传" class="headerlink" title="4、视频上传"></a>4、视频上传</h2><h3 id="4-1、本地视频上传"><a href="#4-1、本地视频上传" class="headerlink" title="4.1、本地视频上传"></a>4.1、本地视频上传</h3><pre class=" language-java"><code class="language-java"> String accessKeyId <span class="token operator">=</span> <span class="token string">"***"</span><span class="token punctuation">;</span>
+        String accessKeySecret <span class="token operator">=</span> <span class="token string">"###"</span><span class="token punctuation">;</span>
 
+        String title <span class="token operator">=</span> <span class="token string">"6 - What If I Want to Move Faster - upload by sdk"</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//上传之后文件名称</span>
+        String fileName <span class="token operator">=</span> <span class="token string">"D:/Project/项目资料/1-阿里云上传测试视频/test.mp4"</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//本地文件路径和名称</span>
+        <span class="token comment" spellcheck="true">//上传视频的方法</span>
+        UploadVideoRequest request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoRequest</span><span class="token punctuation">(</span>accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">,</span> title<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* 可指定分片上传时每个分片的大小，默认为2M字节 */</span>
+        request<span class="token punctuation">.</span><span class="token function">setPartSize</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">*</span> 1024L<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">/* 可指定分片上传时的并发线程数，默认为1，(注：该配置会占用服务器CPU资源，需根据服务器情况指定）*/</span>
+        request<span class="token punctuation">.</span><span class="token function">setTaskNum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            // 关闭OSSClient。
-            ossClient.shutdown();
-            return url;
-        &#125;catch (Exception e)&#123;
-            System.out.println(&quot;图片上传失败！&quot;);
-            e.printStackTrace();
-            return null;
-        &#125;
+        UploadVideoImpl uploader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        UploadVideoResponse response <span class="token operator">=</span> uploader<span class="token punctuation">.</span><span class="token function">uploadVideo</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    &#125;
-&#125;
-
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">isSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/* 如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因 */</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorCode="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorMessage="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 
                 
@@ -643,7 +614,7 @@ public class OssServiceImpl implements OssService &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91OSS/">http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91OSS/</a>
+                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/">http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -681,8 +652,8 @@ public class OssServiceImpl implements OssService &#123;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/oss/">
-                                    <span class="chip bg-color">oss</span>
+                                <a href="/tags/sdk/">
+                                    <span class="chip bg-color">sdk</span>
                                 </a>
                             
                         </div>
@@ -858,24 +829,76 @@ public class OssServiceImpl implements OssService &#123;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91%E8%A7%86%E9%A2%91%E7%82%B9%E6%92%AD/">
+                <a href="/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto" class="responsive-img" alt="阿里云视频点播(sdk)的使用姿势">
+                        <img src="https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto" class="responsive-img" alt="基于java的生成大疆弓形航线算法实现">
                         
-                        <span class="card-title">阿里云视频点播(sdk)的使用姿势</span>
+                        <span class="card-title">基于java的生成大疆弓形航线算法实现</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示sdk在java服务端的使用方式。
+                            本文将介绍给定任意两个坐标，在这坐标之间生成一些列有序点的坐标的算法
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/dji/" class="post-category">
+                                    dji
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/dji/">
+                        <span class="chip bg-color">dji</span>
+                    </a>
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/05/20/a-li-yun-oss/">
+                    <div class="card-image">
+                        
+                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
+                        
+                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文将演示oss在java服务端的使用方式。
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -891,60 +914,8 @@ public class OssServiceImpl implements OssService &#123;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sdk/">
-                        <span class="chip bg-color">sdk</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/04/25/centos7%E5%AE%89%E8%A3%85go-fastdfs/">
-                    <div class="card-image">
-                        
-                        <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">
-                        
-                        <span class="card-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            本文将介绍在CentOS 7 中安装go-fastdfs及可视化界面go-fastdfs-web。
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/go-fastdfs/" class="post-category">
-                                    go-fastdfs
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/CentOS7/">
-                        <span class="chip bg-color">CentOS7</span>
-                    </a>
-                    
-                    <a href="/tags/go-fastdfs/">
-                        <span class="chip bg-color">go-fastdfs</span>
+                    <a href="/tags/oss/">
+                        <span class="chip bg-color">oss</span>
                     </a>
                     
                 </div>

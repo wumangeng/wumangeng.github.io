@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云视频点播(sdk)的使用姿势, 山河远阔">
+    <meta name="keywords" content="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ), 山河远阔">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阿里云视频点播(sdk)的使用姿势 | 山河远阔</title>
+    <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ) | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -30,7 +30,10 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -309,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云视频点播(sdk)的使用姿势</h1>
+                    <h1 class="description center-align post-title">docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</h1>
                 </div>
             </div>
         </div>
@@ -430,8 +433,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/sdk/">
-                                <span class="chip bg-color">sdk</span>
+                            <a href="/tags/CentOS7/">
+                                <span class="chip bg-color">CentOS7</span>
+                            </a>
+                        
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
                             </a>
                         
                     </div>
@@ -442,8 +449,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                阿里云服务
+                            <a href="/categories/docker/" class="post-category">
+                                docker
                             </a>
                         
                     </div>
@@ -464,7 +471,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-20
+                    2021-04-01
                 </div>
                 
 
@@ -485,105 +492,218 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="视频点播（SDK）"><a href="#视频点播（SDK）" class="headerlink" title="视频点播（SDK）"></a>视频点播（SDK）</h1><p><strong>阿里云文档地址：</strong></p>
-<pre><code>https://help.aliyun.com/document_detail/57756.html?spm=a2c4g.11186623.6.1037.2bd84e28xsVzg2
+                <h1 id="docker安装服务"><a href="#docker安装服务" class="headerlink" title="docker安装服务"></a>docker安装服务</h1><h3 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h3><pre class=" language-sh"><code class="language-sh">sudo sed -e 's|^mirrorlist=|#mirrorlist=|g' \
+         -e 's|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g' \
+         -i.bak \
+         /etc/yum.repos.d/CentOS-*.repo
+         
+ sudo yum makecache        
+ 
+ #上传，下载工具
+ yum -y install lrzsz
+ #上传  rz  下载 sz
 </code></pre>
-<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖:"></a>1、引入依赖:</h2><pre><code class="xml">&lt;dependency&gt;
-    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
-    &lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;
-    &lt;version&gt;4.5.1&lt;/version&gt;
-  &lt;/dependency&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
-    &lt;artifactId&gt;aliyun-java-sdk-vod&lt;/artifactId&gt;
-    &lt;version&gt;2.15.11&lt;/version&gt;
-  &lt;/dependency&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;com.aliyun&lt;/groupId&gt;
-    &lt;artifactId&gt;aliyun-sdk-vod-upload&lt;/artifactId&gt;
-    &lt;version&gt;1.4.13&lt;/version&gt;
-  &lt;/dependency&gt;
-  &lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
-    &lt;version&gt;1.2.62&lt;/version&gt;
-  &lt;/dependency&gt;
-</code></pre>
-<h2 id="2、初始化对象："><a href="#2、初始化对象：" class="headerlink" title="2、初始化对象："></a>2、初始化对象：</h2><pre><code class="java">public class InitObject &#123;
-    public static DefaultAcsClient initVodClient(String accessKeyId, String accessKeySecret) throws ClientException &#123;
-        String regionId = &quot;cn-shanghai&quot;;  // 点播服务接入区域
-        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
-        DefaultAcsClient client = new DefaultAcsClient(profile);
-        return client;
-    &#125;
+<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre class=" language-shell"><code class="language-shell">#卸载系统之前的docker 
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+                  
+#安装工具                  
+sudo yum install -y yum-utils
+
+# 配置镜像
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+# 安装    
+sudo yum install -y docker-ce docker-ce-cli containerd.io
+
+#启动
+sudo systemctl start docker
+
+# 设置开机自启动
+sudo systemctl enable docker
+
+docker -v
+sudo docker images
+
+# 配置（阿里云）镜像加速
+sudo mkdir -p /etc/docker
+
+sudo tee /etc/docker/daemon.json <<-'EOF'
+&#123;
+  "registry-mirrors": ["https://pacmlq67.mirror.aliyuncs.com"]
 &#125;
+EOF
+
+
+#修改docker 支持远程访问
+vim /lib/systemd/system/docker.service
+
+#修改这一行
+ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H fd:// --containerd=/run/containerd/containerd.sock 
+
+#重启
+sudo systemctl daemon-reload && sudo systemctl restart docker
+
+
 </code></pre>
-<h2 id="3、获取视频相关信息："><a href="#3、获取视频相关信息：" class="headerlink" title="3、获取视频相关信息："></a>3、获取视频相关信息：</h2><h3 id="3-1、根据视频id获取视频的播放地址："><a href="#3-1、根据视频id获取视频的播放地址：" class="headerlink" title="3.1、根据视频id获取视频的播放地址："></a>3.1、根据视频id获取视频的播放地址：</h3><p>注：加密后的视频不能直接通过地址访问</p>
-<pre><code class="java">public class TestVod &#123;
-    public static void main(String[] args) throws ClientException &#123;
-//  1、根据是视频id获取视频的播放地址
-        //（1）创建初始化对象 参数：阿里云oss的上传密钥（此处替换成你自己的）
-        DefaultAcsClient client = InitObject.initVodClient(&quot;###&quot;, &quot;***&quot;);
+<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre class=" language-shell"><code class="language-shell">#拉取镜像
+sudo docker pull mysql:5.7
 
-        // (2) 创建获取视频地址request 和response
-        GetPlayInfoRequest request = new GetPlayInfoRequest();
-        GetPlayInfoResponse response = new GetPlayInfoResponse();
+# --name指定容器名字 -v目录挂载 -p指定端口映射  -e设置mysql参数 -d后台运行
+sudo docker run -p 3306:3306 --name mysql-pro \
+-v /mydata/mysql/log:/var/log/mysql \
+-v /mydata/mysql/data:/var/lib/mysql \
+-v /mydata/mysql/conf:/etc/mysql \
+-e TZ=Asia/Shanghai \
+-e MYSQL_ROOT_PASSWORD=123456 \
+-d mysql:5.7
 
-        // (3) 向request对象里面设置视频id
-        request.setVideoId(&quot;6e19e54e5f2341f487364a2aeae0f36e&quot;);
+docker exec -it mysql bin/bash
+exit
 
-        // (4) 调用初始化对象里面的方法传递request，获取数据
-        response = client.getAcsResponse(request);
+因为有目录映射，所以我们可以直接在镜像外执行
+vi /mydata/mysql/conf/my.conf 
 
-        List&lt;GetPlayInfoResponse.PlayInfo&gt; playInfoList = response.getPlayInfoList();
-        //播放地址
-        for (GetPlayInfoResponse.PlayInfo playInfo : playInfoList) &#123;
-            System.out.print(&quot;PlayInfo.PlayURL = &quot; + playInfo.getPlayURL() + &quot;\n&quot;);
-        &#125;
-        //Base信息
-        System.out.print(&quot;VideoBase.Title = &quot; + response.getVideoBase().getTitle() + &quot;\n&quot;);
-    &#125;
-&#125;
+[client]
+default-character-set=utf8
+[mysql]
+default-character-set=utf8
+[mysqld]
+init_connect='SET collation_connection = utf8_unicode_ci'
+init_connect='SET NAMES utf8'
+character-set-server=utf8
+collation-server=utf8_unicode_ci
+default-time-zone = '+08:00'
+skip-character-set-client-handshake
+skip-name-resolve
+
+docker restart mysql
 </code></pre>
-<h3 id="3-2、根据视频id获取视频的播放凭证："><a href="#3-2、根据视频id获取视频的播放凭证：" class="headerlink" title="3.2、根据视频id获取视频的播放凭证："></a>3.2、根据视频id获取视频的播放凭证：</h3><pre><code class="java">//  2、根据视频id获取视频播放凭证
-        //（1）创建初始化对象 参数：阿里云oss的上传密钥
-        DefaultAcsClient client = InitObject.initVodClient(&quot;###&quot;, &quot;***&quot;);
+<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre class=" language-shell"><code class="language-shell"># 在虚拟机中
+mkdir -p /mydata/redis/conf
+touch /mydata/redis/conf/redis.conf
 
-        // (2) 创建获取视频凭证request 和response
-        GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
-        GetVideoPlayAuthResponse response = new GetVideoPlayAuthResponse();
+docker pull redis
 
-        // (3) 向request对象里面设置视频id
-        request.setVideoId(&quot;6e19e54e5f2341f487364a2aeae0f36e&quot;);
+docker run -p 6379:6379 --name redis \
+-v /mydata/redis/data:/data \
+-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \
+-d redis redis-server /etc/redis/redis.conf
 
-        // (4) 调用初始化对象里面的方法传递request，获取数据
-        response = client.getAcsResponse(request);
+# 直接进去redis客户端。
+docker exec -it redis redis-cli
 
-        System.out.println(&quot;视频播放凭证为：&quot;+response.getPlayAuth());
+#配置持久化
+vim /mydata/redis/conf/redis.conf
+# 插入下面内容
+appendonly yes
+保存
+
+docker restart redis
+#配置开机自启
+docker update redis --restart=always
+
 </code></pre>
-<h2 id="4、视频上传"><a href="#4、视频上传" class="headerlink" title="4、视频上传"></a>4、视频上传</h2><h3 id="4-1、本地视频上传"><a href="#4-1、本地视频上传" class="headerlink" title="4.1、本地视频上传"></a>4.1、本地视频上传</h3><pre><code class="java"> String accessKeyId = &quot;***&quot;;
-        String accessKeySecret = &quot;###&quot;;
+<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre class=" language-shell"><code class="language-shell">docker pull portainer/portainer
 
-        String title = &quot;6 - What If I Want to Move Faster - upload by sdk&quot;;   //上传之后文件名称
-        String fileName = &quot;D:/Project/项目资料/1-阿里云上传测试视频/test.mp4&quot;;  //本地文件路径和名称
-        //上传视频的方法
-        UploadVideoRequest request = new UploadVideoRequest(accessKeyId, accessKeySecret, title, fileName);
-        /* 可指定分片上传时每个分片的大小，默认为2M字节 */
-        request.setPartSize(2 * 1024 * 1024L);
-        /* 可指定分片上传时的并发线程数，默认为1，(注：该配置会占用服务器CPU资源，需根据服务器情况指定）*/
-        request.setTaskNum(1);
+docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer  portainer/portainer
 
-        UploadVideoImpl uploader = new UploadVideoImpl();
-        UploadVideoResponse response = uploader.uploadVideo(request);
+#访问
+http://ip:9000/
+</code></pre>
+<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre class=" language-shell"><code class="language-shell">#拉取镜像
+docker pull sjqzhang/go-fastdfs:latest
 
-        if (response.isSuccess()) &#123;
-            System.out.print(&quot;VideoId=&quot; + response.getVideoId() + &quot;\n&quot;);
-        &#125; else &#123;
-            /* 如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因 */
-            System.out.print(&quot;VideoId=&quot; + response.getVideoId() + &quot;\n&quot;);
-            System.out.print(&quot;ErrorCode=&quot; + response.getCode() + &quot;\n&quot;);
-            System.out.print(&quot;ErrorMessage=&quot; + response.getMessage() + &quot;\n&quot;);
-        &#125;
+#创建保存目录
+mkdir usr/local/data
+mkdir usr/local/fastdfs_data
+
+#运行
+docker run --name go-fastdfs --privileged=true -t -p 9090:8080 -v /usr/local/data/fastdfs_data:/data -e GO_FASTDFS_DIR=/data sjqzhang/go-fastdfs
+
+#访问
+http://ip:9090/
+</code></pre>
+<pre><code>go-fastdfs的目录结构一般是：
+
+├── conf
+│   └── cfg.json
+├── data
+│   ├── 20200102
+│   ├── fileserver.db
+│   ├── log.db
+│   └── stat.json
+├── files
+│   ├── _big
+│   └── default
+├── fileserver
+├── log
+│   ├── access.log
+│   ├── fileserver.log
+│   └── tusd.log
+└── static
+    └── uppy.html
+</code></pre>
+<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre class=" language-shell"><code class="language-shell">#下载镜像文件
+docker pull perfree/fastdfsweb
+
+#运行容器
+docker run --name fastdfsweb -d -p 8088:8088 perfree/fastdfsweb
+
+#测试是否正常访问
+http://本地ip:8088 
+
+#配置go-fastdfs-web
+集群名称：随意填写
+组：对应本地映射中文件夹conf/cfg.json 文件内容中的group
+访问地址：http://本地ip:8080
+</code></pre>
+<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre class=" language-shell"><code class="language-shell">#查找镜像
+docker search rocketmq
+
+#下载并且启动NameServer
+docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server-4.5.1
+
+#启动broker    Broker容器中默认的配置文件的路径为：/etc/rocketmq/broker.conf
+docker run -d -p 10911:10911 -p 10909:10909\
+ --name rmqbroker --link rmqserver:namesrv\
+ -e "NAMESRV_ADDR=namesrv:9876" -e "JAVA_OPTS=-Duser.home=/opt"\
+ -e "JAVA_OPT_EXT=-server -Xms128m -Xmx128m"\
+ -v /conf/broker.conf:/etc/rocketmq/broker.conf \
+ foxiswho/rocketmq:broker-4.5.1
+ 
+#下载并且启动 rocketmq console
+docker run -d --name rmqconsole -p 8180:8080 --link rmqserver:namesrv\
+ -e "JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
+ -Dcom.rocketmq.sendMessageWithVIPChannel=false"\
+ -t styletang/rocketmq-console-ng
+ 
+ #命令检查一下启动情况
+docker ps|grep rocketmq
+
+#通过浏览器访问console页面
+ip：8180/
+</code></pre>
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class=" language-shell"><code class="language-shell">#查看运行容器的宿主机进程
+ps aux|grep sleep|grep -v grep
+
+#进入容器内部
+docker exec -it 容器id /bin/sh
+#查看容器日志
+docker logs -f 容器id
+
+#容器内安装软件
+yum/apt-get/apt 
+
+#查看docker端口情况
+netstat -luntp
 </code></pre>
 
                 
@@ -611,7 +731,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91%E8%A7%86%E9%A2%91%E7%82%B9%E6%92%AD/">http://wumangeng.github.io/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91%E8%A7%86%E9%A2%91%E7%82%B9%E6%92%AD/</a>
+                    <a href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/">http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -649,8 +769,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/sdk/">
-                                    <span class="chip bg-color">sdk</span>
+                                <a href="/tags/CentOS7/">
+                                    <span class="chip bg-color">CentOS7</span>
+                                </a>
+                            
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
                                 </a>
                             
                         </div>
@@ -826,30 +950,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/25/%E5%A4%A7%E7%96%86%E7%94%9F%E6%88%90%E5%BC%93%E5%BD%A2%E8%88%AA%E7%82%B9%E7%AE%97%E6%B3%95java%E5%AE%9E%E7%8E%B0/">
+                <a href="/2021/04/25/centos7-an-zhuang-go-fastdfs/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto" class="responsive-img" alt="基于java的生成大疆弓形航线算法实现">
+                        <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">
                         
-                        <span class="card-title">基于java的生成大疆弓形航线算法实现</span>
+                        <span class="card-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将介绍给定任意两个坐标，在这坐标之间生成一些列有序点的坐标的算法
+                            本文将介绍在CentOS 7 中安装go-fastdfs及可视化界面go-fastdfs-web。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/dji/" class="post-category">
-                                    dji
+                            <a href="/categories/go-fastdfs/" class="post-category">
+                                    go-fastdfs
                                 </a>
                             
                             
@@ -859,12 +983,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/dji/">
-                        <span class="chip bg-color">dji</span>
+                    <a href="/tags/CentOS7/">
+                        <span class="chip bg-color">CentOS7</span>
                     </a>
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/go-fastdfs/">
+                        <span class="chip bg-color">go-fastdfs</span>
                     </a>
                     
                 </div>
@@ -878,30 +1002,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/20/%E9%98%BF%E9%87%8C%E4%BA%91OSS/">
+                <a href="/2021/03/01/swagger-result-exception-log/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
+                        <img src="https://img1.baidu.com/it/u=4097266928,3649694239&fm=26&fmt=auto" class="responsive-img" alt="项目的常用组件集成（swagger、统一返回结果、异常、日志、包扫描）">
                         
-                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
+                        <span class="card-title">项目的常用组件集成（swagger、统一返回结果、异常、日志、包扫描）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示oss在java服务端的使用方式。
+                            本文将介绍swagger在项目中的集成；统一返回结果集类；统一异常处理；统一日志；以及xml文件扫描配置
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                    阿里云服务
+                            <a href="/categories/Spring/" class="post-category">
+                                    Spring
                                 </a>
                             
                             
@@ -911,8 +1035,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/oss/">
-                        <span class="chip bg-color">oss</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
+                    </a>
+                    
+                    <a href="/tags/springboot/">
+                        <span class="chip bg-color">springboot</span>
                     </a>
                     
                 </div>

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>山河远阔</title>
+  
+  <subtitle>山河远阔</subtitle>
+  <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://wumangeng.github.io/"/>
+  <updated>2021-10-19T09:12:59.503Z</updated>
+  <id>http://wumangeng.github.io/</id>
+  
+  <author>
+    <name>wumangeng</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Netty学习笔记</title>
+    <link href="http://wumangeng.github.io/2021/10/05/netty/"/>
+    <id>http://wumangeng.github.io/2021/10/05/netty/</id>
+    <published>2021-10-05T07:10:30.000Z</published>
+    <updated>2021-10-19T09:12:59.503Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;第-1-章-Netty-介绍和应用场景&quot;&gt;&lt;a href=&quot;#第-1-章-Netty-介绍和应用场景&quot; class=&quot;headerlink&quot; title=&quot;第 1 章 Netty 介绍和应用场景&quot;&gt;&lt;/a&gt;第 1 章 Netty 介绍和应用场景&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="Netty" scheme="http://wumangeng.github.io/tags/Netty/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NIO</title>
+    <link href="http://wumangeng.github.io/2021/10/02/nio/"/>
+    <id>http://wumangeng.github.io/2021/10/02/nio/</id>
+    <published>2021-10-02T07:10:30.000Z</published>
+    <updated>2021-10-15T09:44:46.204Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;NIO-编程&quot;&gt;&lt;a href=&quot;#NIO-编程&quot; class=&quot;headerlink&quot; title=&quot;NIO 编程&quot;&gt;&lt;/a&gt;NIO 编程&lt;/h1&gt;&lt;h2 id=&quot;1-NIO-基本介绍&quot;&gt;&lt;a href=&quot;#1-NIO-基本介绍&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="NIO" scheme="http://wumangeng.github.io/tags/NIO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BIO</title>
+    <link href="http://wumangeng.github.io/2021/10/01/bio/"/>
+    <id>http://wumangeng.github.io/2021/10/01/bio/</id>
+    <published>2021-10-01T07:10:30.000Z</published>
+    <updated>2021-10-15T09:17:29.596Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1、-I-O-模型&quot;&gt;&lt;a href=&quot;#1、-I-O-模型&quot; class=&quot;headerlink&quot; title=&quot;1、 I/O 模型&quot;&gt;&lt;/a&gt;1、 I/O 模型&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;I/O&lt;/code&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于java的生成大疆弓形航线算法实现</title>
+    <link href="http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/"/>
+    <id>http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/</id>
+    <published>2021-05-25T01:10:20.000Z</published>
+    <updated>2021-10-19T02:29:42.509Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;问题背景：本人在开发过程中，遇到给定两个点的坐标，需要生成大量的有规律的坐标（实际上就是大疆无人机的航线）。查询相关资料发现国内的博客基本都是计算两点距离，计算点到线距离的距离等，有几篇也都是C语言形式。在这些资料的基础上本人继续研究深入，最终调试出了符合本</summary>
+        
+      
+    
+    
+    
+    <category term="dji" scheme="http://wumangeng.github.io/categories/dji/"/>
+    
+    
+    <category term="dji" scheme="http://wumangeng.github.io/tags/dji/"/>
+    
+    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阿里云视频点播(sdk)的使用姿势</title>
+    <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/"/>
+    <id>http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</id>
+    <published>2021-05-20T09:10:30.000Z</published>
+    <updated>2021-10-15T10:18:43.305Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;视频点播（SDK）&quot;&gt;&lt;a href=&quot;#视频点播（SDK）&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="阿里云服务" scheme="http://wumangeng.github.io/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="sdk" scheme="http://wumangeng.github.io/tags/sdk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阿里云对象存储(oss)的使用姿势</title>
+    <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/"/>
+    <id>http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</id>
+    <published>2021-05-20T07:10:30.000Z</published>
+    <updated>2021-10-15T04:26:18.609Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;阿里云OSS使用&quot;&gt;&lt;a href=&quot;#阿里云OSS使用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="阿里云服务" scheme="http://wumangeng.github.io/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</title>
+    <link href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/"/>
+    <id>http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</id>
+    <published>2021-04-25T01:10:20.000Z</published>
+    <updated>2021-10-18T02:30:33.879Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;1、安装go-fastdfs&quot;&gt;&lt;a href=&quot;#1、安装go-fastdfs&quot; class=&quot;headerlink&quot; title=&quot;1、安装go-fastdfs&quot;&gt;&lt;/a&gt;1、安装go-fastdfs&lt;/h3&gt;&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="go-fastdfs" scheme="http://wumangeng.github.io/categories/go-fastdfs/"/>
+    
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="go-fastdfs" scheme="http://wumangeng.github.io/tags/go-fastdfs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</title>
+    <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
+    <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
+    <published>2021-04-01T01:10:20.000Z</published>
+    <updated>2021-10-18T01:44:27.935Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;docker安装服务&quot;&gt;&lt;a href=&quot;#docker安装服务&quot; class=&quot;headerlink&quot; title=&quot;docker安装服务&quot;&gt;&lt;/a&gt;docker安装服务&lt;/h1&gt;&lt;h3 id=&quot;设置yum源&quot;&gt;&lt;a href=&quot;#设置yum源&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
+    
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>项目的常用组件集成（swagger、统一返回结果、异常、日志、包扫描）</title>
+    <link href="http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/"/>
+    <id>http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/</id>
+    <published>2021-03-01T01:10:20.000Z</published>
+    <updated>2021-10-18T01:36:09.724Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;swagger2配置&quot;&gt;&lt;a href=&quot;#swagger2配置&quot; class=&quot;headerlink&quot; title=&quot;swagger2配置&quot;&gt;&lt;/a&gt;swagger2配置&lt;/h2&gt;&lt;pre class=&quot; language-xml&quot;&gt;&lt;code</summary>
+        
+      
+    
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="springboot" scheme="http://wumangeng.github.io/tags/springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JWT的使用姿势</title>
+    <link href="http://wumangeng.github.io/2021/02/25/jwt/"/>
+    <id>http://wumangeng.github.io/2021/02/25/jwt/</id>
+    <published>2021-02-25T01:10:20.000Z</published>
+    <updated>2021-10-15T04:02:33.356Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;JWT简介&quot;&gt;&lt;a href=&quot;#JWT简介&quot; class=&quot;headerlink&quot; title=&quot;JWT简介&quot;&gt;&lt;/a&gt;JWT简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;JWT(Json Web</summary>
+        
+      
+    
+    
+    
+    <category term="Security" scheme="http://wumangeng.github.io/categories/Security/"/>
+    
+    
+    <category term="jwt" scheme="http://wumangeng.github.io/tags/jwt/"/>
+    
+    <category term="token" scheme="http://wumangeng.github.io/tags/token/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis Plus</title>
+    <link href="http://wumangeng.github.io/2020/06/27/mybatisplus/"/>
+    <id>http://wumangeng.github.io/2020/06/27/mybatisplus/</id>
+    <published>2020-06-27T10:10:20.000Z</published>
+    <updated>2021-10-15T04:15:55.389Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;MybatisPlus&quot;&gt;&lt;a href=&quot;#MybatisPlus&quot; class=&quot;headerlink&quot; title=&quot;MybatisPlus&quot;&gt;&lt;/a&gt;MybatisPlus&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;简介&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;官网：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Mybatis" scheme="http://wumangeng.github.io/categories/Mybatis/"/>
+    
+    
+    <category term="Mybatis Plus" scheme="http://wumangeng.github.io/tags/Mybatis-Plus/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mybatis</title>
+    <link href="http://wumangeng.github.io/2020/06/25/mybatis/"/>
+    <id>http://wumangeng.github.io/2020/06/25/mybatis/</id>
+    <published>2020-06-25T10:10:20.000Z</published>
+    <updated>2021-10-15T04:13:01.362Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Mybatis&quot;&gt;&lt;a href=&quot;#Mybatis&quot; class=&quot;headerlink&quot; title=&quot;Mybatis&quot;&gt;&lt;/a&gt;Mybatis&lt;/h1&gt;&lt;h2 id=&quot;1、Mybatis介绍&quot;&gt;&lt;a href=&quot;#1、Mybatis介绍&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Mybatis" scheme="http://wumangeng.github.io/categories/Mybatis/"/>
+    
+    
+    <category term="Mybatis" scheme="http://wumangeng.github.io/tags/Mybatis/"/>
+    
+  </entry>
+  
+</feed>

@@ -30,7 +30,10 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -493,22 +496,22 @@
 <p>JWT(Json Web Token)，基于token的用户认证原理：让用户输入账号和密码，认证通过后获得一个token（令牌），在token有效期里用户可以带着token访问特定资源。<br> 开始token并没有一个统一标准，大家都各自使用自己的方案。后来出现了JWT(Json Web Token)这个标准。<br> JWT本质上是一个对JSON对象加密后的字符串。当服务器认证用户通过后，一个包含用户信息的json对象被加密后返回给用户，</p>
 <p>json 对象：</p>
 </blockquote>
-<pre><code class="json">&#123;
-    &quot;expire&quot;: &quot;2019-11-29 20:19:00&quot;,
-    &quot;permissions&quot;: [
-        &quot;sys:user:list&quot;,
-        &quot;sys:dept:list&quot;,
-        &quot;sys:role:list&quot;
-   ],
-    &quot;role&quot;: [
-        &quot;dev&quot;
-   ],
-    &quot;userName&quot;: &quot;dev123&quot;
-&#125;
+<pre class=" language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token property">"expire"</span><span class="token operator">:</span> <span class="token string">"2019-11-29 20:19:00"</span><span class="token punctuation">,</span>
+    <span class="token property">"permissions"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"sys:user:list"</span><span class="token punctuation">,</span>
+        <span class="token string">"sys:dept:list"</span><span class="token punctuation">,</span>
+        <span class="token string">"sys:role:list"</span>
+   <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"role"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">"dev"</span>
+   <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"userName"</span><span class="token operator">:</span> <span class="token string">"dev123"</span>
+&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>之后，用户访问服务器时，都要返回这个json对象。服务器只靠这个对象就可以识别用户身份，不需要再去查数据库。为了防止用户篡改数据，服务器在生成对象时将添加一个签名。<br> 服务器不保存任何会话数据，也就是说，服务器变得<strong>无状态</strong>，从而更容易扩展。</p>
 <h2 id="JWT-怎么用"><a href="#JWT-怎么用" class="headerlink" title="JWT 怎么用"></a>JWT 怎么用</h2><p>以浏览器接收到服务器发过来的jwt后，可以存储在Cookie 或 localStorage 中。之后，浏览器每次与服务器通信时都会带上JWT。可以将JWT放在Cookie中，会自动发送（不跨域），或将JWT放在HTTP请求头的授权字段中。</p>
-<pre><code class="xml">Authorization: Bearer &lt;token&gt;
+<pre class=" language-xml"><code class="language-xml">Authorization: Bearer <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>token</span><span class="token punctuation">></span></span>
 </code></pre>
 <p>也可放在url中，或POST请求的数据体中。</p>
 <h2 id="JWT-结构"><a href="#JWT-结构" class="headerlink" title="JWT 结构"></a>JWT 结构</h2><p>jwt有3个组成部分，每部分通过点号来分割 header.payload.signature</p>
@@ -522,15 +525,15 @@
 <li>声明类型typ，表示这个令牌（token）的类型（type），JWT令牌统一写为JWT</li>
 <li>声明加密的算法alg，通常直接使用HMACSHA256，就是HS256了，也可以使用RSA,支持很多算(HS256、HS384、HS512、RS256、RS384、RS512、ES256、ES384、ES512、PS256、PS384)</li>
 </ul>
-<pre><code class="json">&#123;
-  &quot;alg&quot;: &quot;HS256&quot;,
-  &quot;typ&quot;: &quot;JWT&quot;
-&#125;
+<pre class=" language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"HS256"</span><span class="token punctuation">,</span>
+  <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"JWT"</span>
+&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <ul>
 <li>Base64URL 编码后(Base64编码后可能出现字符+和/，在URL中不能直接作为参数，Base64URL就是把字符+和/分别变成-和 _。JWT有可能放在url中，所以要用Base64URL编码。）</li>
 </ul>
-<pre><code class="tex">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+<pre class=" language-tex"><code class="language-tex">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
 </code></pre>
 <h4 id="载荷-payload"><a href="#载荷-payload" class="headerlink" title="载荷 payload"></a>载荷 payload</h4><p>payload也是一个JSON字符串，是承载消息具体内容的地方，也需要使用Base64URL编码，就是存储我们要保存到客户端的信息，一般都是包含用户的基本信息，权限信息，时间戳等信息。<br> JWT指定了一些官方字段（claims）备用:</p>
 <ul>
@@ -543,41 +546,41 @@
 <li>aud: 受众</li>
 </ul>
 <p>除了官方字段，在这个部分还可以添加私有字段，例如：</p>
-<pre><code class="json">&#123;
-  &quot;sub&quot;: &quot;1dfaafa7-fddf-46f2-b3d8-11bfe9ac7230&quot;,
-  &quot;jwt-roles-key_&quot;: [
-    &quot;普通用户角色&quot;
- ],
-  &quot;iss&quot;: &quot;yingxue.com&quot;,
-  &quot;jwt-permissions-key&quot;: [
-    &quot;sys:user:list&quot;,
-    &quot;sys:dept:list&quot;,
-    &quot;sys:role:list&quot;,
-    &quot;sys:permission:list&quot;,
-    &quot;sys:log:list&quot;
- ],
-  &quot;jwt-user-name-key&quot;: &quot;dev123&quot;,
-  &quot;exp&quot;: 1575005723,
-  &quot;iat&quot;: 1574998523
-&#125;
+<pre class=" language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token property">"sub"</span><span class="token operator">:</span> <span class="token string">"1dfaafa7-fddf-46f2-b3d8-11bfe9ac7230"</span><span class="token punctuation">,</span>
+  <span class="token property">"jwt-roles-key_"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"普通用户角色"</span>
+ <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"iss"</span><span class="token operator">:</span> <span class="token string">"yingxue.com"</span><span class="token punctuation">,</span>
+  <span class="token property">"jwt-permissions-key"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"sys:user:list"</span><span class="token punctuation">,</span>
+    <span class="token string">"sys:dept:list"</span><span class="token punctuation">,</span>
+    <span class="token string">"sys:role:list"</span><span class="token punctuation">,</span>
+    <span class="token string">"sys:permission:list"</span><span class="token punctuation">,</span>
+    <span class="token string">"sys:log:list"</span>
+ <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"jwt-user-name-key"</span><span class="token operator">:</span> <span class="token string">"dev123"</span><span class="token punctuation">,</span>
+  <span class="token property">"exp"</span><span class="token operator">:</span> <span class="token number">1575005723</span><span class="token punctuation">,</span>
+  <span class="token property">"iat"</span><span class="token operator">:</span> <span class="token number">1574998523</span>
+&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 <p>Base64URL编码的后：</p>
-<pre><code class="undefined">eyJzdWIiOiIxZGZhYWZhNy1mZGRmLTQ2ZjItYjNkOC0xMWJmZTlhYzcyMzAiLCJqd3Qtcm9sZXMta2V5XyI6WyLmma7pgJrnlKjmiLfo
+<pre class=" language-undefined"><code class="language-undefined">eyJzdWIiOiIxZGZhYWZhNy1mZGRmLTQ2ZjItYjNkOC0xMWJmZTlhYzcyMzAiLCJqd3Qtcm9sZXMta2V5XyI6WyLmma7pgJrnlKjmiLfo
 p5LoibIiXSwiaXNzIjoieWluZ3h1ZS5jb20iLCJqd3QtcGVybWlzc2lvbnMta2V5IjpbInN5czp1c2VyOmxpc3QiLCJzeXM6ZGVwdDps
 aXN0Iiwic3lzOnJvbGU6bGlzdCIsInN5czpwZXJtaXNzaW9uOmxpc3QiLCJzeXM6bG9nOmxpc3QiXSwiand0LXVzZXItbmFtZS1rZXki
 OiJkZXYxMjMiLCJleHAiOjE1NzUwMDU3MjMsImlhdCI6MTU3NDk5ODUyM30
 </code></pre>
 <h4 id="签名-Signature"><a href="#签名-Signature" class="headerlink" title="签名 Signature"></a>签名 Signature</h4><p>Signature部分是对前两部分的防篡改签名。将Header和Payload用Base64URL编码后，再用点(.)连接起来。然后使用签名算法和密钥对这个字符串进行签名：</p>
-<pre><code class="bash">signature = HMACSHA256(header + &quot;.&quot; + payload, secret);
+<pre class=" language-bash"><code class="language-bash">signature <span class="token operator">=</span> HMACSHA256<span class="token punctuation">(</span>header + <span class="token string">"."</span> + payload, secret<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <p>首先，需要指定一个密码（secret）。该密码保存在服务器中，并且不能向用户公开。然后，使用标头中指定的签名算法根据以下公式生成签名。signature = HMACSHA256(header + “.” + payload, secret);  在计算出签名哈希后，JWT头，有效载荷和签名哈希的三个部分组合成一个字符串，每个部分用”.”分隔，就构成整个JWT对象。  以上三部分都是在服务器定义，当用户登陆成功后，根据用户信息，按照jwt规则生成token返回给客户端。<br> 签名信息：</p>
-<pre><code class="undefined">qYWHdAbYZlP6akHTrDm-MkIWia8mPW-TO75eu8r0-Vk
+<pre class=" language-undefined"><code class="language-undefined">qYWHdAbYZlP6akHTrDm-MkIWia8mPW-TO75eu8r0-Vk
 </code></pre>
 <p><strong>组合在一起</strong><br> 3部分组合在一起，构成了完整的jwt：</p>
-<pre><code class="css">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxZGZhYWZhNy1mZGRmLTQ2ZjItYjNkOC0xMWJmZTlhYzcyMzAiLCJqd3Qtcm9sZXMta2V5XyI
-6WyLmma7pgJrnlKjmiLfop5LoibIiXSwiaXNzIjoieWluZ3h1ZS5jb20iLCJqd3QtcGVybWlzc2lvbnMta2V5IjpbInN5czp1c2VyOmx
-pc3QiLCJzeXM6ZGVwdDpsaXN0Iiwic3lzOnJvbGU6bGlzdCIsInN5czpwZXJtaXNzaW9uOmxpc3QiLCJzeXM6bG9nOmxpc3QiXSwiand
-0LXVzZXItbmFtZS1rZXkiOiJkZXYxMjMiLCJleHAiOjE1NzUwMDU3MjMsImlhdCI6MTU3NDk5ODUyM30.qYWHdAbYZlP6akHTrDm�MkIWia8mPW-TO75eu8r0-Vk
+<pre class=" language-css"><code class="language-css">eyJhbGciOiJIUzI<span class="token number">1</span>NiJ<span class="token number">9.</span>eyJzdWIiOiIxZGZhYWZhNy<span class="token number">1</span>mZGRmLTQ<span class="token number">2</span>ZjItYjNkOC<span class="token number">0</span>xMWJmZTlhYzcyMzAiLCJqd<span class="token number">3</span>Qtcm<span class="token number">9</span>sZXMta<span class="token number">2</span>V<span class="token number">5</span>XyI
+<span class="token number">6</span>WyLmma<span class="token number">7</span>pgJrnlKjmiLfop<span class="token number">5</span>LoibIiXSwiaXNzIjoieWluZ<span class="token number">3</span>h<span class="token number">1</span>ZS<span class="token number">5</span>jb<span class="token number">20</span>iLCJqd<span class="token number">3</span>QtcGVybWlzc<span class="token number">2</span>lvbnMta<span class="token number">2</span>V<span class="token number">5</span>IjpbInN<span class="token number">5</span>czp<span class="token number">1</span>c<span class="token number">2</span>VyOmx
+pc<span class="token number">3</span>QiLCJzeXM<span class="token number">6</span>ZGVwdDpsaXN<span class="token number">0</span>Iiwic<span class="token number">3</span>lzOnJvbGU<span class="token number">6</span>bGlzdCIsInN<span class="token number">5</span>czpwZXJtaXNzaW<span class="token number">9</span>uOmxpc<span class="token number">3</span>QiLCJzeXM<span class="token number">6</span>bG<span class="token number">9</span>nOmxpc<span class="token number">3</span>QiXSwiand
+<span class="token number">0</span>LXVzZXItbmFtZS<span class="token number">1</span>rZXkiOiJkZXYxMjMiLCJleHAiOjE<span class="token number">1</span>NzUwMDU<span class="token number">3</span>MjMsImlhdCI<span class="token number">6</span>MTU<span class="token number">3</span>NDk<span class="token number">5</span>ODUyM<span class="token number">30.</span>qYWHdAbYZlP<span class="token number">6</span>akHTrDm�MkIWia<span class="token number">8</span>mPW-TO<span class="token number">75</span>eu<span class="token number">8</span>r<span class="token number">0</span>-Vk
 </code></pre>
 <h2 id="使用要点"><a href="#使用要点" class="headerlink" title="使用要点"></a>使用要点</h2><ul>
 <li>JWT默认是不加密的，但也可以加密，不加密时不宜在jwt中存放敏感信息</li>
@@ -601,354 +604,354 @@ pc3QiLCJzeXM6ZGVwdDpsaXN0Iiwic3lzOnJvbGU6bGlzdCIsInN5czpwZXJtaXNzaW9uOmxpc3QiLCJ
 <li>当要作废令牌的时候，直接把这个令牌在redis 标记起来，并且设置过期时间(过期时间为该令牌剩余的过期时间)。</li>
 </ul>
 <h2 id="JWT-工具类封装"><a href="#JWT-工具类封装" class="headerlink" title="JWT 工具类封装"></a>JWT 工具类封装</h2><p>我们在日常开发中会多次去验证客户端传入的 token，所以我们要把验证的方法抽出来，封装成一个工具类，每次直接用工具类调用就可以了</p>
-<h5 id="首先创建一个-JwtTokenUtil"><a href="#首先创建一个-JwtTokenUtil" class="headerlink" title="首先创建一个 JwtTokenUtil"></a>首先创建一个 JwtTokenUtil</h5><pre><code class="java">@Slf4j
-public class JwtTokenUtil &#123;
-&#125;
+<h5 id="首先创建一个-JwtTokenUtil"><a href="#首先创建一个-JwtTokenUtil" class="headerlink" title="首先创建一个 JwtTokenUtil"></a>首先创建一个 JwtTokenUtil</h5><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JwtTokenUtil</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h5 id="application-yml-加入-JWT-相关配置参数"><a href="#application-yml-加入-JWT-相关配置参数" class="headerlink" title="application.yml 加入 JWT 相关配置参数"></a>application.yml 加入 JWT 相关配置参数</h5><pre><code class="yml">#JWT 密钥
+<h5 id="application-yml-加入-JWT-相关配置参数"><a href="#application-yml-加入-JWT-相关配置参数" class="headerlink" title="application.yml 加入 JWT 相关配置参数"></a>application.yml 加入 JWT 相关配置参数</h5><pre class=" language-yml"><code class="language-yml">#JWT 密钥
 jwt: secretKey: 78944878877848fg)
  accessTokenExpireTime: PT2H
  refreshTokenExpireTime: PT8H
  refreshTokenExpireAppTime: P30D
  issuer: ggk.com
 </code></pre>
-<h5 id="创建配置读取类"><a href="#创建配置读取类" class="headerlink" title="创建配置读取类"></a>创建配置读取类</h5><pre><code class="java">@Configuration
-@ConfigurationProperties(prefix = &quot;jwt&quot;)
-@Data
-public class TokenSettings &#123;
-    private String secretKey;
-    private Duration accessTokenExpireTime;
-    private Duration refreshTokenExpireTime;
-    private Duration refreshTokenExpireAppTime;
-    private String  issuer; 
-&#125;
+<h5 id="创建配置读取类"><a href="#创建配置读取类" class="headerlink" title="创建配置读取类"></a>创建配置读取类</h5><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@ConfigurationProperties</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> <span class="token string">"jwt"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TokenSettings</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String secretKey<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Duration accessTokenExpireTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Duration refreshTokenExpireTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Duration refreshTokenExpireAppTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> String  issuer<span class="token punctuation">;</span> 
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h5 id="创建初始化配置代理类"><a href="#创建初始化配置代理类" class="headerlink" title="创建初始化配置代理类"></a>创建初始化配置代理类</h5><pre><code class="java">@Component
-public class InitializerUtil &#123;
-    private TokenSettings tokenSettings;
-    public InitializerUtil(TokenSettings tokenSettings) &#123;
-        JwtTokenUtil.setTokenSettings(tokenSettings);
-   &#125;
-&#125;
+<h5 id="创建初始化配置代理类"><a href="#创建初始化配置代理类" class="headerlink" title="创建初始化配置代理类"></a>创建初始化配置代理类</h5><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InitializerUtil</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> TokenSettings tokenSettings<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">InitializerUtil</span><span class="token punctuation">(</span>TokenSettings tokenSettings<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        JwtTokenUtil<span class="token punctuation">.</span><span class="token function">setTokenSettings</span><span class="token punctuation">(</span>tokenSettings<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h5 id="修改JwtTokenUtil加入签发-token-方法"><a href="#修改JwtTokenUtil加入签发-token-方法" class="headerlink" title="修改JwtTokenUtil加入签发 token 方法"></a>修改JwtTokenUtil加入签发 token 方法</h5><pre><code class="java">@Slf4j
-public class JwtTokenUtil &#123;
-    private static String secretKey;
-    private static Duration accessTokenExpireTime;
-    private static Duration refreshTokenExpireTime;
-    private static Duration refreshTokenExpireAppTime;
-    private static String issuer;
+<h5 id="修改JwtTokenUtil加入签发-token-方法"><a href="#修改JwtTokenUtil加入签发-token-方法" class="headerlink" title="修改JwtTokenUtil加入签发 token 方法"></a>修改JwtTokenUtil加入签发 token 方法</h5><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JwtTokenUtil</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> String secretKey<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Duration accessTokenExpireTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Duration refreshTokenExpireTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> Duration refreshTokenExpireAppTime<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> String issuer<span class="token punctuation">;</span>
 
-    public static void setTokenSettings(TokenSettings tokenSettings)&#123;
-        secretKey=tokenSettings.getSecretKey();
-        accessTokenExpireTime=tokenSettings.getAccessTokenExpireTime();
-        refreshTokenExpireTime=tokenSettings.getRefreshTokenExpireTime();
-        refreshTokenExpireAppTime=tokenSettings.getRefreshTokenExpireAppTime();
-        issuer=tokenSettings.getIssuer();
-    &#125;
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">setTokenSettings</span><span class="token punctuation">(</span>TokenSettings tokenSettings<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        secretKey<span class="token operator">=</span>tokenSettings<span class="token punctuation">.</span><span class="token function">getSecretKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        accessTokenExpireTime<span class="token operator">=</span>tokenSettings<span class="token punctuation">.</span><span class="token function">getAccessTokenExpireTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        refreshTokenExpireTime<span class="token operator">=</span>tokenSettings<span class="token punctuation">.</span><span class="token function">getRefreshTokenExpireTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        refreshTokenExpireAppTime<span class="token operator">=</span>tokenSettings<span class="token punctuation">.</span><span class="token function">getRefreshTokenExpireAppTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        issuer<span class="token operator">=</span>tokenSettings<span class="token punctuation">.</span><span class="token function">getIssuer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 签发/生成token
      * issuer 签发人
      * subject 代表这个JWT的主体，即他的所有人，一般是用户ID
      * claims 储存在jwt里的信息(键值对)，一般是放些用户的权限/角色信息
      * ttlMillis 有效时间(毫秒)
      * secret 密钥
-     */
-    public static String generateToken(String issuer, String subject, Map&lt;String, Object&gt; claims, long ttlMillis, String secret) &#123;
-        //加密方式
-        SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-        //当前时间戳，并转为日期
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
-        //String printBase64Binary(byte[])就是将字节数组做base64编码，byte[] parseBase64Binary(String) 就是将Base64编码后的String还原成字节数组。
-        byte[] signingKey = DatatypeConverter.parseBase64Binary(secret);
-        //这里其实就是new一个JwtBuilder，设置jwt的body
-        JwtBuilder builder = Jwts.builder();
-        //如果claims不为空，就加到JWT的载荷里面去
-        if(null!=claims)&#123;
-            builder.setClaims(claims);
-        &#125;
-        if (!StringUtils.isEmpty(subject)) &#123;
-            builder.setSubject(subject);
-        &#125;
-        if (!StringUtils.isEmpty(issuer)) &#123;
-            builder.setIssuer(issuer);
-        &#125;
-        //签发时间
-        builder.setIssuedAt(now);
-        if (ttlMillis &gt;= 0) &#123;
-            long expMillis = nowMillis + ttlMillis;
-            //过期时间
-            Date exp = new Date(expMillis);
-            builder.setExpiration(exp);
-        &#125;
-        builder.signWith(signatureAlgorithm, signingKey);
-        return builder.compact();
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">generateToken</span><span class="token punctuation">(</span>String issuer<span class="token punctuation">,</span> String subject<span class="token punctuation">,</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> claims<span class="token punctuation">,</span> <span class="token keyword">long</span> ttlMillis<span class="token punctuation">,</span> String secret<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//加密方式</span>
+        SignatureAlgorithm signatureAlgorithm <span class="token operator">=</span> SignatureAlgorithm<span class="token punctuation">.</span>HS256<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//当前时间戳，并转为日期</span>
+        <span class="token keyword">long</span> nowMillis <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Date now <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>nowMillis<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//String printBase64Binary(byte[])就是将字节数组做base64编码，byte[] parseBase64Binary(String) 就是将Base64编码后的String还原成字节数组。</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> signingKey <span class="token operator">=</span> DatatypeConverter<span class="token punctuation">.</span><span class="token function">parseBase64Binary</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//这里其实就是new一个JwtBuilder，设置jwt的body</span>
+        JwtBuilder builder <span class="token operator">=</span> Jwts<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//如果claims不为空，就加到JWT的载荷里面去</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>null<span class="token operator">!=</span>claims<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            builder<span class="token punctuation">.</span><span class="token function">setClaims</span><span class="token punctuation">(</span>claims<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>subject<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            builder<span class="token punctuation">.</span><span class="token function">setSubject</span><span class="token punctuation">(</span>subject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>issuer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            builder<span class="token punctuation">.</span><span class="token function">setIssuer</span><span class="token punctuation">(</span>issuer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//签发时间</span>
+        builder<span class="token punctuation">.</span><span class="token function">setIssuedAt</span><span class="token punctuation">(</span>now<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>ttlMillis <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">long</span> expMillis <span class="token operator">=</span> nowMillis <span class="token operator">+</span> ttlMillis<span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//过期时间</span>
+            Date exp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>expMillis<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            builder<span class="token punctuation">.</span><span class="token function">setExpiration</span><span class="token punctuation">(</span>exp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        builder<span class="token punctuation">.</span><span class="token function">signWith</span><span class="token punctuation">(</span>signatureAlgorithm<span class="token punctuation">,</span> signingKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> builder<span class="token punctuation">.</span><span class="token function">compact</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    // 刷新token和业务token 只是过期时间不一样
+    <span class="token comment" spellcheck="true">// 刷新token和业务token 只是过期时间不一样</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 生成 access_token   正常请求资源时携带的凭证
-     */
-    public static String getAccessToken(String subject, Map&lt;String,Object&gt; claims)&#123;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getAccessToken</span><span class="token punctuation">(</span>String subject<span class="token punctuation">,</span> Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Object<span class="token operator">></span> claims<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 
-        return generateToken(issuer,subject,claims,accessTokenExpireTime.toMillis(),secretKey);
-    &#125;
+        <span class="token keyword">return</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>issuer<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>claims<span class="token punctuation">,</span>accessTokenExpireTime<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 生产 PC refresh_token
-     */
-    public static String getRefreshToken(String subject,Map&lt;String,Object&gt; claims)&#123;
-        return generateToken(issuer,subject,claims,refreshTokenExpireTime.toMillis(),secretKey);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getRefreshToken</span><span class="token punctuation">(</span>String subject<span class="token punctuation">,</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Object<span class="token operator">></span> claims<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>issuer<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>claims<span class="token punctuation">,</span>refreshTokenExpireTime<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 生产 App端 refresh_token
-     */
-    public static String getRefreshAppToken(String subject,Map&lt;String,Object&gt; claims)&#123;
-        return generateToken(issuer,subject,claims,refreshTokenExpireAppTime.toMillis(),secretKey);
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getRefreshAppToken</span><span class="token punctuation">(</span>String subject<span class="token punctuation">,</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Object<span class="token operator">></span> claims<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>issuer<span class="token punctuation">,</span>subject<span class="token punctuation">,</span>claims<span class="token punctuation">,</span>refreshTokenExpireAppTime<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 解析令牌 获取数据声明
      * 拿到用户及用户的角色、权限等信息
-     */
-    public static Claims getClaimsFromToken(String token) &#123;
-        Claims claims;
-        try &#123;
-            //用密钥(必字节数组)解析jwt，获取body（有效载荷）
-            claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(secretKey)).parseClaimsJws(token).getBody();
-        &#125; catch (Exception e) &#123;
-            //解析不了，这个token就是无效的
-            claims = null;
-        &#125;
-        return claims;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Claims <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Claims claims<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//用密钥(必字节数组)解析jwt，获取body（有效载荷）</span>
+            claims <span class="token operator">=</span> Jwts<span class="token punctuation">.</span><span class="token function">parser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setSigningKey</span><span class="token punctuation">(</span>DatatypeConverter<span class="token punctuation">.</span><span class="token function">parseBase64Binary</span><span class="token punctuation">(</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">parseClaimsJws</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//解析不了，这个token就是无效的</span>
+            claims <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> claims<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 获取用户id
-     */
-    public static String getUserId(String token)&#123;
-        String userId=null;
-        try &#123;
-            Claims claims = getClaimsFromToken(token);
-            userId = claims.getSubject();
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;error=&#123;&#125;&quot;,e);
-        &#125;
-        return userId;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getUserId</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String userId<span class="token operator">=</span>null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            userId <span class="token operator">=</span> claims<span class="token punctuation">.</span><span class="token function">getSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"error=&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> userId<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 获取用户名
      * 用于首页展示
-     */
-    public static String getUserName(String token)&#123;
-        String username=null;
-        try &#123;
-            //解析token获取claims
-            Claims claims = getClaimsFromToken(token);
-            //claims中的key当作自定义的常量
-            username = (String) claims .get(Constant.JWT_USER_NAME);
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;error=&#123;&#125;&quot;,e);
-        &#125;
-        return username;
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">getUserName</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String username<span class="token operator">=</span>null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//解析token获取claims</span>
+            Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//claims中的key当作自定义的常量</span>
+            username <span class="token operator">=</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span> claims <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Constant<span class="token punctuation">.</span>JWT_USER_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"error=&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> username<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 验证token 是否过期
-     */
-    public static Boolean isTokenExpired(String token) &#123;
-        try &#123;
-            //首先解析，如果能解析成功，证明我服务器签发的
-            Claims claims = getClaimsFromToken(token);
-            Date expiration = claims.getExpiration();
-            //过期时间和当前时间比较，如果过期时间在当前时间之前，返回true，表示已过期；否则返回false，没过期
-            return expiration.before(new Date());
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;error=&#123;&#125;&quot;,e);
-            //解析失败，抛出异常，返回true，表示已过期
-            return true;
-        &#125;
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Boolean <span class="token function">isTokenExpired</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//首先解析，如果能解析成功，证明我服务器签发的</span>
+            Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Date expiration <span class="token operator">=</span> claims<span class="token punctuation">.</span><span class="token function">getExpiration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//过期时间和当前时间比较，如果过期时间在当前时间之前，返回true，表示已过期；否则返回false，没过期</span>
+            <span class="token keyword">return</span> expiration<span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"error=&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//解析失败，抛出异常，返回true，表示已过期</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 校验令牌
-     */
-    public static Boolean validateToken(String token) &#123;
-        Claims claimsFromToken = getClaimsFromToken(token);
-        return (null!=claimsFromToken &amp;&amp; !isTokenExpired(token));
-    &#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Boolean <span class="token function">validateToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Claims claimsFromToken <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>null<span class="token operator">!=</span>claimsFromToken <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">isTokenExpired</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 刷新token
      * 如果是过期刷新，claims/载荷 不变；
      * 如果主动刷新，claims/载荷 改变【一般是权限/角色改变的时候去主动刷新】
-     */
-    public static String refreshToken(String refreshToken,Map&lt;String, Object&gt; claims) &#123;
-        String refreshedToken;
-        try &#123;
-            Claims parserclaims = getClaimsFromToken(refreshToken);
-            /**
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> String <span class="token function">refreshToken</span><span class="token punctuation">(</span>String refreshToken<span class="token punctuation">,</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> claims<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String refreshedToken<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            Claims parserclaims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>refreshToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/**
              * 如果传入的claims为空，说明是过期刷新，原先的用户信息不变，claims引用上个token里的内容
-             */
-            if(null==claims)&#123;
-                claims=parserclaims;
-            &#125;
-            /**
+             */</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>null<span class="token operator">==</span>claims<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                claims<span class="token operator">=</span>parserclaims<span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">/**
              * 不为空，根据传入的claims【用户信息】，生成新的Token
-             */
-            refreshedToken = generateToken(parserclaims.getIssuer(),parserclaims.getSubject(),claims,accessTokenExpireTime.toMillis(),secretKey);
-        &#125; catch (Exception e) &#123;
-            refreshedToken = null;
-            log.error(&quot;error=&#123;&#125;&quot;,e);
-        &#125;
-        return refreshedToken;
-    &#125;
+             */</span>
+            refreshedToken <span class="token operator">=</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>parserclaims<span class="token punctuation">.</span><span class="token function">getIssuer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>parserclaims<span class="token punctuation">.</span><span class="token function">getSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>claims<span class="token punctuation">,</span>accessTokenExpireTime<span class="token punctuation">.</span><span class="token function">toMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>secretKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            refreshedToken <span class="token operator">=</span> null<span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"error=&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> refreshedToken<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 获取token的剩余过期时间
-     */
-    public static long getRemainingTime(String token)&#123;
-        long result=0;
-        try &#123;
-            long nowMillis = System.currentTimeMillis();
-            result= getClaimsFromToken(token).getExpiration().getTime()-nowMillis;
-        &#125; catch (Exception e) &#123;
-            log.error(&quot;error=&#123;&#125;&quot;,e);
-        &#125;
-        return result;
-    &#125;
-&#125;
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">long</span> <span class="token function">getRemainingTime</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> result<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">long</span> nowMillis <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            result<span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getExpiration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span>nowMillis<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"error=&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="JwtTokenUtil"><a href="#JwtTokenUtil" class="headerlink" title="JwtTokenUtil"></a>JwtTokenUtil</h2><pre><code class="java">import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
+<h2 id="JwtTokenUtil"><a href="#JwtTokenUtil" class="headerlink" title="JwtTokenUtil"></a>JwtTokenUtil</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> io<span class="token punctuation">.</span>jsonwebtoken<span class="token punctuation">.</span>Claims<span class="token punctuation">;</span>
+<span class="token keyword">import</span> io<span class="token punctuation">.</span>jsonwebtoken<span class="token punctuation">.</span>Jwts<span class="token punctuation">;</span>
+<span class="token keyword">import</span> io<span class="token punctuation">.</span>jsonwebtoken<span class="token punctuation">.</span>SignatureAlgorithm<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span>Logger<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>slf4j<span class="token punctuation">.</span>LoggerFactory<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>beans<span class="token punctuation">.</span>factory<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Value<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>security<span class="token punctuation">.</span>core<span class="token punctuation">.</span>userdetails<span class="token punctuation">.</span>UserDetails<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>stereotype<span class="token punctuation">.</span>Component<span class="token punctuation">;</span>
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Date<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
 
-/**
+<span class="token comment" spellcheck="true">/**
  * JwtToken生成的工具类
  * JWT token的格式：header.payload.signature
  * header的格式（算法、token的类型）：
- * &#123;&quot;alg&quot;: &quot;HS512&quot;,&quot;type&quot;: &quot;JWT&quot;&#125;
+ * &amp;#123;"alg": "HS512","type": "JWT"&amp;#125;
  * payload的格式（用户名、创建时间、生成时间）：
- * &#123;&quot;sub&quot;:&quot;wang&quot;,&quot;created&quot;:1489079981393,&quot;exp&quot;:1489684781&#125;
+ * &amp;#123;"sub":"wang","created":1489079981393,"exp":1489684781&amp;#125;
  * signature的生成算法：
- * HMACSHA512(base64UrlEncode(header) + &quot;.&quot; +base64UrlEncode(payload),secret)
- */
-@Component
-public class JwtTokenUtil &#123;
-    private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
-    private static final String CLAIM_KEY_USERNAME = &quot;sub&quot;;
-    private static final String CLAIM_KEY_CREATED = &quot;created&quot;;
+ * HMACSHA512(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
+ */</span>
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JwtTokenUtil</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Logger LOGGER <span class="token operator">=</span> LoggerFactory<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span>JwtTokenUtil<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String CLAIM_KEY_USERNAME <span class="token operator">=</span> <span class="token string">"sub"</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> String CLAIM_KEY_CREATED <span class="token operator">=</span> <span class="token string">"created"</span><span class="token punctuation">;</span>
     
-    @Value(&quot;$&#123;jwt.secret&#125;&quot;)
-    private String secret;
-    @Value(&quot;$&#123;jwt.expiration&#125;&quot;)
-    private Long expiration;
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;jwt.secret&amp;#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> String secret<span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;jwt.expiration&amp;#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> Long expiration<span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 根据负责生成JWT的token
-     */
-    private String generateToken(Map&lt;String, Object&gt; claims) &#123;
-        return Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, secret)
-                .compact();
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">private</span> String <span class="token function">generateToken</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> claims<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> Jwts<span class="token punctuation">.</span><span class="token function">builder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">setClaims</span><span class="token punctuation">(</span>claims<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">setExpiration</span><span class="token punctuation">(</span><span class="token function">generateExpirationDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">signWith</span><span class="token punctuation">(</span>SignatureAlgorithm<span class="token punctuation">.</span>HS512<span class="token punctuation">,</span> secret<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">compact</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 从token中获取JWT中的负载
-     */
-    private Claims getClaimsFromToken(String token) &#123;
-        Claims claims = null;
-        try &#123;
-            claims = Jwts.parser()
-                    .setSigningKey(secret)
-                    .parseClaimsJws(token)
-                    .getBody();
-        &#125; catch (Exception e) &#123;
-            LOGGER.info(&quot;JWT格式验证失败:&#123;&#125;&quot;,token);
-        &#125;
-        return claims;
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">private</span> Claims <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Claims claims <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            claims <span class="token operator">=</span> Jwts<span class="token punctuation">.</span><span class="token function">parser</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">setSigningKey</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">parseClaimsJws</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            LOGGER<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"JWT格式验证失败:&amp;#123;&amp;#125;"</span><span class="token punctuation">,</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> claims<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 生成token的过期时间
-     */
-    private Date generateExpirationDate() &#123;
-        return new Date(System.currentTimeMillis() + expiration * 1000);
-    &#125;
+     */</span>
+    <span class="token keyword">private</span> Date <span class="token function">generateExpirationDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> expiration <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    /**
+    <span class="token comment" spellcheck="true">/**
      * 从token中获取登录用户名
-     */
-    public String getUserNameFromToken(String token) &#123;
-        String username;
-        try &#123;
-            Claims claims = getClaimsFromToken(token);
-            username =  claims.getSubject()
-        &#125; catch (Exception e) &#123;
-            username = null;
-        &#125;
-        return username;
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">public</span> String <span class="token function">getUserNameFromToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String username<span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            username <span class="token operator">=</span>  claims<span class="token punctuation">.</span><span class="token function">getSubject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            username <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> username<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 验证token是否还有效
      * @param token       客户端传入的token
      * @param userDetails 从数据库中查询出来的用户信息
-     */
-    public boolean validateToken(String token, UserDetails userDetails) &#123;
-        String username = getUserNameFromToken(token);
-        return username.equals(userDetails.getUsername()) &amp;&amp; !isTokenExpired(token);
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">validateToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">,</span> UserDetails userDetails<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        String username <span class="token operator">=</span> <span class="token function">getUserNameFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> username<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>userDetails<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token function">isTokenExpired</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 判断token是否已经失效
-     */
-    private boolean isTokenExpired(String token) &#123;
-        Date expiredDate = getExpiredDateFromToken(token);
-        return expiredDate.before(new Date());
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">private</span> <span class="token keyword">boolean</span> <span class="token function">isTokenExpired</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Date expiredDate <span class="token operator">=</span> <span class="token function">getExpiredDateFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> expiredDate<span class="token punctuation">.</span><span class="token function">before</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 从token中获取过期时间
-     */
-    private Date getExpiredDateFromToken(String token) &#123;
-        Claims claims = getClaimsFromToken(token);
-        return claims.getExpiration();
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">private</span> Date <span class="token function">getExpiredDateFromToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> claims<span class="token punctuation">.</span><span class="token function">getExpiration</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 根据用户信息生成token
-     */
-    public String generateToken(UserDetails userDetails) &#123;
-        Map&lt;String, Object&gt; claims = new HashMap&lt;&gt;();
-        claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">public</span> String <span class="token function">generateToken</span><span class="token punctuation">(</span>UserDetails userDetails<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> claims <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        claims<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>CLAIM_KEY_USERNAME<span class="token punctuation">,</span> userDetails<span class="token punctuation">.</span><span class="token function">getUsername</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        claims<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>CLAIM_KEY_CREATED<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>claims<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 判断token是否可以被刷新
-     */
-    public boolean canRefresh(String token) &#123;
-        return !isTokenExpired(token);
-    &#125;
-    /**
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">canRefresh</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">!</span><span class="token function">isTokenExpired</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">/**
      * 刷新token
-     */
-    public String refreshToken(String token) &#123;
-        Claims claims = getClaimsFromToken(token);
-        claims.put(CLAIM_KEY_CREATED, new Date());
-        return generateToken(claims);
-    &#125;
-&#125;
+     */</span>
+    <span class="token keyword">public</span> String <span class="token function">refreshToken</span><span class="token punctuation">(</span>String token<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        Claims claims <span class="token operator">=</span> <span class="token function">getClaimsFromToken</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        claims<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>CLAIM_KEY_CREATED<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">generateToken</span><span class="token punctuation">(</span>claims<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 </code></pre>
 
                 
@@ -976,7 +979,7 @@ public class JwtTokenUtil &#123;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/02/25/JWT/">http://wumangeng.github.io/2021/02/25/JWT/</a>
+                    <a href="http://wumangeng.github.io/2021/02/25/jwt/">http://wumangeng.github.io/2021/02/25/jwt/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1247,7 +1250,7 @@ public class JwtTokenUtil &#123;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/06/27/MybatisPlus/">
+                <a href="/2020/06/27/mybatisplus/">
                     <div class="card-image">
                         
                         <img src="https://img0.baidu.com/it/u=4294080919,1722562964&fm=26&fmt=auto" class="responsive-img" alt="Mybatis Plus">
