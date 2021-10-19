@@ -487,66 +487,66 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1、安装go-fastdfs"><a href="#1、安装go-fastdfs" class="headerlink" title="1、安装go-fastdfs"></a>1、安装go-fastdfs</h3><h4 id="1-1-下载go-fastdfs相关文件并且授予执行权限"><a href="#1-1-下载go-fastdfs相关文件并且授予执行权限" class="headerlink" title="1.1 下载go-fastdfs相关文件并且授予执行权限"></a>1.1 下载go-fastdfs相关文件并且授予执行权限</h4><pre><code class="powershell">#创建文件夹
-cd /usr/local/
-mkdir go-fastdfs
-mkdir go-fastdfs-web
-cd go-fastdfs
+                <h3 id="1、安装go-fastdfs"><a href="#1、安装go-fastdfs" class="headerlink" title="1、安装go-fastdfs"></a>1、安装go-fastdfs</h3><h4 id="1-1-下载go-fastdfs相关文件并且授予执行权限"><a href="#1-1-下载go-fastdfs相关文件并且授予执行权限" class="headerlink" title="1.1 下载go-fastdfs相关文件并且授予执行权限"></a>1.1 下载go-fastdfs相关文件并且授予执行权限</h4><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#创建文件夹</span>
+cd <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>
+mkdir go<span class="token operator">-</span>fastdfs
+mkdir go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web
+cd go<span class="token operator">-</span>fastdfs
 
-#如果无法连接github可以换成gitee 
-wget https://github.com/sjqzhang/go-fastdfs/releases/download/v1.3.0/fileserver
+<span class="token comment">#如果无法连接github可以换成gitee </span>
+wget https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>releases<span class="token operator">/</span>download<span class="token operator">/</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>0<span class="token operator">/</span>fileserver
 
-wget  https://raw.githubusercontent.com/sjqzhang/go-fastdfs/master/control
+wget  https:<span class="token operator">/</span><span class="token operator">/</span>raw<span class="token punctuation">.</span>githubusercontent<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>master<span class="token operator">/</span>control
 
-#下载完毕进行授权，否则无法执行
+<span class="token comment">#下载完毕进行授权，否则无法执行</span>
 chmod 755 fileserver
 
 chmod 755 control
 
-#启动（看到running..即为成功，运行成功之后会生成一些文件 ll 可查看）
-./control start
+<span class="token comment">#启动（看到running..即为成功，运行成功之后会生成一些文件 ll 可查看）</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span>
 
-# 放行服务器端口8080后使用如下指令访问
-http://你的ip:8080
-#出现如下页面即可
-</code></pre>
+<span class="token comment"># 放行服务器端口8080后使用如下指令访问</span>
+http:<span class="token operator">/</span><span class="token operator">/</span>你的ip:8080
+<span class="token comment">#出现如下页面即可</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://img-blog.csdnimg.cn/04a1ac263f4e4813bba05093a239a54e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><strong>修改配置文件</strong><br>go-fastdfs的配置文件在 conf下的cfg.json文件里面 直接 vim conf/cfg.json 进入修改保存即可，配置文件全部有中文注释，白名单中添加本机ip,或者你想放行的ip即可<br><img src="https://img-blog.csdnimg.cn/62dd2b930d1f4ce98847b294d5f273ca.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述">修改完毕保存重启即可</p>
-<pre><code class="powershell">#启动/停止/重启/查看状态/查看日志
-./control start|stop|restart|status|tail
-</code></pre>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#启动/停止/重启/查看状态/查看日志</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span><span class="token punctuation">|</span>stop<span class="token punctuation">|</span>restart<span class="token punctuation">|</span>status<span class="token punctuation">|</span>tail<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="1-2-安装可视化工具go-fastdfs-web"><a href="#1-2-安装可视化工具go-fastdfs-web" class="headerlink" title="1.2 安装可视化工具go-fastdfs-web"></a>1.2 安装可视化工具go-fastdfs-web</h3><p><strong>注：可视化工具需java环境(jdk)未安装可参考以下教程进行安装</strong></p>
 <blockquote>
 <p>安装jdk 教程<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sxdcgaq8080/p/7492426.html">https://www.cnblogs.com/sxdcgaq8080/p/7492426.html</a></p>
 </blockquote>
-<pre><code class="powershell">#下载可视化资源包（.tar.gz）
-https://github.com/perfree/go-fastdfs-web/releases
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#下载可视化资源包（.tar.gz）</span>
+https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>perfree<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">/</span>releases
 
-#下载完毕上传到go-fastdfs-web目录下解压
-tar -zxvf go-fastdfs-web-v1.3.6.tar.gz
+<span class="token comment">#下载完毕上传到go-fastdfs-web目录下解压</span>
+tar <span class="token operator">-</span>zxvf go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">-</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>6<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz
 
-#进入go-fastdfs-web目录下 分配权限
-chmod +x goFastDfsWeb.sh
+<span class="token comment">#进入go-fastdfs-web目录下 分配权限</span>
+chmod <span class="token operator">+</span>x goFastDfsWeb<span class="token punctuation">.</span>sh
 
-#运行
-./goFastDfsWeb.sh start
+<span class="token comment">#运行</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
 
-#开放服务器8088端口 运行成功后
-http://ip:8088    #访问
+<span class="token comment">#开放服务器8088端口 运行成功后</span>
+http:<span class="token operator">/</span><span class="token operator">/</span>ip:8088    <span class="token comment">#访问</span>
 
-#如果启动报  -bash: ./goFastDfsWeb.sh: /bin/bash^M: bad interpreter: No such file or directory
-#解决方法：
-vim goFastDfsWeb.sh
-:set fileformat=unix
-#保存退出即可
+<span class="token comment">#如果启动报  -bash: ./goFastDfsWeb.sh: /bin/bash^M: bad interpreter: No such file or directory</span>
+<span class="token comment">#解决方法：</span>
+vim goFastDfsWeb<span class="token punctuation">.</span>sh
+:<span class="token function">set</span> fileformat=unix
+<span class="token comment">#保存退出即可</span>
 
-#运行
-./goFastDfsWeb.sh start
-</code></pre>
+<span class="token comment">#运行</span>
+<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>成功运行后按照界面文字说明注册即可(“注：连接的ip 要在go-fastdfs配置文件的白名单中”)</p>
 
                 
@@ -874,12 +874,12 @@ vim goFastDfsWeb.sh
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
-                    </a>
-                    
                     <a href="/tags/CentOS7/">
                         <span class="chip bg-color">CentOS7</span>
+                    </a>
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>

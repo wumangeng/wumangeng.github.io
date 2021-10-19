@@ -137,7 +137,8 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;视频点播（SDK）&quot;&gt;&lt;a href=&quot;#视频点播（SDK）&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;视频点播（SDK）&quot;&gt;&lt;a href=&quot;#视频点播（SDK）&quot; class=&quot;headerlink&quot; title=&quot;视频点播（SDK）&quot;&gt;&lt;/a&gt;视频点播（SDK）&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;阿里云文档地址：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre</summary>
         
       
     
@@ -223,9 +224,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
     
   </entry>
   
@@ -241,7 +242,7 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;swagger2配置&quot;&gt;&lt;a href=&quot;#swagger2配置&quot; class=&quot;headerlink&quot; title=&quot;swagger2配置&quot;&gt;&lt;/a&gt;swagger2配置&lt;/h2&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;        &amp;lt;!--</summary>
+    <summary type="html">&lt;h2 id=&quot;swagger2配置&quot;&gt;&lt;a href=&quot;#swagger2配置&quot; class=&quot;headerlink&quot; title=&quot;swagger2配置&quot;&gt;&lt;/a&gt;swagger2配置&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-xml&quot;</summary>
         
       
     

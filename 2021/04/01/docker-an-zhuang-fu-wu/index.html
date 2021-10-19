@@ -433,12 +433,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
-                            </a>
-                        
                             <a href="/tags/CentOS7/">
                                 <span class="chip bg-color">CentOS7</span>
+                            </a>
+                        
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
                             </a>
                         
                     </div>
@@ -487,23 +487,26 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="docker安装服务"><a href="#docker安装服务" class="headerlink" title="docker安装服务"></a>docker安装服务</h1><h3 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h3><pre><code class="sh">sudo sed -e &#39;s|^mirrorlist=|#mirrorlist=|g&#39; \
-         -e &#39;s|^#baseurl=http://mirror.centos.org|baseurl=https://mirrors.tuna.tsinghua.edu.cn|g&#39; \
+                <h1 id="docker安装服务"><a href="#docker安装服务" class="headerlink" title="docker安装服务"></a>docker安装服务</h1><h3 id="设置yum源"><a href="#设置yum源" class="headerlink" title="设置yum源"></a>设置yum源</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo sed -e &#39;s|^mirrorlist&#x3D;|#mirrorlist&#x3D;|g&#39; \
+         -e &#39;s|^#baseurl&#x3D;http:&#x2F;&#x2F;mirror.centos.org|baseurl&#x3D;https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn|g&#39; \
          -i.bak \
-         /etc/yum.repos.d/CentOS-*.repo
+         &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-*.repo
          
  sudo yum makecache        
  
  #上传，下载工具
  yum -y install lrzsz
- #上传  rz  下载 sz
-</code></pre>
-<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre><code class="shell">#卸载系统之前的docker 
+ #上传  rz  下载 sz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#卸载系统之前的docker 
 sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
@@ -519,7 +522,7 @@ sudo yum install -y yum-utils
 # 配置镜像
 sudo yum-config-manager \
     --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
+    https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo
 # 安装    
 sudo yum install -y docker-ce docker-ce-cli containerd.io
 
@@ -533,105 +536,108 @@ docker -v
 sudo docker images
 
 # 配置（阿里云）镜像加速
-sudo mkdir -p /etc/docker
+sudo mkdir -p &#x2F;etc&#x2F;docker
 
-sudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;
+sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-&#39;EOF&#39;
 &#123;
-  &quot;registry-mirrors&quot;: [&quot;https://pacmlq67.mirror.aliyuncs.com&quot;]
+  &quot;registry-mirrors&quot;: [&quot;https:&#x2F;&#x2F;pacmlq67.mirror.aliyuncs.com&quot;]
 &#125;
 EOF
 
 
 #修改docker 支持远程访问
-vim /lib/systemd/system/docker.service
+vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;docker.service
 
 #修改这一行
-ExecStart=/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H fd:// --containerd=/run/containerd/containerd.sock 
+ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;dockerd  -H tcp:&#x2F;&#x2F;0.0.0.0:2375 -H fd:&#x2F;&#x2F; --containerd&#x3D;&#x2F;run&#x2F;containerd&#x2F;containerd.sock 
 
 #重启
 sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker
 
 
-</code></pre>
-<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre><code class="shell">#拉取镜像
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#拉取镜像
 sudo docker pull mysql:5.7
 
 # --name指定容器名字 -v目录挂载 -p指定端口映射  -e设置mysql参数 -d后台运行
 sudo docker run -p 3306:3306 --name mysql-pro \
--v /mydata/mysql/log:/var/log/mysql \
--v /mydata/mysql/data:/var/lib/mysql \
--v /mydata/mysql/conf:/etc/mysql \
--e TZ=Asia/Shanghai \
--e MYSQL_ROOT_PASSWORD=123456 \
+-v &#x2F;mydata&#x2F;mysql&#x2F;log:&#x2F;var&#x2F;log&#x2F;mysql \
+-v &#x2F;mydata&#x2F;mysql&#x2F;data:&#x2F;var&#x2F;lib&#x2F;mysql \
+-v &#x2F;mydata&#x2F;mysql&#x2F;conf:&#x2F;etc&#x2F;mysql \
+-e TZ&#x3D;Asia&#x2F;Shanghai \
+-e MYSQL_ROOT_PASSWORD&#x3D;123456 \
 -d mysql:5.7
 
-docker exec -it mysql bin/bash
+docker exec -it mysql bin&#x2F;bash
 exit
 
 因为有目录映射，所以我们可以直接在镜像外执行
-vi /mydata/mysql/conf/my.conf 
+vi &#x2F;mydata&#x2F;mysql&#x2F;conf&#x2F;my.conf 
 
 [client]
-default-character-set=utf8
+default-character-set&#x3D;utf8
 [mysql]
-default-character-set=utf8
+default-character-set&#x3D;utf8
 [mysqld]
-init_connect=&#39;SET collation_connection = utf8_unicode_ci&#39;
-init_connect=&#39;SET NAMES utf8&#39;
-character-set-server=utf8
-collation-server=utf8_unicode_ci
-default-time-zone = &#39;+08:00&#39;
+init_connect&#x3D;&#39;SET collation_connection &#x3D; utf8_unicode_ci&#39;
+init_connect&#x3D;&#39;SET NAMES utf8&#39;
+character-set-server&#x3D;utf8
+collation-server&#x3D;utf8_unicode_ci
+default-time-zone &#x3D; &#39;+08:00&#39;
 skip-character-set-client-handshake
 skip-name-resolve
 
-docker restart mysql
-</code></pre>
-<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre><code class="shell"># 在虚拟机中
-mkdir -p /mydata/redis/conf
-touch /mydata/redis/conf/redis.conf
+docker restart mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 在虚拟机中
+mkdir -p &#x2F;mydata&#x2F;redis&#x2F;conf
+touch &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf
 
 docker pull redis
 
 docker run -p 6379:6379 --name redis \
--v /mydata/redis/data:/data \
--v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \
--d redis redis-server /etc/redis/redis.conf
+-v &#x2F;mydata&#x2F;redis&#x2F;data:&#x2F;data \
+-v &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf \
+-d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf
 
 # 直接进去redis客户端。
 docker exec -it redis redis-cli
 
 #配置持久化
-vim /mydata/redis/conf/redis.conf
+vim &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf
 # 插入下面内容
 appendonly yes
 保存
 
 docker restart redis
 #配置开机自启
-docker update redis --restart=always
+docker update redis --restart&#x3D;always
 
-</code></pre>
-<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre><code class="shell">docker pull portainer/portainer
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-docker run -d -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer  portainer/portainer
+<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull portainer&#x2F;portainer
+
+docker run -d -p 9000:9000 --restart&#x3D;always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock --name prtainer  portainer&#x2F;portainer
 
 #访问
-http://ip:9000/
-</code></pre>
-<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre><code class="shell">#拉取镜像
-docker pull sjqzhang/go-fastdfs:latest
+http:&#x2F;&#x2F;ip:9000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#拉取镜像
+docker pull sjqzhang&#x2F;go-fastdfs:latest
 
 #创建保存目录
-mkdir usr/local/data
-mkdir usr/local/fastdfs_data
+mkdir usr&#x2F;local&#x2F;data
+mkdir usr&#x2F;local&#x2F;fastdfs_data
 
 #运行
-docker run --name go-fastdfs --privileged=true -t -p 9090:8080 -v /usr/local/data/fastdfs_data:/data -e GO_FASTDFS_DIR=/data sjqzhang/go-fastdfs
+docker run --name go-fastdfs --privileged&#x3D;true -t -p 9090:8080 -v &#x2F;usr&#x2F;local&#x2F;data&#x2F;fastdfs_data:&#x2F;data -e GO_FASTDFS_DIR&#x3D;&#x2F;data sjqzhang&#x2F;go-fastdfs
 
 #访问
-http://ip:9090/
-</code></pre>
-<pre><code>go-fastdfs的目录结构一般是：
+http:&#x2F;&#x2F;ip:9090&#x2F;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">go-fastdfs的目录结构一般是：
 
 ├── conf
 │   └── cfg.json
@@ -649,62 +655,62 @@ http://ip:9090/
 │   ├── fileserver.log
 │   └── tusd.log
 └── static
-    └── uppy.html
-</code></pre>
-<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre><code class="shell">#下载镜像文件
-docker pull perfree/fastdfsweb
+    └── uppy.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#下载镜像文件
+docker pull perfree&#x2F;fastdfsweb
 
 #运行容器
-docker run --name fastdfsweb -d -p 8088:8088 perfree/fastdfsweb
+docker run --name fastdfsweb -d -p 8088:8088 perfree&#x2F;fastdfsweb
 
 #测试是否正常访问
-http://本地ip:8088 
+http:&#x2F;&#x2F;本地ip:8088 
 
 #配置go-fastdfs-web
 集群名称：随意填写
-组：对应本地映射中文件夹conf/cfg.json 文件内容中的group
-访问地址：http://本地ip:8080
-</code></pre>
-<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre><code class="shell">#查找镜像
+组：对应本地映射中文件夹conf&#x2F;cfg.json 文件内容中的group
+访问地址：http:&#x2F;&#x2F;本地ip:8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#查找镜像
 docker search rocketmq
 
 #下载并且启动NameServer
-docker run -d -p 9876:9876 --name rmqserver  foxiswho/rocketmq:server-4.5.1
+docker run -d -p 9876:9876 --name rmqserver  foxiswho&#x2F;rocketmq:server-4.5.1
 
-#启动broker    Broker容器中默认的配置文件的路径为：/etc/rocketmq/broker.conf
+#启动broker    Broker容器中默认的配置文件的路径为：&#x2F;etc&#x2F;rocketmq&#x2F;broker.conf
 docker run -d -p 10911:10911 -p 10909:10909\
  --name rmqbroker --link rmqserver:namesrv\
- -e &quot;NAMESRV_ADDR=namesrv:9876&quot; -e &quot;JAVA_OPTS=-Duser.home=/opt&quot;\
- -e &quot;JAVA_OPT_EXT=-server -Xms128m -Xmx128m&quot;\
- -v /conf/broker.conf:/etc/rocketmq/broker.conf \
- foxiswho/rocketmq:broker-4.5.1
+ -e &quot;NAMESRV_ADDR&#x3D;namesrv:9876&quot; -e &quot;JAVA_OPTS&#x3D;-Duser.home&#x3D;&#x2F;opt&quot;\
+ -e &quot;JAVA_OPT_EXT&#x3D;-server -Xms128m -Xmx128m&quot;\
+ -v &#x2F;conf&#x2F;broker.conf:&#x2F;etc&#x2F;rocketmq&#x2F;broker.conf \
+ foxiswho&#x2F;rocketmq:broker-4.5.1
  
 #下载并且启动 rocketmq console
 docker run -d --name rmqconsole -p 8180:8080 --link rmqserver:namesrv\
- -e &quot;JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
- -Dcom.rocketmq.sendMessageWithVIPChannel=false&quot;\
- -t styletang/rocketmq-console-ng
+ -e &quot;JAVA_OPTS&#x3D;-Drocketmq.namesrv.addr&#x3D;namesrv:9876\
+ -Dcom.rocketmq.sendMessageWithVIPChannel&#x3D;false&quot;\
+ -t styletang&#x2F;rocketmq-console-ng
  
  #命令检查一下启动情况
 docker ps|grep rocketmq
 
 #通过浏览器访问console页面
-ip：8180/
-</code></pre>
-<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre><code class="shell">#查看运行容器的宿主机进程
+ip：8180&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#查看运行容器的宿主机进程
 ps aux|grep sleep|grep -v grep
 
 #进入容器内部
-docker exec -it 容器id /bin/sh
+docker exec -it 容器id &#x2F;bin&#x2F;sh
 #查看容器日志
 docker logs -f 容器id
 
 #容器内安装软件
-yum/apt-get/apt 
+yum&#x2F;apt-get&#x2F;apt 
 
 #查看docker端口情况
-netstat -luntp
-</code></pre>
+netstat -luntp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -769,12 +775,12 @@ netstat -luntp
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
-                                </a>
-                            
                                 <a href="/tags/CentOS7/">
                                     <span class="chip bg-color">CentOS7</span>
+                                </a>
+                            
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
                                 </a>
                             
                         </div>
