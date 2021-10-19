@@ -33,7 +33,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 
@@ -531,70 +531,70 @@
 <li>服务器端可以接收客户端发送的数据（<code>telnet</code> 方式即可）。</li>
 <li>代码演示：</li>
 </ol>
-<pre class=" language-java"><code class="language-java">
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>InputStream<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>ServerSocket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>net<span class="token punctuation">.</span>Socket<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>ExecutorService<span class="token punctuation">;</span>
-<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>Executors<span class="token punctuation">;</span>
+<pre><code class="java">
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BIOServer</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+public class BIOServer &#123;
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//线程池机制</span>
-        <span class="token comment" spellcheck="true">//思路</span>
-        <span class="token comment" spellcheck="true">//1. 创建一个线程池</span>
-        <span class="token comment" spellcheck="true">//2. 如果有客户端连接，就创建一个线程，与之通讯(单独写一个方法)</span>
-        ExecutorService newCachedThreadPool <span class="token operator">=</span> Executors<span class="token punctuation">.</span><span class="token function">newCachedThreadPool</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//创建ServerSocket</span>
-        ServerSocket serverSocket <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ServerSocket</span><span class="token punctuation">(</span><span class="token number">6666</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"服务器启动了"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//监听，等待客户端连接</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"等待连接...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">final</span> Socket socket <span class="token operator">=</span> serverSocket<span class="token punctuation">.</span><span class="token function">accept</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"连接到一个客户端"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//就创建一个线程，与之通讯(单独写一个方法)</span>
-            newCachedThreadPool<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Runnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//我们重写</span>
-                    <span class="token comment" spellcheck="true">//可以和客户端通讯</span>
-                    <span class="token function">handler</span><span class="token punctuation">(</span>socket<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    public static void main(String[] args) throws Exception &#123;
+        //线程池机制
+        //思路
+        //1. 创建一个线程池
+        //2. 如果有客户端连接，就创建一个线程，与之通讯(单独写一个方法)
+        ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
+        //创建ServerSocket
+        ServerSocket serverSocket = new ServerSocket(6666);
+        System.out.println(&quot;服务器启动了&quot;);
+        while (true) &#123;
+            System.out.println(&quot;线程信息id = &quot; + Thread.currentThread().getId() + &quot;名字 = &quot; + Thread.currentThread().getName());
+            //监听，等待客户端连接
+            System.out.println(&quot;等待连接....&quot;);
+            final Socket socket = serverSocket.accept();
+            System.out.println(&quot;连接到一个客户端&quot;);
+            //就创建一个线程，与之通讯(单独写一个方法)
+            newCachedThreadPool.execute(new Runnable() &#123;
+                public void run() &#123;//我们重写
+                    //可以和客户端通讯
+                    handler(socket);
+                &#125;
+            &#125;);
+        &#125;
+    &#125;
 
-    <span class="token comment" spellcheck="true">//编写一个handler方法，和客户端通讯</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">handler</span><span class="token punctuation">(</span>Socket socket<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> bytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">byte</span><span class="token punctuation">[</span><span class="token number">1024</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//通过socket获取输入流</span>
-            InputStream inputStream <span class="token operator">=</span> socket<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//循环的读取客户端发送的数据</span>
-            <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"线程信息id = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"名字 = "</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">currentThread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"read...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">int</span> read <span class="token operator">=</span> inputStream<span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span>bytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span>read <span class="token operator">!=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> read<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//输出客户端发送的数据</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                    <span class="token keyword">break</span><span class="token punctuation">;</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">finally</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"关闭和client的连接"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">try</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                socket<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>Copy to clipboardErrorCopied
+    //编写一个handler方法，和客户端通讯
+    public static void handler(Socket socket) &#123;
+        try &#123;
+            System.out.println(&quot;线程信息id = &quot; + Thread.currentThread().getId() + &quot;名字 = &quot; + Thread.currentThread().getName());
+            byte[] bytes = new byte[1024];
+            //通过socket获取输入流
+            InputStream inputStream = socket.getInputStream();
+            //循环的读取客户端发送的数据
+            while (true) &#123;
+                System.out.println(&quot;线程信息id = &quot; + Thread.currentThread().getId() + &quot;名字 = &quot; + Thread.currentThread().getName());
+                System.out.println(&quot;read....&quot;);
+                int read = inputStream.read(bytes);
+                if (read != -1) &#123;
+                    System.out.println(new String(bytes, 0, read));//输出客户端发送的数据
+                &#125; else &#123;
+                    break;
+                &#125;
+            &#125;
+        &#125; catch (Exception e) &#123;
+            e.printStackTrace();
+        &#125; finally &#123;
+            System.out.println(&quot;关闭和client的连接&quot;);
+            try &#123;
+                socket.close();
+            &#125; catch (Exception e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;Copy to clipboardErrorCopied
 </code></pre>
 <h2 id="6、-BIO-问题分析"><a href="#6、-BIO-问题分析" class="headerlink" title="6、 BIO 问题分析"></a>6、 BIO 问题分析</h2><ol>
 <li>每个请求都需要创建独立的线程，与对应的客户端进行数据 <code>Read</code>，业务处理，数据 <code>Write</code>。</li>

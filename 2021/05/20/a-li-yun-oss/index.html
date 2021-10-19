@@ -33,7 +33,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 
@@ -493,131 +493,131 @@
 <li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
 </ul>
 <h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
-<pre class=" language-properties"><code class="language-properties"><span class="token comment" spellcheck="true">#服务名</span>
-<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">service-oss</span>
+<pre><code class="properties">#服务名
+spring.application.name=service-oss
 
-<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8086</span>
+server.port=8086
 
-<span class="token attr-name">spring.profiles.active</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
+spring.profiles.active=dev
 
-<span class="token comment" spellcheck="true">#阿里云oss配置 （以下信息替换成你自己的）</span>
-<span class="token attr-name">aliyun.oss.file.endpoint</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keyid</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keysecret</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token comment" spellcheck="true">#bucket可以在控制台创建，也可以使用java代码创建</span>
-<span class="token attr-name">aliyun.oss.file.bucketname</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
+#阿里云oss配置 （以下信息替换成你自己的）
+aliyun.oss.file.endpoint=***
+aliyun.oss.file.keyid=***
+aliyun.oss.file.keysecret=***
+#bucket可以在控制台创建，也可以使用java代码创建
+aliyun.oss.file.bucketname=***
 </code></pre>
 <h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
-<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span><span class="token punctuation">(</span>exclude <span class="token operator">=</span> DataSourceAutoConfiguration<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true">//配置启动类不加载数据库</span>
-<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token string">"com.hscs"</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>        <span class="token comment" spellcheck="true">//扫描包</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssApplication</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>OssApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<pre><code class="java">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)  //配置启动类不加载数据库
+@ComponentScan(basePackages = &#123;&quot;com.hscs&quot;&#125;)        //扫描包
+public class OssApplication &#123;
+    public static void main(String[] args) &#123;
+        SpringApplication.run(OssApplication.class, args);
+    &#125;
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+&#125;
 </code></pre>
-<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConstantPropertiesUtlis</span> <span class="token keyword">implements</span> <span class="token class-name">InitializingBean</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre><code class="java">@Component
+public class ConstantPropertiesUtlis implements InitializingBean &#123;
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;aliyun.oss.file.endpoint&amp;#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String endpoint<span class="token punctuation">;</span>
+    @Value(&quot;$&#123;aliyun.oss.file.endpoint&#125;&quot;)
+    private String endpoint;
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;aliyun.oss.file.keyid&amp;#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String keyId<span class="token punctuation">;</span>
+    @Value(&quot;$&#123;aliyun.oss.file.keyid&#125;&quot;)
+    private String keyId;
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;aliyun.oss.file.keysecret&amp;#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String keySecret<span class="token punctuation">;</span>
+    @Value(&quot;$&#123;aliyun.oss.file.keysecret&#125;&quot;)
+    private String keySecret;
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&amp;#123;aliyun.oss.file.bucketname&amp;#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> String bucketName<span class="token punctuation">;</span>
+    @Value(&quot;$&#123;aliyun.oss.file.bucketname&#125;&quot;)
+    private String bucketName;
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String END_POINT<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_ID<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String KEY_SECRET<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> String BUCKET_NAME<span class="token punctuation">;</span>
+    public static String END_POINT;
+    public static String KEY_ID;
+    public static String KEY_SECRET;
+    public static String BUCKET_NAME;
 
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afterPropertiesSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Exception <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        END_POINT<span class="token operator">=</span>endpoint<span class="token punctuation">;</span>
-        KEY_ID<span class="token operator">=</span>keyId<span class="token punctuation">;</span>
-        KEY_SECRET<span class="token operator">=</span>keySecret<span class="token punctuation">;</span>
-        BUCKET_NAME<span class="token operator">=</span>bucketName<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    @Override
+    public void afterPropertiesSet() throws Exception &#123;
+        END_POINT=endpoint;
+        KEY_ID=keyId;
+        KEY_SECRET=keySecret;
+        BUCKET_NAME=bucketName;
+    &#125;
 
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+&#125;
 </code></pre>
-<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
-<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"oss/fileoss"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@CrossOrigin</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssController</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre><code class="java">@Controller
+@RequestMapping(&quot;oss/fileoss&quot;)
+@CrossOrigin
+public class OssController &#123;
 
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> OssService ossService<span class="token punctuation">;</span>
+    @Autowired
+    private OssService ossService;
 
-    <span class="token comment" spellcheck="true">/**
+    /**
      * 上传头像
-     * */</span>
-    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> R <span class="token function">uploadFileOss</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        String url<span class="token operator">=</span>ossService<span class="token punctuation">.</span><span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> R<span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"url"</span><span class="token punctuation">,</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+     * */
+    @PostMapping()
+    public R uploadFileOss(MultipartFile file)&#123;
+        String url=ossService.uploadFileAvatar(file);
+        return R.ok().data(&quot;url&quot;,url);
+    &#125;
 
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+&#125;
 </code></pre>
-<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//接口</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OssService</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre><code class="java">//接口
+public interface OssService &#123;
+    String uploadFileAvatar(MultipartFile file);
+&#125;
 
-<span class="token comment" spellcheck="true">//类</span>
-<span class="token comment" spellcheck="true">/**
+//类
+/**
  * @author wmg
  *  文件上传业务实现
- */</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">OssService</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> String <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>MultipartFile file<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        String endpoint <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>END_POINT<span class="token punctuation">;</span>
-        String accessKeyId <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_ID<span class="token punctuation">;</span>
-        String accessKeySecret <span class="token operator">=</span> ConstantPropertiesUtlis<span class="token punctuation">.</span>KEY_SECRET<span class="token punctuation">;</span>
-        String bucketName<span class="token operator">=</span>ConstantPropertiesUtlis<span class="token punctuation">.</span>BUCKET_NAME<span class="token punctuation">;</span>
+ */
+@Service
+public class OssServiceImpl implements OssService &#123;
+    @Override
+    public String uploadFileAvatar(MultipartFile file) &#123;
+        String endpoint = ConstantPropertiesUtlis.END_POINT;
+        String accessKeyId = ConstantPropertiesUtlis.KEY_ID;
+        String accessKeySecret = ConstantPropertiesUtlis.KEY_SECRET;
+        String bucketName=ConstantPropertiesUtlis.BUCKET_NAME;
 
-        <span class="token keyword">try</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">// 创建OSSClient实例。</span>
-            OSS ossClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OSSClientBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span>endpoint<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        try&#123;
+            // 创建OSSClient实例。
+            OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
-            <span class="token comment" spellcheck="true">//获取文件名称</span>
-            String fileName <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getOriginalFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖</span>
-            String uuid <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>uuid<span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//将文件按日期分类</span>
-            String datePath <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>datePath<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">// 上传文件流。</span>
-            InputStream inputStream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//第一个参数为bucket名  第二个参数为上传文件路径</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">putObject</span><span class="token punctuation">(</span>bucketName<span class="token punctuation">,</span> fileName<span class="token punctuation">,</span> inputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            //获取文件名称
+            String fileName = file.getOriginalFilename();
+            //在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖
+            String uuid = UUID.randomUUID().toString().replaceAll(&quot;-&quot;, &quot;&quot;);
+            fileName=uuid+fileName;
+            //将文件按日期分类
+            String datePath = new DateTime().toString(&quot;yyyy/MM/dd&quot;);
+            fileName=datePath+&quot;/&quot;+fileName;
+            // 上传文件流。
+            InputStream inputStream = file.getInputStream();
+            //第一个参数为bucket名  第二个参数为上传文件路径
+            ossClient.putObject(bucketName, fileName, inputStream);
 
-            <span class="token comment" spellcheck="true">//将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg</span>
-            String url<span class="token operator">=</span><span class="token string">"https://"</span><span class="token operator">+</span>bucketName<span class="token operator">+</span><span class="token string">"."</span><span class="token operator">+</span>endpoint<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
+            //将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg
+            String url=&quot;https://&quot;+bucketName+&quot;.&quot;+endpoint+&quot;/&quot;+fileName;
 
 
-            <span class="token comment" spellcheck="true">// 关闭OSSClient。</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> url<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"图片上传失败！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> null<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            // 关闭OSSClient。
+            ossClient.shutdown();
+            return url;
+        &#125;catch (Exception e)&#123;
+            System.out.println(&quot;图片上传失败！&quot;);
+            e.printStackTrace();
+            return null;
+        &#125;
 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    &#125;
+&#125;
 
 </code></pre>
 
