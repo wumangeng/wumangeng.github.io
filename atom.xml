@@ -230,6 +230,33 @@
   </entry>
   
   <entry>
+    <title>RabbitMQ</title>
+    <link href="http://wumangeng.github.io/2021/04/14/ribbitmq/"/>
+    <id>http://wumangeng.github.io/2021/04/14/ribbitmq/</id>
+    <published>2021-04-14T01:10:20.000Z</published>
+    <updated>2021-10-20T11:36:02.668Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;RabbitMQ&quot;&gt;&lt;a href=&quot;#RabbitMQ&quot; class=&quot;headerlink&quot; title=&quot;RabbitMQ&quot;&gt;&lt;/a&gt;RabbitMQ&lt;/h1&gt;&lt;h2 id=&quot;1-MQ引言&quot;&gt;&lt;a href=&quot;#1-MQ引言&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="消息中间件" scheme="http://wumangeng.github.io/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+    <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
+    
+    <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</title>
     <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
     <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
