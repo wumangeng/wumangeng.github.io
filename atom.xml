@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-10-19T09:12:59.503Z</updated>
+  <updated>2021-10-20T09:01:14.175Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -17,11 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>for(;;)与while(true)的区别</title>
+    <link href="http://wumangeng.github.io/2021/10/08/for-yu-while-true-qu-bie/"/>
+    <id>http://wumangeng.github.io/2021/10/08/for-yu-while-true-qu-bie/</id>
+    <published>2021-10-08T01:10:20.000Z</published>
+    <updated>2021-10-20T09:01:14.175Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;在开发过程中死循环通常有两种写法&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-java&quot; data-language=&quot;java&quot;&gt;&lt;code class=&quot;language-java&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="开发技巧" scheme="http://wumangeng.github.io/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/"/>
+    
+    
+    <category term="循环" scheme="http://wumangeng.github.io/tags/%E5%BE%AA%E7%8E%AF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Netty学习笔记</title>
     <link href="http://wumangeng.github.io/2021/10/05/netty/"/>
     <id>http://wumangeng.github.io/2021/10/05/netty/</id>
     <published>2021-10-05T07:10:30.000Z</published>
-    <updated>2021-10-19T09:12:59.503Z</updated>
+    <updated>2021-10-20T06:26:18.858Z</updated>
     
     
       
@@ -48,7 +74,7 @@
     <link href="http://wumangeng.github.io/2021/10/02/nio/"/>
     <id>http://wumangeng.github.io/2021/10/02/nio/</id>
     <published>2021-10-02T07:10:30.000Z</published>
-    <updated>2021-10-15T09:44:46.204Z</updated>
+    <updated>2021-10-20T06:26:26.315Z</updated>
     
     
       
@@ -75,7 +101,7 @@
     <link href="http://wumangeng.github.io/2021/10/01/bio/"/>
     <id>http://wumangeng.github.io/2021/10/01/bio/</id>
     <published>2021-10-01T07:10:30.000Z</published>
-    <updated>2021-10-15T09:17:29.596Z</updated>
+    <updated>2021-10-20T06:25:26.537Z</updated>
     
     
       
@@ -103,7 +129,7 @@
     <link href="http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/"/>
     <id>http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/</id>
     <published>2021-05-25T01:10:20.000Z</published>
-    <updated>2021-10-19T02:29:42.509Z</updated>
+    <updated>2021-10-20T06:26:55.247Z</updated>
     
     
       
@@ -130,7 +156,7 @@
     <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/"/>
     <id>http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</id>
     <published>2021-05-20T09:10:30.000Z</published>
-    <updated>2021-10-15T10:18:43.305Z</updated>
+    <updated>2021-10-20T06:26:47.594Z</updated>
     
     
       
@@ -156,7 +182,7 @@
     <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/"/>
     <id>http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</id>
     <published>2021-05-20T07:10:30.000Z</published>
-    <updated>2021-10-15T04:26:18.609Z</updated>
+    <updated>2021-10-20T06:26:40.572Z</updated>
     
     
       
@@ -181,7 +207,7 @@
     <link href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/"/>
     <id>http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</id>
     <published>2021-04-25T01:10:20.000Z</published>
-    <updated>2021-10-18T02:30:33.879Z</updated>
+    <updated>2021-10-20T06:25:34.549Z</updated>
     
     
       
@@ -208,7 +234,7 @@
     <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
     <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
     <published>2021-04-01T01:10:20.000Z</published>
-    <updated>2021-10-18T01:44:27.935Z</updated>
+    <updated>2021-10-20T06:25:43.091Z</updated>
     
     
       
@@ -235,7 +261,7 @@
     <link href="http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/"/>
     <id>http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/</id>
     <published>2021-03-01T01:10:20.000Z</published>
-    <updated>2021-10-18T01:36:09.724Z</updated>
+    <updated>2021-10-20T06:26:33.340Z</updated>
     
     
       
@@ -262,7 +288,7 @@
     <link href="http://wumangeng.github.io/2021/02/25/jwt/"/>
     <id>http://wumangeng.github.io/2021/02/25/jwt/</id>
     <published>2021-02-25T01:10:20.000Z</published>
-    <updated>2021-10-15T04:02:33.356Z</updated>
+    <updated>2021-10-20T06:25:50.379Z</updated>
     
     
       
@@ -290,7 +316,7 @@
     <link href="http://wumangeng.github.io/2020/06/27/mybatisplus/"/>
     <id>http://wumangeng.github.io/2020/06/27/mybatisplus/</id>
     <published>2020-06-27T10:10:20.000Z</published>
-    <updated>2021-10-15T04:15:55.389Z</updated>
+    <updated>2021-10-20T06:26:07.279Z</updated>
     
     
       
@@ -316,7 +342,7 @@
     <link href="http://wumangeng.github.io/2020/06/25/mybatis/"/>
     <id>http://wumangeng.github.io/2020/06/25/mybatis/</id>
     <published>2020-06-25T10:10:20.000Z</published>
-    <updated>2021-10-15T04:13:01.362Z</updated>
+    <updated>2021-10-20T06:25:59.531Z</updated>
     
     
       

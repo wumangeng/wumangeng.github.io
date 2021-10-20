@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web, 山河远阔">
+    <meta name="keywords" content="死循环">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web | 山河远阔</title>
+    <title>for(;;)与while(true)的区别 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2196051762,325871609&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</h1>
+                    <h1 class="description center-align post-title">for(;;)与while(true)的区别</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +433,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/CentOS7/">
-                                <span class="chip bg-color">CentOS7</span>
-                            </a>
-                        
-                            <a href="/tags/go-fastdfs/">
-                                <span class="chip bg-color">go-fastdfs</span>
+                            <a href="/tags/%E5%BE%AA%E7%8E%AF/">
+                                <span class="chip bg-color">循环</span>
                             </a>
                         
                     </div>
@@ -449,8 +445,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/go-fastdfs/" class="post-category">
-                                go-fastdfs
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/" class="post-category">
+                                开发技巧
                             </a>
                         
                     </div>
@@ -471,7 +467,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-25
+                    2021-10-08
                 </div>
                 
 
@@ -495,59 +491,37 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1、安装go-fastdfs"><a href="#1、安装go-fastdfs" class="headerlink" title="1、安装go-fastdfs"></a>1、安装go-fastdfs</h3><h4 id="1-1-下载go-fastdfs相关文件并且授予执行权限"><a href="#1-1-下载go-fastdfs相关文件并且授予执行权限" class="headerlink" title="1.1 下载go-fastdfs相关文件并且授予执行权限"></a>1.1 下载go-fastdfs相关文件并且授予执行权限</h4><pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#创建文件夹</span>
-cd <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>
-mkdir go<span class="token operator">-</span>fastdfs
-mkdir go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web
-cd go<span class="token operator">-</span>fastdfs
+                <p>在开发过程中死循环通常有两种写法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 1、while的写法</span>
+  <span class="token keyword">while</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">&#125;</span>  
+ 
+<span class="token comment">// 2、 for(;;)的写法</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+  <span class="token punctuation">&#125;</span>
+    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">#如果无法连接github可以换成gitee </span>
-wget https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>releases<span class="token operator">/</span>download<span class="token operator">/</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>0<span class="token operator">/</span>fileserver
+<p>那么两者有何区别，为何在源码中多以<code>for(; ;)</code>形式居多？</p>
+<p>要搞清楚它们的区别从代码的角度来说他们的执行过程几乎是一模一样的，但是它们编译后的结果却差别巨大</p>
+<p>首先我们看一下while编译后的结果</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 编译前</span>
+<span class="token keyword">while</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//编译后</span>
+mov eax<span class="token punctuation">,</span> <span class="token number">1</span>
+test eax<span class="token punctuation">,</span> eax
+je foo<span class="token operator">+</span><span class="token number">23</span>h
+jmp foo<span class="token operator">+</span><span class="token number">18</span>h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-wget  https:<span class="token operator">/</span><span class="token operator">/</span>raw<span class="token punctuation">.</span>githubusercontent<span class="token punctuation">.</span>com<span class="token operator">/</span>sjqzhang<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">/</span>master<span class="token operator">/</span>control
+<p>再来看看for编译后的结果</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 编译前</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 编译后</span>
+jmp foo<span class="token operator">+</span><span class="token number">23</span>h<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">#下载完毕进行授权，否则无法执行</span>
-chmod 755 fileserver
-
-chmod 755 control
-
-<span class="token comment">#启动（看到running..即为成功，运行成功之后会生成一些文件 ll 可查看）</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span>
-
-<span class="token comment"># 放行服务器端口8080后使用如下指令访问</span>
-http:<span class="token operator">/</span><span class="token operator">/</span>你的ip:8080
-<span class="token comment">#出现如下页面即可</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://img-blog.csdnimg.cn/04a1ac263f4e4813bba05093a239a54e.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述"><strong>修改配置文件</strong><br>go-fastdfs的配置文件在 conf下的cfg.json文件里面 直接 vim conf/cfg.json 进入修改保存即可，配置文件全部有中文注释，白名单中添加本机ip,或者你想放行的ip即可<br><img src="https://img-blog.csdnimg.cn/62dd2b930d1f4ce98847b294d5f273ca.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBAY3YtbWFzdGVy,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center" alt="在这里插入图片描述">修改完毕保存重启即可</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#启动/停止/重启/查看状态/查看日志</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>control <span class="token function">start</span><span class="token punctuation">|</span>stop<span class="token punctuation">|</span>restart<span class="token punctuation">|</span>status<span class="token punctuation">|</span>tail<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="1-2-安装可视化工具go-fastdfs-web"><a href="#1-2-安装可视化工具go-fastdfs-web" class="headerlink" title="1.2 安装可视化工具go-fastdfs-web"></a>1.2 安装可视化工具go-fastdfs-web</h3><p><strong>注：可视化工具需java环境(jdk)未安装可参考以下教程进行安装</strong></p>
-<blockquote>
-<p>安装jdk 教程<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sxdcgaq8080/p/7492426.html">https://www.cnblogs.com/sxdcgaq8080/p/7492426.html</a></p>
-</blockquote>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token comment">#下载可视化资源包（.tar.gz）</span>
-https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>perfree<span class="token operator">/</span>go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">/</span>releases
-
-<span class="token comment">#下载完毕上传到go-fastdfs-web目录下解压</span>
-tar <span class="token operator">-</span>zxvf go<span class="token operator">-</span>fastdfs<span class="token operator">-</span>web<span class="token operator">-</span>v1<span class="token punctuation">.</span>3<span class="token punctuation">.</span>6<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz
-
-<span class="token comment">#进入go-fastdfs-web目录下 分配权限</span>
-chmod <span class="token operator">+</span>x goFastDfsWeb<span class="token punctuation">.</span>sh
-
-<span class="token comment">#运行</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span>
-
-<span class="token comment">#开放服务器8088端口 运行成功后</span>
-http:<span class="token operator">/</span><span class="token operator">/</span>ip:8088    <span class="token comment">#访问</span>
-
-<span class="token comment">#如果启动报  -bash: ./goFastDfsWeb.sh: /bin/bash^M: bad interpreter: No such file or directory</span>
-<span class="token comment">#解决方法：</span>
-vim goFastDfsWeb<span class="token punctuation">.</span>sh
-:<span class="token function">set</span> fileformat=unix
-<span class="token comment">#保存退出即可</span>
-
-<span class="token comment">#运行</span>
-<span class="token punctuation">.</span><span class="token operator">/</span>goFastDfsWeb<span class="token punctuation">.</span>sh <span class="token function">start</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>成功运行后按照界面文字说明注册即可(“注：连接的ip 要在go-fastdfs配置文件的白名单中”)</p>
+<p>通过两者分别编译后的结果对比可知，<code>for(; ;)</code>语句不仅指令少、不占用寄存器，还没有跳转判断指令，比<code>while(1)</code>好。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><code>for(; ;)</code>和<code>while(1)</code>两者在语法使用层面表现出完全一样的逻辑，但是两者的底层实现截然不同，相比之下<code>for(; ;)</code>比<code>while(1)</code>更为简洁。</p>
 
                 
             </div>
@@ -574,7 +548,7 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/">http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</a>
+                    <a href="http://wumangeng.github.io/2021/10/08/for-yu-while-true-qu-bie/">http://wumangeng.github.io/2021/10/08/for-yu-while-true-qu-bie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -612,12 +586,8 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/CentOS7/">
-                                    <span class="chip bg-color">CentOS7</span>
-                                </a>
-                            
-                                <a href="/tags/go-fastdfs/">
-                                    <span class="chip bg-color">go-fastdfs</span>
+                                <a href="/tags/%E5%BE%AA%E7%8E%AF/">
+                                    <span class="chip bg-color">循环</span>
                                 </a>
                             
                         </div>
@@ -789,45 +759,47 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-oss/">
+                <a href="/2021/10/08/for-yu-while-true-qu-bie/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
+                        <img src="https://img2.baidu.com/it/u=2196051762,325871609&fm=26&fmt=auto" class="responsive-img" alt="for(;;)与while(true)的区别">
                         
-                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
+                        <span class="card-title">for(;;)与while(true)的区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示oss在java服务端的使用方式。
+                            为什么源码中的死循环用for(;;)而不使用while呢？
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                    阿里云服务
+                            <a href="/categories/%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/" class="post-category">
+                                    开发技巧
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/oss/">
-                        <span class="chip bg-color">oss</span>
+                    <a href="/tags/%E5%BE%AA%E7%8E%AF/">
+                        <span class="chip bg-color">循环</span>
                     </a>
                     
                 </div>
@@ -841,30 +813,30 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/01/docker-an-zhuang-fu-wu/">
+                <a href="/2021/10/05/netty/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto" class="responsive-img" alt="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)">
+                        <img src="https://img2.baidu.com/it/u=2182871799,908266224&fm=26&fmt=auto" class="responsive-img" alt="Netty学习笔记">
                         
-                        <span class="card-title">docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</span>
+                        <span class="card-title">Netty学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将介绍在docker中安装mysql等服务
+                            尚硅谷Netty学习笔记整理。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/docker/" class="post-category">
-                                    docker
+                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    IO网络编程
                                 </a>
                             
                             
@@ -874,12 +846,12 @@ vim goFastDfsWeb<span class="token punctuation">.</span>sh
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/CentOS7/">
-                        <span class="chip bg-color">CentOS7</span>
+                    <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">IO网络编程</span>
                     </a>
                     
-                    <a href="/tags/docker/">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/Netty/">
+                        <span class="chip bg-color">Netty</span>
                     </a>
                     
                 </div>
