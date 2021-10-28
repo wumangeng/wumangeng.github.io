@@ -125,6 +125,33 @@
   </entry>
   
   <entry>
+    <title>线程池以及线程的异步编排使用</title>
+    <link href="http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/"/>
+    <id>http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/</id>
+    <published>2021-06-05T01:10:20.000Z</published>
+    <updated>2021-10-28T06:16:22.483Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;线程池&quot;&gt;&lt;a href=&quot;#线程池&quot; class=&quot;headerlink&quot; title=&quot;线程池&quot;&gt;&lt;/a&gt;线程池&lt;/h1&gt;&lt;h3 id=&quot;1、初始化线程的-4-种方式&quot;&gt;&lt;a href=&quot;#1、初始化线程的-4-种方式&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="多线程" scheme="http://wumangeng.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>基于java的生成大疆弓形航线算法实现</title>
     <link href="http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/"/>
     <id>http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/</id>
@@ -288,7 +315,7 @@
     <link href="http://wumangeng.github.io/2021/03/10/jdk8-xin-te-xing/"/>
     <id>http://wumangeng.github.io/2021/03/10/jdk8-xin-te-xing/</id>
     <published>2021-03-10T01:10:20.000Z</published>
-    <updated>2021-10-25T09:01:08.253Z</updated>
+    <updated>2021-10-27T01:50:47.408Z</updated>
     
     
       
