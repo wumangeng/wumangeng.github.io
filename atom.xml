@@ -129,14 +129,14 @@
     <link href="http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/"/>
     <id>http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/</id>
     <published>2021-07-05T01:10:20.000Z</published>
-    <updated>2021-11-01T09:22:18.905Z</updated>
+    <updated>2021-11-01T09:45:57.140Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;Java-Bean校验&quot;&gt;&lt;a href=&quot;#Java-Bean校验&quot; class=&quot;headerlink&quot; title=&quot;Java Bean校验&quot;&gt;&lt;/a&gt;Java Bean校验&lt;/h1&gt;&lt;h2 id=&quot;1-Valid-介绍&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;Java-Bean校验&quot;&gt;&lt;a href=&quot;#Java-Bean校验&quot; class=&quot;headerlink&quot; title=&quot;Java Bean校验&quot;&gt;&lt;/a&gt;Java Bean校验&lt;/h1&gt;&lt;h2 id=&quot;1、-Valid-介绍&quot;&gt;&lt;a</summary>
         
       
     
@@ -335,9 +335,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
     <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
   </entry>
   
