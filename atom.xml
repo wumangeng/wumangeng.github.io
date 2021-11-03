@@ -125,6 +125,33 @@
   </entry>
   
   <entry>
+    <title>Xxl-Job 2.3.0源码分析</title>
+    <link href="http://wumangeng.github.io/2021/08/05/xxl-job-xiang-mu-fen-xi/"/>
+    <id>http://wumangeng.github.io/2021/08/05/xxl-job-xiang-mu-fen-xi/</id>
+    <published>2021-08-05T01:10:20.000Z</published>
+    <updated>2021-11-03T06:50:34.964Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Xxl-Job源码分析&quot;&gt;&lt;a href=&quot;#Xxl-Job源码分析&quot; class=&quot;headerlink&quot; title=&quot;Xxl-Job源码分析&quot;&gt;&lt;/a&gt;Xxl-Job源码分析&lt;/h1&gt;&lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="xxl-job" scheme="http://wumangeng.github.io/categories/xxl-job/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="xxl-job" scheme="http://wumangeng.github.io/tags/xxl-job/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java Bean校验</title>
     <link href="http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/"/>
     <id>http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/</id>
@@ -152,6 +179,27 @@
     <category term="JSR303" scheme="http://wumangeng.github.io/tags/JSR303/"/>
     
     <category term="java bean" scheme="http://wumangeng.github.io/tags/java-bean/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring IOC循环依赖解决方案</title>
+    <link href="http://wumangeng.github.io/2021/06/15/spring-ioc-xun-huan-yi-lai-jie-jue-fang-an/"/>
+    <id>http://wumangeng.github.io/2021/06/15/spring-ioc-xun-huan-yi-lai-jie-jue-fang-an/</id>
+    <published>2021-06-15T01:10:20.000Z</published>
+    <updated>2021-11-02T10:18:37.404Z</updated>
+    
+    
+    
+    
+    <category term="IOC" scheme="http://wumangeng.github.io/categories/IOC/"/>
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
+    
+    <category term="IOC" scheme="http://wumangeng.github.io/tags/IOC/"/>
+    
+    <category term="循环" scheme="http://wumangeng.github.io/tags/%E5%BE%AA%E7%8E%AF/"/>
     
   </entry>
   
