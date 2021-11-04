@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-10-20T09:01:14.175Z</updated>
+  <updated>2021-11-03T07:05:44.466Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Xxl-Job 2.3.0源码分析</title>
+    <link href="http://wumangeng.github.io/2021/10/18/xxl-job-xiang-mu-fen-xi/"/>
+    <id>http://wumangeng.github.io/2021/10/18/xxl-job-xiang-mu-fen-xi/</id>
+    <published>2021-10-18T01:10:20.000Z</published>
+    <updated>2021-11-03T07:05:44.466Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Xxl-Job源码分析&quot;&gt;&lt;a href=&quot;#Xxl-Job源码分析&quot; class=&quot;headerlink&quot; title=&quot;Xxl-Job源码分析&quot;&gt;&lt;/a&gt;Xxl-Job源码分析&lt;/h1&gt;&lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="xxl-job" scheme="http://wumangeng.github.io/categories/xxl-job/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="xxl-job" scheme="http://wumangeng.github.io/tags/xxl-job/"/>
+    
+  </entry>
   
   <entry>
     <title>for(;;)与while(true)的区别</title>
@@ -121,33 +148,6 @@
     <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Xxl-Job 2.3.0源码分析</title>
-    <link href="http://wumangeng.github.io/2021/08/05/xxl-job-xiang-mu-fen-xi/"/>
-    <id>http://wumangeng.github.io/2021/08/05/xxl-job-xiang-mu-fen-xi/</id>
-    <published>2021-08-05T01:10:20.000Z</published>
-    <updated>2021-11-03T06:50:34.964Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Xxl-Job源码分析&quot;&gt;&lt;a href=&quot;#Xxl-Job源码分析&quot; class=&quot;headerlink&quot; title=&quot;Xxl-Job源码分析&quot;&gt;&lt;/a&gt;Xxl-Job源码分析&lt;/h1&gt;&lt;h2 id=&quot;导读&quot;&gt;&lt;a href=&quot;#导读&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="xxl-job" scheme="http://wumangeng.github.io/categories/xxl-job/"/>
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-    <category term="xxl-job" scheme="http://wumangeng.github.io/tags/xxl-job/"/>
     
   </entry>
   
