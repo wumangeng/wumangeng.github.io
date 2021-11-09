@@ -74,7 +74,7 @@
     <link href="http://wumangeng.github.io/2021/10/05/netty/"/>
     <id>http://wumangeng.github.io/2021/10/05/netty/</id>
     <published>2021-10-05T07:10:30.000Z</published>
-    <updated>2021-10-20T06:26:18.858Z</updated>
+    <updated>2021-11-05T01:57:34.874Z</updated>
     
     
       
@@ -152,11 +152,36 @@
   </entry>
   
   <entry>
+    <title>5个经典的sql问题</title>
+    <link href="http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/"/>
+    <id>http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/</id>
+    <published>2021-08-11T01:10:20.000Z</published>
+    <updated>2021-11-09T06:46:05.927Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、每门课程问题&quot;&gt;&lt;a href=&quot;#一、每门课程问题&quot; class=&quot;headerlink&quot; title=&quot;一、每门课程问题&quot;&gt;&lt;/a&gt;一、每门课程问题&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;用一条 SQL 语句查询 学生表每门课都大于 80</summary>
+        
+      
+    
+    
+    
+    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java Bean校验</title>
     <link href="http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/"/>
     <id>http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/</id>
     <published>2021-07-05T01:10:20.000Z</published>
-    <updated>2021-11-01T09:51:42.315Z</updated>
+    <updated>2021-11-05T08:11:11.929Z</updated>
     
     
       
@@ -179,27 +204,6 @@
     <category term="JSR303" scheme="http://wumangeng.github.io/tags/JSR303/"/>
     
     <category term="java bean" scheme="http://wumangeng.github.io/tags/java-bean/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring IOC循环依赖解决方案</title>
-    <link href="http://wumangeng.github.io/2021/06/15/spring-ioc-xun-huan-yi-lai-jie-jue-fang-an/"/>
-    <id>http://wumangeng.github.io/2021/06/15/spring-ioc-xun-huan-yi-lai-jie-jue-fang-an/</id>
-    <published>2021-06-15T01:10:20.000Z</published>
-    <updated>2021-11-02T10:18:37.404Z</updated>
-    
-    
-    
-    
-    <category term="IOC" scheme="http://wumangeng.github.io/categories/IOC/"/>
-    
-    
-    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
-    
-    <category term="IOC" scheme="http://wumangeng.github.io/tags/IOC/"/>
-    
-    <category term="循环" scheme="http://wumangeng.github.io/tags/%E5%BE%AA%E7%8E%AF/"/>
     
   </entry>
   

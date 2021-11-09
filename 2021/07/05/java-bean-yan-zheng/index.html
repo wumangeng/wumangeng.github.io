@@ -563,6 +563,12 @@
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>6.0.17.Final<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>springboot项目则引入</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span> 
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-validation<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>这里不需要引入 javax.validation包，hibernate-validator框架中已经有引入了。<br><img src="https://img-blog.csdnimg.cn/20190917174053365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mzc0MDIyMw==,size_1,color_FFFFFF,t_70"><br>如果使用springboot，本文使用的是 2.1.7.RELEASE 版本，其中 spring-boot-starter-web 包中已经引入了 hibernate-validator 6.0.17.RELEASE了，不需要我们手动添加。</p>
 <p>如果使用的非maven项目，需要下载对应的jar引入到项目中。</p>
 <h4 id="2-1-2-SpringMVC配置"><a href="#2-1-2-SpringMVC配置" class="headerlink" title="2.1.2 SpringMVC配置"></a>2.1.2 SpringMVC配置</h4><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--配置中需要注意的地方：
@@ -1186,30 +1192,30 @@ validationMessageSource通过set方法注入,然后转换为MessageInterpolator�
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/10/01/bio/">
+                <a href="/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto" class="responsive-img" alt="BIO">
+                        <img src="https://img2.baidu.com/it/u=4085049135,313268802&fm=26&fmt=auto" class="responsive-img" alt="5个经典的sql问题">
                         
-                        <span class="card-title">BIO</span>
+                        <span class="card-title">5个经典的sql问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将简述BIO的原理和使用。
+                            课程问题，topN，连续，行转列，留存问题
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-01
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    IO网络编程
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
                                 </a>
                             
                             
@@ -1219,12 +1225,8 @@ validationMessageSource通过set方法注入,然后转换为MessageInterpolator�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
-                        <span class="chip bg-color">IO网络编程</span>
-                    </a>
-                    
-                    <a href="/tags/BIO/">
-                        <span class="chip bg-color">BIO</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>
@@ -1238,30 +1240,30 @@ validationMessageSource通过set方法注入,然后转换为MessageInterpolator�
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/06/15/spring-ioc-xun-huan-yi-lai-jie-jue-fang-an/">
+                <a href="/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=1353527048,631496601&fm=26&fmt=auto" class="responsive-img" alt="Spring IOC循环依赖解决方案">
+                        <img src="https://img0.baidu.com/it/u=3761347439,390631203&fm=26&fmt=auto" class="responsive-img" alt="线程池以及线程的异步编排使用">
                         
-                        <span class="card-title">Spring IOC循环依赖解决方案</span>
+                        <span class="card-title">线程池以及线程的异步编排使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本篇文章将会从源码深入解析Spring是如何解决循环依赖
+                            本文将讲述线程池在业务中的使用姿势
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/IOC/" class="post-category">
-                                    IOC
+                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                    多线程
                                 </a>
                             
                             
@@ -1271,16 +1273,12 @@ validationMessageSource通过set方法注入,然后转换为MessageInterpolator�
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
                     </a>
                     
-                    <a href="/tags/IOC/">
-                        <span class="chip bg-color">IOC</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%BE%AA%E7%8E%AF/">
-                        <span class="chip bg-color">循环</span>
+                    <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                        <span class="chip bg-color">多线程</span>
                     </a>
                     
                 </div>

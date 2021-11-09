@@ -1,0 +1,1614 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="mysql">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>5个经典的sql问题 | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=4085049135,313268802&fm=26&fmt=auto')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">5个经典的sql问题</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/mysql/" class="post-category">
+                                mysql
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-08-11
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、每门课程问题"><a href="#一、每门课程问题" class="headerlink" title="一、每门课程问题"></a>一、每门课程问题</h2><p><strong>用一条 SQL 语句查询 学生表每门课都大于 80 分的学生姓名。</strong></p>
+<h3 id="解决办法一：-having"><a href="#解决办法一：-having" class="headerlink" title="解决办法一： having"></a>解决办法一： having</h3><p>思路：如果最小的课程都大于80分，那他所有的课程分数，肯定都大于80分！</p>
+<p>代码实现</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> name
+<span class="token keyword">FROM</span> student
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> name
+<span class="token keyword">HAVING</span> <span class="token function">MIN</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span><span class="token operator">></span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="解决办法二：not-in"><a href="#解决办法二：not-in" class="headerlink" title="解决办法二：not in"></a>解决办法二：not in</h3><p>可以用反向思维，先查询出表里面有小于 80 分的 name,然后用 not in 去除掉</p>
+<p>代码实现</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> name
+<span class="token keyword">FROM</span> student
+<span class="token keyword">WHERE</span> name <span class="token operator">NOT</span> <span class="token operator">IN</span>
+    <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> name
+    <span class="token keyword">FROM</span> student
+    <span class="token keyword">WHERE</span> score <span class="token operator">&lt;=</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="二、topN-问题"><a href="#二、topN-问题" class="headerlink" title="二、topN 问题"></a>二、topN 问题</h2><p><strong>准备：</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">create</span> <span class="token keyword">table</span> <span class="token punctuation">`</span>test1<span class="token punctuation">`</span> <span class="token punctuation">(</span>
+  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token operator">not</span> <span class="token boolean">null</span> <span class="token keyword">auto_increment</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>name<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>course<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>score<span class="token punctuation">`</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token boolean">null</span><span class="token punctuation">,</span>
+  <span class="token keyword">primary</span> <span class="token keyword">key</span> <span class="token punctuation">(</span><span class="token punctuation">`</span>id<span class="token punctuation">`</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span> <span class="token keyword">engine</span><span class="token operator">=</span><span class="token keyword">innodb</span> <span class="token keyword">auto_increment</span><span class="token operator">=</span><span class="token number">10</span> <span class="token keyword">default</span> <span class="token keyword">charset</span><span class="token operator">=</span>utf8
+
+
+<span class="token keyword">insert</span> <span class="token keyword">into</span> test1<span class="token punctuation">(</span>name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score<span class="token punctuation">)</span>
+<span class="token keyword">values</span> 
+<span class="token punctuation">(</span><span class="token string">'张三'</span><span class="token punctuation">,</span><span class="token string">'语文'</span><span class="token punctuation">,</span><span class="token number">80</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'李四'</span><span class="token punctuation">,</span><span class="token string">'语文'</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'王五'</span><span class="token punctuation">,</span><span class="token string">'语文'</span><span class="token punctuation">,</span><span class="token number">93</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'张三'</span><span class="token punctuation">,</span><span class="token string">'数学'</span><span class="token punctuation">,</span><span class="token number">77</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'李四'</span><span class="token punctuation">,</span><span class="token string">'数学'</span><span class="token punctuation">,</span><span class="token number">68</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'王五'</span><span class="token punctuation">,</span><span class="token string">'数学'</span><span class="token punctuation">,</span><span class="token number">99</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'张三'</span><span class="token punctuation">,</span><span class="token string">'英语'</span><span class="token punctuation">,</span><span class="token number">90</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'李四'</span><span class="token punctuation">,</span><span class="token string">'英语'</span><span class="token punctuation">,</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token string">'王五'</span><span class="token punctuation">,</span><span class="token string">'英语'</span><span class="token punctuation">,</span><span class="token number">89</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="TOP-1"><a href="#TOP-1" class="headerlink" title="TOP 1"></a>TOP 1</h3><p> <strong>需求：查询每门课程分数最高的学生以及成绩</strong></p>
+<p> 实现方法：可以通过自连接、子查询来实现。</p>
+<h4 id="a、自连接实现"><a href="#a、自连接实现" class="headerlink" title="a、自连接实现"></a>a、自连接实现</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span>name<span class="token punctuation">,</span>a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score 
+<span class="token keyword">from</span> test1 a  <span class="token keyword">join</span> <span class="token punctuation">(</span><span class="token keyword">select</span> course<span class="token punctuation">,</span><span class="token function">max</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span> score <span class="token keyword">from</span> test1 <span class="token keyword">group</span> <span class="token keyword">by</span> course<span class="token punctuation">)</span> b  
+<span class="token keyword">on</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>b<span class="token punctuation">.</span>course <span class="token operator">and</span> a<span class="token punctuation">.</span>score<span class="token operator">=</span>b<span class="token punctuation">.</span>score<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109111018177.png" alt="image-20211109111018177"></p>
+<h4 id="b、子查询实现"><a href="#b、子查询实现" class="headerlink" title="b、子查询实现"></a>b、子查询实现</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score 
+<span class="token keyword">from</span> test1 a  
+<span class="token keyword">where</span> score<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span> <span class="token keyword">from</span> test1 <span class="token keyword">where</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>test1<span class="token punctuation">.</span>course<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score 
+<span class="token keyword">from</span> test1 a 
+<span class="token keyword">where</span> <span class="token operator">not</span> <span class="token keyword">exists</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token number">1</span> <span class="token keyword">from</span> test1 <span class="token keyword">where</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>test1<span class="token punctuation">.</span>course <span class="token operator">and</span> a<span class="token punctuation">.</span>score <span class="token operator">&lt;</span> test1<span class="token punctuation">.</span>score<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="TOP-N"><a href="#TOP-N" class="headerlink" title="TOP N"></a>TOP N</h3><p> <strong>需求：查询每门课程前两名的学生以及成绩</strong></p>
+<p> 实现方式：使用union all、自身左连接、子查询、用户变量等方式实现</p>
+<h4 id="a、使用union-all实现"><a href="#a、使用union-all实现" class="headerlink" title="a、使用union all实现"></a>a、使用union all实现</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token punctuation">(</span><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span><span class="token string">'语文'</span> <span class="token keyword">order</span> <span class="token keyword">by</span> score <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">union</span> <span class="token keyword">all</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span><span class="token string">'数学'</span> <span class="token keyword">order</span> <span class="token keyword">by</span> score <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">union</span> <span class="token keyword">all</span>
+<span class="token punctuation">(</span><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span><span class="token string">'英语'</span> <span class="token keyword">order</span> <span class="token keyword">by</span> score <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> 执行效果如下</p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105605964-20784068.png" alt="img"></p>
+<h4 id="b、使用自身左连接"><a href="#b、使用自身左连接" class="headerlink" title="b、使用自身左连接"></a>b、使用自身左连接</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span>name<span class="token punctuation">,</span>a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score 
+<span class="token keyword">from</span> test1 a <span class="token keyword">left</span> <span class="token keyword">join</span> test1 b <span class="token keyword">on</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>b<span class="token punctuation">.</span>course <span class="token operator">and</span> a<span class="token punctuation">.</span>score<span class="token operator">&lt;</span>b<span class="token punctuation">.</span>score
+<span class="token keyword">group</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>name<span class="token punctuation">,</span>a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score
+<span class="token keyword">having</span> <span class="token function">count</span><span class="token punctuation">(</span>b<span class="token punctuation">.</span>id<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token number">2</span>
+<span class="token keyword">order</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score <span class="token keyword">desc</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> 执行效果如下</p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105642433-1988260519.png" alt="img"></p>
+<h4 id="c、使用子查询"><a href="#c、使用子查询" class="headerlink" title="c、使用子查询"></a>c、使用子查询</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span>
+<span class="token keyword">from</span> test1 a
+<span class="token keyword">where</span> <span class="token number">2</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span>a<span class="token punctuation">.</span>course <span class="token operator">and</span> score<span class="token operator">></span>a<span class="token punctuation">.</span>score<span class="token punctuation">)</span>
+<span class="token keyword">order</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score <span class="token keyword">desc</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> 执行效果如下</p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105757355-1691491211.png" alt="img"></p>
+<h4 id="d、使用用户变量"><a href="#d、使用用户变量" class="headerlink" title="d、使用用户变量"></a>d、使用用户变量</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token variable">@course</span> :<span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
+
+<span class="token keyword">select</span> name<span class="token punctuation">,</span> course<span class="token punctuation">,</span> score
+<span class="token keyword">from</span> <span class="token punctuation">(</span>
+<span class="token keyword">select</span> name<span class="token punctuation">,</span> course<span class="token punctuation">,</span> score<span class="token punctuation">,</span>
+<span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">@course</span> <span class="token operator">=</span> course<span class="token punctuation">,</span> <span class="token variable">@num</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">as</span> row_number<span class="token punctuation">,</span>
+<span class="token variable">@course</span> :<span class="token operator">=</span> course <span class="token keyword">as</span> <span class="token keyword">dummy</span>
+<span class="token keyword">from</span> test1
+<span class="token keyword">order</span> <span class="token keyword">by</span> course<span class="token punctuation">,</span> score <span class="token keyword">desc</span>
+<span class="token punctuation">)</span> <span class="token keyword">as</span> x <span class="token keyword">where</span> x<span class="token punctuation">.</span>row_number <span class="token operator">&lt;=</span> <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="三、连续问题（7-天连续登陆）"><a href="#三、连续问题（7-天连续登陆）" class="headerlink" title="三、连续问题（7 天连续登陆）"></a>三、连续问题（7 天连续登陆）</h2><p><strong>准备：</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SET</span> NAMES utf8mb4<span class="token punctuation">;</span>
+<span class="token keyword">SET</span> FOREIGN_KEY_CHECKS <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">-- ----------------------------</span>
+<span class="token comment">-- Table structure for login_log</span>
+<span class="token comment">-- ----------------------------</span>
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span>  <span class="token punctuation">(</span>
+  <span class="token punctuation">`</span>id<span class="token punctuation">`</span> <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">AUTO_INCREMENT</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>stu_name<span class="token punctuation">`</span> <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8 <span class="token keyword">COLLATE</span> utf8_general_ci <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  <span class="token punctuation">`</span>createtime<span class="token punctuation">`</span> <span class="token keyword">datetime</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span><span class="token punctuation">`</span>id<span class="token punctuation">`</span><span class="token punctuation">)</span> <span class="token keyword">USING</span> <span class="token keyword">BTREE</span>
+<span class="token punctuation">)</span> <span class="token keyword">ENGINE</span> <span class="token operator">=</span> <span class="token keyword">InnoDB</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token operator">=</span> <span class="token number">20</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> <span class="token operator">=</span> utf8 <span class="token keyword">COLLATE</span> <span class="token operator">=</span> utf8_general_ci ROW_FORMAT <span class="token operator">=</span> Dynamic<span class="token punctuation">;</span>
+
+<span class="token comment">-- ----------------------------</span>
+<span class="token comment">-- Records of login_log</span>
+<span class="token comment">-- ----------------------------</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'2021-03-07 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'2021-03-03 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'2021-03-05 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'zhangsan'</span><span class="token punctuation">,</span> <span class="token string">'2021-03-01 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-04 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-03 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-02 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-01 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-05 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-06 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-07 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-08 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">13</span><span class="token punctuation">,</span> <span class="token string">'xiaowang'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-05 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token string">'xiaoli'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-06 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token string">'xiaoli'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-07 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token string">'xiaozhao'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-08 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">17</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-05 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">18</span><span class="token punctuation">,</span> <span class="token string">'xiaozhao'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-06 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> <span class="token punctuation">`</span>login_log<span class="token punctuation">`</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">19</span><span class="token punctuation">,</span> <span class="token string">'lisi'</span><span class="token punctuation">,</span> <span class="token string">'2021-02-07 09:58:29.438123'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">SET</span> FOREIGN_KEY_CHECKS <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>实现思路:</strong></p>
+<p>1、因为每天用户登录次数可能不止一次，所以需要先将用户每天的登录日期去重。</p>
+<p>2、再用row_number() over(partition by _ order by _)函数将用户id分组，按照登陆时间进行排序。</p>
+<p>3、计算登录日期减去第二步骤得到的结果值，用户连续登陆情况下，每次相减的结果都相同。</p>
+<p>4、按照id和日期分组并求和，筛选大于等于7的即为连续7天登陆的用户。</p>
+<p><strong>代码实现</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">-- 8.0版本：</span>
+<span class="token comment">-- 3 按照stu_name和日期分组并统计人数，筛选大于等于7的即为连续7天登陆的用户</span>
+<span class="token keyword">select</span>  stu_name<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> num <span class="token keyword">from</span> 
+<span class="token punctuation">(</span>
+    <span class="token comment">-- 2 计算登录日期,登录时间-用row_number() over(partition by _ order by _)函数将用户id分组的结果值</span>
+    <span class="token keyword">select</span> stu_name<span class="token punctuation">,</span><span class="token keyword">date</span><span class="token punctuation">(</span>createtime<span class="token punctuation">)</span><span class="token operator">-</span>row_number<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">over</span><span class="token punctuation">(</span><span class="token keyword">partition</span> <span class="token keyword">by</span> stu_name <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> createtime<span class="token punctuation">)</span> num <span class="token keyword">from</span> 
+    <span class="token punctuation">(</span>
+    <span class="token comment">-- 1、去重，每天多次登录，只保留一条</span>
+    <span class="token keyword">select</span> <span class="token keyword">distinct</span> stu_name<span class="token punctuation">,</span>DATE_FORMAT<span class="token punctuation">(</span>createtime<span class="token punctuation">,</span><span class="token string">'%Y-%m-%d'</span><span class="token punctuation">)</span>createtime  <span class="token keyword">from</span> login_log
+    <span class="token punctuation">)</span> t1
+<span class="token punctuation">)</span>t2 <span class="token keyword">GROUP</span> <span class="token keyword">BY</span>  stu_name  <span class="token keyword">HAVING</span><span class="token punctuation">(</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">7</span>
+
+
+<span class="token comment">-- 5.7版本：</span>
+<span class="token comment">-- 声明用户变量，记录行号和登录用户名</span>
+<span class="token keyword">set</span> <span class="token variable">@row_number</span>:<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token variable">@customer_no</span>:<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span>
+<span class="token comment">-- 3 如果连续登录，date(createtime)-num 结果会相等</span>
+<span class="token keyword">select</span>  stu_name<span class="token punctuation">,</span><span class="token function">count</span><span class="token punctuation">(</span> <span class="token keyword">date</span><span class="token punctuation">(</span>createtime<span class="token punctuation">)</span><span class="token operator">-</span>num <span class="token punctuation">)</span><span class="token keyword">as</span> num <span class="token keyword">from</span> 
+<span class="token punctuation">(</span>
+   <span class="token comment">-- 2 记录行号;</span>
+   <span class="token keyword">select</span>    <span class="token variable">@row_number</span>:<span class="token operator">=</span>
+            <span class="token keyword">case</span> 
+                <span class="token keyword">when</span> <span class="token variable">@customer_no</span><span class="token operator">=</span>l1<span class="token punctuation">.</span>stu_name <span class="token keyword">then</span> <span class="token variable">@row_number</span><span class="token operator">+</span><span class="token number">1</span>
+                <span class="token keyword">else</span> <span class="token number">1</span>
+            <span class="token keyword">end</span> <span class="token keyword">as</span> num<span class="token punctuation">,</span>
+      <span class="token variable">@customer_no</span>:<span class="token operator">=</span> l1<span class="token punctuation">.</span>stu_name  stuName
+   <span class="token punctuation">,</span>stu_name<span class="token punctuation">,</span>DATE_FORMAT<span class="token punctuation">(</span>createtime<span class="token punctuation">,</span><span class="token string">'%Y-%m-%d'</span><span class="token punctuation">)</span> createtime <span class="token keyword">from</span> 
+    <span class="token punctuation">(</span>
+      <span class="token comment">-- 1 去除同一天登录多次</span>
+      <span class="token keyword">select</span> <span class="token keyword">DISTINCT</span> stu_name<span class="token punctuation">,</span>DATE_FORMAT<span class="token punctuation">(</span>createtime<span class="token punctuation">,</span><span class="token string">'%Y-%m-%d'</span><span class="token punctuation">)</span> createtime <span class="token keyword">from</span> login_log  <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> stu_name<span class="token punctuation">,</span>createtime
+    <span class="token punctuation">)</span> l1
+  
+<span class="token punctuation">)</span> l2 <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> l2<span class="token punctuation">.</span>stu_name <span class="token keyword">HAVING</span> num<span class="token operator">></span><span class="token number">7</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="四、行转列问题"><a href="#四、行转列问题" class="headerlink" title="四、行转列问题"></a>四、行转列问题</h2><p>SQL行转列、列转行这个主题还是比较常见的，行转列主要适用于对数据作聚合统计，如统计某类目的商品在某个时间区间的销售情况。列转行问题同样也很常见。</p>
+<p>行转列，就是在原来的数据集上减少行数，增加列的数量。具体是什么情况，大家请往下看。</p>
+<p>这里有一张学生成绩表，注意看，小老王 2020 年的成绩缺失了。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">name              grade  point   
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+小老王                <span class="token number">2019</span>  <span class="token number">3.6</span>     
+小老王                <span class="token number">2018</span>  <span class="token number">4.3</span>     
+玛丽莲·梦露           <span class="token number">2018</span>  <span class="token number">3.9</span>     
+玛丽莲·梦露           <span class="token number">2019</span>  <span class="token number">4.2</span>     
+玛丽莲·梦露           <span class="token number">2020</span>  <span class="token number">4.4</span>     
+蒜你牛                <span class="token number">2020</span>  <span class="token number">4.6</span>     
+蒜你牛                <span class="token number">2018</span>  <span class="token number">4.0</span>     
+蒜你牛                <span class="token number">2019</span>  <span class="token number">4.3</span>      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接看表的数据不能很直观地了解在某个学年里每个学生的成绩，我们希望把每个学年拎出来作为列，就像下面这样子。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">name             <span class="token number">2018</span>    <span class="token number">2019</span>    <span class="token number">2020</span>    
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+小老王              <span class="token number">4.3</span>     <span class="token number">3.6</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+玛丽莲梦露          <span class="token number">3.9</span>     <span class="token number">4.2</span>     <span class="token number">4.4</span>     
+小李子              <span class="token number">4.0</span>     <span class="token number">4.3</span>     <span class="token number">4.6</span>     <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>怎么拎出这几个列的数据呢？可以先试试用 <code>case when</code> 。把学年作为过滤的条件，比如过滤条件是 2018 的时候，只有属于该年度的成绩才能放到 <code>2018</code> 的列中。</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+  NAME<span class="token punctuation">,</span>
+  <span class="token keyword">CASE</span>
+    <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2018</span>
+    <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+  <span class="token keyword">END</span> <span class="token keyword">AS</span> <span class="token string">'2018'</span><span class="token punctuation">,</span>
+  <span class="token keyword">CASE</span>
+    <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2019</span>
+    <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+  <span class="token keyword">END</span> <span class="token keyword">AS</span> <span class="token string">'2019'</span><span class="token punctuation">,</span>
+  <span class="token keyword">CASE</span>
+    <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2020</span>
+    <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+  <span class="token keyword">END</span> <span class="token keyword">AS</span> <span class="token string">'2020'</span>
+<span class="token keyword">FROM</span>
+  t<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上面的 SQL 执行之后的结果如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">name             <span class="token number">2018</span>    <span class="token number">2019</span>    <span class="token number">2020</span>    
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>  <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token function">小老王</span>              <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token number">3.6</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+小老王              <span class="token number">4.3</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+玛丽莲梦露          <span class="token number">3.9</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+<span class="token function">玛丽莲梦露</span>          <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token number">4.2</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+<span class="token function">玛丽莲梦露</span>          <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token number">4.4</span>     
+<span class="token function">小李子</span>              <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token number">4.6</span>     
+小李子              <span class="token number">4.0</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  
+<span class="token function">小李子</span>              <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token number">4.3</span>     <span class="token punctuation">(</span><span class="token constant">NULL</span><span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个结果和我们想要的结果有点接近了，只是每个学生还出现在多行数据中，每个学生应该只对应一行数据才合理。</p>
+<p>把多行的数据聚合成一行可以使用聚合函数，<code>max()</code>、<code>min()</code>、<code>sum()</code> 在这里都可以使用。因为我们要看到的是每个学生的成绩，所以要将 <code>name</code> 字段作为分组字段。完整的 SQL 如下：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+  NAME<span class="token punctuation">,</span>
+  <span class="token function">MAX</span><span class="token punctuation">(</span>
+    <span class="token keyword">CASE</span>
+      <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2018</span>
+      <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+    <span class="token keyword">END</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'2018'</span><span class="token punctuation">,</span>
+  <span class="token function">MAX</span><span class="token punctuation">(</span>
+    <span class="token keyword">CASE</span>
+      <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2019</span>
+      <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+    <span class="token keyword">END</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'2019'</span><span class="token punctuation">,</span>
+  <span class="token function">MAX</span><span class="token punctuation">(</span>
+    <span class="token keyword">CASE</span>
+      <span class="token keyword">WHEN</span> grade <span class="token operator">=</span> <span class="token number">2020</span>
+      <span class="token keyword">THEN</span> <span class="token keyword">POINT</span>
+    <span class="token keyword">END</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token string">'2020'</span>
+<span class="token keyword">FROM</span>
+  t
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> NAME<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>写行转列（不包括动态行转列）不难，关键得知道分析哪些字段要作为分组的依据，哪个字段将拆分成多个列。然后，套上下面这个模板就可以实现功能了。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">SELECT</span> 
+  分组字段<span class="token number">1</span><span class="token punctuation">,</span>
+  分组字段<span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span> 分组字段n <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token constant">MAX</span><span class="token punctuation">(</span>
+    <span class="token constant">CASE</span>
+      <span class="token constant">WHEN</span> 条件<span class="token number">1</span>成立 
+      <span class="token constant">THEN</span> 数值对应的字段 
+    <span class="token constant">END</span><span class="token punctuation">)</span> <span class="token constant">AS</span> <span class="token string">'条件1的列名'</span><span class="token punctuation">,</span>
+  <span class="token constant">MAX</span><span class="token punctuation">(</span>
+    <span class="token constant">CASE</span>
+      <span class="token constant">WHEN</span> 条件<span class="token number">2</span>成立 
+      <span class="token constant">THEN</span> 数值对应的字段 
+    <span class="token constant">END</span><span class="token punctuation">)</span> <span class="token constant">AS</span> <span class="token string">'条件2的列名'</span><span class="token punctuation">,</span>
+  <span class="token constant">MAX</span><span class="token punctuation">(</span>条件判断n<span class="token punctuation">)</span> <span class="token constant">AS</span> <span class="token string">'条件n的列名'</span> 
+<span class="token constant">FROM</span>
+  表 
+<span class="token constant">GROUP</span> <span class="token constant">BY</span> 分组字段<span class="token number">1</span><span class="token punctuation">,</span>
+  分组字段<span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token punctuation">[</span> 分组字段n <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="五、留存问题"><a href="#五、留存问题" class="headerlink" title="五、留存问题"></a>五、留存问题</h2><p>APP分析中经常用到AARRR模型（海盗模型）用来分析APP的现状，其中一个重要节点就是提高留存（Acquisition），而留存率这个指标在这个阶段可以说是核心指标也不为过。那如何用SQL计算留存率呢？</p>
+<p>留存率指标中，通常需要关注次日留存、3日留存、7日留存和月留存。对新增用户而言，需要关注更细颗粒度的数据，也就是7日内每天的留存率。</p>
+<p><strong>留存率计算方法</strong></p>
+<p>假如今天新增了100名用户，第二天登陆了50名，则次日留存率为50/100=50%，第三天登录了30名，则第二日留存率为30/100=30%,以此类推。</p>
+<p><strong>用SQL的计算思路</strong></p>
+<ol>
+<li>用SQL调取出user_id和用户login_time的表，获得新增用户登录时间表。</li>
+<li>根据user_id和login_time，增加一列first_day，此列存着每个用户最早登录时间。</li>
+<li>有了最早登录时间和所有的登录时间，再增加一列by_day，这一列是用login_time - first_day ，得到0，1，2，3，4，5……，这就得到了某一天登录离第一次登录有多长时间。</li>
+</ol>
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-d9d12d9065edbcb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/241/format/webp" alt="img"></p>
+<p>获得一个这样的表</p>
+<ul>
+<li><p>然后从表中提取数据，找到first_day对应的with_first列中0有多少个，1有多少个，一直到7以上。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-8cccde6df41d6a0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/409/format/webp" alt="img"></p>
+<p>最后获得这个表</p>
+</li>
+<li><p>根据此表，就很容易计算出每天引流的留存率。</p>
+</li>
+</ul>
+<p><strong>实际操作</strong></p>
+<p>数据：是我用excel随便模拟的数据，与真实情况不符。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-f38c9be9db18b03d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/137/format/webp" alt="img"></p>
+<p>模拟数据</p>
+<p>数据库：MySQL</p>
+<p><strong>步骤一：从数据库中提取出user_id和login_time并排序</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> 
+    user_id<span class="token punctuation">,</span>
+    str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+<span class="token keyword">from</span> user_info
+<span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-93318c827fbaa232.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/118/format/webp" alt="img"></p>
+<p>获得数据</p>
+<p><strong>步骤二：增加一列first_day，存储每个用户ID最早登录时间</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+    b<span class="token punctuation">.</span>user_id<span class="token punctuation">,</span>
+    b<span class="token punctuation">.</span>login_time<span class="token punctuation">,</span>
+    c<span class="token punctuation">.</span>first_day
+<span class="token keyword">FROM</span> 
+    <span class="token punctuation">(</span><span class="token keyword">select</span> 
+        user_id<span class="token punctuation">,</span>
+        str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+    <span class="token keyword">from</span> user_info
+    <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> b
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>
+    <span class="token punctuation">(</span><span class="token keyword">SELECT</span>       <span class="token comment">---找到user_id对应的最早登录时间，然后匹配带登录时间的user_id</span>
+        user_id<span class="token punctuation">,</span>
+        <span class="token function">min</span><span class="token punctuation">(</span>login_time<span class="token punctuation">)</span> first_day
+    <span class="token keyword">FROM</span> 
+       <span class="token punctuation">(</span><span class="token keyword">select</span> 
+            user_id<span class="token punctuation">,</span>
+            str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+        <span class="token keyword">from</span> user_info
+        <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> a
+    <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">)</span> c
+<span class="token keyword">on</span> b<span class="token punctuation">.</span>user_id <span class="token operator">=</span> c<span class="token punctuation">.</span>user_id
+<span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-05e10e8e726bbc0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/182/format/webp" alt="img"></p>
+<p>得到first_day列</p>
+<p><strong>步骤三：用登录时间-最早登录时间得到一列by_day</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+    user_id<span class="token punctuation">,</span>
+    login_time<span class="token punctuation">,</span>
+    first_day<span class="token punctuation">,</span>
+    DATEDIFF<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span>first_day<span class="token punctuation">)</span> <span class="token keyword">as</span> by_day
+<span class="token keyword">FROM</span>
+  <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+      b<span class="token punctuation">.</span>user_id<span class="token punctuation">,</span>
+      b<span class="token punctuation">.</span>login_time<span class="token punctuation">,</span>
+      c<span class="token punctuation">.</span>first_day
+  <span class="token keyword">FROM</span> 
+      <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+          user_id<span class="token punctuation">,</span>
+          str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+       <span class="token keyword">FROM</span> user_info
+       <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> b
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>
+    <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+        user_id<span class="token punctuation">,</span>
+        <span class="token function">min</span><span class="token punctuation">(</span>login_time<span class="token punctuation">)</span> first_day
+     <span class="token keyword">FROM</span>
+         <span class="token punctuation">(</span><span class="token keyword">select</span> 
+              user_id<span class="token punctuation">,</span>
+              str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+          <span class="token keyword">from</span> user_info
+          <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> a
+     <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">)</span> c
+   <span class="token keyword">on</span> b<span class="token punctuation">.</span>user_id <span class="token operator">=</span> c<span class="token punctuation">.</span>user_id
+   <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> e
+<span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-c2ef455335216dee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/227/format/webp" alt="img"></p>
+<p>得到by_day</p>
+<p><strong>最后一步：提取字段作为列名</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+    first_day<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_0<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_1<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_2<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">3</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_3<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">4</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_4<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">5</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_5<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">=</span> <span class="token number">6</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_6<span class="token punctuation">,</span>
+    <span class="token function">sum</span><span class="token punctuation">(</span><span class="token keyword">case</span> <span class="token keyword">when</span> by_day <span class="token operator">>=</span> <span class="token number">7</span> <span class="token keyword">then</span> <span class="token number">1</span> <span class="token keyword">else</span> <span class="token number">0</span> <span class="token keyword">end</span><span class="token punctuation">)</span> day_7plus
+<span class="token keyword">FROM</span>
+   <span class="token punctuation">(</span><span class="token keyword">SELECT</span> 
+      user_id<span class="token punctuation">,</span>
+      login_time<span class="token punctuation">,</span>
+      first_day<span class="token punctuation">,</span>
+      DATEDIFF<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span>first_day<span class="token punctuation">)</span> <span class="token keyword">as</span> by_day
+   <span class="token keyword">FROM</span>
+     <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+        b<span class="token punctuation">.</span>user_id<span class="token punctuation">,</span>
+        b<span class="token punctuation">.</span>login_time<span class="token punctuation">,</span>
+        c<span class="token punctuation">.</span>first_day
+      <span class="token keyword">FROM</span> 
+        <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+            user_id<span class="token punctuation">,</span>
+            str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+         <span class="token keyword">FROM</span> user_info
+         <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> b
+    <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span>
+      <span class="token punctuation">(</span><span class="token keyword">SELECT</span>
+          user_id<span class="token punctuation">,</span>
+          <span class="token function">min</span><span class="token punctuation">(</span>login_time<span class="token punctuation">)</span> first_day
+       <span class="token keyword">FROM</span>
+           <span class="token punctuation">(</span><span class="token keyword">select</span> 
+                user_id<span class="token punctuation">,</span>
+                str_to_date<span class="token punctuation">(</span>login_time<span class="token punctuation">,</span><span class="token string">'%Y/%m/%d'</span><span class="token punctuation">)</span> login_time
+            <span class="token keyword">FROM</span> 
+                user_info
+            <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> a
+       <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">)</span> c
+     <span class="token keyword">on</span> b<span class="token punctuation">.</span>user_id <span class="token operator">=</span> c<span class="token punctuation">.</span>user_id
+     <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> e
+  <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> f
+<span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span>
+<span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/832367-1e469359d4d6321a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/405/format/webp" alt="img"></p>
+<p>根据最后得到的数据，我们直接用除法或者加一个SQL语句，就能算出来留存率，之后的分析就是看自己了。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/">http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/10/01/bio/">
+                    <div class="card-image">
+                        
+                        <img src="https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto" class="responsive-img" alt="BIO">
+                        
+                        <span class="card-title">BIO</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文将简述BIO的原理和使用。
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    IO网络编程
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">IO网络编程</span>
+                    </a>
+                    
+                    <a href="/tags/BIO/">
+                        <span class="chip bg-color">BIO</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/05/java-bean-yan-zheng/">
+                    <div class="card-image">
+                        
+                        <img src="https://img1.baidu.com/it/u=2638050182,2028521818&fm=15&fmt=auto" class="responsive-img" alt="Java Bean校验">
+                        
+                        <span class="card-title">Java Bean校验</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文将介绍JSR303在开发中的使用
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JSR303/" class="post-category">
+                                    JSR303
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/springboot/">
+                        <span class="chip bg-color">springboot</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
+                    </a>
+                    
+                    <a href="/tags/JSR303/">
+                        <span class="chip bg-color">JSR303</span>
+                    </a>
+                    
+                    <a href="/tags/java-bean/">
+                        <span class="chip bg-color">java bean</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
