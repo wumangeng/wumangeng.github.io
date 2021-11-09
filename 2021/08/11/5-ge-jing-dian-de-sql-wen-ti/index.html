@@ -536,7 +536,7 @@
 <span class="token keyword">from</span> test1 a  <span class="token keyword">join</span> <span class="token punctuation">(</span><span class="token keyword">select</span> course<span class="token punctuation">,</span><span class="token function">max</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span> score <span class="token keyword">from</span> test1 <span class="token keyword">group</span> <span class="token keyword">by</span> course<span class="token punctuation">)</span> b  
 <span class="token keyword">on</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>b<span class="token punctuation">.</span>course <span class="token operator">and</span> a<span class="token punctuation">.</span>score<span class="token operator">=</span>b<span class="token punctuation">.</span>score<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109111018177.png" alt="image-20211109111018177"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109111018177.png"></p>
 <h4 id="b、子查询实现"><a href="#b、子查询实现" class="headerlink" title="b、子查询实现"></a>b、子查询实现</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score 
 <span class="token keyword">from</span> test1 a  
 <span class="token keyword">where</span> score<span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">max</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span> <span class="token keyword">from</span> test1 <span class="token keyword">where</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>test1<span class="token punctuation">.</span>course<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -554,7 +554,7 @@
 <span class="token punctuation">(</span><span class="token keyword">select</span> name<span class="token punctuation">,</span>course<span class="token punctuation">,</span>score <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span><span class="token string">'英语'</span> <span class="token keyword">order</span> <span class="token keyword">by</span> score <span class="token keyword">desc</span> <span class="token keyword">limit</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p> 执行效果如下</p>
-<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105605964-20784068.png" alt="img"></p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105605964-20784068.png"></p>
 <h4 id="b、使用自身左连接"><a href="#b、使用自身左连接" class="headerlink" title="b、使用自身左连接"></a>b、使用自身左连接</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> a<span class="token punctuation">.</span>name<span class="token punctuation">,</span>a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score 
 <span class="token keyword">from</span> test1 a <span class="token keyword">left</span> <span class="token keyword">join</span> test1 b <span class="token keyword">on</span> a<span class="token punctuation">.</span>course<span class="token operator">=</span>b<span class="token punctuation">.</span>course <span class="token operator">and</span> a<span class="token punctuation">.</span>score<span class="token operator">&lt;</span>b<span class="token punctuation">.</span>score
 <span class="token keyword">group</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>name<span class="token punctuation">,</span>a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score
@@ -562,14 +562,14 @@
 <span class="token keyword">order</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score <span class="token keyword">desc</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p> 执行效果如下</p>
-<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105642433-1988260519.png" alt="img"></p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105642433-1988260519.png"></p>
 <h4 id="c、使用子查询"><a href="#c、使用子查询" class="headerlink" title="c、使用子查询"></a>c、使用子查询</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">select</span> <span class="token operator">*</span>
 <span class="token keyword">from</span> test1 a
 <span class="token keyword">where</span> <span class="token number">2</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">from</span> test1 <span class="token keyword">where</span> course<span class="token operator">=</span>a<span class="token punctuation">.</span>course <span class="token operator">and</span> score<span class="token operator">></span>a<span class="token punctuation">.</span>score<span class="token punctuation">)</span>
 <span class="token keyword">order</span> <span class="token keyword">by</span> a<span class="token punctuation">.</span>course<span class="token punctuation">,</span>a<span class="token punctuation">.</span>score <span class="token keyword">desc</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p> 执行效果如下</p>
-<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105757355-1691491211.png" alt="img"></p>
+<p>​    <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/615800-20170822105757355-1691491211.png"></p>
 <h4 id="d、使用用户变量"><a href="#d、使用用户变量" class="headerlink" title="d、使用用户变量"></a>d、使用用户变量</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">set</span> <span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token variable">@course</span> :<span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span>
 
 <span class="token keyword">select</span> name<span class="token punctuation">,</span> course<span class="token punctuation">,</span> score
@@ -770,11 +770,11 @@
 <li>根据user_id和login_time，增加一列first_day，此列存着每个用户最早登录时间。</li>
 <li>有了最早登录时间和所有的登录时间，再增加一列by_day，这一列是用login_time - first_day ，得到0，1，2，3，4，5……，这就得到了某一天登录离第一次登录有多长时间。</li>
 </ol>
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-d9d12d9065edbcb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/241/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160251403.png"></p>
 <p>获得一个这样的表</p>
 <ul>
 <li><p>然后从表中提取数据，找到first_day对应的with_first列中0有多少个，1有多少个，一直到7以上。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-8cccde6df41d6a0e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/409/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160318733.png"></p>
 <p>最后获得这个表</p>
 </li>
 <li><p>根据此表，就很容易计算出每天引流的留存率。</p>
@@ -782,7 +782,8 @@
 </ul>
 <p><strong>实际操作</strong></p>
 <p>数据：是我用excel随便模拟的数据，与真实情况不符。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-f38c9be9db18b03d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/137/format/webp" alt="img"></p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160352470.png" style="zoom:67%;" />
+
 <p>模拟数据</p>
 <p>数据库：MySQL</p>
 <p><strong>步骤一：从数据库中提取出user_id和login_time并排序</strong></p>
@@ -792,7 +793,7 @@
 <span class="token keyword">from</span> user_info
 <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-93318c827fbaa232.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/118/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160505622.png"></p>
 <p>获得数据</p>
 <p><strong>步骤二：增加一列first_day，存储每个用户ID最早登录时间</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
@@ -819,7 +820,7 @@
 <span class="token keyword">on</span> b<span class="token punctuation">.</span>user_id <span class="token operator">=</span> c<span class="token punctuation">.</span>user_id
 <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-05e10e8e726bbc0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/182/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160540115.png"></p>
 <p>得到first_day列</p>
 <p><strong>步骤三：用登录时间-最早登录时间得到一列by_day</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
@@ -853,7 +854,7 @@
    <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> e
 <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-c2ef455335216dee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/227/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160607644.png"></p>
 <p>得到by_day</p>
 <p><strong>最后一步：提取字段作为列名</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
@@ -901,7 +902,7 @@
 <span class="token keyword">group</span> <span class="token keyword">by</span> <span class="token number">1</span>
 <span class="token keyword">order</span> <span class="token keyword">by</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://upload-images.jianshu.io/upload_images/832367-1e469359d4d6321a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/405/format/webp" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211109160638608.png"></p>
 <p>根据最后得到的数据，我们直接用除法或者加一个SQL语句，就能算出来留存率，之后的分析就是看自己了。</p>
 
                 
