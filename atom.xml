@@ -156,7 +156,7 @@
     <link href="http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/"/>
     <id>http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/</id>
     <published>2021-08-25T01:10:20.000Z</published>
-    <updated>2021-11-11T03:19:27.281Z</updated>
+    <updated>2021-11-11T03:32:02.611Z</updated>
     
     
       
@@ -414,9 +414,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
     
   </entry>
   
