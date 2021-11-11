@@ -125,10 +125,10 @@
   
   <entry>
     <title>BIO</title>
-    <link href="http://wumangeng.github.io/2021/10/01/bio/"/>
-    <id>http://wumangeng.github.io/2021/10/01/bio/</id>
-    <published>2021-10-01T07:10:30.000Z</published>
-    <updated>2021-10-20T06:25:26.537Z</updated>
+    <link href="http://wumangeng.github.io/2021/09/06/bio/"/>
+    <id>http://wumangeng.github.io/2021/09/06/bio/</id>
+    <published>2021-09-06T07:10:30.000Z</published>
+    <updated>2021-11-11T03:35:24.825Z</updated>
     
     
       
@@ -414,9 +414,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
     <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
   </entry>
   
