@@ -152,6 +152,33 @@
   </entry>
   
   <entry>
+    <title>ThreadLocal详解</title>
+    <link href="http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/"/>
+    <id>http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/</id>
+    <published>2021-08-25T01:10:20.000Z</published>
+    <updated>2021-11-11T03:19:27.281Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;ThreadLocal是什么&quot;&gt;&lt;a href=&quot;#ThreadLocal是什么&quot; class=&quot;headerlink&quot; title=&quot;ThreadLocal是什么&quot;&gt;&lt;/a&gt;ThreadLocal是什么&lt;/h2&gt;&lt;p&gt;​   </summary>
+        
+      
+    
+    
+    
+    <category term="多线程" scheme="http://wumangeng.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    
+    <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>5个经典的sql问题</title>
     <link href="http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/"/>
     <id>http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/</id>
@@ -228,9 +255,9 @@
     <category term="多线程" scheme="http://wumangeng.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
     <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
@@ -255,9 +282,9 @@
     <category term="dji" scheme="http://wumangeng.github.io/categories/dji/"/>
     
     
-    <category term="dji" scheme="http://wumangeng.github.io/tags/dji/"/>
-    
     <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
+    
+    <category term="dji" scheme="http://wumangeng.github.io/tags/dji/"/>
     
   </entry>
   
@@ -387,9 +414,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
     <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
   </entry>
   
@@ -527,31 +554,6 @@
     
     
     <category term="Mybatis Plus" scheme="http://wumangeng.github.io/tags/Mybatis-Plus/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis</title>
-    <link href="http://wumangeng.github.io/2020/06/25/mybatis/"/>
-    <id>http://wumangeng.github.io/2020/06/25/mybatis/</id>
-    <published>2020-06-25T10:10:20.000Z</published>
-    <updated>2021-10-20T06:25:59.531Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Mybatis&quot;&gt;&lt;a href=&quot;#Mybatis&quot; class=&quot;headerlink&quot; title=&quot;Mybatis&quot;&gt;&lt;/a&gt;Mybatis&lt;/h1&gt;&lt;h2 id=&quot;1、Mybatis介绍&quot;&gt;&lt;a href=&quot;#1、Mybatis介绍&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Mybatis" scheme="http://wumangeng.github.io/categories/Mybatis/"/>
-    
-    
-    <category term="Mybatis" scheme="http://wumangeng.github.io/tags/Mybatis/"/>
     
   </entry>
   

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云视频点播(sdk)的使用姿势, 山河远阔">
+    <meta name="keywords" content="ThreadLocal">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阿里云视频点播(sdk)的使用姿势 | 山河远阔</title>
+    <title>ThreadLocal详解 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=839516846,1956607711&fm=15&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云视频点播(sdk)的使用姿势</h1>
+                    <h1 class="description center-align post-title">ThreadLocal详解</h1>
                 </div>
             </div>
         </div>
@@ -433,8 +433,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/sdk/">
-                                <span class="chip bg-color">sdk</span>
+                            <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                <span class="chip bg-color">多线程</span>
+                            </a>
+                        
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
                     </div>
@@ -445,8 +449,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                阿里云服务
+                            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="post-category">
+                                多线程
                             </a>
                         
                     </div>
@@ -461,13 +465,13 @@
                 <!-- 增加在文章页显示作者名的功能 -->
                 <div class="text-color" align=center style="font-size:large">
                     
-                        <i class="far fa-square"></i> wumangeng
+                        <i class="far fa-square"></i> wmg
                     
                 </div>
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-20
+                    2021-08-25
                 </div>
                 
 
@@ -491,106 +495,102 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="视频点播（SDK）"><a href="#视频点播（SDK）" class="headerlink" title="视频点播（SDK）"></a>视频点播（SDK）</h1><p><strong>阿里云文档地址：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">https:&#x2F;&#x2F;help.aliyun.com&#x2F;document_detail&#x2F;57756.html?spm&#x3D;a2c4g.11186623.6.1037.2bd84e28xsVzg2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h2 id="ThreadLocal是什么"><a href="#ThreadLocal是什么" class="headerlink" title="ThreadLocal是什么"></a>ThreadLocal是什么</h2><p>​    从名字我们就可以看到ThreadLocal叫做线程变量，意思是ThreadLocal中填充的变量属于<strong>当前</strong>线程，该变量对其他线程而言是隔离的。Synchronized用于线程间的数据共享，而ThreadLocal的作用主要是做数据隔离。</p>
+<p>​    ThreadLocal提供线程本地变量，每个线程拥有本地变量的副本，各个线程之间的变量互不干扰。ThreadLocal实现在多线程环境下去保证变量的安全。以下是ThreadLocal类的注释。</p>
+<blockquote>
+<p>This class provides thread-local variables. These variables differ from their normal counterparts in that each thread that accesses one (via its get or set method) has its own, independently initialized copy of the variable.</p>
+</blockquote>
+<h2 id="ThreadLocal怎么用"><a href="#ThreadLocal怎么用" class="headerlink" title="ThreadLocal怎么用"></a>ThreadLocal怎么用</h2><p><strong>ThreadLocal类接口有主要的几个方法</strong>：</p>
+<ul>
+<li>void set(T value)        设置当前线程的线程局部变量的值。</li>
+<li>T get()        该方法返回当前线程所对应的线程局部变量。</li>
+<li>void remove()         将当前线程局部变量的值删除，目的是为了减少内存的占用，该方法是JDK 5.0新增的方法。需要指出的是，当线程结束后，对应该线程的局部变量将自动被垃圾回收，所以显式调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。</li>
+<li>T initialValue()    返回该线程局部变量的初始值，该方法是一个protected的方法，显然是为了让子类覆盖而设计的。这个方法是一个延迟调用方法，在线程第1次调用get()或set()时才执行，并且仅执行1次。ThreadLocal中的缺省实现直接返回一个null。</li>
+<li>T setInitialValue() 设置初始值。在get操作没有对应的值时，调用此方法。private方法，防止被覆盖。过程和set类似，只不过是用initialValue作为value进行设置。</li>
+</ul>
+<p><strong>在使用ThreadLocal之前我们先来看看Spring是如何使用的</strong>：</p>
+<p>​    Spring的事务主要是依靠ThreadLocal和AOP去实现的，ThreadLocal来保证单个线程中的数据库操作使用的是同一个数据库连接，同时，采用这种方式可以使业务层使用事务时不需要感知并管理connection对象，通过传播级别，巧妙地管理多个事务配置之间的切换，挂起和恢复。</p>
+<p>​    Spring框架里面就是用的ThreadLocal来实现这种隔离，主要是在TransactionSynchronizationManager这个类里面，代码如下所示:</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Log</span> logger <span class="token operator">=</span> <span class="token class-name">LogFactory</span><span class="token punctuation">.</span><span class="token function">getLog</span><span class="token punctuation">(</span><span class="token class-name">TransactionSynchronizationManager</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖:"></a>1、引入依赖:</h2><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-core<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.5.1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-java-sdk-vod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>2.15.11<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.aliyun<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>aliyun-sdk-vod-upload<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.4.13<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.alibaba<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>fastjson<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>1.2.62<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">ThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Map</span><span class="token punctuation">&lt;</span><span class="token class-name">Object</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span><span class="token punctuation">></span></span> resources <span class="token operator">=</span>
+   <span class="token keyword">new</span> <span class="token class-name">NamedThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token string">"Transactional resources"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="2、初始化对象："><a href="#2、初始化对象：" class="headerlink" title="2、初始化对象："></a>2、初始化对象：</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InitObject</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">DefaultAcsClient</span> <span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token class-name">String</span> accessKeyId<span class="token punctuation">,</span> <span class="token class-name">String</span> accessKeySecret<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ClientException</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> regionId <span class="token operator">=</span> <span class="token string">"cn-shanghai"</span><span class="token punctuation">;</span>  <span class="token comment">// 点播服务接入区域</span>
-        <span class="token class-name">DefaultProfile</span> profile <span class="token operator">=</span> <span class="token class-name">DefaultProfile</span><span class="token punctuation">.</span><span class="token function">getProfile</span><span class="token punctuation">(</span>regionId<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">DefaultAcsClient</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DefaultAcsClient</span><span class="token punctuation">(</span>profile<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> client<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">ThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Set</span><span class="token punctuation">&lt;</span><span class="token class-name">TransactionSynchronization</span><span class="token punctuation">></span><span class="token punctuation">></span></span> synchronizations <span class="token operator">=</span>
+   <span class="token keyword">new</span> <span class="token class-name">NamedThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token string">"Transaction synchronizations"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h2 id="3、获取视频相关信息："><a href="#3、获取视频相关信息：" class="headerlink" title="3、获取视频相关信息："></a>3、获取视频相关信息：</h2><h3 id="3-1、根据视频id获取视频的播放地址："><a href="#3-1、根据视频id获取视频的播放地址：" class="headerlink" title="3.1、根据视频id获取视频的播放地址："></a>3.1、根据视频id获取视频的播放地址：</h3><p>注：加密后的视频不能直接通过地址访问</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestVod</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">ClientException</span> <span class="token punctuation">&#123;</span>
-<span class="token comment">//  1、根据是视频id获取视频的播放地址</span>
-        <span class="token comment">//（1）创建初始化对象 参数：阿里云oss的上传密钥（此处替换成你自己的）</span>
-        <span class="token class-name">DefaultAcsClient</span> client <span class="token operator">=</span> <span class="token class-name">InitObject</span><span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">ThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> currentTransactionName <span class="token operator">=</span>
+   <span class="token keyword">new</span> <span class="token class-name">NamedThreadLocal</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token string">"Current transaction name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  ……<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-        <span class="token comment">// (2) 创建获取视频地址request 和response</span>
-        <span class="token class-name">GetPlayInfoRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">GetPlayInfoResponse</span> response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetPlayInfoResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment">// (3) 向request对象里面设置视频id</span>
-        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token comment">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
-        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo</span><span class="token punctuation">></span></span> playInfoList <span class="token operator">=</span> response<span class="token punctuation">.</span><span class="token function">getPlayInfoList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//播放地址</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">GetPlayInfoResponse<span class="token punctuation">.</span>PlayInfo</span> playInfo <span class="token operator">:</span> playInfoList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"PlayInfo.PlayURL = "</span> <span class="token operator">+</span> playInfo<span class="token punctuation">.</span><span class="token function">getPlayURL</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p><strong>一个完整的使用ThreadLocal的例子</strong>：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadLocalExample</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">MyRunnable</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">private</span> <span class="token class-name">ThreadLocal</span> threadLocal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            threadLocal<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">100D</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            	<span class="token class-name">Thread</span><span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+ 
+            <span class="token punctuation">&#125;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>threadLocal<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
-        <span class="token comment">//Base信息</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoBase.Title = "</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoBase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+ 
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+         <span class="token class-name">MyRunnable</span> sharedRunnableInstance <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MyRunnable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">Thread</span> thread1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>sharedRunnableInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">Thread</span> thread2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>sharedRunnableInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         thread1<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         thread2<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="3-2、根据视频id获取视频的播放凭证："><a href="#3-2、根据视频id获取视频的播放凭证：" class="headerlink" title="3.2、根据视频id获取视频的播放凭证："></a>3.2、根据视频id获取视频的播放凭证：</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//  2、根据视频id获取视频播放凭证</span>
-        <span class="token comment">//（1）创建初始化对象 参数：阿里云oss的上传密钥</span>
-        <span class="token class-name">DefaultAcsClient</span> client <span class="token operator">=</span> <span class="token class-name">InitObject</span><span class="token punctuation">.</span><span class="token function">initVodClient</span><span class="token punctuation">(</span><span class="token string">"###"</span><span class="token punctuation">,</span> <span class="token string">"***"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p><strong>使用场景：</strong></p>
+<p>​    在项目中存在一个线程经常遇到横跨若干方法调用，需要传递的对象，也就是上下文（Context），它是一种状态，经常就是是用户身份、任务信息等，就会存在过渡传参的问题。</p>
+<p>​    使用到类似责任链模式，给每个方法增加一个context参数非常麻烦，而且有些时候，如果调用链有无法修改源码的第三方库，对象参数就传不进去了，所以我使用到了ThreadLocal去做了一下改造，这样只需要在调用前在ThreadLocal中设置参数，其他地方get一下就好了。</p>
+<h2 id="ThreadLocal的数据结构"><a href="#ThreadLocal的数据结构" class="headerlink" title="ThreadLocal的数据结构"></a>ThreadLocal的数据结构</h2><p>​    Thread类中有个变量threadLocals，这个类型为ThreadLocal中的一个内部类ThreadLocalMap，这个类没有实现map接口，就是一个普通的Java类，但是实现的类似map的功能。</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111105643447.png" style="zoom:67%;" />
 
-        <span class="token comment">// (2) 创建获取视频凭证request 和response</span>
-        <span class="token class-name">GetVideoPlayAuthRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">GetVideoPlayAuthResponse</span> response <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">GetVideoPlayAuthResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p><img src="https://pics1.baidu.com/feed/bd315c6034a85edf2121027dcd5cad25dc5475ca.jpeg?token=91e25098f7ec0ffe3ffb2ac6a9e82dc8"></p>
+<p>​    每个线程都要自己的一个map，map是一个数组的数据结构存储数据，每个元素是一个Entry，entry的key是threadlocal的引用，也就是当前变量的副本，value就是set的值。</p>
+<h2 id="ThreadLocal源码分析"><a href="#ThreadLocal源码分析" class="headerlink" title="ThreadLocal源码分析"></a>ThreadLocal源码分析</h2><h4 id="1、set方法"><a href="#1、set方法" class="headerlink" title="1、set方法"></a><strong>1、set方法</strong></h4><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111105916711.png" style="zoom:67%;" />
 
-        <span class="token comment">// (3) 向request对象里面设置视频id</span>
-        request<span class="token punctuation">.</span><span class="token function">setVideoId</span><span class="token punctuation">(</span><span class="token string">"6e19e54e5f2341f487364a2aeae0f36e"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>​    从set方法我们可以看到，首先获取到了当前线程t，然后调用getMap获取ThreadLocalMap，如果map存在，则将当前线程对象t作为key，要存储的对象作为value存到map里面去。如果该Map不存在，则初始化一个。那么ThreadLocalMap又是什么？getMap又是什么？</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111110141923.png" style="zoom:67%;" />
 
-        <span class="token comment">// (4) 调用初始化对象里面的方法传递request，获取数据</span>
-        response <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">getAcsResponse</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>​    可以看到ThreadLocalMap其实就是ThreadLocal的一个静态内部类，里面定义了一个Entry来保存数据，而且还是继承的弱引用。在Entry内部使用ThreadLocal作为key，使用我们设置的value作为value。</p>
+<p>getMap</p>
+<blockquote>
+<p>ThreadLocalMap getMap(Thread t) {</p>
+<p>​    return t.threadLocals;</p>
+<p>}</p>
+</blockquote>
+<p>调用当期线程t，返回当前线程t中的成员变量threadLocals。而threadLocals其实就是ThreadLocalMap。</p>
+<h4 id="2、get方法"><a href="#2、get方法" class="headerlink" title="2、get方法"></a>2、get方法</h4><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111110449411.png" style="zoom:67%;" />
 
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"视频播放凭证为："</span><span class="token operator">+</span>response<span class="token punctuation">.</span><span class="token function">getPlayAuth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>​    首先获取当前线程，然后调用getMap方法获取一个ThreadLocalMap，如果map不为null，那就使用当前线程作为ThreadLocalMap的Entry的键，然后值就作为相应的的值，如果没有那就设置一个初始值。如何设置一个初始值呢？</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111110550843.png" style="zoom:67%;" />
 
-<h2 id="4、视频上传"><a href="#4、视频上传" class="headerlink" title="4、视频上传"></a>4、视频上传</h2><h3 id="4-1、本地视频上传"><a href="#4-1、本地视频上传" class="headerlink" title="4.1、本地视频上传"></a>4.1、本地视频上传</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> accessKeyId <span class="token operator">=</span> <span class="token string">"***"</span><span class="token punctuation">;</span>
-       <span class="token class-name">String</span> accessKeySecret <span class="token operator">=</span> <span class="token string">"###"</span><span class="token punctuation">;</span>
+<h4 id="3、remove方法"><a href="#3、remove方法" class="headerlink" title="3、remove方法"></a>3、remove方法</h4><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211111110630537.png" style="zoom:67%;" />
 
-       <span class="token class-name">String</span> title <span class="token operator">=</span> <span class="token string">"6 - What If I Want to Move Faster - upload by sdk"</span><span class="token punctuation">;</span>   <span class="token comment">//上传之后文件名称</span>
-       <span class="token class-name">String</span> fileName <span class="token operator">=</span> <span class="token string">"D:/Project/项目资料/1-阿里云上传测试视频/test.mp4"</span><span class="token punctuation">;</span>  <span class="token comment">//本地文件路径和名称</span>
-       <span class="token comment">//上传视频的方法</span>
-       <span class="token class-name">UploadVideoRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoRequest</span><span class="token punctuation">(</span>accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">,</span> title<span class="token punctuation">,</span> fileName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token comment">/* 可指定分片上传时每个分片的大小，默认为2M字节 */</span>
-       request<span class="token punctuation">.</span><span class="token function">setPartSize</span><span class="token punctuation">(</span><span class="token number">2</span> <span class="token operator">*</span> <span class="token number">1024</span> <span class="token operator">*</span> <span class="token number">1024L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token comment">/* 可指定分片上传时的并发线程数，默认为1，(注：该配置会占用服务器CPU资源，需根据服务器情况指定）*/</span>
-       request<span class="token punctuation">.</span><span class="token function">setTaskNum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-       <span class="token class-name">UploadVideoImpl</span> uploader <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">UploadVideoImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token class-name">UploadVideoResponse</span> response <span class="token operator">=</span> uploader<span class="token punctuation">.</span><span class="token function">uploadVideo</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-       <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">isSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-           <span class="token comment">/* 如果设置回调URL无效，不影响视频上传，可以返回VideoId同时会返回错误码。其他情况上传失败时，VideoId为空，此时需要根据返回错误码分析具体错误原因 */</span>
-           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"VideoId="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getVideoId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorCode="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"ErrorMessage="</span> <span class="token operator">+</span> response<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-       <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<p>​    从map中移除。</p>
+<h4 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h4><p>（1）每个Thread维护着一个ThreadLocalMap的引用</p>
+<p>（2）ThreadLocalMap是ThreadLocal的内部类，用Entry来进行存储</p>
+<p>（3）ThreadLocal创建的副本是存储在自己的threadLocals中的，也就是自己的ThreadLocalMap。</p>
+<p>（4）ThreadLocalMap的键值为ThreadLocal对象，而且可以有多个threadLocal变量，因此保存在map中</p>
+<p>（5）在进行get之前，必须先set，否则会报空指针异常，当然也可以初始化一个，但是必须重写initialValue()方法。</p>
+<p>（6）ThreadLocal本身并不存储值，它只是作为一个key来让线程从ThreadLocalMap获取value。</p>
+<h2 id="ThreadLocal内存泄漏问题"><a href="#ThreadLocal内存泄漏问题" class="headerlink" title="ThreadLocal内存泄漏问题"></a>ThreadLocal内存泄漏问题</h2><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/1234.webp"></p>
+<p>上面这张图详细的揭示了ThreadLocal和Thread以及ThreadLocalMap三者的关系。</p>
+<p>1、Thread中有一个map，就是ThreadLocalMap</p>
+<p>2、ThreadLocalMap的key是ThreadLocal，值是我们自己设定的。</p>
+<p>3、ThreadLocal是一个弱引用，当为null时，会被当成垃圾回收</p>
+<p><strong>4、重点来了，突然我们ThreadLocal是null了，也就是要被垃圾回收器回收了，但是此时我们的ThreadLocalMap生命周期和Thread的一样，它不会回收，这时候就出现了一个现象。那就是ThreadLocalMap的key没了，但是value还在，这就造成了内存泄漏。</strong></p>
+<p><strong>解决办法：使用完ThreadLocal后，执行remove操作，避免出现内存溢出情况。</strong></p>
 
                 
             </div>
@@ -607,7 +607,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">wumangeng</a>
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -617,7 +617,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/">http://wumangeng.github.io/2021/05/20/a-li-yun-shi-pin-dian-bo/</a>
+                    <a href="http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/">http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -630,7 +630,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">wumangeng</a>
+                    <a href="/about" target="_blank">wmg</a>
                     !
                 </span>
             </div>
@@ -655,8 +655,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/sdk/">
-                                    <span class="chip bg-color">sdk</span>
+                                <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                                    <span class="chip bg-color">多线程</span>
+                                </a>
+                            
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
                         </div>
@@ -832,30 +836,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/">
+                <a href="/2021/10/01/bio/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2556980320,3655737827&fm=26&fmt=auto" class="responsive-img" alt="基于java的生成大疆弓形航线算法实现">
+                        <img src="https://img0.baidu.com/it/u=3784115433,2940703514&fm=26&fmt=auto" class="responsive-img" alt="BIO">
                         
-                        <span class="card-title">基于java的生成大疆弓形航线算法实现</span>
+                        <span class="card-title">BIO</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将介绍给定任意两个坐标，在这坐标之间生成一些列有序点的坐标的算法
+                            本文将简述BIO的原理和使用。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-25
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-01
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/dji/" class="post-category">
-                                    dji
+                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    IO网络编程
                                 </a>
                             
                             
@@ -865,12 +869,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                        <span class="chip bg-color">IO网络编程</span>
                     </a>
                     
-                    <a href="/tags/dji/">
-                        <span class="chip bg-color">dji</span>
+                    <a href="/tags/BIO/">
+                        <span class="chip bg-color">BIO</span>
                     </a>
                     
                 </div>
@@ -884,30 +888,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-oss/">
+                <a href="/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
+                        <img src="https://img2.baidu.com/it/u=4085049135,313268802&fm=26&fmt=auto" class="responsive-img" alt="5个经典的sql问题">
                         
-                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
+                        <span class="card-title">5个经典的sql问题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示oss在java服务端的使用方式。
+                            课程问题，topN，连续，行转列，留存问题
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                    阿里云服务
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
                                 </a>
                             
                             
@@ -917,8 +921,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/oss/">
-                        <span class="chip bg-color">oss</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
                 </div>
