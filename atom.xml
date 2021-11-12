@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-03T07:05:44.466Z</updated>
+  <updated>2021-11-12T08:52:25.919Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redis-Cluster集群搭建</title>
+    <link href="http://wumangeng.github.io/2021/11/04/redis-ji-qun-da-jian/"/>
+    <id>http://wumangeng.github.io/2021/11/04/redis-ji-qun-da-jian/</id>
+    <published>2021-11-04T08:10:20.000Z</published>
+    <updated>2021-11-12T08:52:25.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Redis-Cluster集群搭建&quot;&gt;&lt;a href=&quot;#Redis-Cluster集群搭建&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="redis" scheme="http://wumangeng.github.io/categories/redis/"/>
+    
+    
+    <category term="redis集群" scheme="http://wumangeng.github.io/tags/redis%E9%9B%86%E7%BE%A4/"/>
+    
+    <category term="redis" scheme="http://wumangeng.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>Xxl-Job 2.3.0源码分析</title>
@@ -398,7 +425,7 @@
     <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
     <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
     <published>2021-04-01T01:10:20.000Z</published>
-    <updated>2021-10-20T06:25:43.091Z</updated>
+    <updated>2021-11-12T03:22:54.129Z</updated>
     
     
       
@@ -414,9 +441,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
     
   </entry>
   
@@ -528,32 +555,6 @@
     <category term="websocket" scheme="http://wumangeng.github.io/tags/websocket/"/>
     
     <category term="springboot" scheme="http://wumangeng.github.io/tags/springboot/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mybatis Plus</title>
-    <link href="http://wumangeng.github.io/2020/06/27/mybatisplus/"/>
-    <id>http://wumangeng.github.io/2020/06/27/mybatisplus/</id>
-    <published>2020-06-27T10:10:20.000Z</published>
-    <updated>2021-10-20T06:26:07.279Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;MybatisPlus&quot;&gt;&lt;a href=&quot;#MybatisPlus&quot; class=&quot;headerlink&quot; title=&quot;MybatisPlus&quot;&gt;&lt;/a&gt;MybatisPlus&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;简介&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;官网：&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="Mybatis" scheme="http://wumangeng.github.io/categories/Mybatis/"/>
-    
-    
-    <category term="Mybatis Plus" scheme="http://wumangeng.github.io/tags/Mybatis-Plus/"/>
     
   </entry>
   
