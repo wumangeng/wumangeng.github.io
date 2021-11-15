@@ -441,9 +441,9 @@
     <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
     
     
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
     <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
   </entry>
   
