@@ -529,12 +529,12 @@
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> AMQP 协议</span>
 AMQP（advanced message queuing protocol）`在2003年时被提出，最早用于解决金融领不同平台之间的消息传递交互问题。顾名思义，AMQP是一种协议，更准确的说是一种binary wire-level protocol（链接协议）。这是其和JMS的本质差别，AMQP不从API层进行限定，而是直接定义网络交换的数据格式。这使得实现了AMQP的provider天然性就是跨平台的。以下是AMQP协议模型:<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200311182438041.png" alt="image-20200311182438041"></p>
-<h3 id="2-2-RabbitMQ-的安装"><a href="#2-2-RabbitMQ-的安装" class="headerlink" title="2.2 RabbitMQ 的安装"></a>2.2 RabbitMQ 的安装</h3><h4 id="2-2-1-下载"><a href="#2-2-1-下载" class="headerlink" title="2.2.1 下载"></a>2.2.1 下载</h4><p><code>官网下载地址</code>: <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html![image-20190925220115235](https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220115235.png)">https://www.rabbitmq.com/download.html![image-20190925220115235](https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220115235.png)</a></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200311182438041.png"></p>
+<h3 id="2-2-RabbitMQ-的安装"><a href="#2-2-RabbitMQ-的安装" class="headerlink" title="2.2 RabbitMQ 的安装"></a>2.2 RabbitMQ 的安装</h3><h4 id="2-2-1-下载"><a href="#2-2-1-下载" class="headerlink" title="2.2.1 下载"></a>2.2.1 下载</h4><p><code>官网下载地址</code>: <a target="_blank" rel="noopener" href="https://www.rabbitmq.com/download.html![](https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220115235.png)">https://www.rabbitmq.com/download.html![](https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220115235.png)</a></p>
 <blockquote>
 <p><code>最新版本</code>: 3.7.18</p>
 </blockquote>
-<h4 id="2-2-2-下载的安装包"><a href="#2-2-2-下载的安装包" class="headerlink" title="2.2.2 下载的安装包"></a>2.2.2 下载的安装包<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220343521.png" alt="image-20190925220343521"></h4><blockquote>
+<h4 id="2-2-2-下载的安装包"><a href="#2-2-2-下载的安装包" class="headerlink" title="2.2.2 下载的安装包"></a>2.2.2 下载的安装包<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925220343521.png"></h4><blockquote>
 <p><code>注意</code>:这里的安装包是centos7安装的包</p>
 </blockquote>
 <h4 id="2-2-3-安装步骤"><a href="#2-2-3-安装步骤" class="headerlink" title="2.2.3 安装步骤"></a>2.2.3 安装步骤</h4><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 1.将rabbitmq安装包上传到linux系统中</span>
@@ -557,9 +557,9 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
 <span class="token title important"><span class="token punctuation">#</span> 6.修改配置文件(参见下图:)</span>
 	vim /etc/rabbitmq/rabbitmq.config <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222230260-3836271.png" alt="image-20190925222230260"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222230260-3836271.png"></p>
 <p>将上图中配置文件中红色部分去掉<code>%%</code>,以及最后的<code>,</code>逗号 修改为下图:</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222329200-3836312.png" alt="image-20190925222329200"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222329200-3836312.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 7.执行如下命令,启动rabbitmq中的插件管理</span>
 	rabbitmq-plugins enable rabbitmq_management
 	
@@ -600,7 +600,7 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
              └─3244 inet_gethost 4
       .........<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222743776-3836511.png" alt="image-20190925222743776"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190925222743776-3836511.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 10.关闭防火墙服务</span>
 	systemctl disable firewalld
     Removed symlink /etc/systemd/system/multi-user.target.wants/firewalld.service.
@@ -610,12 +610,12 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
 <span class="token title important"><span class="token punctuation">#</span> 11.访问web管理界面</span>
 	http://10.15.0.8:15672/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190926194738708-3836601.png" alt="image-20190926194738708"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190926194738708-3836601.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 12.登录管理界面</span>
 	username:  guest
 	password:  guest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190926194954822-3836665.png" alt="image-20190926194954822"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20190926194954822-3836665.png"></p>
 <hr>
 <h2 id="3-RabiitMQ-配置"><a href="#3-RabiitMQ-配置" class="headerlink" title="3. RabiitMQ 配置"></a>3. RabiitMQ 配置</h2><h3 id="3-1RabbitMQ-管理命令行"><a href="#3-1RabbitMQ-管理命令行" class="headerlink" title="3.1RabbitMQ 管理命令行"></a>3.1RabbitMQ 管理命令行</h3><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 1.服务启动相关</span>
 	systemctl start|restart|stop|status rabbitmq-server
@@ -626,7 +626,7 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
 <span class="token title important"><span class="token punctuation">#</span> 3.插件管理命令行</span>
 	rabbitmq-plugins enable|list|disable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="3-2-web管理界面介绍"><a href="#3-2-web管理界面介绍" class="headerlink" title="3.2 web管理界面介绍"></a>3.2 web管理界面介绍</h3><h4 id="3-2-1-overview概览"><a href="#3-2-1-overview概览" class="headerlink" title="3.2.1 overview概览"></a>3.2.1 overview概览</h4><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126162026720.png" alt="image-20191126162026720"></p>
+<h3 id="3-2-web管理界面介绍"><a href="#3-2-web管理界面介绍" class="headerlink" title="3.2 web管理界面介绍"></a>3.2 web管理界面介绍</h3><h4 id="3-2-1-overview概览"><a href="#3-2-1-overview概览" class="headerlink" title="3.2.1 overview概览"></a>3.2.1 overview概览</h4><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126162026720.png"></p>
 <ul>
 <li><p><code>connections：无论生产者还是消费者，都需要与RabbitMQ建立连接后才可以完成消息的生产和消费，在这里可以查看连接情况</code></p>
 </li>
@@ -637,7 +637,7 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
 <li><p><code>Queues：队列，即消息队列，消息存放在队列中，等待消费，消费后被移除队列。</code></p>
 </li>
 </ul>
-<h4 id="3-2-2-Admin用户和虚拟主机管理"><a href="#3-2-2-Admin用户和虚拟主机管理" class="headerlink" title="3.2.2 Admin用户和虚拟主机管理"></a>3.2.2 Admin用户和虚拟主机管理</h4><h5 id="1-添加用户"><a href="#1-添加用户" class="headerlink" title="1. 添加用户"></a>1. 添加用户</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126162617280.png" alt="image-20191126162617280"></p>
+<h4 id="3-2-2-Admin用户和虚拟主机管理"><a href="#3-2-2-Admin用户和虚拟主机管理" class="headerlink" title="3.2.2 Admin用户和虚拟主机管理"></a>3.2.2 Admin用户和虚拟主机管理</h4><h5 id="1-添加用户"><a href="#1-添加用户" class="headerlink" title="1. 添加用户"></a>1. 添加用户</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126162617280.png"></p>
 <p>上面的Tags选项，其实是指定用户的角色，可选的有以下几个：</p>
 <ul>
 <li><p><code>超级管理员(administrator)</code></p>
@@ -659,23 +659,23 @@ AMQP（advanced message queuing protocol）`在2003年时被提出，最早用�
 <h5 id="2-创建虚拟主机"><a href="#2-创建虚拟主机" class="headerlink" title="2. 创建虚拟主机"></a>2. 创建虚拟主机</h5><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 虚拟主机</span>
 	为了让各个用户可以互不干扰的工作，RabbitMQ添加了虚拟主机（Virtual Hosts）的概念。其实就是一个独立的访问路径，不同用户使用不同路径，各自有自己的队列、交换机，互相不会影响。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163023153.png" alt="image-20191126163023153"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163023153.png"></p>
 <h5 id="3-绑定虚拟主机和用户"><a href="#3-绑定虚拟主机和用户" class="headerlink" title="3. 绑定虚拟主机和用户"></a>3. 绑定虚拟主机和用户</h5><p>创建好虚拟主机，我们还要给用户添加访问权限：</p>
 <p>点击添加好的虚拟主机：</p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163506795.png" alt="image-20191126163506795"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163506795.png"></p>
 <p>进入虚拟机设置界面:</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163631889.png" alt="image-20191126163631889"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126163631889.png"></p>
 <hr>
-<h2 id="4-RabbitMQ-的第一个程序"><a href="#4-RabbitMQ-的第一个程序" class="headerlink" title="4.RabbitMQ 的第一个程序"></a>4.RabbitMQ 的第一个程序</h2><h3 id="4-0-AMQP协议的回顾"><a href="#4-0-AMQP协议的回顾" class="headerlink" title="4.0 AMQP协议的回顾"></a>4.0 AMQP协议的回顾</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200312140114784.png" alt="image-20200312140114784"></p>
-<h3 id="4-1-RabbitMQ支持的消息模型"><a href="#4-1-RabbitMQ支持的消息模型" class="headerlink" title="4.1 RabbitMQ支持的消息模型"></a>4.1 RabbitMQ支持的消息模型</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165434784.png" alt="image-20191126165434784"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165459282.png" alt="image-20191126165459282"></p>
+<h2 id="4-RabbitMQ-的第一个程序"><a href="#4-RabbitMQ-的第一个程序" class="headerlink" title="4.RabbitMQ 的第一个程序"></a>4.RabbitMQ 的第一个程序</h2><h3 id="4-0-AMQP协议的回顾"><a href="#4-0-AMQP协议的回顾" class="headerlink" title="4.0 AMQP协议的回顾"></a>4.0 AMQP协议的回顾</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200312140114784.png"></p>
+<h3 id="4-1-RabbitMQ支持的消息模型"><a href="#4-1-RabbitMQ支持的消息模型" class="headerlink" title="4.1 RabbitMQ支持的消息模型"></a>4.1 RabbitMQ支持的消息模型</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165434784.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165459282.png"></p>
 <h3 id="4-2-引入依赖"><a href="#4-2-引入依赖" class="headerlink" title="4.2 引入依赖"></a>4.2 引入依赖</h3><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>com.rabbitmq<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>amqp-client<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.7.2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="4-3-第一种模型-直连"><a href="#4-3-第一种模型-直连" class="headerlink" title="4.3 第一种模型(直连)"></a>4.3 第一种模型(直连)</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165840602.png" alt="image-20191126165840602"></p>
+<h3 id="4-3-第一种模型-直连"><a href="#4-3-第一种模型-直连" class="headerlink" title="4.3 第一种模型(直连)"></a>4.3 第一种模型(直连)</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126165840602.png"></p>
 <p>在上图的模型中，有以下概念：</p>
 <ul>
 <li>P：生产者，也就是要发送消息的程序</li>
@@ -736,7 +736,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 
 <hr>
 <h3 id="4-4-第二种模型-work-quene"><a href="#4-4-第二种模型-work-quene" class="headerlink" title="4.4 第二种模型(work quene)"></a>4.4 第二种模型(work quene)</h3><p><code>Work queues</code>，也被称为（<code>Task queues</code>），任务模型。当消息处理比较耗时的时候，可能生产消息的速度会远远大于消息的消费速度。长此以往，消息就会堆积越来越多，无法及时处理。此时就可以使用work 模型：<strong>让多个消费者绑定到一个队列，共同消费队列中的消息</strong>。队列中的消息一旦消费，就会消失，因此任务是不会被重复执行的。</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314221002008.png" alt="image-20200314221002008"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314221002008.png"></p>
 <p>角色：</p>
 <ul>
 <li>P：生产者：任务的发布者</li>
@@ -810,8 +810,8 @@ channel<span class="token punctuation">.</span><span class="token function">basi
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="4-测试结果"><a href="#4-测试结果" class="headerlink" title="4.测试结果"></a>4.测试结果</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314223242058.png" alt="image-20200314223242058"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314223302207.png" alt="image-20200314223302207"></p>
+<h5 id="4-测试结果"><a href="#4-测试结果" class="headerlink" title="4.测试结果"></a>4.测试结果</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314223242058.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314223302207.png"></p>
 <blockquote>
 <p><code>总结:默认情况下，RabbitMQ将按顺序将每个消息发送给下一个使用者。平均而言，每个消费者都会收到相同数量的消息。这种分发消息的方式称为循环。</code></p>
 </blockquote>
@@ -833,13 +833,13 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <li><p>设置通道一次只能消费一个消息</p>
 </li>
 <li><p>关闭消息的自动确认,开启手动确认消息</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314230412178.png" alt="image-20200314230412178"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314230423280.png" alt="image-20200314230423280"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314230412178.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200314230423280.png"></p>
 </li>
 </ul>
 <hr>
 <h3 id="4-5-第三种模型-fanout"><a href="#4-5-第三种模型-fanout" class="headerlink" title="4.5 第三种模型(fanout)"></a>4.5 第三种模型(fanout)</h3><p><code>fanout 扇出 也称为广播</code></p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126213115873.png" alt="image-20191126213115873"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126213115873.png"></p>
 <p>在广播模式下，消息发送流程是这样的：</p>
 <ul>
 <li> 可以有多个消费者</li>
@@ -896,9 +896,9 @@ channel<span class="token punctuation">.</span><span class="token function">basi
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="5-测试结果"><a href="#5-测试结果" class="headerlink" title="5. 测试结果"></a>5. 测试结果</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180653207.png" alt="image-20200315180653207"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180708489.png" alt="image-20200315180708489"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180728035.png" alt="image-20200315180728035"></p>
+<h5 id="5-测试结果"><a href="#5-测试结果" class="headerlink" title="5. 测试结果"></a>5. 测试结果</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180653207.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180708489.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200315180728035.png"></p>
 <hr>
 <h3 id="4-6-第四种模型-Routing"><a href="#4-6-第四种模型-Routing" class="headerlink" title="4.6 第四种模型(Routing)"></a>4.6 第四种模型(Routing)</h3><h4 id="4-6-1-Routing-之订阅模型-Direct-直连"><a href="#4-6-1-Routing-之订阅模型-Direct-直连" class="headerlink" title="4.6.1 Routing 之订阅模型-Direct(直连)"></a>4.6.1 Routing 之订阅模型-Direct(直连)</h4><p><code>在Fanout模式中，一条消息，会被所有订阅的队列都消费。但是，在某些场景下，我们希望不同的消息被不同的队列消费。这时就要用到Direct类型的Exchange。</code></p>
 <p> 在Direct模型下：</p>
@@ -908,7 +908,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <li>Exchange不再把消息交给每一个绑定的队列，而是根据消息的<code>Routing Key</code>进行判断，只有队列的<code>Routingkey</code>与消息的 <code>Routing key</code>完全一致，才会接收到消息</li>
 </ul>
 <p>流程:</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126220145375.png" alt="image-20191126220145375"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191126220145375.png"></p>
 <p>图解：</p>
 <ul>
 <li>P：生产者，向Exchange发送消息，发送消息时，会指定一个routing key。</li>
@@ -988,13 +988,13 @@ channel<span class="token punctuation">.</span><span class="token function">basi
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="4-测试生产者发送Route-key为error的消息时"><a href="#4-测试生产者发送Route-key为error的消息时" class="headerlink" title="4.测试生产者发送Route key为error的消息时"></a>4.测试生产者发送Route key为error的消息时</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102613933.png" alt="image-20200316102613933"></p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102627912.png" alt="image-20200316102627912"></p>
-<h5 id="5-测试生产者发送Route-key为info的消息时"><a href="#5-测试生产者发送Route-key为info的消息时" class="headerlink" title="5.测试生产者发送Route key为info的消息时"></a>5.测试生产者发送Route key为info的消息时</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102925740.png" alt="image-20200316102925740"></p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102947326.png" alt="image-20200316102947326"></p>
+<h5 id="4-测试生产者发送Route-key为error的消息时"><a href="#4-测试生产者发送Route-key为error的消息时" class="headerlink" title="4.测试生产者发送Route key为error的消息时"></a>4.测试生产者发送Route key为error的消息时</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102613933.png"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102627912.png"></p>
+<h5 id="5-测试生产者发送Route-key为info的消息时"><a href="#5-测试生产者发送Route-key为info的消息时" class="headerlink" title="5.测试生产者发送Route key为info的消息时"></a>5.测试生产者发送Route key为info的消息时</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102925740.png"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316102947326.png"></p>
 <hr>
 <h4 id="4-6-2-Routing-之订阅模型-Topic"><a href="#4-6-2-Routing-之订阅模型-Topic" class="headerlink" title="4.6.2 Routing 之订阅模型-Topic"></a>4.6.2 Routing 之订阅模型-Topic</h4><p><code>Topic</code>类型的<code>Exchange</code>与<code>Direct</code>相比，都是可以根据<code>RoutingKey</code>把消息路由到不同的队列。只不过<code>Topic</code>类型<code>Exchange</code>可以让队列在绑定<code>Routing key</code> 的时候使用通配符！这种模型<code>Routingkey</code> 一般都是由一个或多个单词组成，多个单词之间以”.”分割，例如： <code>item.insert</code></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191127121900255.png" alt="image-20191127121900255"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20191127121900255.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 统配符</span>
 		<span class="token list punctuation">*</span> (star) can substitute for exactly one word.    匹配不多不少恰好1个词
 		<span class="token title important"><span class="token punctuation">#</span> (hash) can substitute for zero or more words.  匹配一个或多个词</span>
@@ -1040,8 +1040,8 @@ channel<span class="token punctuation">.</span><span class="token function">basi
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="4-测试结果-1"><a href="#4-测试结果-1" class="headerlink" title="4.测试结果"></a>4.测试结果</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316113935785.png" alt="image-20200316113935785"></p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316114000459.png" alt="image-20200316114000459"></p>
+<h5 id="4-测试结果-1"><a href="#4-测试结果-1" class="headerlink" title="4.测试结果"></a>4.测试结果</h5><p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316113935785.png"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200316114000459.png"></p>
 <h2 id="5-SpringBoot中使用RabbitMQ"><a href="#5-SpringBoot中使用RabbitMQ" class="headerlink" title="5. SpringBoot中使用RabbitMQ"></a>5. SpringBoot中使用RabbitMQ</h2><h3 id="5-0-搭建初始环境"><a href="#5-0-搭建初始环境" class="headerlink" title="5.0 搭建初始环境"></a>5.0 搭建初始环境</h3><h5 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h5><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-amqp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
@@ -1207,22 +1207,22 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <ul>
 <li><code>串行方式:</code> 将注册信息写入数据库后,发送注册邮件,再发送注册短信,以上三个任务全部完成后才返回给客户端。 这有一个问题是,邮件,短信并不是必须的,它只是一个通知,而这种做法让客户端等待没有必要等待的东西. </li>
 </ul>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-4860248.png" alt="这里写图片描述"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-4860248.png"></p>
 <ul>
 <li><code>并行方式: </code>将注册信息写入数据库后,发送邮件的同时,发送短信,以上三个任务完成后,返回给客户端,并行的方式能提高处理的时间。 </li>
 </ul>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211112660.png" alt="这里写图片描述"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211112660.png"></p>
 <ul>
 <li><p><code>消息队列:</code>假设三个业务节点分别使用50ms,串行方式使用时间150ms,并行使用时间100ms。虽然并行已经提高的处理时间,但是,前面说过,邮件和短信对我正常的使用网站没有任何影响，客户端没有必要等着其发送完成才显示注册成功,应该是写入数据库后就返回.  <code>消息队列</code>: 引入消息队列后，把发送邮件,短信不是必须的业务逻辑异步处理 </p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/592892-20190520220249900-1679743651.jpg" alt="img"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/592892-20190520220249900-1679743651.jpg"></p>
 </li>
 </ul>
 <p>由此可以看出,引入消息队列后，用户的响应时间就等于写入数据库的时间+写入消息队列的时间(可以忽略不计),引入消息队列后处理后,响应时间是串行的3倍,是并行的2倍。</p>
 <h3 id="6-2-应用解耦"><a href="#6-2-应用解耦" class="headerlink" title="6.2 应用解耦"></a>6.2 应用解耦</h3><p><code>场景：双11是购物狂节,用户下单后,订单系统需要通知库存系统,传统的做法就是订单系统调用库存系统的接口. </code></p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211247287.png" alt="这里写图片描述"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211247287.png"></p>
 <p>这种做法有一个缺点:</p>
 <p>当库存系统出现故障时,订单就会失败。 订单系统和库存系统高耦合.  引入消息队列 </p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211304085.png" alt="这里写图片描述"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211304085.png"></p>
 <ul>
 <li><p><code>订单系统:</code>用户下单后,订单系统完成持久化处理,将消息写入消息队列,返回用户订单下单成功。</p>
 </li>
@@ -1233,7 +1233,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <p>  <code>作用:</code> </p>
 <p>​            1.可以控制活动人数，超过此一定阀值的订单直接丢弃(我为什么秒杀一次都没有成功过呢^^) </p>
 <p>​            2.可以缓解短时间的高流量压垮应用(应用程序按自己的最大处理能力获取订单) </p>
-<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211341601.png" alt="这里写图片描述"></p>
+<p> <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/SouthEast-20191127211341601.png"></p>
 <p>1.用户的请求,服务器收到之后,首先写入消息队列,加入消息队列长度超过最大值,则直接抛弃用户请求或跳转到错误页面.  </p>
 <p>2.秒杀业务根据消息队列中的请求信息，再做后续处理.</p>
 <hr>
@@ -1244,7 +1244,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <ol>
 <li><h5 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h5></li>
 </ol>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320094147471.png" alt="image-20200320094147471"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320094147471.png"></p>
 <p>​    核心解决问题:  <code>当集群中某一时刻master节点宕机,可以对Quene中信息,进行备份</code></p>
 <ol start="2">
 <li><h5 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h5><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 0.集群规划</span>
@@ -1291,19 +1291,19 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 
 <span class="token title important"><span class="token punctuation">#</span> 8.登录管理界面,展示如下状态:</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095613586.png" alt="image-20200320095613586"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095613586.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 9.测试集群在node1上,创建队列</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095743935.png" alt="image-20200320095743935"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095743935.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 10.查看node2和node3节点:</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095827688.png" alt="image-20200320095827688"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095843370.png" alt="image-20200320095843370"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095827688.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320095843370.png"></p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 11.关闭node1节点,执行如下命令,查看node2和node3:</span>
 	rabbitmqctl stop_app<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320100000347.png" alt="image-20200320100000347"></p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320100010968.png" alt="image-20200320100010968"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320100000347.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320100010968.png"></p>
 <hr>
 </li>
 </ol>
@@ -1313,7 +1313,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 </blockquote>
 <p><code>镜像队列机制就是将队列在三个节点之间设置主从关系，消息会在三个节点之间进行自动同步，且如果其中一个节点不可用，并不会导致消息丢失或服务不可用的情况，提升MQ集群的整体高可用性。</code></p>
 <ol>
-<li><h5 id="集群架构图"><a href="#集群架构图" class="headerlink" title="集群架构图"></a>集群架构图</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320113423235.png" alt="image-20200320113423235"></p>
+<li><h5 id="集群架构图"><a href="#集群架构图" class="headerlink" title="集群架构图"></a>集群架构图</h5><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/RibbitMQImage/image-20200320113423235.png"></p>
 </li>
 <li><h5 id="配置集群架构"><a href="#配置集群架构" class="headerlink" title="配置集群架构"></a>配置集群架构</h5><pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">#</span> 0.策略说明</span>
 	rabbitmqctl set_policy <span class="token url">[<span class="token content">-p &lt;vhost></span>] [<span class="token variable">--priority &lt;priority></span>]</span> [--apply-to <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>apply-to</span><span class="token punctuation">></span></span>] <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pattern</span><span class="token punctuation">></span></span>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>definition</span><span class="token punctuation">></span></span>
