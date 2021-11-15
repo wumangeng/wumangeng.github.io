@@ -128,7 +128,7 @@
     <link href="http://wumangeng.github.io/2021/10/02/nio/"/>
     <id>http://wumangeng.github.io/2021/10/02/nio/</id>
     <published>2021-10-02T07:10:30.000Z</published>
-    <updated>2021-10-20T06:26:26.315Z</updated>
+    <updated>2021-11-15T03:07:52.301Z</updated>
     
     
       
@@ -144,8 +144,6 @@
     <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
     <category term="NIO" scheme="http://wumangeng.github.io/tags/NIO/"/>
     
   </entry>
@@ -155,7 +153,7 @@
     <link href="http://wumangeng.github.io/2021/09/06/bio/"/>
     <id>http://wumangeng.github.io/2021/09/06/bio/</id>
     <published>2021-09-06T07:10:30.000Z</published>
-    <updated>2021-11-11T03:35:24.825Z</updated>
+    <updated>2021-11-15T03:08:42.507Z</updated>
     
     
       
@@ -171,8 +169,6 @@
     
     <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
     
     <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
     
