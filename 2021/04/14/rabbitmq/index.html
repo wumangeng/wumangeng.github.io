@@ -1106,32 +1106,36 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 </li>
 </ol>
 <h3 id="5-3-Fanout-广播模型"><a href="#5-3-Fanout-广播模型" class="headerlink" title="5.3 Fanout 广播模型"></a>5.3 Fanout 广播模型</h3><ol>
-<li><h5 id="开发生产者-2"><a href="#开发生产者-2" class="headerlink" title="开发生产者"></a>开发生产者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
-<span class="token keyword">private</span> <span class="token class-name">RabbitTemplate</span> rabbitTemplate<span class="token punctuation">;</span>
+<li><h5 id="开发生产者-2"><a href="#开发生产者-2" class="headerlink" title="开发生产者"></a>开发生产者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java">       <span class="token annotation punctuation">@Autowired</span>
+         <span class="token keyword">private</span> <span class="token class-name">RabbitTemplate</span> rabbitTemplate<span class="token punctuation">;</span>
+         
+         <span class="token annotation punctuation">@Test</span>
+         <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testFanout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+           rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"logs"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token string">"这是日志广播"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">&#125;</span>
 
-<span class="token annotation punctuation">@Test</span>
-<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testFanout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
-  rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"logs"</span><span class="token punctuation">,</span><span class="token string">""</span><span class="token punctuation">,</span><span class="token string">"这是日志广播"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><h5 id="开发消费者-2"><a href="#开发消费者-2" class="headerlink" title="开发消费者"></a>开发消费者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FanoutCustomer</span> <span class="token punctuation">&#123;</span>
+<span class="token number">2.</span> ##### 开发消费者
 
-    <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span> <span class="token annotation punctuation">@QueueBinding</span><span class="token punctuation">(</span>
-            value <span class="token operator">=</span> <span class="token annotation punctuation">@Queue</span><span class="token punctuation">,</span>
-            exchange <span class="token operator">=</span> <span class="token annotation punctuation">@Exchange</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"logs"</span><span class="token punctuation">,</span>type <span class="token operator">=</span> <span class="token string">"fanout"</span><span class="token punctuation">)</span>
-    <span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receive1</span><span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"message1 = "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span> <span class="token annotation punctuation">@QueueBinding</span><span class="token punctuation">(</span>
-            value <span class="token operator">=</span> <span class="token annotation punctuation">@Queue</span><span class="token punctuation">,</span> <span class="token comment">//创建临时队列</span>
-            exchange <span class="token operator">=</span> <span class="token annotation punctuation">@Exchange</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"logs"</span><span class="token punctuation">,</span>type <span class="token operator">=</span> <span class="token string">"fanout"</span><span class="token punctuation">)</span>  <span class="token comment">//绑定交换机类型</span>
-    <span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receive2</span><span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"message2 = "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+   ```java
+   <span class="token annotation punctuation">@Component</span>
+   <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FanoutCustomer</span> <span class="token punctuation">&#123;</span>
+   
+       <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span> <span class="token annotation punctuation">@QueueBinding</span><span class="token punctuation">(</span>
+               value <span class="token operator">=</span> <span class="token annotation punctuation">@Queue</span><span class="token punctuation">,</span>
+               exchange <span class="token operator">=</span> <span class="token annotation punctuation">@Exchange</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"logs"</span><span class="token punctuation">,</span>type <span class="token operator">=</span> <span class="token string">"fanout"</span><span class="token punctuation">)</span>
+       <span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receive1</span><span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"message1 = "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+   
+       <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span> <span class="token annotation punctuation">@QueueBinding</span><span class="token punctuation">(</span>
+               value <span class="token operator">=</span> <span class="token annotation punctuation">@Queue</span><span class="token punctuation">,</span> <span class="token comment">//创建临时队列</span>
+               exchange <span class="token operator">=</span> <span class="token annotation punctuation">@Exchange</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"logs"</span><span class="token punctuation">,</span>type <span class="token operator">=</span> <span class="token string">"fanout"</span><span class="token punctuation">)</span>  <span class="token comment">//绑定交换机类型</span>
+       <span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receive2</span><span class="token punctuation">(</span><span class="token class-name">String</span> message<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"message2 = "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ol>
 <h3 id="5-4-Route-路由模型"><a href="#5-4-Route-路由模型" class="headerlink" title="5.4 Route 路由模型"></a>5.4 Route 路由模型</h3><ol>
 <li><h5 id="开发生产者-3"><a href="#开发生产者-3" class="headerlink" title="开发生产者"></a>开发生产者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
@@ -1141,7 +1145,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testDirect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"directs"</span><span class="token punctuation">,</span><span class="token string">"error"</span><span class="token punctuation">,</span><span class="token string">"error 的日志信息"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><h5 id="开发消费者-3"><a href="#开发消费者-3" class="headerlink" title="开发消费者"></a>开发消费者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<li><h5 id="开发消费者-2"><a href="#开发消费者-2" class="headerlink" title="开发消费者"></a>开发消费者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DirectCustomer</span> <span class="token punctuation">&#123;</span>
 
     <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span><span class="token punctuation">&#123;</span>
@@ -1175,7 +1179,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testTopic</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
   rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"topics"</span><span class="token punctuation">,</span><span class="token string">"user.save.findAll"</span><span class="token punctuation">,</span><span class="token string">"user.save.findAll 的消息"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><h5 id="开发消费者-4"><a href="#开发消费者-4" class="headerlink" title="开发消费者"></a>开发消费者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<li><h5 id="开发消费者-3"><a href="#开发消费者-3" class="headerlink" title="开发消费者"></a>开发消费者</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TopCustomer</span> <span class="token punctuation">&#123;</span>
     <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>bindings <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
             <span class="token annotation punctuation">@QueueBinding</span><span class="token punctuation">(</span>
@@ -1371,7 +1375,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/04/14/ribbitmq/">http://wumangeng.github.io/2021/04/14/ribbitmq/</a>
+                    <a href="http://wumangeng.github.io/2021/04/14/rabbitmq/">http://wumangeng.github.io/2021/04/14/rabbitmq/</a>
                 </span>
             </div>
             <div class="reprint__notice">

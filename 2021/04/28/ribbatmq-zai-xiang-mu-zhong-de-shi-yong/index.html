@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿里云对象存储(oss)的使用姿势, 山河远阔">
+    <meta name="keywords" content="RabbitMQ">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>阿里云对象存储(oss)的使用姿势 | 山河远阔</title>
+    <title>Springboot中使用RabbitMQ | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=1609584650,2929177914&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">阿里云对象存储(oss)的使用姿势</h1>
+                    <h1 class="description center-align post-title">Springboot中使用RabbitMQ</h1>
                 </div>
             </div>
         </div>
@@ -433,8 +433,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/oss/">
-                                <span class="chip bg-color">oss</span>
+                            <a href="/tags/RabbitMQ/">
+                                <span class="chip bg-color">RabbitMQ</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                                <span class="chip bg-color">消息中间件</span>
                             </a>
                         
                     </div>
@@ -445,8 +449,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/" class="post-category">
-                                阿里云服务
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
+                                消息中间件
                             </a>
                         
                     </div>
@@ -467,7 +471,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-20
+                    2021-04-28
                 </div>
                 
 
@@ -491,138 +495,266 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="阿里云OSS使用"><a href="#阿里云OSS使用" class="headerlink" title="阿里云OSS使用"></a>阿里云OSS使用</h1><ul>
-<li>首先在使用之前请先确保你已经申请了阿里云的oss对象存储服务（如果没有请先申请）</li>
-<li>请先获取到oss的 endpoint、keyid、keysecret、bucketname的值（每个人都不一样）</li>
-</ul>
-<h4 id="1、创建一个新的模块"><a href="#1、创建一个新的模块" class="headerlink" title="1、创建一个新的模块"></a>1、创建一个新的模块</h4><p>配置文件为：</p>
-<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token comment">#服务名</span>
-<span class="token attr-name">spring.application.name</span><span class="token punctuation">=</span><span class="token attr-value">service-oss</span>
+                <h1 id="Springboot中使用RabbitMQ"><a href="#Springboot中使用RabbitMQ" class="headerlink" title="Springboot中使用RabbitMQ"></a>Springboot中使用RabbitMQ</h1><p><a target="_blank" rel="noopener" href="https://rabbitmq.com/documentation.html">rabbitMQ官方文档</a></p>
+<h2 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h2><h4 id="1-1、使用docker安装rabbitMQ"><a href="#1-1、使用docker安装rabbitMQ" class="headerlink" title="1.1、使用docker安装rabbitMQ"></a>1.1、使用docker安装rabbitMQ</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 -p 4369:4369 -p 25672:25672 -p 15671:15671 -p 15672:15672 rabbitmq:management
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<span class="token attr-name">server.port</span><span class="token punctuation">=</span><span class="token attr-value">8086</span>
+<p>端口说明：</p>
+<pre class="line-numbers language-none"><code class="language-none">4369，25672  Erlang发现，集群端口
+5672，5671   AMQP端口
+15672        web管理后台端口
+61613，61614 STOMP协议端口
+1883，8883   MQTT协议端口<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token attr-name">spring.profiles.active</span><span class="token punctuation">=</span><span class="token attr-value">dev</span>
+<p>端口详细说明查看<a target="_blank" rel="noopener" href="https://rabbitmq.com/networking.html">RabbitMQ端口说明</a></p>
+<p>启动完毕登录web管理页面 ：  <a target="_blank" rel="noopener" href="http://ip:15672/">http://ip:15672/</a>   账号密码都是  guest</p>
+<h4 id="1-2、创建项目"><a href="#1-2、创建项目" class="headerlink" title="1.2、创建项目"></a>1.2、创建项目</h4><ol>
+<li><p>创建Springboot项目，导入RabbitMQ依赖：</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-amqp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>配置文件配置连接信息</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
+  rabbitmq:
+    host: 192.168.5.37
+    port: 5672
+    #账号密码
+    username: guest
+    password: guest
+    # 虚拟主机名字
+    virtual-host: &#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>启动类添加 <strong>@EnableRabbit</strong>注解</p>
+</li>
+</ol>
+<h2 id="2、创建exchange、queue、binding"><a href="#2、创建exchange、queue、binding" class="headerlink" title="2、创建exchange、queue、binding"></a>2、创建exchange、queue、binding</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
+  <span class="token keyword">private</span> <span class="token class-name">AmqpAdmin</span> amqpAdmin<span class="token punctuation">;</span>
 
-<span class="token comment">#阿里云oss配置 （以下信息替换成你自己的）</span>
-<span class="token attr-name">aliyun.oss.file.endpoint</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keyid</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token attr-name">aliyun.oss.file.keysecret</span><span class="token punctuation">=</span><span class="token attr-value">***</span>
-<span class="token comment">#bucket可以在控制台创建，也可以使用java代码创建</span>
-<span class="token attr-name">aliyun.oss.file.bucketname</span><span class="token punctuation">=</span><span class="token attr-value">***</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token comment">/**
+   * 创建交换机(Exchange)、队列(Queue)、绑定(Binding)
+   * */</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 
-<h4 id="2、创建utils、controller、service包-和-启动类"><a href="#2、创建utils、controller、service包-和-启动类" class="headerlink" title="2、创建utils、controller、service包 和 启动类"></a>2、创建utils、controller、service包 和 启动类</h4><p>启动类为：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootApplication</span><span class="token punctuation">(</span>exclude <span class="token operator">=</span> <span class="token class-name">DataSourceAutoConfiguration</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>  <span class="token comment">//配置启动类不加载数据库</span>
-<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>basePackages <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"com.hscs"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>		<span class="token comment">//扫描包</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssApplication</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">OssApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
+      <span class="token comment">// 创建交换机  参数：交换机名字，是否持久化，是否自动删除，自定义参数</span>
+      <span class="token class-name">DirectExchange</span> directExchange <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DirectExchange</span><span class="token punctuation">(</span><span class="token string">"java-exchange"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      amqpAdmin<span class="token punctuation">.</span><span class="token function">declareExchange</span><span class="token punctuation">(</span>directExchange<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+      <span class="token comment">//创建队列   参数：队列名，是否持久化，是否排它（只能被声明的连接使用，一旦连接其它无法连接），是否自动删除，自定义参数</span>
+      <span class="token class-name">Queue</span> queue <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span><span class="token string">"java-queue"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">,</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      amqpAdmin<span class="token punctuation">.</span><span class="token function">declareQueue</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<h4 id="3、在utils包下创建ConstantPropertiesUtlis类"><a href="#3、在utils包下创建ConstantPropertiesUtlis类" class="headerlink" title="3、在utils包下创建ConstantPropertiesUtlis类"></a>3、在utils包下创建ConstantPropertiesUtlis类</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConstantPropertiesUtlis</span> <span class="token keyword">implements</span> <span class="token class-name">InitializingBean</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">/**
+       *  创建绑定关系 参数：
+       *  String destination, 目的地 (队列名或者交换机名)
+       *  Binding.DestinationType destinationType, 目的地类型(队列或者交换机)
+       *  String exchange,    交换机
+       *  String routingKey,  路由键
+       *  @Nullable Map&lt;String, Object> arguments   自定义参数
+       */</span>
+      <span class="token class-name">Binding</span> binding <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Binding</span><span class="token punctuation">(</span><span class="token string">"java-queue"</span><span class="token punctuation">,</span>
+              <span class="token class-name">Binding<span class="token punctuation">.</span>DestinationType</span><span class="token punctuation">.</span>QUEUE<span class="token punctuation">,</span>
+              <span class="token string">"java-exchange"</span><span class="token punctuation">,</span>
+              <span class="token string">"java"</span><span class="token punctuation">,</span>
+              <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      amqpAdmin<span class="token punctuation">.</span><span class="token function">declareBinding</span><span class="token punctuation">(</span>binding<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&#123;aliyun.oss.file.endpoint&#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> endpoint<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&#123;aliyun.oss.file.keyid&#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> keyId<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&#123;aliyun.oss.file.keysecret&#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> keySecret<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&#123;aliyun.oss.file.bucketname&#125;"</span><span class="token punctuation">)</span>
-    <span class="token keyword">private</span> <span class="token class-name">String</span> bucketName<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> END_POINT<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> KEY_ID<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> KEY_SECRET<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> BUCKET_NAME<span class="token punctuation">;</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">afterPropertiesSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">&#123;</span>
-        END_POINT<span class="token operator">=</span>endpoint<span class="token punctuation">;</span>
-        KEY_ID<span class="token operator">=</span>keyId<span class="token punctuation">;</span>
-        KEY_SECRET<span class="token operator">=</span>keySecret<span class="token punctuation">;</span>
-        BUCKET_NAME<span class="token operator">=</span>bucketName<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="4、创建controller类"><a href="#4、创建controller类" class="headerlink" title="4、创建controller类"></a>4、创建controller类</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
-<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"oss/fileoss"</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@CrossOrigin</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssController</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> <span class="token class-name">OssService</span> ossService<span class="token punctuation">;</span>
+<h2 id="3、收发消息"><a href="#3、收发消息" class="headerlink" title="3、收发消息"></a>3、收发消息</h2><p>配置使用JSON序列化消息内容：RabbitConfig</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitConfig</span> <span class="token punctuation">&#123;</span>
 
     <span class="token comment">/**
-     * 上传头像
+     * 配置使用JSON序列化消息内容
      * */</span>
-    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token keyword">public</span> <span class="token class-name">R</span> <span class="token function">uploadFileOss</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> file<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> url<span class="token operator">=</span>ossService<span class="token punctuation">.</span><span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token class-name">R</span><span class="token punctuation">.</span><span class="token function">ok</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token string">"url"</span><span class="token punctuation">,</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">MessageConverter</span> <span class="token function">messageConverter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Jackson2JsonMessageConverter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>发送消息</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
+<span class="token keyword">private</span> <span class="token class-name">RabbitTemplate</span> rabbitTemplate<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sendMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">//发送消息  参数：交换机，路由键，消息</span>
+    rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span><span class="token string">"java-exchange"</span><span class="token punctuation">,</span><span class="token string">"java"</span><span class="token punctuation">,</span><span class="token string">"msg"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>接收消息</strong></p>
+<p> @RabbitListener ：用在方法或类上  用于接收消息，放在类上时表示监听哪些队列，接收方法使用@RabbitHandler</p>
+<p>@RabbitHandler ： 只能用在方法上  用于重载接收不同参数的消息</p>
+<p>多个服务监听同一个队列时，同一条消息只会被一个服务消费</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * queues：声明需要监听的队列名
+ * 方法参数可以写以下类型：
+ * 1、Message message：原生消息类型：消息头+消息体
+ * 2、T&lt;发送消息的类型> 
+ */</span>
+<span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>queues <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"java-queue"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveMessage</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">//消息体</span>
+    <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> body <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//消息头</span>
+    <span class="token class-name">MessageProperties</span> properties <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4、消息确认机制"><a href="#4、消息确认机制" class="headerlink" title="4、消息确认机制"></a>4、消息确认机制</h2><p>保证消息不丢失，可靠抵达，可以使用事务消息，性能下降250倍。</p>
+<img src="https://img1.baidu.com/it/u=3116913352,2299300798&fm=15&fmt=auto"/>
+
+<h4 id="4-1、消息抵达p-gt-b"><a href="#4-1、消息抵达p-gt-b" class="headerlink" title="4.1、消息抵达p-&gt;b"></a>4.1、消息抵达p-&gt;b</h4><p>消息由product-&gt;Broker</p>
+<ol>
+<li>配置文件添加 发送消息确认机制</li>
+</ol>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
+  rabbitmq:
+    host: 192.168.5.37
+    port: 5672
+    #账号密码
+    username: guest
+    password: guest
+    # 虚拟主机名字
+    virtual-host: &#x2F;
+    #开启消息发送端（生产者）确认机制
+    publisher-confirms: true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>配置类配置RabbitTemplate，设置确认回调</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitConfig</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">RabbitTemplate</span> rabbitTemplate<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * 配置使用JSON序列化消息内容
+     * */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">MessageConverter</span> <span class="token function">messageConverter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Jackson2JsonMessageConverter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 
+    <span class="token comment">/**
+     * 配置消息发送端确认模式
+     * */</span>
+    <span class="token annotation punctuation">@PostConstruct</span>   <span class="token comment">//构造器创建后执行此方法</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">initRabbitTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        rabbitTemplate<span class="token punctuation">.</span><span class="token function">setConfirmCallback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RabbitTemplate<span class="token punctuation">.</span>ConfirmCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// correlationData 当前消息唯一关联数据（消息id） b 消息是否成功收到  s 失败的原因</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">confirm</span><span class="token punctuation">(</span><span class="token class-name">CorrelationData</span> correlationData<span class="token punctuation">,</span> <span class="token keyword">boolean</span> b<span class="token punctuation">,</span> <span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-2、消息抵达b-gt-q"><a href="#4-2、消息抵达b-gt-q" class="headerlink" title="4.2、消息抵达b-&gt;q"></a>4.2、消息抵达b-&gt;q</h4><ol>
+<li>配置抵达队列确认</li>
+</ol>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
+  rabbitmq:
+    host: 192.168.5.37
+    port: 5672
+    #账号密码
+    username: guest
+    password: guest
+    # 虚拟主机名字
+    virtual-host: &#x2F;
+    #开启消息发送端（生产者）确认机制
+    publisher-confirms: true
+    #开启发送失败退回（消息有没有找到合适的队列）
+    publisher-returns: true
+	#只要抵达队列，以异步模式优先回调
+    template:
+      mandatory: true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>配置类配置RabbitTemplate，设置确认回调</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * 配置消息发送端确认模式
+ * */</span>
+<span class="token annotation punctuation">@PostConstruct</span>   <span class="token comment">//构造器创建后执行此方法</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">initRabbitTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    rabbitTemplate<span class="token punctuation">.</span><span class="token function">setConfirmCallback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RabbitTemplate<span class="token punctuation">.</span>ConfirmCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// correlationData 当前消息唯一关联数据（消息id） b 消息是否成功收到  s 失败的原因</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">confirm</span><span class="token punctuation">(</span><span class="token class-name">CorrelationData</span> correlationData<span class="token punctuation">,</span> <span class="token keyword">boolean</span> b<span class="token punctuation">,</span> <span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    rabbitTemplate<span class="token punctuation">.</span><span class="token function">setReturnsCallback</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">RabbitTemplate<span class="token punctuation">.</span>ReturnsCallback</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//只要消息没有抵达指定队列就触发此回调</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">returnedMessage</span><span class="token punctuation">(</span><span class="token class-name">ReturnedMessage</span> returnedMessage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="5、创建业务接口和实现接口类"><a href="#5、创建业务接口和实现接口类" class="headerlink" title="5、创建业务接口和实现接口类"></a>5、创建业务接口和实现接口类</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//接口</span>
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OssService</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">String</span> <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> file<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
+<h4 id="4-3、消息消费q-gt-c"><a href="#4-3、消息消费q-gt-c" class="headerlink" title="4.3、消息消费q-&gt;c"></a>4.3、消息消费q-&gt;c</h4><p>默认是自动确认的，只要消息被接收就会自动从队列中移除</p>
+<ol>
+<li>配置手动确认模式</li>
+</ol>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
+  rabbitmq:
+    host: 192.168.5.37
+    port: 5672
+    #账号密码
+    username: guest
+    password: guest
+    # 虚拟主机名字
+    virtual-host: &#x2F;
+    #开启消息发送端（生产者）确认机制
+    publisher-confirms: true
+    #开启发送失败退回（消息有没有找到合适的队列）
+    publisher-returns: true
+    #只要抵达队列，以异步模式优先回调
+    template:
+      mandatory: true
+    #手动确认机制
+    listener:
+      simple:
+        acknowledge-mode: manual<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">//类</span>
-<span class="token comment">/**
- * @author wmg
- *  文件上传业务实现
- */</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OssServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">OssService</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">uploadFileAvatar</span><span class="token punctuation">(</span><span class="token class-name">MultipartFile</span> file<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">String</span> endpoint <span class="token operator">=</span> <span class="token class-name">ConstantPropertiesUtlis</span><span class="token punctuation">.</span>END_POINT<span class="token punctuation">;</span>
-        <span class="token class-name">String</span> accessKeyId <span class="token operator">=</span> <span class="token class-name">ConstantPropertiesUtlis</span><span class="token punctuation">.</span>KEY_ID<span class="token punctuation">;</span>
-        <span class="token class-name">String</span> accessKeySecret <span class="token operator">=</span> <span class="token class-name">ConstantPropertiesUtlis</span><span class="token punctuation">.</span>KEY_SECRET<span class="token punctuation">;</span>
-        <span class="token class-name">String</span> bucketName<span class="token operator">=</span><span class="token class-name">ConstantPropertiesUtlis</span><span class="token punctuation">.</span>BUCKET_NAME<span class="token punctuation">;</span>
-
-        <span class="token keyword">try</span><span class="token punctuation">&#123;</span>
-            <span class="token comment">// 创建OSSClient实例。</span>
-            <span class="token class-name">OSS</span> ossClient <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OSSClientBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span>endpoint<span class="token punctuation">,</span> accessKeyId<span class="token punctuation">,</span> accessKeySecret<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">//获取文件名称</span>
-            <span class="token class-name">String</span> fileName <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getOriginalFilename</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//在文件里面添加随机唯一的id值，避免名字重复造成文件覆盖</span>
-            <span class="token class-name">String</span> uuid <span class="token operator">=</span> UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replaceAll</span><span class="token punctuation">(</span><span class="token string">"-"</span><span class="token punctuation">,</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>uuid<span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment">//将文件按日期分类</span>
-            <span class="token class-name">String</span> datePath <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            fileName<span class="token operator">=</span>datePath<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-            <span class="token comment">// 上传文件流。</span>
-            <span class="token class-name">InputStream</span> inputStream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">getInputStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//第一个参数为bucket名  第二个参数为上传文件路径</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">putObject</span><span class="token punctuation">(</span>bucketName<span class="token punctuation">,</span> fileName<span class="token punctuation">,</span> inputStream<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-            <span class="token comment">//将上传路径返回  https://home-school-communication.oss-cn-guangzhou.aliyuncs.com/image/1.jpg</span>
-            <span class="token class-name">String</span> url<span class="token operator">=</span><span class="token string">"https://"</span><span class="token operator">+</span>bucketName<span class="token operator">+</span><span class="token string">"."</span><span class="token operator">+</span>endpoint<span class="token operator">+</span><span class="token string">"/"</span><span class="token operator">+</span>fileName<span class="token punctuation">;</span>
-
-
-            <span class="token comment">// 关闭OSSClient。</span>
-            ossClient<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> url<span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"图片上传失败！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<ol start="2">
+<li>手动确认</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RabbitHandler</span>    
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveMessage</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Object</span> obj<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	<span class="token comment">//.....业务处理</span>
+        <span class="token comment">//消息头</span>
+        <span class="token class-name">MessageProperties</span> properties <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//签收货物 参数：channel内消息顺序， 是否批量确认(false逐个确认)</span>
+            channel<span class="token punctuation">.</span><span class="token function">basicAck</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
             e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"网络中断"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
+<ol start="3">
+<li>拒接货物</li>
+</ol>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RabbitHandler</span>   
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveMessage</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Object</span> obj<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token comment">//消息体</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> body <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//消息头</span>
+        <span class="token class-name">MessageProperties</span> properties <span class="token operator">=</span> message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//拒接货物 方式1 参数：channel内消息顺序， 是否批量， 是否重新入队</span>
+            channel<span class="token punctuation">.</span><span class="token function">basicNack</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//拒接货物 方式2 参数：channel内消息顺序， 是否重新入队</span>
+            channel<span class="token punctuation">.</span><span class="token function">basicReject</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>err<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"网络中断"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
@@ -650,7 +782,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/">http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</a>
+                    <a href="http://wumangeng.github.io/2021/04/28/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/">http://wumangeng.github.io/2021/04/28/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -688,8 +820,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/oss/">
-                                    <span class="chip bg-color">oss</span>
+                                <a href="/tags/RabbitMQ/">
+                                    <span class="chip bg-color">RabbitMQ</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
+                                    <span class="chip bg-color">消息中间件</span>
                                 </a>
                             
                         </div>
@@ -865,18 +1001,18 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/05/20/a-li-yun-shi-pin-dian-bo/">
+                <a href="/2021/05/20/a-li-yun-oss/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=3124216371,777411843&fm=26&fmt=auto" class="responsive-img" alt="阿里云视频点播(sdk)的使用姿势">
+                        <img src="https://img1.baidu.com/it/u=3260373333,3898703681&fm=26&fmt=auto" class="responsive-img" alt="阿里云对象存储(oss)的使用姿势">
                         
-                        <span class="card-title">阿里云视频点播(sdk)的使用姿势</span>
+                        <span class="card-title">阿里云对象存储(oss)的使用姿势</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            本文将演示sdk在java服务端的使用方式。
+                            本文将演示oss在java服务端的使用方式。
                         
                     </div>
                     <div class="publish-info">
@@ -898,8 +1034,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sdk/">
-                        <span class="chip bg-color">sdk</span>
+                    <a href="/tags/oss/">
+                        <span class="chip bg-color">oss</span>
                     </a>
                     
                 </div>
@@ -913,30 +1049,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/28/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/">
+                <a href="/2021/04/25/centos7-an-zhuang-go-fastdfs/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=1609584650,2929177914&fm=26&fmt=auto" class="responsive-img" alt="Springboot中使用RabbitMQ">
+                        <img src="https://img0.baidu.com/it/u=546089431,36503233&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=287" class="responsive-img" alt="CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web">
                         
-                        <span class="card-title">Springboot中使用RabbitMQ</span>
+                        <span class="card-title">CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Springboot中使用RabbitMQ
+                            本文将介绍在CentOS 7 中安装go-fastdfs及可视化界面go-fastdfs-web。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-25
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-category">
-                                    消息中间件
+                            <a href="/categories/go-fastdfs/" class="post-category">
+                                    go-fastdfs
                                 </a>
                             
                             
@@ -946,12 +1082,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/RabbitMQ/">
-                        <span class="chip bg-color">RabbitMQ</span>
+                    <a href="/tags/CentOS7/">
+                        <span class="chip bg-color">CentOS7</span>
                     </a>
                     
-                    <a href="/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/">
-                        <span class="chip bg-color">消息中间件</span>
+                    <a href="/tags/go-fastdfs/">
+                        <span class="chip bg-color">go-fastdfs</span>
                     </a>
                     
                 </div>
