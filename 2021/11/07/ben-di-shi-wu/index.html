@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="redis集群">
+    <meta name="keywords" content="事务">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis-Cluster集群搭建 | 山河远阔</title>
+    <title>本地事务的坑 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2106353876,4138672594&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2675676491,1895675049&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis-Cluster集群搭建</h1>
+                    <h1 class="description center-align post-title">本地事务的坑</h1>
                 </div>
             </div>
         </div>
@@ -433,12 +433,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
-                                <span class="chip bg-color">redis集群</span>
+                            <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                                <span class="chip bg-color">事务</span>
                             </a>
                         
-                            <a href="/tags/redis/">
-                                <span class="chip bg-color">redis</span>
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
+                            </a>
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
                             </a>
                         
                     </div>
@@ -449,8 +453,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/redis/" class="post-category">
-                                redis
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
                             </a>
                         
                     </div>
@@ -471,7 +475,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-04
+                    2021-11-07
                 </div>
                 
 
@@ -495,371 +499,334 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Redis-Cluster集群搭建"><a href="#Redis-Cluster集群搭建" class="headerlink" title="Redis-Cluster集群搭建"></a>Redis-Cluster集群搭建</h1><p>Redis作为基于键值对的NoSQL数据库，具有高性能、丰富的数据结构、持久化、高可用、分布式等特性，同时Redis本身非常稳定，已经得到业界的广泛认可和使用。</p>
-<p>在Redis中，集群的解决方案有三种：</p>
-<ol>
-<li>主从复制</li>
-<li>哨兵机制</li>
-<li>Cluster</li>
-</ol>
-<p>Redis Cluster是Redis的分布式解决方案，在 3.0 版本正式推出。</p>
-<h2 id="集群方案的对比"><a href="#集群方案的对比" class="headerlink" title="集群方案的对比"></a>集群方案的对比</h2><p><strong>1. 主从复制</strong></p>
-<p>同Mysql主从复制的原因一样，Redis虽然读取写入的速度都特别快，但是也会产生读压力特别大的情况。为了分担读压力，Redis支持主从复制，读写分离。一个Master可以有多个Slaves。</p>
-<p><img src="https://img0.baidu.com/it/u=826591689,2436190742&fm=26&fmt=auto"></p>
-<p>优点</p>
-<ul>
-<li>数据备份</li>
-<li>读写分离，提高服务器性能</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>不能自动故障恢复,RedisHA系统（需要开发）</li>
-<li>无法实现动态扩容</li>
-</ul>
-<p><strong>2. 哨兵机制</strong></p>
-<p>Redis Sentinel是社区版本推出的原生<strong>高可用</strong>解决方案，其部署架构主要包括两部分：Redis Sentinel集群和Redis数据集群。</p>
-<p>其中Redis Sentinel集群是由若干Sentinel节点组成的分布式集群，可以实现故障发现、故障自动转移、配置中心和客户端通知。Redis Sentinel的节点数量要满足2n+1（n&gt;=1）的奇数个。</p>
-<img src="https://img0.baidu.com/it/u=221994883,4069749511&fm=253&fmt=auto&app=138&f=PNG?w=717&h=405" style="zoom:67%;" />
-
-<p>优点</p>
-<ul>
-<li>自动化故障恢复</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>Redis 数据节点中 slave 节点作为备份节点不提供服务</li>
-<li>无法实现动态扩容</li>
-</ul>
-<p><strong>3. Redis-Cluster</strong></p>
-<p>Redis Cluster是社区版推出的Redis分布式集群解决方案，主要解决Redis分布式方面的需求，比如，当遇到单机内存，并发和流量等瓶颈的时候，Redis Cluster能起到很好的负载均衡的目的。</p>
-<p>Redis Cluster着眼于<code>提高并发量</code>。</p>
-<p>群集至少需要3主3从，且每个实例使用不同的配置文件。</p>
-<p>在redis-cluster架构中，<code>redis-master节点一般用于接收读写，而redis-slave节点则一般只用于备份</code>， 其与对应的master拥有相同的slot集合，若某个redis-master意外失效，则再将其对应的slave进行升级为临时redis-master。</p>
-<p>在redis的官方文档中，对redis-cluster架构上，有这样的说明：在cluster架构下，默认的，一般redis-master用于接收读写，而redis-slave则用于备份，<code>当有请求是在向slave发起时，会直接重定向到对应key所在的master来处理</code>。 但如果不介意读取的是redis-cluster中有可能过期的数据并且对写请求不感兴趣时，则亦可通过<code>readonly</code>命令，将slave设置成可读，然后通过slave获取相关的key，达到读写分离。具体可以参阅redis<a target="_blank" rel="noopener" href="https://redis.io/commands/readonly">官方文档</a>等相关内容</p>
-<p><img src="https://img0.baidu.com/it/u=483825446,3728742724&fm=15&fmt=auto" alt="img"></p>
-<p>优点</p>
-<ul>
-<li>解决分布式负载均衡的问题。具体解决方案是分片/虚拟槽slot。</li>
-<li>可实现动态扩容</li>
-<li>P2P模式，无中心化</li>
-</ul>
-<p>缺点</p>
-<ul>
-<li>为了性能提升，客户端需要缓存路由表信息</li>
-<li>Slave在集群中充当“冷备”，不能缓解读压力</li>
-</ul>
-<h2 id="网络规划"><a href="#网络规划" class="headerlink" title="网络规划"></a>网络规划</h2><p>这里没有搭建虚拟机环境，全部在本地部署。本机的ip为 <code>192.168.5.37</code></p>
+                <h3 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h3><p><strong>事务的定义</strong></p>
+<p>所谓事务,它是一个操作集合，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
+<p><strong>事务有4个重要特性：ACID</strong></p>
 <table>
 <thead>
 <tr>
-<th>ip</th>
-<th>port</th>
+<th align="center">原子性（Atomicity）</th>
+<th>当事务结束，它对所有资源状态的改变都被视为一个操作，这些操作要不同时成功，要不同时失败</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>172.18.0.3</td>
-<td>7001</td>
+<td align="center">一致性（Consistency）</td>
+<td>操作完成后，所有数据必须符合业务规则，否则事务必须中止</td>
 </tr>
 <tr>
-<td>172.18.0.4</td>
-<td>7002</td>
+<td align="center">隔离性（Isolation）</td>
+<td>事务以相互隔离的方式执行，事务以外的实体无法知道事务过程中的中间状态</td>
 </tr>
 <tr>
-<td>172.18.0.5</td>
-<td>7003</td>
-</tr>
-<tr>
-<td>172.18.0.6</td>
-<td>7004</td>
-</tr>
-<tr>
-<td>172.18.0.7</td>
-<td>7005</td>
-</tr>
-<tr>
-<td>172.18.0.8</td>
-<td>7006</td>
+<td align="center">持久性（Durable）</td>
+<td>事务提交后，数据必须以一种持久性方式存储起来</td>
 </tr>
 </tbody></table>
-<p><strong>配置docker内部网络</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker network create --subnet&#x3D;172.18.0.0&#x2F;16 redisnetwork<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>事务产生的问题：</strong></p>
+<p>场景：同一个事务内（同一个服务内）</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>数据的状态</th>
+<th align="center">实际行为</th>
+<th>产生原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>脏读</td>
+<td>未提交</td>
+<td align="center">打算提交但是数据回滚了，读取了提交的数据</td>
+<td>数据的读取</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>已提交</td>
+<td align="center">读取了修改前的数据</td>
+<td>数据的修改</td>
+</tr>
+<tr>
+<td>幻读</td>
+<td>已提交</td>
+<td align="center">读取了插入前的数据</td>
+<td>数据的插入</td>
+</tr>
+</tbody></table>
+<p><strong>事务隔离级：</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>结果</th>
+<th>脏读</th>
+<th align="center">不可重复读</th>
+<th align="center">幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Read UnCommitted(读未提交)</td>
+<td>什么都不解决</td>
+<td>√</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td>Read Committed(读提交)</td>
+<td>解决了脏读的问题</td>
+<td>–</td>
+<td align="center">√</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td>Repeatable Read(重复读)</td>
+<td>mysql的默认级别，解决了不可重复读</td>
+<td>–</td>
+<td align="center">–</td>
+<td align="center">√</td>
+</tr>
+<tr>
+<td>Serializable(序列化)</td>
+<td>解决所有问题</td>
+<td>–</td>
+<td align="center">–</td>
+<td align="center">–</td>
+</tr>
+</tbody></table>
+<pre><code>READ UNCOMMITTED（读未提交数据）：允许事务读取未被其他事务提交的变更数据，会出现脏读、不可重复读和幻读问题。
+READ COMMITTED（读已提交数据）：只允许事务读取已经被其他事务提交的变更数据，可避免脏读，仍会出现不可重复读和幻读问题。
+REPEATABLE READ（可重复读）：确保事务可以多次从一个字段中读取相同的值，在此事务持续期间，禁止其他事务对此字段的更新，可以避免脏读和不可重复读，仍会出现幻读问题。
+SERIALIZABLE（序列化）：确保事务可以从一个表中读取相同的行，在这个事务持续期间，禁止其他事务对该表执行插入、更新和删除操作，可避免所有并发问题，但性能非常低。
+</code></pre>
+<h4 id="Spring中事务的使用"><a href="#Spring中事务的使用" class="headerlink" title="Spring中事务的使用"></a>Spring中事务的使用</h4><p>Spring 事务其实就是对数据库事务的支持。Spring  事务的隔离级别和数据库中的隔离级别是相对应的。Spring事务分为声明式事务和编程式事务（基本很少人使用）。</p>
+<p><strong>Spring事务5种隔离级别：</strong></p>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isolation_default</td>
+<td align="center">使用数据库默认的事务隔离级别</td>
+</tr>
+<tr>
+<td>isolation_read_uncommitted</td>
+<td align="center">允许读取尚未提交的修改，可能导致脏读、幻读和不可重复读</td>
+</tr>
+<tr>
+<td>isolation_read_committed</td>
+<td align="center">允许从已经提交的事务读取，可防止脏读、但幻读，不可重复读仍然有可能发生</td>
+</tr>
+<tr>
+<td>isolation_repeatable_read</td>
+<td align="center">对相同字段的多次读取的结果是一致的，除非数据被当前事务自生修改。可防止脏读和不可重复读，但幻读仍有可能发生</td>
+</tr>
+<tr>
+<td>isolation_serializable</td>
+<td align="center">完全服从acid隔离原则，确保不发生脏读、不可重复读、和幻读，但执行效率最低。</td>
+</tr>
+</tbody></table>
+<p><strong>Spring事务7种传播行为</strong></p>
+<table>
+<thead>
+<tr>
+<th>传播行为</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>propagation_required（xml文件中为required)</td>
+<td>表示当前方法必须在一个具有事务的上下文中运行，如有客户端有事务在进行，那么被调用端将在该事务中运行，否则的话重新开启一个事务。（如果被调用端发生异常，那么调用端和被调用端事务都将回滚）</td>
+</tr>
+<tr>
+<td>propagation_supports(supports）</td>
+<td>表示当前方法不必需要具有一个事务上下文，但是如果有一个事务的话，它也可以在这个事务中运行</td>
+</tr>
+<tr>
+<td>propagation_mandatory(mandatory）</td>
+<td>表示当前方法必须在一个事务中运行，如果没有事务，将抛出异常</td>
+</tr>
+<tr>
+<td>propagation_nested(nested)</td>
+<td>表示如果当前方法正有一个事务在运行中，则该方法应该运行在一个嵌套事务中，被嵌套的事务可以独立于被封装的事务中进行提交或者回滚。如果封装事务存在，并且外层事务抛出异常回滚，那么内层事务必须回滚，反之，内层事务并不影响外层事务。如果封装事务不存在，则同propagation_required的一样</td>
+</tr>
+<tr>
+<td>propagation_never（never)</td>
+<td>表示当方法务不应该在一个事务中运行，如果存在一个事务，则抛出异常</td>
+</tr>
+<tr>
+<td>propagation_requires_new(requires_new）</td>
+<td>表示当前方法必须运行在它自己的事务中。一个新的事务将启动，而且如果有一个现有的事务在运行的话，则这个方法将在运行期被挂起，直到新的事务提交或者回滚才恢复执行。</td>
+</tr>
+<tr>
+<td>propagation_not_supported（not_supported）</td>
+<td>表示该方法不应该在一个事务中运行。如果有一个事务正在运行，他将在运行期被挂起，直到这个事务提交或者回滚才恢复执行</td>
+</tr>
+</tbody></table>
+<p>使用Spring中的事务非常简单只需要两步：</p>
+<ol>
+<li>添加数据源配置，在启动类上添加@EnableTransactionManagement注解</li>
+<li>在业务方法上添加@Transactional即可</li>
+</ol>
+<h4 id="Transactional属性"><a href="#Transactional属性" class="headerlink" title="@Transactional属性"></a>@Transactional属性</h4><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>String</td>
+<td>可选的限定描述符，指定使用的事务管理器</td>
+</tr>
+<tr>
+<td>propagation</td>
+<td>enum: Propagation</td>
+<td>可选的事务传播行为设置</td>
+</tr>
+<tr>
+<td>isolation</td>
+<td>enum: Isolation</td>
+<td>可选的事务隔离级别设置</td>
+</tr>
+<tr>
+<td>readOnly</td>
+<td>boolean</td>
+<td>读写或只读事务，默认读写</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>int (in seconds granularity)</td>
+<td>事务超时时间设置</td>
+</tr>
+<tr>
+<td>rollbackFor</td>
+<td>Class对象数组，必须继承自Throwable</td>
+<td>导致事务回滚的异常类数组</td>
+</tr>
+<tr>
+<td>rollbackForClassName</td>
+<td>类名数组，必须继承自Throwable</td>
+<td>导致事务回滚的异常类名字数组</td>
+</tr>
+<tr>
+<td>noRollbackFor</td>
+<td>Class对象数组，必须继承自Throwable</td>
+<td>不会导致事务回滚的异常类数组</td>
+</tr>
+<tr>
+<td>noRollbackForClassName</td>
+<td>类名数组，必须继承自Throwable</td>
+<td>不会导致事务回滚的异常类名字数组</td>
+</tr>
+</tbody></table>
+<p><strong>用法：</strong></p>
+<ol>
+<li><p>在需要事务管理的地方加@Transactional 注解。@Transactional 注解可以被应用于接口定义和接口方法、类定义和类的 public 方法上。</p>
+</li>
+<li><p>@Transactional 注解只能应用到 public 可见度的方法上。 如果你在 protected、private 或者  package-visible 的方法上使用 @Transactional 注解，它也不会报错，  但是这个被注解的方法将不会展示已配置的事务设置。</p>
+</li>
+<li><p>注意仅仅 @Transactional 注解的出现不足于开启事务行为，它仅仅 是一种元数据。必须在配置文件中使用配置元素，才真正开启了事务行为。</p>
+</li>
+<li><p>通过 元素的 “proxy-target-class” 属性值来控制是基于接口的还是基于类的代理被创建。如果  “proxy-target-class” 属值被设置为  “true”，那么基于类的代理将起作用（这时需要CGLIB库cglib.jar在CLASSPATH中）。如果  “proxy-target-class” 属值被设置为 “false” 或者这个属性被省略，那么标准的JDK基于接口的代理将起作用。</p>
+</li>
+<li><p>Spring团队建议在具体的类（或类的方法）上使用 @Transactional  注解，而不要使用在类所要实现的任何接口上。在接口上使用 @Transactional 注解，只能当你设置了基于接口的代理时它才生效。因为注解是  不能继承 的，这就意味着如果正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装。</p>
+</li>
+<li><p>@Transactional 的事务开启 ，是基于接口的 或者是<strong>基于类的代理被创建</strong>。所以<strong>在同一个类中一个方法调用另一个方法有事务的方法，事务是不会起作用的。</strong></p>
+</li>
+</ol>
+<p>详细使用可以参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zht741322694/article/details/78676964">Spring事务隔离级别、传播机制以及简单配置</a></p>
+<h4 id="Spring事务中的坑："><a href="#Spring事务中的坑：" class="headerlink" title="Spring事务中的坑："></a>Spring事务中的坑：</h4><p>在同一个类中一个方法调用另一个方法有事务的方法，事务是不会起作用的。</p>
+<p>举个例子：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 
-<h2 id="Redis配置文件"><a href="#Redis配置文件" class="headerlink" title="Redis配置文件"></a>Redis配置文件</h2><p>在docker环境中，配置文件映射宿主机的时候，(宿主机)必须有配置文件。<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/antirez/redis/5.0.7/redis.conf">附件</a>在这里。大家可以根据自己的需求定制配置文件。</p>
-<p>下边是我的配置文件 <code>redis-cluster.tmpl</code></p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># redis端口
-port $&#123;PORT&#125;
-# 关闭保护模式(保护模式，默认值 yes，即开启。开启保护模式以后，需配置 bind ip 或者设置访问密码；关闭保护模式，外部网络可以直接访问)
-protected-mode no
-# 允许访问端口
-bind 0.0.0.0  
-# 登录密码(这里可以自己改 我的为123456)         
-requirepass 123456
-# 开启主节点访问认证(这里可以自己改 我的为123456)
-masterauth  123456
-# 开启集群
-cluster-enabled yes
-# 集群节点配置
-cluster-config-file nodes.conf
-# 超时
-cluster-node-timeout 5000
-# 集群节点IP host模式为宿主机IP
-cluster-announce-ip 192.168.5.40
-# 集群节点端口 7001 - 7006
-cluster-announce-port $&#123;PORT&#125;
-cluster-announce-bus-port 1$&#123;PORT&#125;
-# 开启 appendonly 备份模式
-appendonly yes
-# 每秒钟备份
-appendfsync everysec
-# 对aof文件进行压缩时，是否执行同步操作
-no-appendfsync-on-rewrite no
-# 当目前aof文件大小超过上一次重写时的aof文件大小的100%时会再次进行重写
-auto-aof-rewrite-percentage 100
-# 重写前AOF文件的大小最小值 默认 64mb
-auto-aof-rewrite-min-size 64mb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>READ_COMMITTED<span class="token punctuation">)</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
 
-<p>现在通过脚本 <code>redis-cluster-config.sh</code> 批量生成配置文件</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">port</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">seq</span> <span class="token number">7001</span> <span class="token number">7006</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token punctuation">\</span>
-  <span class="token function">mkdir</span> -p ./redis-cluster/<span class="token variable">$&#123;port&#125;</span>/conf <span class="token punctuation">\</span>
-  <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable">PORT</span><span class="token operator">=</span><span class="token variable">$&#123;port&#125;</span> envsubst <span class="token operator">&lt;</span> ./redis-cluster.tmpl <span class="token operator">></span> ./redis-cluster/<span class="token variable">$&#123;port&#125;</span>/conf/redis.conf <span class="token punctuation">\</span>
-  <span class="token operator">&amp;&amp;</span> <span class="token function">mkdir</span> -p ./redis-cluster/<span class="token variable">$&#123;port&#125;</span>/data<span class="token punctuation">;</span> <span class="token punctuation">\</span>
-<span class="token keyword">done</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>READ_UNCOMMITTED<span class="token punctuation">)</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token comment">//....</span>
+	<span class="token punctuation">&#125;</span>
 
-<p>生成的配置文件如下图</p>
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/1683301-20200301191646698-1620681875.png" alt="img"></p>
-<h2 id="Docker环境搭建"><a href="#Docker环境搭建" class="headerlink" title="Docker环境搭建"></a>Docker环境搭建</h2><h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>这里还是通过docker-compose进行测试环境的docker编排。</p>
-<p><strong>docker-compose.yml</strong></p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;2&#39;
-networks:
-  redisnetwork:
-    external: true
-services:
-  cluster_7001:
-    image: redis:6.0
-    container_name: cluster_7001
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7001&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7001&#x2F;data:&#x2F;data
-    ports:
-      - 7001:7001
-      - 17001:17001
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7001
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.3
-  cluster_7002:
-    image: redis:6.0
-    container_name: cluster_7002
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7002&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7002&#x2F;data:&#x2F;data
-    ports:
-      - 7002:7002
-      - 17002:17002
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7002
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.4
-  cluster_7003:
-    image: redis:6.0
-    container_name: cluster_7003
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7003&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7003&#x2F;data:&#x2F;data
-    ports:
-      - 7003:7003
-      - 17003:17003
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7003
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.5
-  cluster_7004:
-    image: redis:6.0
-    container_name: cluster_7004
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7004&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7004&#x2F;data:&#x2F;data
-    ports:
-      - 7004:7004
-      - 17004:17004
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7004
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.6
-  cluster_7005:
-    image: redis:6.0
-    container_name: cluster_7005
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7005&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7005&#x2F;data:&#x2F;data
-    ports:
-      - 7005:7005
-      - 17005:17005
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7005
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.7
-  cluster_7006:
-    image: redis:6.0
-    container_name: cluster_7006
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7006&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7006&#x2F;data:&#x2F;data
-    ports:
-      - 7006:7006
-      - 17006:17006
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7006
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.8
-  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>REPEATABLE_READ<span class="token punctuation">)</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token comment">//....</span>
+	<span class="token punctuation">&#125;</span>
+	
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>配置完成在当前路径下运行</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#构建镜像</span>
-docker-compose up -d
+<p>在以上这种情景中a调用了同一个类里面的b和c方法，那么b和c方法的事务会失效。a的事务设置会覆盖b和c的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 
-<span class="token comment">#运行成功后随便进入一个容器</span>
-docker <span class="token builtin class-name">exec</span> -it cluster_7001 /bin/bash
+		<span class="token annotation punctuation">@Transactional</span>
+		<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
 
-<span class="token comment">#启动连接集群 注意ip和端口的对应关系</span>
-redis-cli -p <span class="token number">7001</span> -a <span class="token number">123456</span> --cluster create <span class="token number">172.18</span>.0.3:7001 <span class="token number">172.18</span>.0.4:7002 <span class="token number">172.18</span>.0.5:7003 <span class="token number">172.18</span>.0.6:7004 <span class="token number">172.18</span>.0.7:7005 <span class="token number">172.18</span>.0.8:7006 --cluster-replicas <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+		<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRED<span class="token punctuation">)</span>
+		<span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token comment">//....</span>
+		<span class="token punctuation">&#125;</span>
 
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>进入容器内部运行以下指令</p>
-<p><strong>1. 查看集群通信是否正常</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">redis-cli -h <span class="token number">172.18</span>.0.7 -p <span class="token number">7005</span> -a <span class="token number">123456</span> <span class="token function">ping</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+		<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRES_NEW<span class="token punctuation">)</span>
+		<span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			<span class="token comment">//....</span>
+		<span class="token punctuation">&#125;</span>
 
-<blockquote>
-<p>Warning: Using a password with ‘-a’ or ‘-u’ option on the command line interface may not be safe.PONG</p>
-</blockquote>
-<p><strong>2. 测试简单存储</strong></p>
-<p>切换节点</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">redis-cli -h <span class="token number">172.18</span>.0.5 -p <span class="token number">7003</span> -a <span class="token number">123456</span> -c<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<blockquote>
-<p>Warning: Using a password with ‘-a’ or ‘-u’ option on the command line interface may not be safe.</p>
-</blockquote>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">set</span> name admin
+<p>以上情景中a和b将共用一个事务，c为一个新的事务。因此会造成a，b回滚事务，c不回滚</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token annotation punctuation">@Transactional</span>
+		<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+			bService<span class="token punctuation">.</span><span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			cService<span class="token punctuation">.</span><span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>3. 查看集群状态</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cluster nodes<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211112161741842.png"></p>
-<p><strong>4. 查看slots分片</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cluster slots<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211112161858639.png" style="zoom:67%;" />
-
-<p><strong>5. 查看集群信息</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cluster info<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>6.关闭集群</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker-compose down<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h2 id="SpringBoot配置Redis集群"><a href="#SpringBoot配置Redis集群" class="headerlink" title="SpringBoot配置Redis集群"></a>SpringBoot配置Redis集群</h2><p>在SpringBoot2.x版本中，redis默认的连接池已经更换为Lettuce，而不再是jedis。</p>
-<h4 id="1-在pom-xml中引入相关依赖"><a href="#1-在pom-xml中引入相关依赖" class="headerlink" title="1. 在pom.xml中引入相关依赖"></a>1. 在pom.xml中引入相关依赖</h4><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+<p>这种情况下a，b，c事务均生效。原因在于Spring的事务是通过代理对象来实现的，同一个代理对象内调用方法会覆盖。</p>
+<h4 id="事务失效解决方法"><a href="#事务失效解决方法" class="headerlink" title="事务失效解决方法"></a>事务失效解决方法</h4><p>同一个对象内事务方法互相调用默认失效的，原因在于绕过了代理对象。</p>
+<p>因此解决方法是，使用代理对象来调用事务方法，具体实施如下：</p>
+<ol>
+<li><p>引入aop依赖，aop中包含了aspectj</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.commons<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>commons-pool2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>开启动态代理，在启动类添加@EnableAspectJAutoProxy，对外暴露代理对象</p>
+</li>
+<li><p>使用代理对象在本类互调</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">&#123;</span>
 
-<h4 id="2-application-yml"><a href="#2-application-yml" class="headerlink" title="2. application.yml"></a>2. application.yml</h4><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
-  redis:
-    timeout: 6000
-    password: 123456
-    cluster:
-      max-redirects: 3 # 获取失败 最大重定向次数 
-      nodes:
-        - 192.168.5.40:7001
-        - 192.168.5.40:7002
-        - 192.168.5.40:7003
-        - 192.168.5.40:7004
-        - 192.168.5.40:7005
-        - 192.168.5.40:7006
-    lettuce:
-      pool:
-        max-active: 1000 #连接池最大连接数（使用负值表示没有限制）
-        max-idle: 10 # 连接池中的最大空闲连接
-        min-idle: 5 # 连接池中的最小空闲连接
-        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
-  cache:
-    jcache:
-      config: classpath:ehcache.xml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token annotation punctuation">@Transactional</span>
+	<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token class-name">AService</span> aProxyService <span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">AService</span><span class="token punctuation">)</span> <span class="token class-name">AopContext</span><span class="token punctuation">.</span><span class="token function">currentProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		aProxyService<span class="token punctuation">.</span><span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		aProxyService<span class="token punctuation">.</span><span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
 
-<h4 id="3-redis配置"><a href="#3-redis配置" class="headerlink" title="3. redis配置"></a>3. redis配置</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
-<span class="token annotation punctuation">@AutoConfigureAfter</span><span class="token punctuation">(</span><span class="token class-name">RedisAutoConfiguration</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisConfig</span> <span class="token punctuation">&#123;</span>
-    <span class="token annotation punctuation">@Bean</span>
-    <span class="token keyword">public</span> <span class="token class-name">RedisTemplate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> <span class="token function">redisCacheTemplate</span><span class="token punctuation">(</span><span class="token class-name">LettuceConnectionFactory</span> redisConnectionFactory<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">RedisTemplate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> template <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RedisTemplate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        template<span class="token punctuation">.</span><span class="token function">setKeySerializer</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">StringRedisSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        template<span class="token punctuation">.</span><span class="token function">setValueSerializer</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">GenericJackson2JsonRedisSerializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        template<span class="token punctuation">.</span><span class="token function">setConnectionFactory</span><span class="token punctuation">(</span>redisConnectionFactory<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> template<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRED<span class="token punctuation">)</span>
+	<span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token comment">//....</span>
+	<span class="token punctuation">&#125;</span>
 
-<h4 id="4-基本测试"><a href="#4-基本测试" class="headerlink" title="4. 基本测试"></a>4. 基本测试</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@SpringBootTest</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RedisTest</span> <span class="token punctuation">&#123;</span>
+	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRES_NEW<span class="token punctuation">)</span>
+	<span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+		<span class="token comment">//....</span>
+	<span class="token punctuation">&#125;</span>
 
-    <span class="token annotation punctuation">@Autowired</span>
-    <span class="token keyword">private</span> <span class="token class-name">RedisTemplate</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">></span></span> redisTemplate<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
 
-    <span class="token annotation punctuation">@Test</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        redisTemplate<span class="token punctuation">.</span><span class="token function">opsForValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">,</span> <span class="token string">"admin"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">String</span> name <span class="token operator">=</span> redisTemplate<span class="token punctuation">.</span><span class="token function">opsForValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//输出admin</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -885,7 +852,7 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/11/04/redis-ji-qun-da-jian/">http://wumangeng.github.io/2021/11/04/redis-ji-qun-da-jian/</a>
+                    <a href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/">http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -923,12 +890,16 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
-                                    <span class="chip bg-color">redis集群</span>
+                                <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                                    <span class="chip bg-color">事务</span>
                                 </a>
                             
-                                <a href="/tags/redis/">
-                                    <span class="chip bg-color">redis</span>
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
+                                </a>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
                         </div>
@@ -1100,9 +1071,10 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/11/07/ben-di-shi-wu/">
                     <div class="card-image">
@@ -1119,9 +1091,9 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1134,6 +1106,7 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1160,30 +1133,30 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/18/xxl-job-xiang-mu-fen-xi/">
+                <a href="/2021/11/04/redis-ji-qun-da-jian/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=485371004,2956942101&fm=15&fmt=auto" class="responsive-img" alt="Xxl-Job 2.3.0源码分析">
+                        <img src="https://img2.baidu.com/it/u=2106353876,4138672594&fm=26&fmt=auto" class="responsive-img" alt="Redis-Cluster集群搭建">
                         
-                        <span class="card-title">Xxl-Job 2.3.0源码分析</span>
+                        <span class="card-title">Redis-Cluster集群搭建</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            分布式任务调度平台
+                            redis-cluster集群搭建步骤
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-18
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/xxl-job/" class="post-category">
-                                    xxl-job
+                            <a href="/categories/redis/" class="post-category">
+                                    redis
                                 </a>
                             
                             
@@ -1193,12 +1166,12 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
-                        <span class="chip bg-color">项目</span>
+                    <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
+                        <span class="chip bg-color">redis集群</span>
                     </a>
                     
-                    <a href="/tags/xxl-job/">
-                        <span class="chip bg-color">xxl-job</span>
+                    <a href="/tags/redis/">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
                 </div>

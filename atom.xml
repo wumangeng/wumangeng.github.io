@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-12T10:27:01.189Z</updated>
+  <updated>2021-11-19T04:24:10.026Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>本地事务的坑</title>
+    <link href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/"/>
+    <id>http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</id>
+    <published>2021-11-07T01:10:20.000Z</published>
+    <updated>2021-11-19T04:24:10.026Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;本地事务&quot;&gt;&lt;a href=&quot;#本地事务&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
+    
+    
+    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
+    
+  </entry>
   
   <entry>
     <title>Redis-Cluster集群搭建</title>
@@ -283,6 +312,33 @@
   </entry>
   
   <entry>
+    <title>Springboot中使用RabbitMQ</title>
+    <link href="http://wumangeng.github.io/2021/06/13/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/"/>
+    <id>http://wumangeng.github.io/2021/06/13/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/</id>
+    <published>2021-06-13T01:10:20.000Z</published>
+    <updated>2021-11-16T08:37:09.650Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Springboot中使用RabbitMQ&quot;&gt;&lt;a href=&quot;#Springboot中使用RabbitMQ&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="消息中间件" scheme="http://wumangeng.github.io/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+    
+    <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
+    
+    <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>线程池以及线程的异步编排使用</title>
     <link href="http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/"/>
     <id>http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/</id>
@@ -384,33 +440,6 @@
     
     
     <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Springboot中使用RabbitMQ</title>
-    <link href="http://wumangeng.github.io/2021/04/28/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/"/>
-    <id>http://wumangeng.github.io/2021/04/28/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/</id>
-    <published>2021-04-28T01:10:20.000Z</published>
-    <updated>2021-11-16T08:33:07.149Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Springboot中使用RabbitMQ&quot;&gt;&lt;a href=&quot;#Springboot中使用RabbitMQ&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="消息中间件" scheme="http://wumangeng.github.io/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-    <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
-    
-    <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   
@@ -519,33 +548,6 @@
     <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
     
     <category term="jdk8" scheme="http://wumangeng.github.io/tags/jdk8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>项目的常用组件集成（swagger、统一返回结果、异常、日志、包扫描）</title>
-    <link href="http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/"/>
-    <id>http://wumangeng.github.io/2021/03/01/swagger-result-exception-log/</id>
-    <published>2021-03-01T01:10:20.000Z</published>
-    <updated>2021-10-20T06:26:33.340Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;swagger2配置&quot;&gt;&lt;a href=&quot;#swagger2配置&quot; class=&quot;headerlink&quot; title=&quot;swagger2配置&quot;&gt;&lt;/a&gt;swagger2配置&lt;/h2&gt;&lt;pre class=&quot;line-numbers language-xml&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
-    
-    
-    <category term="springboot" scheme="http://wumangeng.github.io/tags/springboot/"/>
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
