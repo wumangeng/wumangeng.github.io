@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-19T04:24:10.026Z</updated>
+  <updated>2021-11-19T12:51:44.880Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -17,11 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>go语言基础学习</title>
+    <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
+    <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
+    <published>2021-11-15T01:10:20.000Z</published>
+    <updated>2021-11-19T12:51:44.880Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;go的官方文档：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="GoLang" scheme="http://wumangeng.github.io/categories/GoLang/"/>
+    
+    
+    <category term="GoLang" scheme="http://wumangeng.github.io/tags/GoLang/"/>
+    
+  </entry>
+  
+  <entry>
     <title>本地事务的坑</title>
     <link href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/"/>
     <id>http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</id>
     <published>2021-11-07T01:10:20.000Z</published>
-    <updated>2021-11-19T04:24:10.026Z</updated>
+    <updated>2021-11-19T08:01:35.376Z</updated>
     
     
       
@@ -521,33 +546,6 @@
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
     <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jdk8新特性的使用</title>
-    <link href="http://wumangeng.github.io/2021/03/10/jdk8-xin-te-xing/"/>
-    <id>http://wumangeng.github.io/2021/03/10/jdk8-xin-te-xing/</id>
-    <published>2021-03-10T01:10:20.000Z</published>
-    <updated>2021-10-27T01:50:47.408Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1、Lambda表达式&quot;&gt;&lt;a href=&quot;#1、Lambda表达式&quot; class=&quot;headerlink&quot; title=&quot;1、Lambda表达式&quot;&gt;&lt;/a&gt;1、Lambda表达式&lt;/h2&gt;&lt;h4 id=&quot;lambda简介&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="java" scheme="http://wumangeng.github.io/categories/java/"/>
-    
-    
-    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
-    
-    <category term="jdk8" scheme="http://wumangeng.github.io/tags/jdk8/"/>
     
   </entry>
   
