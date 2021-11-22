@@ -558,6 +558,115 @@ a<span class="token punctuation">,</span> sex<span class="token punctuation">,</
 fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span> <span class="token comment">// 0 1 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>上面b和c可以不写= iota，但是a必须写</p>
+<h3 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h3><h4 id="标识符概念"><a href="#标识符概念" class="headerlink" title="标识符概念"></a><strong>标识符概念</strong></h4><ol>
+<li>Golang对各种变量、方法、函数等命名时使用的字符序列称为标识符</li>
+<li>凡是自己可以起名字的地方都叫标识符</li>
+</ol>
+<h4 id="标识符的命名规则"><a href="#标识符的命名规则" class="headerlink" title="标识符的命名规则"></a><strong>标识符的命名规则</strong></h4><ol>
+<li>由26个英文字母大小写, 0-9, _组成</li>
+<li>数字不可以开头。</li>
+</ol>
+<ol start="3">
+<li>Golan中严格区分大小写</li>
+<li>标识符不能包含空格</li>
+<li>下划线”_”本身在Go中是一个特殊的标识符,称为空标识符。可以代表任何其它的标识符,但是它对应的值会被忽略(比如:忽略某个返回值)。所以仅能被作为占位符使用,不能作为标识符使用</li>
+<li>不能以系统保留关键字作为标识符,比如 break，if 等等</li>
+</ol>
+<h4 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h4><p>下面列出25个Go语言的关键字或保留字：</p>
+<table>
+<thead>
+<tr>
+<th>break</th>
+<th>default</th>
+<th>func</th>
+<th>interface</th>
+<th>select</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>case</td>
+<td>defer</td>
+<td>go</td>
+<td>map</td>
+<td>struct</td>
+</tr>
+<tr>
+<td>chan</td>
+<td>else</td>
+<td>goto</td>
+<td>package</td>
+<td>switch</td>
+</tr>
+<tr>
+<td>const</td>
+<td>fallthrough</td>
+<td>if</td>
+<td>range</td>
+<td>type</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>for</td>
+<td>import</td>
+<td>return</td>
+<td>var</td>
+</tr>
+</tbody></table>
+<p>除了以上介绍的这些关键字，Go 语言还有 36 个预定义标识符，其中包含了基本类型的名称和一些基本的内置函数，见下表：</p>
+<table>
+<thead>
+<tr>
+<th>append</th>
+<th>bool</th>
+<th>byte</th>
+<th>cap</th>
+<th>close</th>
+<th>complex</th>
+<th>complex64</th>
+<th>complex128</th>
+<th>uint16</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>copy</td>
+<td>false</td>
+<td>float32</td>
+<td>float64</td>
+<td>imag</td>
+<td>int</td>
+<td>int8</td>
+<td>int16</td>
+<td>uint32</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>int64</td>
+<td>iota</td>
+<td>len</td>
+<td>make</td>
+<td>new</td>
+<td>nil</td>
+<td>panic</td>
+<td>uint64</td>
+</tr>
+<tr>
+<td>print</td>
+<td>println</td>
+<td>real</td>
+<td>recover</td>
+<td>string</td>
+<td>true</td>
+<td>uint</td>
+<td>uint8</td>
+<td>uintptr</td>
+</tr>
+</tbody></table>
+<h4 id="标识符的命名规范"><a href="#标识符的命名规范" class="headerlink" title="标识符的命名规范"></a>标识符的命名规范</h4><ol>
+<li>包名：保持 package的名字和目录保持一致，包名统一使用单数形式，尽量采取有意义的包名，简短，有意义，不要和标准库冲突</li>
+<li>变量名、函数名、常量名：采用驼峰法</li>
+<li>如果变量名、函数名、常量名<strong>首字母大写,则可以被其他的包访问</strong>；如果<strong>首字母小写则只能在本包中使用</strong>(注：可以简单的理解成,首字母大写是公有的,首字母是私有的)，在 golan没有public, private等关键字</li>
+<li>文件命名：一律采用小写，不用驼峰式，尽量见名思义，看见文件名就可以知道这个文件下的大概内容。<br> 其中测试文件以_test.go结尾，除测试文件外，命名不出现。</li>
+</ol>
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><img src="http://image.i-ll.cc/blog/20190304/t1jRSgll4p1M.png"/>
 
 <p>数值型中的int32又称为rune，可保存一个unicode码点。int和uint的大小和操作系统位数一样，32位OS(系统)则为4字节，64位OS则为8字节。浮点数默认64位，整数默认int。</p>
@@ -628,16 +737,21 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>然后调用函数进行转换</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go">s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatInt</span><span class="token punctuation">(</span><span class="token function">int64</span><span class="token punctuation">(</span>n1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">// 10表示十进制</span>
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span>
-s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatFloat</span><span class="token punctuation">(</span>a1<span class="token punctuation">,</span> <span class="token string">'f'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span> <span class="token comment">// 'f'表示浮点数类型、10表示精度10位，64表示float64</span>
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span>
-s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatBool</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> num <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">12345</span>	
+str <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>	<span class="token comment">//int 转string</span>
+
+s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatInt</span><span class="token punctuation">(</span><span class="token function">int64</span><span class="token punctuation">(</span>n1<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token comment">// 10表示十进制</span>
+   fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span>
+
+   s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatFloat</span><span class="token punctuation">(</span>a1<span class="token punctuation">,</span> <span class="token string">'f'</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span> <span class="token comment">// 'f'表示浮点数类型、10表示精度10位，64表示float64</span>
+   fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span>
+
+   s0 <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatBool</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+   fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"s type:%T, s = %v\n"</span><span class="token punctuation">,</span> s0<span class="token punctuation">,</span> s0<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>string转基本类型：</p>
 <p>也是用strconv包中的Parse方法，但Parse方法会返回两个值：转换的值，以及转换错误</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> b2<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">ParseBool</span><span class="token punctuation">(</span>s0<span class="token punctuation">)</span> <span class="token comment">// _表示接收但忽略</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> b2<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">ParseBool</span><span class="token punctuation">(</span>s0<span class="token punctuation">)</span> <span class="token comment">// go中可以有多个返回值，_表示接收但忽略</span>
 fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"b2 type:%T, b2 = %v\n"</span><span class="token punctuation">,</span> b2<span class="token punctuation">,</span> b2<span class="token punctuation">)</span>
 
 <span class="token keyword">var</span> i0<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">=</span> strconv<span class="token punctuation">.</span><span class="token function">ParseInt</span><span class="token punctuation">(</span><span class="token string">"1233"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span> <span class="token comment">// 后两个参数分别表示进制和转换成int的位数</span>
@@ -647,11 +761,21 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
 fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"f0 type:%T, f0 = %v\n"</span><span class="token punctuation">,</span> f0<span class="token punctuation">,</span> f0<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果待转换的string不合法，就会转换成对应类型的默认值(0)</p>
-<h4 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h4><p>和C里面的指针类似</p>
+<h4 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h4><ol>
+<li><p>基本数据类型，变量存的就是值,也叫值类型</p>
+</li>
+<li><p>获取变量的地址，用&amp;，比如:var num int,获取num的地址: &amp;num</p>
+</li>
+<li><p>指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值 如:</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> ptr <span class="token operator">*</span><span class="token builtin">int</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>num   <span class="token comment">// ptr是指针变量  ptr的类型为 *int   值为&amp;num</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>获取指针类型所指向的值，使用:，比如: var ptr int，使用ptr获取p指向的值</p>
+</li>
+</ol>
+<p>和C里面的指针类似</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">i <span class="token operator">:=</span> <span class="token number">1</span>
 ptr0 <span class="token operator">:=</span> <span class="token operator">&amp;</span>i
  
-fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%x, %d, %x"</span><span class="token punctuation">,</span> ptr0<span class="token punctuation">,</span> <span class="token operator">*</span>ptr0<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ptr0<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%x, %d, %x"</span><span class="token punctuation">,</span> ptr0<span class="token punctuation">,</span> <span class="token operator">*</span>ptr0<span class="token punctuation">,</span> <span class="token operator">&amp;</span>ptr0<span class="token punctuation">)</span>  <span class="token comment">//*ptr0表示取出ptr0指向地址对应的值</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>%x表示十六进制</p>
 <p>同样，通过指针改变变量的值也是一样</p>
