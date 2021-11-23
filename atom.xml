@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-22T03:07:28.238Z</updated>
+  <updated>2021-11-22T04:25:17.598Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2021-11-22T03:07:28.238Z</updated>
+    <updated>2021-11-22T04:25:17.598Z</updated>
     
     
       
@@ -337,6 +337,31 @@
   </entry>
   
   <entry>
+    <title>分布式事务解决方案</title>
+    <link href="http://wumangeng.github.io/2021/07/01/fen-bu-shi-shi-wu-jie-jue-fang-an/"/>
+    <id>http://wumangeng.github.io/2021/07/01/fen-bu-shi-shi-wu-jie-jue-fang-an/</id>
+    <published>2021-07-01T01:10:20.000Z</published>
+    <updated>2021-11-23T07:42:31.894Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;分布式理论&quot;&gt;&lt;a href=&quot;#分布式理论&quot; class=&quot;headerlink&quot; title=&quot;分布式理论&quot;&gt;&lt;/a&gt;分布式理论&lt;/h2&gt;&lt;h3 id=&quot;CAP定理&quot;&gt;&lt;a href=&quot;#CAP定理&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="分布式事务" scheme="http://wumangeng.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
+    
+    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Springboot中使用RabbitMQ</title>
     <link href="http://wumangeng.github.io/2021/06/13/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/"/>
     <id>http://wumangeng.github.io/2021/06/13/ribbatmq-zai-xiang-mu-zhong-de-shi-yong/</id>
@@ -519,33 +544,6 @@
     <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
     
     <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</title>
-    <link href="http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/"/>
-    <id>http://wumangeng.github.io/2021/04/01/docker-an-zhuang-fu-wu/</id>
-    <published>2021-04-01T01:10:20.000Z</published>
-    <updated>2021-11-12T03:22:54.129Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;docker安装服务&quot;&gt;&lt;a href=&quot;#docker安装服务&quot; class=&quot;headerlink&quot; title=&quot;docker安装服务&quot;&gt;&lt;/a&gt;docker安装服务&lt;/h1&gt;&lt;h3 id=&quot;设置yum源&quot;&gt;&lt;a href=&quot;#设置yum源&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
-    
-    
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
     
   </entry>
   
