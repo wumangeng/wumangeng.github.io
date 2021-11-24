@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-22T04:25:17.598Z</updated>
+  <updated>2021-11-24T03:19:01.531Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2021-11-22T04:25:17.598Z</updated>
+    <updated>2021-11-24T03:19:01.531Z</updated>
     
     
       
@@ -306,6 +306,33 @@
   </entry>
   
   <entry>
+    <title>Seata 1.4.2的使用</title>
+    <link href="http://wumangeng.github.io/2021/07/06/seata-shi-yong/"/>
+    <id>http://wumangeng.github.io/2021/07/06/seata-shi-yong/</id>
+    <published>2021-07-06T01:10:20.000Z</published>
+    <updated>2021-11-23T08:50:02.408Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA</summary>
+        
+      
+    
+    
+    
+    <category term="分布式事务" scheme="http://wumangeng.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
+    
+    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
+    
+    <category term="Seata" scheme="http://wumangeng.github.io/tags/Seata/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java Bean校验</title>
     <link href="http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/"/>
     <id>http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/</id>
@@ -341,7 +368,7 @@
     <link href="http://wumangeng.github.io/2021/07/01/fen-bu-shi-shi-wu-jie-jue-fang-an/"/>
     <id>http://wumangeng.github.io/2021/07/01/fen-bu-shi-shi-wu-jie-jue-fang-an/</id>
     <published>2021-07-01T01:10:20.000Z</published>
-    <updated>2021-11-23T07:42:31.894Z</updated>
+    <updated>2021-11-23T07:46:57.691Z</updated>
     
     
       
@@ -517,33 +544,6 @@
     <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
     
     <category term="go-fastdfs" scheme="http://wumangeng.github.io/tags/go-fastdfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RabbitMQ</title>
-    <link href="http://wumangeng.github.io/2021/04/14/rabbitmq/"/>
-    <id>http://wumangeng.github.io/2021/04/14/rabbitmq/</id>
-    <published>2021-04-14T01:10:20.000Z</published>
-    <updated>2021-11-16T08:20:10.499Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;RabbitMQ&quot;&gt;&lt;a href=&quot;#RabbitMQ&quot; class=&quot;headerlink&quot; title=&quot;RabbitMQ&quot;&gt;&lt;/a&gt;RabbitMQ&lt;/h1&gt;&lt;h2 id=&quot;1-MQ引言&quot;&gt;&lt;a href=&quot;#1-MQ引言&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="消息中间件" scheme="http://wumangeng.github.io/categories/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-    
-    <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
-    
-    <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   

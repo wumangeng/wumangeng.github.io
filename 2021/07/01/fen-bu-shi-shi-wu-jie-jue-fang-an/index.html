@@ -523,7 +523,7 @@
 <p>**最终一致性( Eventual Consistency)**：是指系统中的所有数据副本经过一定时间后,最终能够达到一致的状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况。</p>
 <p><strong>强一致性、弱一致性、最终一致性</strong><br>    从客户端角度,多进程并发访间时，更新过的数据在不同进程如何获取的不同策略,决定了不同的一致性。对于关系型数据库,要求更新过的数据能被后续的访问都能看到，这是强一致性。如果能容忍后续的部分或者全部访问不到，则是弱一致性。如果经过一段时间后要求能访问到更新后的数据，则是最终一致性。</p>
 <p>BASE理论是对CAP中的一致性和可用性进行一个权衡的结果，理论的核心思想就是：我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</p>
-<p>分布式系统实现一致性算法：<a target="_blank" rel="noopener" href="http://thesecretlivesofdata.com/raft/">raft算法原理动画展示</a>     [raft动画解析视频](<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1np4y1C7Yf?p=286&spm_id_from=pageDriver">Java项目《谷粒商城》Java架构师 | 微服务 | 大型电商项目_哔哩哔哩_bilibili</a>)</p>
+<p>分布式系统实现一致性算法：<a target="_blank" rel="noopener" href="http://thesecretlivesofdata.com/raft/">raft算法原理动画展示</a>  </p>
 <h2 id="分布式事务解决方案"><a href="#分布式事务解决方案" class="headerlink" title="分布式事务解决方案"></a>分布式事务解决方案</h2><h3 id="两阶段提交（2PC）"><a href="#两阶段提交（2PC）" class="headerlink" title="两阶段提交（2PC）"></a>两阶段提交（2PC）</h3><p>数据库支持的2pc【2 phase commit二阶提交】,又叫做 XA Transaction。MSQL从5.5版本开始支持, SOL Serve2005开始支持, Oracle7开始支持<br>其中,XA是一个两阶段提交协议,该协议分为以下两个阶段：<br>第一阶段：事务协调器要求每个涉及到事务的数据库预提交 (precommit)此操作,并反映是否可以提交<br>第二阶段：事务协调器要求毎个数据库提交数据。其中,如果有任何一个数据库否决此次提交,那么所有数据库都会被要求回滚它们在此事务中的那部分信息</p>
 <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211122175107216.png" alt=" " style="zoom:67%;" />
 
