@@ -1163,7 +1163,6 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 <li>先执行表达式，得到值，然后和 case 的表达式进行比较，如果相等，就匹配到，然后执行对应的 case 的语句块，然后<strong>退出</strong> switch 控制。</li>
 <li>如果 switch的表达式的值没有和任何的 case 的表达式匹配成功，则执行 default的语句块。</li>
 <li>多个表达式使用<strong>逗号</strong>间隔</li>
-<li>switch没有break</li>
 </ol>
 <h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><p>基本语法</p>
 <blockquote>
@@ -1176,13 +1175,46 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 	<span class="token comment">//代码块</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>注：Go中没有while，do…while循环</strong></p>
+<p><strong>注：Go中没有while，do…while循环，Go语言支持goto跳转，但不支持使用</strong></p>
+<h4 id="break"><a href="#break" class="headerlink" title="break"></a>break</h4><p>break用于终止某个语句块的执行，用于中断当前for或跳出switch语句</p>
+<p>break 出现在多层嵌套循环中可以使用标签（label）表明要终止哪个循环</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span> <span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">for</span> j <span class="token operator">:=</span> <span class="token number">0</span> <span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">;</span> j<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> j<span class="token operator">==</span><span class="token number">2</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">break</span>  <span class="token comment">// break  默认会跳出最近的for循环</span>
+		<span class="token punctuation">&#125;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"j="</span><span class="token punctuation">,</span>j<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出结果：</p>
+<blockquote>
+<p>j= 0<br>j= 1<br>j= 0<br>j= 1<br>j= 0<br>j= 1<br>j= 0<br>j= 1</p>
+</blockquote>
+<p>使用标签</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">label1<span class="token punctuation">:</span>
+	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span> <span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">4</span> <span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">for</span> j <span class="token operator">:=</span> <span class="token number">0</span> <span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token punctuation">;</span> j<span class="token operator">++</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">if</span> j<span class="token operator">==</span><span class="token number">2</span> <span class="token punctuation">&#123;</span>
+				<span class="token keyword">break</span>  label1	<span class="token comment">// 一旦触发直接终止i的循环</span>
+			<span class="token punctuation">&#125;</span>
+			fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"j="</span><span class="token punctuation">,</span>j<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+		fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"i="</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出结果：</p>
+<blockquote>
+<p>j= 0<br>j= 1</p>
+</blockquote>
+<h4 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h4><p>continue用于结束本次循环，在多层嵌套时可用标签跳转，用法同上（break是终止循环，continue是跳过本次循环）</p>
 <h4 id="for-range遍历"><a href="#for-range遍历" class="headerlink" title="for-range遍历"></a>for-range遍历</h4><p>这是一种同时获取索引和值或键值的遍历方式</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">str <span class="token operator">:=</span> <span class="token string">"拜仁慕尼黑来自德甲"</span>
 <span class="token keyword">for</span> index<span class="token punctuation">,</span> s <span class="token operator">:=</span> <span class="token keyword">range</span> str <span class="token punctuation">&#123;</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d --- %c \n"</span><span class="token punctuation">,</span>index<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d --- %c "</span><span class="token punctuation">,</span>index<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>输出：0 — 拜 3 — 仁 6 — 慕 9 — 尼 12 — 黑 15 — 来 18 — 自 21 — 德 24 — 甲 </p>
 <h3 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a>生成随机数</h3><p>导入math/random和time包</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token punctuation">(</span>
     <span class="token string">"fmt"</span>
@@ -1191,9 +1223,9 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 <span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>设置种子，生成随机数</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go">rand<span class="token punctuation">.</span><span class="token function">Seed</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">rand<span class="token punctuation">.</span><span class="token function">Seed</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">UnixNano</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">//time.Now().UnixNano() 返回当前系统的纳秒数</span>
 n <span class="token operator">:=</span> rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>
-fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"n="</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h4 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h4><p>函数定义:</p>
 <blockquote>

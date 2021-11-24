@@ -496,7 +496,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Springboot中使用RabbitMQ"><a href="#Springboot中使用RabbitMQ" class="headerlink" title="Springboot中使用RabbitMQ"></a>Springboot中使用RabbitMQ</h1><p><a target="_blank" rel="noopener" href="https://rabbitmq.com/documentation.html">rabbitMQ官方文档</a></p>
-<h2 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h2><h4 id="1-1、使用docker安装rabbitMQ"><a href="#1-1、使用docker安装rabbitMQ" class="headerlink" title="1.1、使用docker安装rabbitMQ"></a>1.1、使用docker安装rabbitMQ</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 -p 4369:4369 -p 25672:25672 -p 15671:15671 -p 15672:15672 rabbitmq:management
+<h2 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h2><h4 id="1-1、使用docker安装rabbitMQ"><a href="#1-1、使用docker安装rabbitMQ" class="headerlink" title="1.1、使用docker安装rabbitMQ"></a>1.1、使用docker安装rabbitMQ</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -d --name rabbitmq -p <span class="token number">5671</span>:5671 -p <span class="token number">5672</span>:5672 -p <span class="token number">4369</span>:4369 -p <span class="token number">25672</span>:25672 -p <span class="token number">15671</span>:15671 -p <span class="token number">15672</span>:15672 rabbitmq:management
 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>端口说明：</p>
@@ -527,7 +527,7 @@
 <li><p>启动类添加 <strong>@EnableRabbit</strong>注解</p>
 </li>
 </ol>
-<h2 id="2、创建exchange、queue、binding"><a href="#2、创建exchange、queue、binding" class="headerlink" title="2、创建exchange、queue、binding"></a>2、创建exchange、queue、binding</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
+<h2 id="2、创建exchange、queue、binding"><a href="#2、创建exchange、queue、binding" class="headerlink" title="2、创建exchange、queue、binding"></a>2、创建exchange、queue、binding</h2><h3 id="2-1-手动创建"><a href="#2-1-手动创建" class="headerlink" title="2.1 手动创建"></a>2.1 手动创建</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Autowired</span>
   <span class="token keyword">private</span> <span class="token class-name">AmqpAdmin</span> amqpAdmin<span class="token punctuation">;</span>
 
   <span class="token comment">/**
@@ -559,6 +559,41 @@
       amqpAdmin<span class="token punctuation">.</span><span class="token function">declareBinding</span><span class="token punctuation">(</span>binding<span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h3 id="2-2-Spring自动注入"><a href="#2-2-Spring自动注入" class="headerlink" title="2.2 Spring自动注入"></a>2.2 Spring自动注入</h3><p>Spring支持以配置文件的形式创建exchange、queue、binding  </p>
+<p>例：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>amqp<span class="token punctuation">.</span>core<span class="token punctuation">.</span></span><span class="token class-name">Binding</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>amqp<span class="token punctuation">.</span>core<span class="token punctuation">.</span></span><span class="token class-name">Exchange</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>amqp<span class="token punctuation">.</span>core<span class="token punctuation">.</span></span><span class="token class-name">Queue</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>amqp<span class="token punctuation">.</span>core<span class="token punctuation">.</span></span><span class="token class-name">TopicExchange</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Bean</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">Configuration</span><span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MQBeanConfig</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">queue1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span>  <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span><span class="token string">"queueName"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Exchange</span> <span class="token function">exchange1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">TopicExchange</span><span class="token punctuation">(</span><span class="token string">"exchangeName"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">binding1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Binding</span><span class="token punctuation">(</span><span class="token string">"queueName"</span><span class="token punctuation">,</span>
+                <span class="token class-name">Binding<span class="token punctuation">.</span>DestinationType</span><span class="token punctuation">.</span>QUEUE<span class="token punctuation">,</span>
+                <span class="token string">"exchangeName"</span><span class="token punctuation">,</span>
+                <span class="token string">"routingKey"</span><span class="token punctuation">,</span>
+                <span class="token keyword">null</span>
+                <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注：@Bean里面的属性注入时，如果MQ中已存在也不会进行覆盖</p>
 <h2 id="3、收发消息"><a href="#3、收发消息" class="headerlink" title="3、收发消息"></a>3、收发消息</h2><p>配置使用JSON序列化消息内容：RabbitConfig</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitConfig</span> <span class="token punctuation">&#123;</span>
@@ -756,6 +791,347 @@
         <span class="token punctuation">&#125;</span>
     <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="5、延时队列"><a href="#5、延时队列" class="headerlink" title="5、延时队列"></a>5、延时队列</h2><p>以下内容来源于博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/mfrank/p/11260355.html">https://www.cnblogs.com/mfrank/p/11260355.html</a></p>
+<p><strong>延时队列</strong>：是用来存放需要在指定时间被处理的元素的队列。</p>
+<p><strong>什么时候需要用延时队列呢？</strong></p>
+<ol>
+<li>订单在十分钟之内未支付则自动取消。</li>
+<li>新创建的店铺，如果在十天内都没有上传过商品，则自动发送消息提醒。</li>
+<li>账单在一周内未支付，则自动结算。</li>
+<li>用户注册成功后，如果三天内没有登陆则进行短信提醒。</li>
+<li>用户发起退款，如果三天内没有得到处理则通知相关运营人员。</li>
+<li>预定会议后，需要在预定的时间点前十分钟通知各个与会人员参加会议。</li>
+</ol>
+<p><strong>解决方法：使用RabbitMQ消息的TTL（消息存活时间）和死信Exchange结合</strong></p>
+<p>消息的流向：</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/5d3d743143ecc85643.png" alt=" " style="zoom:50%;" />
+
+<p><strong>RabbitMQ可以对队列和消息分别设置TTL：</strong></p>
+<ul>
+<li>对队列设置就是队列没有消费者连着的保留时间，也可以对每一个单独的消息做单独的设置。超过了这个时间，我们认为这个消息就死了，称之为死信。</li>
+<li>如果队列设置了，消息也设置了，那么会取小的。所以一个消息如果被路由到不同的队列中，这个消息死亡的时间有可能不一样（不同的队列设置）。这里单讲单个消息的TTL，因为它才是实现延迟任务的关键。可以通过设置消息的expiration字段或者x-message-ttl属性来设置时间，两者是一样的效果。</li>
+</ul>
+<p><strong>消息在什么时候会变成死信</strong>：</p>
+<ol>
+<li>消息拒绝并且没有设置重新入队</li>
+<li>消息TTL过期</li>
+<li>消息堆积，并且队列达到最大长度，先入队的消息会变成DL（队列满了，无法再添加）</li>
+</ol>
+<h4 id="队列设置TTL"><a href="#队列设置TTL" class="headerlink" title="队列设置TTL"></a>队列设置TTL</h4><p>生产者生产一条延时消息，根据需要延时时间的不同，利用不同的routingkey将消息路由到不同的延时队列，每个队列都设置了不同的TTL属性，并绑定在同一个死信交换机中，消息过期后，根据routingkey的不同，又会被路由到不同的死信队列中，消费者只需要监听对应的死信队列进行处理即可。</p>
+<p>下面来看代码：</p>
+<p>先声明交换机、队列以及他们的绑定关系：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitMQConfig</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_EXCHANGE_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.exchange"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEA_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queuea"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEB_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queueb"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEA_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queuea.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEB_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queueb.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_EXCHANGE <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.exchange"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEA_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.delay_10s.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEB_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.delay_60s.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEA_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.queuea"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEB_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.queueb"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 声明延时Exchange</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"delayExchange"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">DirectExchange</span> <span class="token function">delayExchange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DirectExchange</span><span class="token punctuation">(</span>DELAY_EXCHANGE_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信Exchange</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"deadLetterExchange"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">DirectExchange</span> <span class="token function">deadLetterExchange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DirectExchange</span><span class="token punctuation">(</span>DEAD_LETTER_EXCHANGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明延时队列A 延时10s</span>
+    <span class="token comment">// 并绑定到对应的死信交换机</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"delayQueueA"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">delayQueueA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> args <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-exchange    这里声明当前队列绑定的死信交换机</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-exchange"</span><span class="token punctuation">,</span> DEAD_LETTER_EXCHANGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-routing-key  这里声明当前队列的死信路由key</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-routing-key"</span><span class="token punctuation">,</span> DEAD_LETTER_QUEUEA_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-message-ttl  声明队列的TTL</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-message-ttl"</span><span class="token punctuation">,</span> <span class="token number">6000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token class-name">QueueBuilder</span><span class="token punctuation">.</span><span class="token function">durable</span><span class="token punctuation">(</span>DELAY_QUEUEA_NAME<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withArguments</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明延时队列B 延时 60s</span>
+    <span class="token comment">// 并绑定到对应的死信交换机</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"delayQueueB"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">delayQueueB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> args <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-exchange    这里声明当前队列绑定的死信交换机</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-exchange"</span><span class="token punctuation">,</span> DEAD_LETTER_EXCHANGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-routing-key  这里声明当前队列的死信路由key</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-routing-key"</span><span class="token punctuation">,</span> DEAD_LETTER_QUEUEB_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-message-ttl  声明队列的TTL</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-message-ttl"</span><span class="token punctuation">,</span> <span class="token number">60000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token class-name">QueueBuilder</span><span class="token punctuation">.</span><span class="token function">durable</span><span class="token punctuation">(</span>DELAY_QUEUEB_NAME<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withArguments</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列A 用于接收延时10s处理的消息</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueA"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">deadLetterQueueA</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEA_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列B 用于接收延时60s处理的消息</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueB"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">deadLetterQueueB</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEB_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明延时队列A绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">delayBindingA</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayQueueA"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DELAY_QUEUEA_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明业务队列B绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">delayBindingB</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayQueueB"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DELAY_QUEUEB_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列A绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">deadLetterBindingA</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueA"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEA_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列B绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">deadLetterBindingB</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueB"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                      <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEB_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接下来，创建两个消费者，分别对两个死信队列的消息进行消费：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DeadLetterQueueConsumer</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>queues <span class="token operator">=</span> DEAD_LETTER_QUEUEA_NAME<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveA</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,死信队列A收到消息：&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        channel<span class="token punctuation">.</span><span class="token function">basicAck</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>queues <span class="token operator">=</span> DEAD_LETTER_QUEUEB_NAME<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveB</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,死信队列B收到消息：&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        channel<span class="token punctuation">.</span><span class="token function">basicAck</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后是消息的生产者：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DelayMessageSender</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">RabbitTemplate</span> rabbitTemplate<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sendMsg</span><span class="token punctuation">(</span><span class="token class-name">String</span> msg<span class="token punctuation">,</span> <span class="token class-name">DelayTypeEnum</span> type<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span>type<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">case</span> <span class="token class-name">DELAY_10s</span><span class="token operator">:</span>
+                rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span>DELAY_EXCHANGE_NAME<span class="token punctuation">,</span> DELAY_QUEUEA_ROUTING_KEY<span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token class-name">DELAY_60s</span><span class="token operator">:</span>
+                rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span>DELAY_EXCHANGE_NAME<span class="token punctuation">,</span> DELAY_QUEUEB_ROUTING_KEY<span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接下来，我们暴露一个web接口来生产消息：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"rabbitmq"</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitMQMsgController</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">DelayMessageSender</span> sender<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"sendmsg"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sendMsg</span><span class="token punctuation">(</span><span class="token class-name">String</span> msg<span class="token punctuation">,</span> <span class="token class-name">Integer</span> delayType<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,收到请求，msg:&#123;&#125;,delayType:&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">,</span> delayType<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sender<span class="token punctuation">.</span><span class="token function">sendMsg</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> <span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span><span class="token class-name">DelayTypeEnum</span><span class="token punctuation">.</span><span class="token function">getDelayTypeEnumByValue</span><span class="token punctuation">(</span>delayType<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>准备就绪，启动！</p>
+<p>打开rabbitMQ的<a target="_blank" rel="noopener" href="http://localhost:15672/">管理后台</a>，可以看到我们刚才创建的交换机和队列信息：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/5d3d54e15534398514.png" alt="2.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/5d3d54e17df8183993.png" alt="4.png"></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/5d3d54e16952546955.png" alt="3.png"></p>
+<p>接下来，我们来发送几条消息，<a target="_blank" rel="noopener" href="http://localhost:8080/rabbitmq/sendmsg?msg=testMsg1&amp;delayType=1">http://localhost:8080/rabbitmq/sendmsg?msg=testMsg1&amp;delayType=1</a> <a target="_blank" rel="noopener" href="http://localhost:8080/rabbitmq/sendmsg?msg=testMsg2&amp;delayType=2">http://localhost:8080/rabbitmq/sendmsg?msg=testMsg2&amp;delayType=2</a></p>
+<p>日志如下：</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">2019-07-28 16:02:19.813  INFO 3860 --- [nio-8080-exec-9] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:02:19 CST 2019,收到请求，msg:testMsg1,delayType:1
+2019-07-28 16:02:19.815  INFO 3860 --- [nio-8080-exec-9] .l.DirectReplyToMessageListenerContainer : SimpleConsumer [queue=amq.rabbitmq.reply-to, consumerTag=amq.ctag-o-qPpkWIkRm73DIrOIVhig identity=766339] started
+2019-07-28 16:02:25.829  INFO 3860 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:02:25 CST 2019,死信队列A收到消息：testMsg1
+2019-07-28 16:02:41.326  INFO 3860 --- [nio-8080-exec-1] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:02:41 CST 2019,收到请求，msg:testMsg2,delayType:2
+2019-07-28 16:03:41.329  INFO 3860 --- [ntContainer#0-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:03:41 CST 2019,死信队列B收到消息：testMsg2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第一条消息在6s后变成了死信消息，然后被消费者消费掉，第二条消息在60s之后变成了死信消息，然后被消费掉，这样，一个还算ok的延时队列就打造完成了。</p>
+<p>不过，等等，如果这样使用的话，岂不是每增加一个新的时间需求，就要新增一个队列，这里只有6s和60s两个时间选项，如果需要一个小时后处理，那么就需要增加TTL为一个小时的队列，如果是预定会议室然后提前通知这样的场景，岂不是要增加无数个队列才能满足需求？？</p>
+<p>嗯，仔细想想，事情并不简单。</p>
+<p>显然，需要一种更通用的方案才能满足需求，那么就只能将TTL设置在消息属性里了。我们来试一试。</p>
+<h4 id="消息设置TTL"><a href="#消息设置TTL" class="headerlink" title="消息设置TTL"></a>消息设置TTL</h4><p>增加一个延时队列，用于接收设置为任意延时时长的消息，增加一个相应的死信队列和routingkey：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitMQConfig</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_EXCHANGE_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.exchange"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEC_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queuec"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAY_QUEUEC_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.business.queuec.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_EXCHANGE <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.exchange"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEC_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.delay_anytime.routingkey"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DEAD_LETTER_QUEUEC_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.deadletter.queuec"</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 声明延时Exchange</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"delayExchange"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">DirectExchange</span> <span class="token function">delayExchange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DirectExchange</span><span class="token punctuation">(</span>DELAY_EXCHANGE_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信Exchange</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"deadLetterExchange"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">DirectExchange</span> <span class="token function">deadLetterExchange</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">DirectExchange</span><span class="token punctuation">(</span>DEAD_LETTER_EXCHANGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明延时队列C 不设置TTL</span>
+    <span class="token comment">// 并绑定到对应的死信交换机</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"delayQueueC"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">delayQueueC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> args <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-exchange    这里声明当前队列绑定的死信交换机</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-exchange"</span><span class="token punctuation">,</span> DEAD_LETTER_EXCHANGE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// x-dead-letter-routing-key  这里声明当前队列的死信路由key</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-dead-letter-routing-key"</span><span class="token punctuation">,</span> DEAD_LETTER_QUEUEC_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token class-name">QueueBuilder</span><span class="token punctuation">.</span><span class="token function">durable</span><span class="token punctuation">(</span>DELAY_QUEUEC_NAME<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">withArguments</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列C 用于接收延时任意时长处理的消息</span>
+    <span class="token annotation punctuation">@Bean</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueC"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">deadLetterQueueC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEC_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明延时列C绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">delayBindingC</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayQueueC"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                 <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"delayExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DELAY_QUEUEC_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// 声明死信队列C绑定关系</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">deadLetterBindingC</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterQueueC"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                      <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"deadLetterExchange"</span><span class="token punctuation">)</span> <span class="token class-name">DirectExchange</span> exchange<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>exchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DEAD_LETTER_QUEUEC_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>增加一个死信队列C的消费者：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>queues <span class="token operator">=</span> DEAD_LETTER_QUEUEC_NAME<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveC</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,死信队列C收到消息：&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    channel<span class="token punctuation">.</span><span class="token function">basicAck</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再次启动！然后访问：<a target="_blank" rel="noopener" href="http://localhost:8080/rabbitmq/delayMsg?msg=testMsg1delayTime=5000">http://localhost:8080/rabbitmq/delayMsg?msg=testMsg1delayTime=5000</a> 来生产消息，注意这里的单位是毫秒。</p>
+<pre class="line-numbers language-none"><code class="language-none">2019-07-28 16:45:07.033  INFO 31468 --- [nio-8080-exec-4] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:45:07 CST 2019,收到请求，msg:testMsg1,delayTime:5000
+2019-07-28 16:45:11.694  INFO 31468 --- [nio-8080-exec-5] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:45:11 CST 2019,收到请求，msg:testMsg2,delayTime:5000
+2019-07-28 16:45:12.048  INFO 31468 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:45:12 CST 2019,死信队列C收到消息：testMsg1
+2019-07-28 16:45:16.709  INFO 31468 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:45:16 CST 2019,死信队列C收到消息：testMsg2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>看起来似乎没什么问题，但不要高兴的太早，在最开始的时候，就介绍过，如果使用在消息属性上设置TTL的方式，消息可能并不会按时“死亡“，因为RabbitMQ只会检查第一个消息是否过期，如果过期则丢到死信队列，索引如果第一个消息的延时时长很长，而第二个消息的延时时长很短，则第二个消息并不会优先得到执行。</p>
+<p>实验一下：</p>
+<pre class="line-numbers language-none"><code class="language-none">2019-07-28 16:49:02.957  INFO 31468 --- [nio-8080-exec-8] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:49:02 CST 2019,收到请求，msg:longDelayedMsg,delayTime:20000
+2019-07-28 16:49:10.671  INFO 31468 --- [nio-8080-exec-9] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 16:49:10 CST 2019,收到请求，msg:shortDelayedMsg,delayTime:2000
+2019-07-28 16:49:22.969  INFO 31468 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:49:22 CST 2019,死信队列C收到消息：longDelayedMsg
+2019-07-28 16:49:22.970  INFO 31468 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 16:49:22 CST 2019,死信队列C收到消息：shortDelayedMsg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们先发了一个延时时长为20s的消息，然后发了一个延时时长为2s的消息，结果显示，第二个消息会在等第一个消息成为死信后才会“死亡“。</p>
+<p>上文中提到的问题，确实是一个硬伤，如果不能实现在消息粒度上添加TTL，并使其在设置的TTL时间及时死亡，就无法设计成一个通用的延时队列。</p>
+<p>那如何解决这个问题呢？不要慌，安装一个插件即可：<a target="_blank" rel="noopener" href="https://www.rabbitmq.com/community-plugins.html">https://www.rabbitmq.com/community-plugins.html</a> ，下载rabbitmq_delayed_message_exchange插件，然后解压放置到RabbitMQ的插件目录。</p>
+<p>接下来，进入RabbitMQ的安装目录下的sbin目录，执行下面命令让该插件生效，然后重启RabbitMQ。</p>
+<pre class="line-numbers language-none"><code class="language-none">rabbitmq-plugins enable rabbitmq_delayed_message_exchange<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后，我们再声明几个Bean：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DelayedRabbitMQConfig</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAYED_QUEUE_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.delay.queue"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAYED_EXCHANGE_NAME <span class="token operator">=</span> <span class="token string">"delay.queue.demo.delay.exchange"</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span> DELAYED_ROUTING_KEY <span class="token operator">=</span> <span class="token string">"delay.queue.demo.delay.routingkey"</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Queue</span> <span class="token function">immediateQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Queue</span><span class="token punctuation">(</span>DELAYED_QUEUE_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">CustomExchange</span> <span class="token function">customExchange</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">></span></span> args <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        args<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"x-delayed-type"</span><span class="token punctuation">,</span> <span class="token string">"direct"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">CustomExchange</span><span class="token punctuation">(</span>DELAYED_EXCHANGE_NAME<span class="token punctuation">,</span> <span class="token string">"x-delayed-message"</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">Binding</span> <span class="token function">bindingNotify</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"immediateQueue"</span><span class="token punctuation">)</span> <span class="token class-name">Queue</span> queue<span class="token punctuation">,</span>
+                                 <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">"customExchange"</span><span class="token punctuation">)</span> <span class="token class-name">CustomExchange</span> customExchange<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token class-name">BindingBuilder</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">to</span><span class="token punctuation">(</span>customExchange<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>DELAYED_ROUTING_KEY<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">noargs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>controller层再添加一个入口：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"delayMsg2"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">delayMsg2</span><span class="token punctuation">(</span><span class="token class-name">String</span> msg<span class="token punctuation">,</span> <span class="token class-name">Integer</span> delayTime<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,收到请求，msg:&#123;&#125;,delayTime:&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">,</span> delayTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sender<span class="token punctuation">.</span><span class="token function">sendDelayMsg</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> delayTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>消息生产者的代码也需要修改：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sendDelayMsg</span><span class="token punctuation">(</span><span class="token class-name">String</span> msg<span class="token punctuation">,</span> <span class="token class-name">Integer</span> delayTime<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    rabbitTemplate<span class="token punctuation">.</span><span class="token function">convertAndSend</span><span class="token punctuation">(</span>DELAYED_EXCHANGE_NAME<span class="token punctuation">,</span> DELAYED_ROUTING_KEY<span class="token punctuation">,</span> msg<span class="token punctuation">,</span> a <span class="token operator">-></span><span class="token punctuation">&#123;</span>
+        a<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setDelay</span><span class="token punctuation">(</span>delayTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后，再创建一个消费者：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@RabbitListener</span><span class="token punctuation">(</span>queues <span class="token operator">=</span> DELAYED_QUEUE_NAME<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receiveD</span><span class="token punctuation">(</span><span class="token class-name">Message</span> message<span class="token punctuation">,</span> <span class="token class-name">Channel</span> channel<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">IOException</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> msg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"当前时间：&#123;&#125;,延时队列收到消息：&#123;&#125;"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    channel<span class="token punctuation">.</span><span class="token function">basicAck</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span><span class="token function">getMessageProperties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getDeliveryTag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一切准备就绪，启动！然后分别访问以下链接：</p>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;localhost:8080&#x2F;rabbitmq&#x2F;delayMsg2?msg&#x3D;msg1&amp;delayTime&#x3D;20000
+http:&#x2F;&#x2F;localhost:8080&#x2F;rabbitmq&#x2F;delayMsg2?msg&#x3D;msg2&amp;delayTime&#x3D;2000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>日志如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">2019-07-28 17:28:13.729  INFO 25804 --- [nio-8080-exec-2] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 17:28:13 CST 2019,收到请求，msg:msg1,delayTime:20000
+2019-07-28 17:28:20.607  INFO 25804 --- [nio-8080-exec-1] c.m.d.controller.RabbitMQMsgController   : 当前时间：Sun Jul 28 17:28:20 CST 2019,收到请求，msg:msg2,delayTime:2000
+2019-07-28 17:28:22.624  INFO 25804 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 17:28:22 CST 2019,延时队列收到消息：msg2
+2019-07-28 17:28:33.751  INFO 25804 --- [ntContainer#1-1] c.m.d.mq.DeadLetterQueueConsumer         : 当前时间：Sun Jul 28 17:28:33 CST 2019,延时队列收到消息：msg1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>第二个消息被先消费掉了，符合预期。至此，RabbitMQ实现延时队列的部分就完结了。</p>
+<p>延时队列在需要延时处理的场景下非常有用，使用RabbitMQ来实现延时队列可以很好的利用RabbitMQ的特性，如：消息可靠发送、消息可靠投递、死信队列来保障消息至少被消费一次以及未被正确处理的消息不会被丢弃。另外，通过RabbitMQ集群的特性，可以很好的解决单点故障问题，不会因为单个节点挂掉导致延时队列不可用或者消息丢失。</p>
+<p>当然，延时队列还有很多其它选择，比如利用Java的DelayQueu，利用Redis的zset，利用Quartz或者利用kafka的时间轮，这些方式各有特点，但就像炉石传说一般，这些知识就好比手里的卡牌，知道的越多，可以用的卡牌也就越多，遇到问题便能游刃有余，所以需要大量的知识储备和经验积累才能打造出更出色的卡牌组合，让自己解决问题的能力得到更好的提升。</p>
 
                 
             </div>

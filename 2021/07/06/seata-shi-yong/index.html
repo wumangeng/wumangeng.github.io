@@ -708,8 +708,6 @@
 <p>seata-server.bat -p 8091 -n 2</p>
 <p>linux下启动：<br> sh seata-server.sh -p 18091 -n 1</p>
 <p>sh seata-server.sh -p 8091 -n 2</p>
-<img src="https:////upload-images.jianshu.io/upload_images/1977357-9689c93d75baa7bd.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1141" alt=" " style="zoom:67%;" />
-
 <p>⑦客户端启动时，可以看是否成功注册到seata server服务器</p>
 <h2 id="3-创建需要的事务表"><a href="#3-创建需要的事务表" class="headerlink" title="3.创建需要的事务表"></a>3.创建需要的事务表</h2><p>global_table：全局事务表<br> branch_table：分支信息表<br> lock_table：加锁的表<br> 以上三个表需要创建在seata服务器操作的db上，即file.conf中配置的数据库。</p>
 <pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">--全局事务表--
