@@ -1110,14 +1110,22 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
 <li><p>可以通过使用括号来临时提升某个表达式的整体运算优先级。</p>
 </li>
 </ol>
-<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>包名和目录名一致。</p>
-<p>文件中变量、函数名首字母大写，则为public，小写则为包私有</p>
-<p>引用自己的包时，先把src目录的上级目录加入环境变量GO_PATH中，然后引入包在src目录下的相对路径</p>
-<p>然后就可以引用model包下首字母大写的变量或函数了</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go">fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>Name<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><ul>
+<li><p>包的本质是创建不同的文件夹，来存放程序文件</p>
+</li>
+<li><p>包名通常和文件夹名保持一致。</p>
+</li>
+<li><p>文件中变量、函数名首字母大写，则为public，小写则为包私有</p>
+</li>
+<li><p>在import包时，路径从$GOPATH的src下开始，不用带src，编译器会从src下开始引入</p>
+</li>
+<li><p>然后就可以引用model包下首字母大写的变量或函数了</p>
+</li>
+</ul>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go">fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>   <span class="token comment">// 包名.函数/变量</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>model包下的test_model.go内容如下所示，文件不用引用。引用目录就行</p>
-<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> model
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> model   <span class="token comment">//打包</span>
  
 <span class="token keyword">var</span> Name <span class="token operator">=</span> <span class="token string">"Jason"</span>
 <span class="token keyword">var</span> age <span class="token operator">=</span> <span class="token number">23</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
@@ -1229,8 +1237,9 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h4 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h4><p>函数定义:</p>
 <blockquote>
-<p>func  函数名(参数列表)  返回值类型 {</p>
+<p>func  函数名 (参数列表)  （返回值列表） {</p>
 <p>//函数体</p>
+<p>return  返回值列表</p>
 <p>}</p>
 </blockquote>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">generateRandom</span><span class="token punctuation">(</span>time <span class="token builtin">int64</span><span class="token punctuation">,</span> _range <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
