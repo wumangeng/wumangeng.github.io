@@ -1121,6 +1121,10 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
 </li>
 <li><p>然后就可以引用model包下首字母大写的变量或函数了</p>
 </li>
+<li><p>如果包名过长，可以给包起别名。一旦起别名，原来的名就不能再使用了</p>
+</li>
+<li><p>在同一个包下不能有相同的函数名和变量名</p>
+</li>
 </ul>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>   <span class="token comment">// 包名.函数/变量</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
@@ -1130,6 +1134,11 @@ fmt<span class="token punctuation">.</span><span class="token function">Printf</
 <span class="token keyword">var</span> Name <span class="token operator">=</span> <span class="token string">"Jason"</span>
 <span class="token keyword">var</span> age <span class="token operator">=</span> <span class="token number">23</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p><strong>编译go项目：</strong></p>
+<ol>
+<li>进入到项目的$GOPATH目录下</li>
+<li>运行  go build  -o  bin/name.exe   路径             // -o 为给生成的可执行文件指定位置和命名， 路径为src下开始到main包  例： /go_code/helloword/main</li>
+</ol>
 <h3 id="读取控制台数据"><a href="#读取控制台数据" class="headerlink" title="读取控制台数据"></a>读取控制台数据</h3><p>调用fmt.Scan等方法即可</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> j <span class="token builtin">string</span>
 fmt<span class="token punctuation">.</span><span class="token function">Scanln</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>j<span class="token punctuation">)</span> <span class="token comment">// Scanln读取一行</span>
