@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="事务">
+    <meta name="keywords" content="SQL">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>本地事务的坑 | 山河远阔</title>
+    <title>SQL优化 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -312,12 +312,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2675676491,1895675049&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3189394240,3229304938&fm=26&fmt=auto')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">本地事务的坑</h1>
+                    <h1 class="description center-align post-title">SQL优化</h1>
                 </div>
             </div>
         </div>
@@ -433,16 +433,12 @@
                     
                     <div class="article-tag">
                         
+                            <a href="/tags/sql/">
+                                <span class="chip bg-color">sql</span>
+                            </a>
+                        
                             <a href="/tags/mysql/">
                                 <span class="chip bg-color">mysql</span>
-                            </a>
-                        
-                            <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                                <span class="chip bg-color">事务</span>
-                            </a>
-                        
-                            <a href="/tags/Spring/">
-                                <span class="chip bg-color">Spring</span>
                             </a>
                         
                     </div>
@@ -453,8 +449,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/mysql/" class="post-category">
+                                mysql
                             </a>
                         
                     </div>
@@ -475,7 +471,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-07
+                    2021-03-12
                 </div>
                 
 
@@ -499,355 +495,34 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="本地事务"><a href="#本地事务" class="headerlink" title="本地事务"></a>本地事务</h2><p><strong>事务的定义</strong></p>
-<p>所谓事务,它是一个操作集合，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
-<p><strong>事务有4个重要特性：ACID</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">原子性（Atomicity）</th>
-<th>当事务结束，它对所有资源状态的改变都被视为一个操作，这些操作要不同时成功，要不同时失败</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">一致性（Consistency）</td>
-<td>操作完成后，所有数据必须符合业务规则，否则事务必须中止</td>
-</tr>
-<tr>
-<td align="center">隔离性（Isolation）</td>
-<td>事务以相互隔离的方式执行，事务以外的实体无法知道事务过程中的中间状态</td>
-</tr>
-<tr>
-<td align="center">持久性（Durable）</td>
-<td>事务提交后，数据必须以一种持久性方式存储起来</td>
-</tr>
-</tbody></table>
-<p><strong>事务产生的问题：</strong></p>
-<p>场景：同一个事务内（同一个服务内）</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>数据的状态</th>
-<th align="center">实际行为</th>
-<th>产生原因</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>脏读</td>
-<td>未提交</td>
-<td align="center">打算提交但是数据回滚了，读取了提交的数据</td>
-<td>数据的读取</td>
-</tr>
-<tr>
-<td>不可重复读</td>
-<td>已提交</td>
-<td align="center">读取了修改前的数据</td>
-<td>数据的修改</td>
-</tr>
-<tr>
-<td>幻读</td>
-<td>已提交</td>
-<td align="center">读取了插入前的数据</td>
-<td>数据的插入</td>
-</tr>
-</tbody></table>
-<p><strong>事务隔离级：</strong></p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>结果</th>
-<th>脏读</th>
-<th align="center">不可重复读</th>
-<th align="center">幻读</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Read UnCommitted(读未提交)</td>
-<td>什么都不解决</td>
-<td>√</td>
-<td align="center">√</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td>Read Committed(读提交)</td>
-<td>解决了脏读的问题</td>
-<td>–</td>
-<td align="center">√</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td>Repeatable Read(重复读)</td>
-<td>mysql的默认级别，解决了不可重复读</td>
-<td>–</td>
-<td align="center">–</td>
-<td align="center">√</td>
-</tr>
-<tr>
-<td>Serializable(序列化)</td>
-<td>解决所有问题</td>
-<td>–</td>
-<td align="center">–</td>
-<td align="center">–</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>READ UNCOMMITTED（读未提交数据）：允许事务读取未被其他事务提交的变更数据，会出现脏读、不可重复读和幻读问题。<br>READ COMMITTED（读已提交数据）：只允许事务读取已经被其他事务提交的变更数据，可避免脏读，仍会出现不可重复读和幻读问题。<br>REPEATABLE READ（可重复读）：确保事务可以多次从一个字段中读取相同的值，在此事务持续期间，禁止其他事务对此字段的更新，可以避免脏读和不可重复读，仍会出现幻读问题。<br>SERIALIZABLE（序列化）：确保事务可以从一个表中读取相同的行，在这个事务持续期间，禁止其他事务对该表执行插入、更新和删除操作，可避免所有并发问题，但性能非常低。</p>
-</blockquote>
-<h3 id="Spring中事务的使用"><a href="#Spring中事务的使用" class="headerlink" title="Spring中事务的使用"></a>Spring中事务的使用</h3><p>Spring 事务其实就是对数据库事务的支持。Spring  事务的隔离级别和数据库中的隔离级别是相对应的。Spring事务分为声明式事务和编程式事务（基本很少人使用）。</p>
-<p><strong>Spring事务5种隔离级别：</strong></p>
-<table>
-<thead>
-<tr>
-<th>隔离级别</th>
-<th align="center">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>isolation_default</td>
-<td align="center">使用数据库默认的事务隔离级别</td>
-</tr>
-<tr>
-<td>isolation_read_uncommitted</td>
-<td align="center">允许读取尚未提交的修改，可能导致脏读、幻读和不可重复读</td>
-</tr>
-<tr>
-<td>isolation_read_committed</td>
-<td align="center">允许从已经提交的事务读取，可防止脏读、但幻读，不可重复读仍然有可能发生</td>
-</tr>
-<tr>
-<td>isolation_repeatable_read</td>
-<td align="center">对相同字段的多次读取的结果是一致的，除非数据被当前事务自生修改。可防止脏读和不可重复读，但幻读仍有可能发生</td>
-</tr>
-<tr>
-<td>isolation_serializable</td>
-<td align="center">完全服从acid隔离原则，确保不发生脏读、不可重复读、和幻读，但执行效率最低。</td>
-</tr>
-</tbody></table>
-<p><strong>Spring事务7种传播行为</strong></p>
-<table>
-<thead>
-<tr>
-<th>传播行为</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>propagation_required（xml文件中为required)</td>
-<td>表示当前方法必须在一个具有事务的上下文中运行，如有客户端有事务在进行，那么被调用端将在该事务中运行，否则的话重新开启一个事务。（如果被调用端发生异常，那么调用端和被调用端事务都将回滚）</td>
-</tr>
-<tr>
-<td>propagation_supports(supports）</td>
-<td>表示当前方法不必需要具有一个事务上下文，但是如果有一个事务的话，它也可以在这个事务中运行</td>
-</tr>
-<tr>
-<td>propagation_mandatory(mandatory）</td>
-<td>表示当前方法必须在一个事务中运行，如果没有事务，将抛出异常</td>
-</tr>
-<tr>
-<td>propagation_nested(nested)</td>
-<td>表示如果当前方法正有一个事务在运行中，则该方法应该运行在一个嵌套事务中，被嵌套的事务可以独立于被封装的事务中进行提交或者回滚。如果封装事务存在，并且外层事务抛出异常回滚，那么内层事务必须回滚，反之，内层事务并不影响外层事务。如果封装事务不存在，则同propagation_required的一样</td>
-</tr>
-<tr>
-<td>propagation_never（never)</td>
-<td>表示当方法务不应该在一个事务中运行，如果存在一个事务，则抛出异常</td>
-</tr>
-<tr>
-<td>propagation_requires_new(requires_new）</td>
-<td>表示当前方法必须运行在它自己的事务中。一个新的事务将启动，而且如果有一个现有的事务在运行的话，则这个方法将在运行期被挂起，直到新的事务提交或者回滚才恢复执行。</td>
-</tr>
-<tr>
-<td>propagation_not_supported（not_supported）</td>
-<td>表示该方法不应该在一个事务中运行。如果有一个事务正在运行，他将在运行期被挂起，直到这个事务提交或者回滚才恢复执行</td>
-</tr>
-</tbody></table>
-<p>使用Spring中的事务非常简单只需要两步：</p>
-<ol>
-<li>添加数据源配置，在启动类上添加@EnableTransactionManagement注解</li>
-<li>在业务方法上添加@Transactional即可</li>
-</ol>
-<h3 id="Transactional属性"><a href="#Transactional属性" class="headerlink" title="@Transactional属性"></a>@Transactional属性</h3><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>value</td>
-<td>String</td>
-<td>可选的限定描述符，指定使用的事务管理器</td>
-</tr>
-<tr>
-<td>propagation</td>
-<td>enum: Propagation</td>
-<td>可选的事务传播行为设置</td>
-</tr>
-<tr>
-<td>isolation</td>
-<td>enum: Isolation</td>
-<td>可选的事务隔离级别设置</td>
-</tr>
-<tr>
-<td>readOnly</td>
-<td>boolean</td>
-<td>读写或只读事务，默认读写</td>
-</tr>
-<tr>
-<td>timeout</td>
-<td>int (in seconds granularity)</td>
-<td>事务超时时间设置</td>
-</tr>
-<tr>
-<td>rollbackFor</td>
-<td>Class对象数组，必须继承自Throwable</td>
-<td>导致事务回滚的异常类数组</td>
-</tr>
-<tr>
-<td>rollbackForClassName</td>
-<td>类名数组，必须继承自Throwable</td>
-<td>导致事务回滚的异常类名字数组</td>
-</tr>
-<tr>
-<td>noRollbackFor</td>
-<td>Class对象数组，必须继承自Throwable</td>
-<td>不会导致事务回滚的异常类数组</td>
-</tr>
-<tr>
-<td>noRollbackForClassName</td>
-<td>类名数组，必须继承自Throwable</td>
-<td>不会导致事务回滚的异常类名字数组</td>
-</tr>
-</tbody></table>
-<p><strong>用法：</strong></p>
-<ol>
-<li><p>在需要事务管理的地方加@Transactional 注解。@Transactional 注解可以被应用于接口定义和接口方法、类定义和类的 public 方法上。</p>
-</li>
-<li><p>@Transactional 注解只能应用到 public 可见度的方法上。 如果你在 protected、private 或者  package-visible 的方法上使用 @Transactional 注解，它也不会报错，  但是这个被注解的方法将不会展示已配置的事务设置。</p>
-</li>
-<li><p>注意仅仅 @Transactional 注解的出现不足于开启事务行为，它仅仅 是一种元数据。必须在配置文件中使用配置元素，才真正开启了事务行为。</p>
-</li>
-<li><p>通过 元素的 “proxy-target-class” 属性值来控制是基于接口的还是基于类的代理被创建。如果  “proxy-target-class” 属值被设置为  “true”，那么基于类的代理将起作用（这时需要CGLIB库cglib.jar在CLASSPATH中）。如果  “proxy-target-class” 属值被设置为 “false” 或者这个属性被省略，那么标准的JDK基于接口的代理将起作用。</p>
-</li>
-<li><p>Spring团队建议在具体的类（或类的方法）上使用 @Transactional  注解，而不要使用在类所要实现的任何接口上。在接口上使用 @Transactional 注解，只能当你设置了基于接口的代理时它才生效。因为注解是  不能继承 的，这就意味着如果正在使用基于类的代理时，那么事务的设置将不能被基于类的代理所识别，而且对象也将不会被事务代理所包装。</p>
-</li>
-<li><p>@Transactional 的事务开启 ，是基于接口的 或者是<strong>基于类的代理被创建</strong>。所以<strong>在同一个类中一个方法调用另一个方法有事务的方法，事务是不会起作用的。</strong></p>
-</li>
-</ol>
-<p>详细使用可以参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zht741322694/article/details/78676964">Spring事务隔离级别、传播机制以及简单配置</a></p>
-<h3 id="Spring事务失效问题"><a href="#Spring事务失效问题" class="headerlink" title="Spring事务失效问题"></a>Spring事务失效问题</h3><p>Spring事务失效的场景有：</p>
-<ul>
-<li>@Transactional 应用在非 public 修饰的方法上</li>
-<li>@Transactional 注解属性 propagation 设置错误</li>
-<li>@Transactional 注解属性 rollbackFor 设置错误</li>
-<li>同一个类中方法调用，导致@Transactional失效</li>
-<li>异常被catch捕获导致@Transactional失效</li>
-</ul>
-<p>举个例子：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <h1 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h1><h2 id="1、SQL查询是否存在"><a href="#1、SQL查询是否存在" class="headerlink" title="1、SQL查询是否存在"></a>1、SQL查询是否存在</h2><p>业务代码中，需要根据一个或多个条件，查询是否存在记录，不关心有多少条记录。我们习惯性的SQL及代码写法如下</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">#### SQL写法:</span>
+<span class="token keyword">SELECT</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">AND</span> b <span class="token operator">=</span> <span class="token number">2</span>
 
-	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>READ_COMMITTED<span class="token punctuation">)</span>
-	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		<span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
+<span class="token comment">#### Java写法:</span>
+<span class="token keyword">int</span> nums <span class="token operator">=</span> xxDao<span class="token punctuation">.</span>countXxxxByXxx<span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span> nums <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">)</span> &#123;
+  <span class="token comment">//当存在时，执行这里的代码</span>
+&#125; <span class="token keyword">else</span> &#123;
+  <span class="token comment">//当不存在时，执行这里的代码</span>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>READ_UNCOMMITTED<span class="token punctuation">)</span>
-	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token comment">//....</span>
-	<span class="token punctuation">&#125;</span>
+<p>这样写感觉没什么问题，但其实这种做法比较耗费数据库的资源</p>
+<h3 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h3><p>推荐写法如下：</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">#### SQL写法:</span>
+<span class="token keyword">SELECT</span> <span class="token number">1</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">AND</span> b <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">LIMIT</span> <span class="token number">1</span>
 
-	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>isolation <span class="token operator">=</span> <span class="token class-name">Isolation</span><span class="token punctuation">.</span>REPEATABLE_READ<span class="token punctuation">)</span>
-	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token comment">//....</span>
-	<span class="token punctuation">&#125;</span>
-	
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#### Java写法:</span>
+<span class="token keyword">Integer</span> exist <span class="token operator">=</span> xxDao<span class="token punctuation">.</span>existXxxxByXxx<span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span> exist <span class="token operator">!=</span> <span class="token boolean">NULL</span> <span class="token punctuation">)</span> &#123;
+  <span class="token comment">//当存在时，执行这里的代码</span>
+&#125; <span class="token keyword">else</span> &#123;
+  <span class="token comment">//当不存在时，执行这里的代码</span>
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>在以上这种情景中a调用了同一个类里面的b和c方法，那么b和c方法的事务会失效。a的事务设置会覆盖b和c的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-
-		<span class="token annotation punctuation">@Transactional</span>
-		<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			<span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-
-		<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRED<span class="token punctuation">)</span>
-		<span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			<span class="token comment">//....</span>
-		<span class="token punctuation">&#125;</span>
-
-		<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRES_NEW<span class="token punctuation">)</span>
-		<span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			<span class="token comment">//....</span>
-		<span class="token punctuation">&#125;</span>
-
-	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>以上情景中a和b将共用一个事务，c为一个新的事务。因此会造成a，b回滚事务，c不回滚</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token annotation punctuation">@Transactional</span>
-		<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-			bService<span class="token punctuation">.</span><span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-			cService<span class="token punctuation">.</span><span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">10</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这种情况下a，b，c事务均生效。原因在于Spring的事务是通过代理对象来实现的，同一个代理对象内调用方法会覆盖。</p>
-<h3 id="事务失效解决方法"><a href="#事务失效解决方法" class="headerlink" title="事务失效解决方法"></a>事务失效解决方法</h3><p>同一个对象内事务方法互相调用默认失效的，原因在于绕过了代理对象。</p>
-<p>因此解决方法是，使用代理对象来调用事务方法，具体实施如下：</p>
-<ol>
-<li><p>引入aop依赖，aop中包含了aspectj</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-aop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>开启动态代理，在启动类添加@EnableAspectJAutoProxy，对外暴露代理对象</p>
-</li>
-<li><p>使用代理对象在本类互调</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">AService</span><span class="token punctuation">&#123;</span>
-
-	<span class="token annotation punctuation">@Transactional</span>
-	<span class="token keyword">void</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token class-name">AService</span> aProxyService <span class="token operator">=</span><span class="token punctuation">(</span><span class="token class-name">AService</span><span class="token punctuation">)</span> <span class="token class-name">AopContext</span><span class="token punctuation">.</span><span class="token function">currentProxy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		aProxyService<span class="token punctuation">.</span><span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-		aProxyService<span class="token punctuation">.</span><span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-	<span class="token punctuation">&#125;</span>
-
-	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRED<span class="token punctuation">)</span>
-	<span class="token keyword">void</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token comment">//....</span>
-	<span class="token punctuation">&#125;</span>
-
-	<span class="token annotation punctuation">@Transactional</span><span class="token punctuation">(</span>propagation <span class="token operator">=</span> <span class="token class-name">Propagation</span><span class="token punctuation">.</span>REQUIRES_NEW<span class="token punctuation">)</span>
-	<span class="token keyword">void</span> <span class="token function">c</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-		<span class="token comment">//....</span>
-	<span class="token punctuation">&#125;</span>
-
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-<h3 id="长事务问题"><a href="#长事务问题" class="headerlink" title="长事务问题"></a>长事务问题</h3><p><strong>长事务产生原因？</strong></p>
-<p><code>@Transactional</code> 注解，是使用 AOP 实现的，本质就是在目标方法执行前后进行拦截。在目标方法执行前加入或创建一个事务，在执行方法执行后，根据实际情况选择提交或是回滚事务。</p>
-<p>当 Spring 遇到该注解时，会自动从数据库连接池中获取 connection，并开启事务然后绑定到 ThreadLocal 上，对于@Transactional注解包裹的整个方法都是<strong>使用同一个connection连接</strong>。如果我们出现了耗时的操作，比如第三方接口调用，业务逻辑复杂，大批量数据处理等就会导致我们我们占用这个connection的时间会很长，数据库连接一直被占用不释放。一旦类似操作过多，就会导致数据库连接池耗尽。</p>
-<p>在一个事务中执行RPC操作导致数据库连接池撑爆属于是典型的<strong>长事务问题</strong>，类似的操作还有在事务中进行大量数据查询，业务规则处理等…</p>
-<p><strong>何为长事务？</strong></p>
-<p>顾名思义就是运行时间比较长，长时间未提交的事务，也可以称之为<strong>大事务</strong>。</p>
-<p><strong>长事务会引发哪些问题？</strong></p>
-<p>长事务引发的常见危害有：</p>
-<ol>
-<li>数据库连接池被占满，应用无法获取连接资源；</li>
-<li>容易引发数据库死锁；</li>
-<li>数据库回滚时间长；</li>
-<li>在主从架构中会导致主从延时变大。</li>
-</ol>
-<p><strong>如何避免长事务？</strong></p>
-<p>解决长事务的宗旨就是 <strong>对事务方法进行拆分，尽量让事务变小，变快，减小事务的颗粒度。</strong></p>
-<p>避免长事务最简单的方法就是<strong>不要使用声明式事务<code>@Transactional</code>，而是使用编程式事务手动控制事务范围。</strong></p>
+<p>SQL不再使用<code>count</code>，而是改用<code>LIMIT 1</code>，让数据库查询时遇到一条就返回，不要再继续查找还有多少条了</p>
+<p>业务代码中直接判断是否非空即可。</p>
+<p>好处：根据查询条件查出来的条数越多，性能提升的越明显，在某些情况下，还可以减少联合索引的创建。</p>
 
                 
             </div>
@@ -874,7 +549,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/">http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</a>
+                    <a href="http://wumangeng.github.io/2021/03/12/sql-you-hua/">http://wumangeng.github.io/2021/03/12/sql-you-hua/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -912,16 +587,12 @@
                     
                         <div class="article-tag">
                             
+                                <a href="/tags/sql/">
+                                    <span class="chip bg-color">sql</span>
+                                </a>
+                            
                                 <a href="/tags/mysql/">
                                     <span class="chip bg-color">mysql</span>
-                                </a>
-                            
-                                <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                                    <span class="chip bg-color">事务</span>
-                                </a>
-                            
-                                <a href="/tags/Spring/">
-                                    <span class="chip bg-color">Spring</span>
                                 </a>
                             
                         </div>
@@ -1097,30 +768,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/15/go-ji-chu-yu-fa/">
+                <a href="/2021/04/01/docker-an-zhuang-fu-wu/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2561631021,1559222725&fm=26&fmt=auto" class="responsive-img" alt="go语言基础学习">
+                        <img src="https://img2.baidu.com/it/u=1589818293,2913011842&fm=26&fmt=auto" class="responsive-img" alt="docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)">
                         
-                        <span class="card-title">go语言基础学习</span>
+                        <span class="card-title">docker中安装常用的服务(docker、mysql、redis、prtainer、go-fastdfs、rocketMQ)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GoLang语言基础知识
+                            本文将介绍在docker中安装mysql等服务
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-01
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/GoLang/" class="post-category">
-                                    GoLang
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
                                 </a>
                             
                             
@@ -1130,8 +801,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/GoLang/">
-                        <span class="chip bg-color">GoLang</span>
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/CentOS7/">
+                        <span class="chip bg-color">CentOS7</span>
                     </a>
                     
                 </div>
@@ -1145,30 +820,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/04/redis-ji-qun-da-jian/">
+                <a href="/2021/03/10/jdk8-xin-te-xing/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=2106353876,4138672594&fm=26&fmt=auto" class="responsive-img" alt="Redis-Cluster集群搭建">
+                        <img src="https://img1.baidu.com/it/u=3537811982,3362111695&fm=26&fmt=auto" class="responsive-img" alt="jdk8新特性的使用">
                         
-                        <span class="card-title">Redis-Cluster集群搭建</span>
+                        <span class="card-title">jdk8新特性的使用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            redis-cluster集群搭建步骤
+                            本文将简要介绍jdk8新特性的使用
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-10
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/redis/" class="post-category">
-                                    redis
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
                             
@@ -1178,12 +853,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
-                        <span class="chip bg-color">redis集群</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/redis/">
-                        <span class="chip bg-color">redis</span>
+                    <a href="/tags/jdk8/">
+                        <span class="chip bg-color">jdk8</span>
                     </a>
                     
                 </div>

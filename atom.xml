@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-25T08:43:25.677Z</updated>
+  <updated>2021-11-26T01:55:27.010Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -17,11 +17,32 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="http://wumangeng.github.io/2021/11/26/jvm-mian-shi-ti/"/>
+    <id>http://wumangeng.github.io/2021/11/26/jvm-mian-shi-ti/</id>
+    <published>2021-11-26T01:38:24.924Z</published>
+    <updated>2021-11-26T01:55:27.010Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-说说-JVM-内存区域&quot;&gt;&lt;a href=&quot;#1-说说-JVM-内存区域&quot; class=&quot;headerlink&quot; title=&quot;1.说说 JVM 内存区域&quot;&gt;&lt;/a&gt;1.说说 JVM 内存区域&lt;/h2&gt;&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>go语言基础学习</title>
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2021-11-25T08:43:25.677Z</updated>
+    <updated>2021-11-29T06:23:00.072Z</updated>
     
     
       
@@ -46,14 +67,14 @@
     <link href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/"/>
     <id>http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</id>
     <published>2021-11-07T01:10:20.000Z</published>
-    <updated>2021-11-19T08:01:35.376Z</updated>
+    <updated>2021-11-26T01:35:41.237Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h3 id=&quot;本地事务&quot;&gt;&lt;a href=&quot;#本地事务&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;本地事务&quot;&gt;&lt;a href=&quot;#本地事务&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -62,9 +83,9 @@
     <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
     
     
-    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
-    
     <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
+    
+    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
     
     <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
     
@@ -517,33 +538,6 @@
     
     
     <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS 7 安装go-fastdfs及可视化界面go-fastdfs-web</title>
-    <link href="http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/"/>
-    <id>http://wumangeng.github.io/2021/04/25/centos7-an-zhuang-go-fastdfs/</id>
-    <published>2021-04-25T01:10:20.000Z</published>
-    <updated>2021-10-20T06:25:34.549Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;1、安装go-fastdfs&quot;&gt;&lt;a href=&quot;#1、安装go-fastdfs&quot; class=&quot;headerlink&quot; title=&quot;1、安装go-fastdfs&quot;&gt;&lt;/a&gt;1、安装go-fastdfs&lt;/h3&gt;&lt;h4</summary>
-        
-      
-    
-    
-    
-    <category term="go-fastdfs" scheme="http://wumangeng.github.io/categories/go-fastdfs/"/>
-    
-    
-    <category term="CentOS7" scheme="http://wumangeng.github.io/tags/CentOS7/"/>
-    
-    <category term="go-fastdfs" scheme="http://wumangeng.github.io/tags/go-fastdfs/"/>
     
   </entry>
   

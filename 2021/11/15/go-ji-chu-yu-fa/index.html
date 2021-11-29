@@ -672,6 +672,14 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 <p>数值型中的int32又称为rune，可保存一个unicode码点。int和uint的大小和操作系统位数一样，32位OS(系统)则为4字节，64位OS则为8字节。浮点数默认64位，整数默认int。</p>
 <h4 id="值类型与引用类型"><a href="#值类型与引用类型" class="headerlink" title="值类型与引用类型"></a>值类型与引用类型</h4><p>值类型：基本数据类型、数组、结构体。变量直接存储值，通常存储于栈中，函数传参时使用值传递</p>
 <p>引用类型：指针、切片、映射、管道、接口等。变量存储的是值的地址，通常存储于堆中，会发生GC，函数传参时使用引用传递。</p>
+<p><strong>函数参数的两种传递方式</strong>：</p>
+<ol>
+<li><p>值传递</p>
+</li>
+<li><p>引用传递</p>
+</li>
+</ol>
+<p>不管是值传递还是引用传递，传递给函数的都是变量的副本，不同的是，值传递的是值的拷贝，引用传递的是地址的拷贝，一般来说，地址拷贝效率高，因为数据量小，而值拷贝决定拷贝的数据大小，数据越大，效率越低。</p>
 <h4 id="查看变量类型"><a href="#查看变量类型" class="headerlink" title="查看变量类型"></a>查看变量类型</h4><p>查看变量类型：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">a<span class="token punctuation">,</span> sex<span class="token operator">:=</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">"male"</span>
  
@@ -1246,7 +1254,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h4 id="普通函数"><a href="#普通函数" class="headerlink" title="普通函数"></a>普通函数</h4><p>函数定义:</p>
 <blockquote>
-<p>func  函数名 (参数列表)  （返回值列表） {</p>
+<p>func  函数名 (参数列表)  （返回值列表） {              //返回值只有一个时可以不写（）</p>
 <p>//函数体</p>
 <p>return  返回值列表</p>
 <p>}</p>
@@ -1256,15 +1264,21 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
     <span class="token keyword">return</span> rand<span class="token punctuation">.</span><span class="token function">Intn</span><span class="token punctuation">(</span>_range<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>调用如下</p>
+<p>调用如下：</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">generateRandom</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span><span class="token function">Now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Unix</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>init函数，用来初始化源文件</p>
+<p>调用函数，如果函数有多个返回值时，在接收时，希望忽略某个返回值，则使用 _ 符号表示占位忽略</p>
+<p>Go函数支持可变参数(可变参数要放在形参列表的最后一位)</p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">sum</span><span class="token punctuation">(</span>args<span class="token operator">...</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span><span class="token punctuation">&#123;</span>  <span class="token comment">//支持0-多个参数</span>
+	<span class="token comment">//......</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="init函数"><a href="#init函数" class="headerlink" title="init函数"></a>init函数</h4><p>每一个源文件中都有一个init函数，最大的作用是用来初始化源文件，该函数会在main函数执行前被调用</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">&#123;</span>
     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"init variable_advanced.."</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>源文件执行流程：全局变量定义-&gt;init-&gt;main，如果此文件还引入了别的文件，就先执行被引用文件的变量定义和init</p>
+<p>源文件执行流程：全局变量定义 -&gt; init -&gt; main，如果此文件还引入了别的文件，就先执行被引用文件的变量定义和init</p>
 <h4 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h4><p>匿名函数，没有名字的函数，如下</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">res <span class="token operator">:=</span> <span class="token keyword">func</span> <span class="token punctuation">(</span>n1 <span class="token builtin">int</span><span class="token punctuation">,</span> n2 <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span>  <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> n1 <span class="token operator">*</span> n2
@@ -1293,7 +1307,7 @@ n1<span class="token punctuation">,</span> n2 <span class="token operator">=</sp
     fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">fun1</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">44</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>函数和引用环境的整体叫做闭包，例如</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>一个函数和其相关的引用环境组合的整体叫做闭包，例如</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">AddUpper</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">func</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">var</span> n <span class="token builtin">int</span> <span class="token operator">=</span> <span class="token number">10</span>
     <span class="token keyword">return</span> <span class="token keyword">func</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">&#123;</span>
@@ -1318,7 +1332,7 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 g <span class="token operator">:=</span> <span class="token function">AddUpper</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">g</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 14</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><p>defer用来表示一条语句在函数结束后再执行，defer语句会把语句和相应数值的拷贝进行压栈，先入后出。以如下代码为例，这是一个defer + 闭包的例子，makeSuffix的入参为suffix，而返回值是一个函数，此函数入参类型为string，返回值类型也是string。</p>
+<h4 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h4><p>defer用来表示一条语句在函数结束后再执行（主要用于释放资源），defer语句会把语句和相应数值的拷贝进行压栈，先入后出。以如下代码为例，这是一个defer + 闭包的例子，makeSuffix的入参为suffix，而返回值是一个函数，此函数入参类型为string，返回值类型也是string。</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">makeSuffix</span><span class="token punctuation">(</span>suffix <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">var</span> n <span class="token operator">=</span> <span class="token number">1</span>
     <span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"suffix = "</span><span class="token punctuation">,</span> suffix<span class="token punctuation">,</span> <span class="token string">", n = "</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span>
@@ -1341,6 +1355,31 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可见虽然匿名函数执行了两次，但闭包函数makeSuffix里的语句只执行了一次，而且defer语句先定义的后输出，且都在函数体执行完之后。</p>
+<h4 id="字符串常用函数"><a href="#字符串常用函数" class="headerlink" title="字符串常用函数"></a>字符串常用函数</h4><ol>
+<li><p>统计字符串的长度,按字节  len(str)</p>
+</li>
+<li><p>字符串遍历，同时处理有中文的问题  r := []rune(str)</p>
+</li>
+<li><p>字符串转整数： n , err := strconv.Atoi(“12”)</p>
+</li>
+<li><p>整数转字符串: str = strconv.Itoa(12345)</p>
+</li>
+<li><p>字符串转[]byte:  var bytes= []byte(“hello go”)</p>
+</li>
+<li><p>[]byte转字符串: str = string([]byte{97,98,99})</p>
+</li>
+<li><p>10进制转2,8,16进制: str = strconv.FormatInt(123,2) // 2-&gt;8,16</p>
+</li>
+<li><p>查找子串是否在指定的字符串中:  strings.Contains(“seafood”, “foo”) //true</p>
+</li>
+<li><p>统计一个字符串有几个指定的子串:strings.Count(“ceheese”, “e”) //4</p>
+</li>
+<li><p>不区分大小写的字符串比较(== 是区分字母大小写的):  fmt.PrintIn(strings.EqualFold(“abc”, “Abc”) // true</p>
+</li>
+<li><p>返回子串在字符串第一次出现的index值，如果没有返回-1 : strings.Index(“NLT_abc”,”abc”) //4</p>
+</li>
+<li></li>
+</ol>
 <h3 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h3><p>值类型的用new，返回的是一个指针</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go">p <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span>
 fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"*p = "</span><span class="token punctuation">,</span> <span class="token operator">*</span>p<span class="token punctuation">,</span> <span class="token string">", p = "</span><span class="token punctuation">,</span> p<span class="token punctuation">)</span>
@@ -3573,49 +3612,36 @@ conn <span class="token operator">:=</span> pool<span class="token punctuation">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/11/15/go-ji-chu-yu-fa/">
+                <a href="/2021/11/26/jvm-mian-shi-ti/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2561631021,1559222725&fm=26&fmt=auto" class="responsive-img" alt="go语言基础学习">
                         
-                        <span class="card-title">go语言基础学习</span>
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            GoLang语言基础知识
+                            
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-26
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/GoLang/" class="post-category">
-                                    GoLang
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            wumangeng
                             
                         </span>
                     </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/GoLang/">
-                        <span class="chip bg-color">GoLang</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -3660,12 +3686,12 @@ conn <span class="token operator">:=</span> pool<span class="token punctuation">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                        <span class="chip bg-color">事务</span>
-                    </a>
-                    
                     <a href="/tags/mysql/">
                         <span class="chip bg-color">mysql</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                        <span class="chip bg-color">事务</span>
                     </a>
                     
                     <a href="/tags/Spring/">
