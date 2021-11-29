@@ -493,8 +493,9 @@
             <div id="articleContent">
                 <h2 id="cron表达式生成器"><a href="#cron表达式生成器" class="headerlink" title="cron表达式生成器"></a>cron表达式生成器</h2><p>以下内容来自于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35461948/article/details/109908092">https://blog.csdn.net/qq_35461948/article/details/109908092</a></p>
 <p>在线cron表达式生成器： <a target="_blank" rel="noopener" href="https://www.bejson.com/othertools/cron/">https://www.bejson.com/othertools/cron/</a></p>
-<p> 使用生成器，即时测试，便于理解和解析cron表达式<br><strong>cron表达式结构</strong></p>
-<p>Cron表达式是一个表示时间周期的字符串。分为6或7个域，每一个域代表一个含义。 corn从左到右（用空格隔开）</p>
+<p>使用生成器，即时测试，便于理解和解析cron表达式</p>
+<p><strong>cron表达式结构</strong></p>
+<p>cron表达式是一个表示时间周期的字符串。分为6或7个域，每一个域代表一个含义。 corn从左到右（用空格隔开）</p>
 <p>格式：{秒} {分} {时} {日} {月} {周} {年（可选）}</p>
 <p> Seconds Minutes Hours DayofMonth Month DayofWeek Year</p>
 <p> DayofMonth 就是day 每天</p>
@@ -828,7 +829,6 @@
 	<span class="token punctuation">&#125;</span>
 
 
-
 	<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">appendGapInfo</span><span class="token punctuation">(</span><span class="token class-name">String</span> time<span class="token punctuation">,</span> <span class="token keyword">int</span> rangeNum<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
 
 		<span class="token class-name">StringBuffer</span> sBufferTemp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -857,122 +857,66 @@
 
 	<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="WeekEnum"><a href="#WeekEnum" class="headerlink" title="WeekEnum"></a>WeekEnum</h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">WeekEnum</span> <span class="token punctuation">&#123;</span>
 
-	<span class="token function">SECONDS</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"星期天"</span><span class="token punctuation">,</span> <span class="token string">"Sunday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">MONDAY</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"星期一"</span><span class="token punctuation">,</span> <span class="token string">"Monday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">TUESDAY</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"星期二"</span><span class="token punctuation">,</span> <span class="token string">"Tuesday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">WEDNESDAY</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">,</span>
-
-			<span class="token string">"星期三"</span><span class="token punctuation">,</span> <span class="token string">"Wednesday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">THURSDAY</span><span class="token punctuation">(</span><span class="token string">"5"</span><span class="token punctuation">,</span> <span class="token string">"星期四"</span><span class="token punctuation">,</span>
-
-			<span class="token string">"Thursday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">FRIDAY</span><span class="token punctuation">(</span><span class="token string">"6"</span><span class="token punctuation">,</span> <span class="token string">"星期五"</span><span class="token punctuation">,</span> <span class="token string">"Friday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">SATURDAY</span><span class="token punctuation">(</span><span class="token string">"7"</span><span class="token punctuation">,</span> <span class="token string">"星期六"</span><span class="token punctuation">,</span> <span class="token string">"Saturday "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
+	<span class="token function">SECONDS</span><span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"星期天"</span><span class="token punctuation">,</span> <span class="token string">"Sunday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">MONDAY</span><span class="token punctuation">(</span><span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"星期一"</span><span class="token punctuation">,</span> <span class="token string">"Monday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">TUESDAY</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">,</span> <span class="token string">"星期二"</span><span class="token punctuation">,</span> <span class="token string">"Tuesday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">WEDNESDAY</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">,</span><span class="token string">"星期三"</span><span class="token punctuation">,</span> <span class="token string">"Wednesday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">THURSDAY</span><span class="token punctuation">(</span><span class="token string">"5"</span><span class="token punctuation">,</span> <span class="token string">"星期四"</span><span class="token punctuation">,</span><span class="token string">"Thursday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">FRIDAY</span><span class="token punctuation">(</span><span class="token string">"6"</span><span class="token punctuation">,</span> <span class="token string">"星期五"</span><span class="token punctuation">,</span> <span class="token string">"Friday "</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">SATURDAY</span><span class="token punctuation">(</span><span class="token string">"7"</span><span class="token punctuation">,</span> <span class="token string">"星期六"</span><span class="token punctuation">,</span> <span class="token string">"Saturday "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 	<span class="token keyword">private</span> <span class="token class-name">String</span> key<span class="token punctuation">;</span>
-
 	<span class="token keyword">private</span> <span class="token class-name">String</span> nameCn<span class="token punctuation">;</span>
-
 	<span class="token keyword">private</span> <span class="token class-name">String</span> nameEn<span class="token punctuation">;</span>
 
-
-
 	<span class="token class-name">WeekEnum</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token punctuation">,</span> <span class="token class-name">String</span> nameCn<span class="token punctuation">,</span> <span class="token class-name">String</span> nameEn<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>nameCn <span class="token operator">=</span> nameCn<span class="token punctuation">;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>nameEn <span class="token operator">=</span> nameEn<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">matchNameCn</span><span class="token punctuation">(</span><span class="token class-name">String</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">WeekEnum</span> m <span class="token operator">:</span> <span class="token class-name">WeekEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 			<span class="token keyword">if</span> <span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 				<span class="token keyword">return</span> m<span class="token punctuation">.</span><span class="token function">getNameCn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 			<span class="token punctuation">&#125;</span>
-
 		<span class="token punctuation">&#125;</span>
-
 		<span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">matchNameEn</span><span class="token punctuation">(</span><span class="token class-name">String</span> code<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">WeekEnum</span> m <span class="token operator">:</span> <span class="token class-name">WeekEnum</span><span class="token punctuation">.</span><span class="token function">values</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 			<span class="token keyword">if</span> <span class="token punctuation">(</span>m<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 				<span class="token keyword">return</span> m<span class="token punctuation">.</span><span class="token function">getNameEn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
 			<span class="token punctuation">&#125;</span>
-
 		<span class="token punctuation">&#125;</span>
-
 		<span class="token keyword">return</span> <span class="token string">""</span><span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
-
-
 
 	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">return</span> key<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setKey</span><span class="token punctuation">(</span><span class="token class-name">String</span> key<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>key <span class="token operator">=</span> key<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getNameCn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">return</span> nameCn<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNameCn</span><span class="token punctuation">(</span><span class="token class-name">String</span> nameCn<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>nameCn <span class="token operator">=</span> nameCn<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
 
 
 	<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getNameEn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">return</span> nameEn<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
-
-
 
 	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNameEn</span><span class="token punctuation">(</span><span class="token class-name">String</span> nameEn<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
 		<span class="token keyword">this</span><span class="token punctuation">.</span>nameEn <span class="token operator">=</span> nameEn<span class="token punctuation">;</span>
-
 	<span class="token punctuation">&#125;</span>
 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java">	<span class="token annotation punctuation">@org.junit.jupiter.api.Test</span>
 	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">cronTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
