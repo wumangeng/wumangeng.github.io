@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-26T01:55:27.010Z</updated>
+  <updated>2021-11-29T06:23:00.072Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://wumangeng.github.io/2021/11/26/jvm-mian-shi-ti/"/>
-    <id>http://wumangeng.github.io/2021/11/26/jvm-mian-shi-ti/</id>
-    <published>2021-11-26T01:38:24.924Z</published>
-    <updated>2021-11-26T01:55:27.010Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1-说说-JVM-内存区域&quot;&gt;&lt;a href=&quot;#1-说说-JVM-内存区域&quot; class=&quot;headerlink&quot; title=&quot;1.说说 JVM 内存区域&quot;&gt;&lt;/a&gt;1.说说 JVM 内存区域&lt;/h2&gt;&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>go语言基础学习</title>
@@ -538,6 +517,31 @@
     
     
     <category term="sdk" scheme="http://wumangeng.github.io/tags/sdk/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阿里云对象存储(oss)的使用姿势</title>
+    <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/"/>
+    <id>http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</id>
+    <published>2021-05-20T07:10:30.000Z</published>
+    <updated>2021-10-20T06:26:40.572Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;阿里云OSS使用&quot;&gt;&lt;a href=&quot;#阿里云OSS使用&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="阿里云服务" scheme="http://wumangeng.github.io/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+    <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
     
   </entry>
   
