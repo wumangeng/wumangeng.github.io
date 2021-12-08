@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-11-29T06:23:00.072Z</updated>
+  <updated>2021-12-08T09:44:47.784Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>链路追踪Skywalking实践</title>
+    <link href="http://wumangeng.github.io/2021/12/05/skywalking-ying-yong/"/>
+    <id>http://wumangeng.github.io/2021/12/05/skywalking-ying-yong/</id>
+    <published>2021-12-05T01:10:20.000Z</published>
+    <updated>2021-12-08T09:44:47.784Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;链路追踪介绍&quot;&gt;&lt;a href=&quot;#链路追踪介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Skywalking" scheme="http://wumangeng.github.io/categories/Skywalking/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="Skywalking" scheme="http://wumangeng.github.io/tags/Skywalking/"/>
+    
+  </entry>
+  
+  <entry>
     <title>go语言基础学习</title>
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2021-11-29T06:23:00.072Z</updated>
+    <updated>2021-12-07T09:27:14.013Z</updated>
     
     
       
@@ -517,31 +544,6 @@
     
     
     <category term="sdk" scheme="http://wumangeng.github.io/tags/sdk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>阿里云对象存储(oss)的使用姿势</title>
-    <link href="http://wumangeng.github.io/2021/05/20/a-li-yun-oss/"/>
-    <id>http://wumangeng.github.io/2021/05/20/a-li-yun-oss/</id>
-    <published>2021-05-20T07:10:30.000Z</published>
-    <updated>2021-10-20T06:26:40.572Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;阿里云OSS使用&quot;&gt;&lt;a href=&quot;#阿里云OSS使用&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="阿里云服务" scheme="http://wumangeng.github.io/categories/%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
-    
-    
-    <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
     
   </entry>
   

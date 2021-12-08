@@ -1,0 +1,1753 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Skywalking">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>链路追踪Skywalking实践 | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=3980057088,1377959210&fm=26&fmt=auto')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">链路追踪Skywalking实践</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                                <span class="chip bg-color">项目</span>
+                            </a>
+                        
+                            <a href="/tags/Skywalking/">
+                                <span class="chip bg-color">Skywalking</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Skywalking/" class="post-category">
+                                Skywalking
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-12-05
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="链路追踪介绍"><a href="#链路追踪介绍" class="headerlink" title="链路追踪介绍"></a>链路追踪介绍</h2><p>对于一个大型的几十个、几百个微服务构成的微服务架构系统，通常会遇到下面一些问题，比如：</p>
+<ol>
+<li><p>如何串联整个调用链路，快速定位问题？</p>
+</li>
+<li><p>如何缕清各个微服务之间的依赖关系？</p>
+</li>
+<li><p>如何进行各个微服务接口的性能分折？</p>
+</li>
+<li><p>如何跟踪整个业务流程的调用处理顺序？</p>
+</li>
+</ol>
+<h2 id="1、Skywalking简介"><a href="#1、Skywalking简介" class="headerlink" title="1、Skywalking简介"></a>1、Skywalking简介</h2><h3 id="1-1-Skywalking是什么"><a href="#1-1-Skywalking是什么" class="headerlink" title="1.1 Skywalking是什么"></a>1.1 Skywalking是什么</h3><p>skywalking是一个国产开源框架，2015年由吴晟开源 ， 2017年加入Apache孵化器。skywalking是分布式系统的应用程序性能监视工具，专为微服务、云原生架构和基于容器（Docker、K8s、Mesos）架构而设计。它是一款优秀的 APM（Application Performance Management）工具，包括了分布式追踪、性能指标分析、应用和服务依赖分析等。</p>
+<p>官网：<a target="_blank" rel="noopener" href="http://skywalking.apache.org/">http://skywalking.apache.org/</a> </p>
+<p>下载：<a target="_blank" rel="noopener" href="http://skywalking.apache.org/downloads/">http://skywalking.apache.org/downloads/</a></p>
+<p>Github：<a target="_blank" rel="noopener" href="https://github.com/apache/skywalking">https://github.com/apache/skywalking</a> </p>
+<p>文档： <a target="_blank" rel="noopener" href="https://skywalking.apache.org/docs/main/v8.4.0/readme/">https://skywalking.apache.org/docs/main/v8.4.0/readme/</a></p>
+<p> 中文文档： <a target="_blank" rel="noopener" href="https://skyapm.github.io/document-cn-translation-of-skywalking/">https://skyapm.github.io/document-cn-translation-of-skywalking/</a></p>
+<h3 id="1-2-链路追踪框架对比"><a href="#1-2-链路追踪框架对比" class="headerlink" title="1.2 链路追踪框架对比"></a>1.2 链路追踪框架对比</h3><ol>
+<li><p>Zipkin是Twitter开源的调用链分析工具，目前基于springcloud sleuth得到了广泛的使用，特点是轻量，使用部署简单。</p>
+</li>
+<li><ol start="2">
+<li>Pinpoint是韩国人开源的基于字节码注入的调用链分析，以及应用监控分析工具。特点是支持多种插件，UI功能强大，接入端无代码侵入。</li>
+</ol>
+</li>
+<li><p>SkyWalking是本土开源的基于字节码注入的调用链分析，以及应用监控分析工具。特点是支持多种插件，UI功能较强，接入端无代码侵入。目前已加入Apache孵化器。</p>
+</li>
+<li><p>CAT是大众点评开源的基于编码和配置的调用链分析，应用监控分析，日志采集，监控报警等一系列的监控平台工具。</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="center">cat</th>
+<th align="center">zipkin</th>
+<th align="center">pinpoint</th>
+<th align="center">skywalking</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">依赖</td>
+<td align="center">Java 6，7，8      Maven 3.2.3+      mysql5.6      Linux 2.6以及之上（2.6内核才可以支持epoll）</td>
+<td align="center">Java 6，7，8     Maven3.2+      rabbitMQ</td>
+<td align="center">Java 6，7，8      maven3+      Hbase0.94+</td>
+<td align="center">Java 6，7，8      maven3.0+      nodejs      zookeeper      elasticsearch</td>
+</tr>
+<tr>
+<td align="left">实现方式</td>
+<td align="center">代码埋点（拦截器，注解，过滤器等）</td>
+<td align="center">拦截请求，发送（HTTP，mq）数据至zipkin服务</td>
+<td align="center">java探针，字节码增强</td>
+<td align="center">java探针，字节码增强</td>
+</tr>
+<tr>
+<td align="left">存储选择</td>
+<td align="center">mysql , hdfs</td>
+<td align="center">in-memory ， mysql ， Cassandra ， Elasticsearch</td>
+<td align="center">HBase</td>
+<td align="center">elasticsearch , H2</td>
+</tr>
+<tr>
+<td align="left">通信方式</td>
+<td align="center">—</td>
+<td align="center">http ， MQ</td>
+<td align="center">thrift</td>
+<td align="center">GRPC</td>
+</tr>
+<tr>
+<td align="left">MQ监控</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="center">支持（RocketMQ，kafka）</td>
+</tr>
+<tr>
+<td align="left">全局调用统计</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="left">trace查询</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="left">报警</td>
+<td align="center">支持</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="left">JVM监控</td>
+<td align="center">不支持</td>
+<td align="center">不支持</td>
+<td align="center">支持</td>
+<td align="center">支持</td>
+</tr>
+<tr>
+<td align="left">调用链路可视化</td>
+<td align="center">有</td>
+<td align="center">有</td>
+<td align="center">有</td>
+<td align="center">有</td>
+</tr>
+<tr>
+<td align="left">优点</td>
+<td align="center">功能完善。</td>
+<td align="center">spring-cloud-sleuth可以很好的集成zipkin ， 代码无侵入，集成非常简单 ， 社区更加活跃。 对外提供有query接口，更加容易二次开发</td>
+<td align="center">完全无侵入， 仅需修改启动方式，界面完善，功能细致。</td>
+<td align="center">完全无侵入，界面完善，支持应用拓扑图及单个调用链查询。 功能比较完善（zipkin + pinpoint）</td>
+</tr>
+<tr>
+<td align="left">缺点</td>
+<td align="center">代码侵入性较强，需要埋点      文档比较混乱，文档与发布版本的符合性较低，需要依赖点评私服 （或者需要把他私服上的jar手动下载下来，然后上传到我们的私服上去）。</td>
+<td align="center">默认使用的是http请求向zipkin上报信息，耗性能。      跟sleuth结合可以使用rabbitMQ的方式异步来做，增加了复杂度，需要引入rabbitMQ 。      数据分析比较简单。</td>
+<td align="center">不支持查询单个调用链， 对外表现的是整个应用的调用生态。      二次开发难度较高</td>
+<td align="center">3.2版本之前BUG较多 ，网上反映兼容性较差 . 3.2新版本的反映情况较少      依赖较多。</td>
+</tr>
+<tr>
+<td align="left">文档</td>
+<td align="center">网上资料较少，仅官网提供的文档，比较乱</td>
+<td align="center">文档完善</td>
+<td align="center">文档完善</td>
+<td align="center">文档完善</td>
+</tr>
+</tbody></table>
+<h3 id="1-3-Skywalking主要功能特性"><a href="#1-3-Skywalking主要功能特性" class="headerlink" title="1.3 Skywalking主要功能特性"></a>1.3 Skywalking主要功能特性</h3><p>1、 多种监控手段，可以通过语言探针和service mesh获得监控的数据；</p>
+<p>2、 支持多种语言自动探针，包括 Java，.NET Core 和 Node.JS；</p>
+<p>3、 轻量高效，无需大数据平台和大量的服务器资源；4、模块化，UI、存储、集群管理都有多种机制可选；</p>
+<p>5、 支持告警；</p>
+<p>6、 优秀的可视化解决方案；</p>
+<h2 id="2、SkyWalking-环境搭建部署"><a href="#2、SkyWalking-环境搭建部署" class="headerlink" title="2、SkyWalking 环境搭建部署"></a>2、SkyWalking 环境搭建部署</h2><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208161526609.png" style="zoom:50%;" />
+
+<ul>
+<li>skywalking agent和业务系统绑定在一起，负责收集各种监控数据 </li>
+<li>Skywalking oapservice是负责处理监控数据的，比如接受skywalking agent的监控数据，并存储在数据库中; 接受skywalking webapp的前端请求，从数据库查询数据，并返回数据给前端。</li>
+<li>Skywalking oapservice通常以集 群的形式存在。 skywalking webapp，前端界面，用于展示数据。 用于存储监控数据的数据库，比如mysql、elasticsearch等。</li>
+</ul>
+<h3 id="2-1-下载-SkyWalking"><a href="#2-1-下载-SkyWalking" class="headerlink" title="2.1 下载 SkyWalking"></a>2.1 下载 SkyWalking</h3><p>下载：<a target="_blank" rel="noopener" href="http://skywalking.apache.org/downloads/">http://skywalking.apache.org/downloads/</a></p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208161741455.png" style="zoom:70%;" />
+
+<p><strong>目录结构：</strong></p>
+<ul>
+<li><p>webapp ：UI前端(web 监控页面)的jar包和配置文件;</p>
+</li>
+<li><p>oap-libs ：后台应用的jar包，以及它的依赖jar包，里边有一个server-starter-*.jar就是启动程序;</p>
+</li>
+<li><p>config：启动后台应用程序的配置文件，是使用的各种配置</p>
+</li>
+<li><p> bin：各种启动脚本，一般使用脚本startup.*来启动<strong>web页面</strong>和对应的后台应用;</p>
+</li>
+<li><p>oapService.*：默认使用的后台程序的启动脚本;(使用的是默认模式启动，还支持其他模式，各模式区别见启动模式)</p>
+</li>
+<li><p>oapServicelnit.*：使用init模式启动;在此模式下，OAP服务器启动以执行初始化工作，然后退出</p>
+</li>
+<li><p>oapServiceNoInit.*：使用no init模式启动;在此模式下，OAP服务器不进行初始化。</p>
+</li>
+<li><p>webappService.*：UI前端的启动脚本;</p>
+</li>
+<li><p>startup.*：组合脚本，同时启动oapService.*、 webappService.*脚本;</p>
+</li>
+<li><p> agent：</p>
+</li>
+<li><p>skywalking-agent.jar：代理服务jar包</p>
+</li>
+<li><p>config：代理服务启动时使用的配置文件</p>
+</li>
+<li><p>plugins：包含多个插件，代理服务启动时会加载改目录下的所有插件(实际是各种jar包)</p>
+</li>
+<li><p>optional-plugins：可选插件，当需要支持某种功能时，比如SpringCloud Gateway，则需要把对应的jar包拷贝到 plugins目录下;</p>
+</li>
+</ul>
+<h3 id="2-2-搭建SkyWalking-OAP-服务"><a href="#2-2-搭建SkyWalking-OAP-服务" class="headerlink" title="2.2 搭建SkyWalking OAP 服务"></a>2.2 搭建SkyWalking OAP 服务</h3><p>启动脚本bin/startup.sh </p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163356925.png"></p>
+<p>日志信息存储在logs目录</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163132426.png" style="zoom:150%;" />
+
+<p>启动成功后会启动两个服务，一个是skywalking-oap-server，一个是skywalking-web-ui ： 8868</p>
+<p>skywalking-oap-server服务启动后会暴露11800 和 12800 两个端口，分别为<strong>收集监控数据的端口11800和接受前端请 求的端口12800</strong>，修改端口可以修改config/applicaiton.yml</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163306666.png"></p>
+<p>skywalking-web-ui服务会占用 8080 端口， 修改端口可以修改webapp/webapp.yml </p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163335233.png"></p>
+<p>server.port：SkyWalking UI服务端口，默认是8080；</p>
+<p>collector.ribbon.listOfServers：SkyWalking OAP服务地址数组，SkyWalking UI界面的数据是通过请求SkyWalking OAP服务来获得； </p>
+<p>访问：<a target="_blank" rel="noopener" href="http://192.168.3.100:8080/">http://192.168.3.100:8080/</a></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163432089.png"></p>
+<p> 页面的右下角可以中英文切换，可以切换选择要展示的时间区间的跟踪数据。</p>
+<h3 id="2-3-SkyWalking中三个概念"><a href="#2-3-SkyWalking中三个概念" class="headerlink" title="2.3 SkyWalking中三个概念"></a>2.3 SkyWalking中三个概念</h3><p><strong>服务(Service) ：</strong>表示对请求提供相同行为的一系列或一组工作负载，在使用Agent时，可以定义服务的名字；</p>
+<p><strong>服务实例(Service Instance) ：</strong>上述的一组工作负载中的每一个工作负载称为一个实例， 一个服务实例实际就是操作系统上 的一个真实进程； </p>
+<p><strong>端点(Endpoint) ：</strong>对于特定服务所接收的请求路径, 如HTTP的URI路径和gRPC服务的类名 + 方法签名；</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163634772.png"></p>
+<h3 id="2-4-SkyWalking-UI介绍-http-note-youdao-com-noteshare-id-2ffc04d844595930dc3f42490b2f1a58-amp-sub-4B6EDF5E5E894A72A3F96166197AB389"><a href="#2-4-SkyWalking-UI介绍-http-note-youdao-com-noteshare-id-2ffc04d844595930dc3f42490b2f1a58-amp-sub-4B6EDF5E5E894A72A3F96166197AB389" class="headerlink" title="2.4 [SkyWalking UI介绍](http://note.youdao.com/noteshare? id=2ffc04d844595930dc3f42490b2f1a58&amp;sub=4B6EDF5E5E894A72A3F96166197AB389)"></a>2.4 [SkyWalking UI介绍](<a target="_blank" rel="noopener" href="http://note.youdao.com/noteshare">http://note.youdao.com/noteshare</a>? id=2ffc04d844595930dc3f42490b2f1a58&amp;sub=4B6EDF5E5E894A72A3F96166197AB389)</h3><h2 id="3、-SkyWalking-接入微服务"><a href="#3、-SkyWalking-接入微服务" class="headerlink" title="3、 SkyWalking 接入微服务"></a>3、 SkyWalking 接入微服务</h2><h3 id="3-1-linux环境—通过jar包方式接入"><a href="#3-1-linux环境—通过jar包方式接入" class="headerlink" title="3.1 linux环境—通过jar包方式接入"></a>3.1 linux环境—通过jar包方式接入</h3><p> 准备一个springboot程序，打成可执行jar包，写一个shell脚本，在启动项目的Shell脚本上，通过 -javaagent 参数进行 配置SkyWalking Agent来跟踪微服务；</p>
+<p> startup.sh脚本：</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token shebang important">#!/bin/sh</span>
+<span class="token comment"># SkyWalking Agent配置</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SW_AGENT_NAME</span><span class="token operator">=</span>springboot‐skywalking‐demo <span class="token comment">#Agent名字,一般使用`spring.application.name`</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SW_AGENT_COLLECTOR_BACKEND_SERVICES</span><span class="token operator">=</span><span class="token number">127.0</span>.0.1:11800 <span class="token comment">#配置 Collector 地址。 </span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SW_AGENT_SPAN_LIMIT</span><span class="token operator">=</span><span class="token number">2000</span> <span class="token comment">#配置链路的最大Span数量，默认为 300。 </span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_AGENT</span><span class="token operator">=</span>‐javaagent:/usr/local/soft/apache‐skywalking‐apm‐bin‐es7/agent/skywalking‐agent.jar 
+java <span class="token variable">$JAVA_AGENT</span> ‐jar springboot‐skywalking‐demo‐0.0.1‐SNAPSHOT.jar <span class="token comment">#jar启动 </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>启动日志</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208163912332.png"></p>
+<p>等同于</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java ‐javaagent:/usr/local/soft/apache‐skywalking‐apm‐bin‐es7/agent/skywalking‐agent.jar
+‐DSW_AGENT_COLLECTOR_BACKEND_SERVICES<span class="token operator">=</span><span class="token number">127.0</span>.0.1:11800
+‐DSW_AGENT_NAME<span class="token operator">=</span>springboot‐skywalking‐demo ‐jar springboot‐skywalking‐demo‐0.0.1‐SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>参数名对应agent/config/agent.config配置文件中的属性。 </p>
+<p>属性对应的源码：org.apache.skywalking.apm.agent.core.conf.Config.java</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># The service name in UI</span>
+agent.service_name<span class="token operator">=</span><span class="token variable">$&#123;SW_AGENT_NAME<span class="token operator">:</span>Your_ApplicationName&#125;</span>
+<span class="token comment"># Backend service addresses.</span>
+collector.backend_service<span class="token operator">=</span><span class="token variable">$&#123;SW_AGENT_COLLECTOR_BACKEND_SERVICES<span class="token operator">:</span>127.0.0.1<span class="token operator">:</span>11800&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们也可以使用skywalking.+配置文件中的配置名作为系统配置项来进行覆盖。 javaagent参数配置方式优先级更高</p>
+<p> 测试： 访问你的微服务</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208164158356.png"></p>
+<h3 id="3-2-windos环境—在IDEA中使用Skywalking"><a href="#3-2-windos环境—在IDEA中使用Skywalking" class="headerlink" title="3.2 windos环境—在IDEA中使用Skywalking"></a>3.2 windos环境—在IDEA中使用Skywalking</h3><p>在运行的程序配置jvm参数，如下图所示：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208164416303.png"></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># skywalking‐agent.jar的本地磁盘的路径</span>
+‐javaagent:D:<span class="token punctuation">\</span>apache<span class="token punctuation">\</span>apache‐skywalking‐apm‐es7‐8.4.0<span class="token punctuation">\</span>apache‐skywalking‐apm‐bin‐es7<span class="token punctuation">\</span>agent<span class="token punctuation">\</span>skywalking‐agent.jar
+<span class="token comment"># 在skywalking上显示的服务名</span>
+‐DSW_AGENT_NAME<span class="token operator">=</span>springboot‐skywalking‐demo
+<span class="token comment"># skywalking的collector服务的IP及端口</span>
+‐DSW_AGENT_COLLECTOR_BACKEND_SERVICES<span class="token operator">=</span><span class="token number">192.168</span>.3.100:11800
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>-DSW_AGENT_COLLECTOR_BACKEND_SERVICES 可以指定远程地址， 但是-javaagent必须绑定你本机物理路径的skywalking-agent.jar</p>
+<h3 id="3-3-Skywalking跨多个微服务跟踪"><a href="#3-3-Skywalking跨多个微服务跟踪" class="headerlink" title="3.3 Skywalking跨多个微服务跟踪"></a>3.3 Skywalking跨多个微服务跟踪</h3><p> Skywalking跨多个微服务跟踪，只需要每个微服务启动时添加javaagent参数即可。</p>
+<p> 注意：此处存在bug，跟踪链路不显示gateway 拷贝agent/optional-plugins目录下的gateway插件到agent/plugins目录，redis也是</p>
+<h2 id="4、-Skywalking持久化跟踪数据"><a href="#4、-Skywalking持久化跟踪数据" class="headerlink" title="4、 Skywalking持久化跟踪数据"></a>4、 Skywalking持久化跟踪数据</h2><p> 默认使用的H2数据库存储</p>
+<p> config/application.yml </p>
+<h3 id="4-1-基于mysql持久化"><a href="#4-1-基于mysql持久化" class="headerlink" title="4.1 基于mysql持久化:"></a>4.1 基于mysql持久化:</h3><ol>
+<li><p>修改config目录下的application.yml，使用mysql作为持久化存储的仓库</p>
+</li>
+<li><p>修改mysql连接配置 </p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">storage: 
+<span class="token comment">#选择使用mysql 默认使用h2，不会持久化，重启skyWalking之前的数据会丢失 </span>
+selector: <span class="token variable">$&#123;SW_STORAGE<span class="token operator">:</span>mysql&#125;</span> 
+<span class="token comment">#使用mysql作为持久化存储的仓库</span>
+mysql: 
+properties: 
+<span class="token comment">#数据库连接地址</span>
+jdbcUrl: <span class="token variable">$&#123;SW_JDBC_URL<span class="token operator">:</span>"jdbc<span class="token operator">:</span>mysql<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>1ocalhost<span class="token operator">:</span>3306<span class="token operator">/</span>swtest"&#125;</span> 
+<span class="token comment">#用户名 </span>
+dataSource.user: <span class="token variable">$&#123;SW_DATA_SOURCE_USER<span class="token operator">:</span>root&#125;</span> 
+<span class="token comment">#密码 </span>
+dataSource.password: <span class="token variable">$&#123;SW_DATA_SOURCE_PASSWORD<span class="token operator">:</span>root&#125;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意：需要添加mysql数据驱动包，因为在lib目录下是没有mysql数据驱动包的，所以修改完配置启动是会报错，启动失 败的。</p>
+</li>
+<li><p>添加mysql数据驱动包到oap-libs目录下</p>
+</li>
+<li><p>  启动Skywalking，查看swtest数据库，可以看到生成了很多表。 说明启动成功了，打开配置对应的地址<a target="_blank" rel="noopener" href="http://192.168.3.100:8080/%EF%BC%8C%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0skywalking%E7%9A%84web%E7%95%8C%E9%9D%A2%E3%80%82">http://192.168.3.100:8080/，可以看到skywalking的web界面。</a></p>
+</li>
+<li><p> 测试：重启skywalking，验证跟踪数据会不会丢失</p>
+</li>
+</ol>
+<h2 id="5、-自定义SkyWalking链路追踪"><a href="#5、-自定义SkyWalking链路追踪" class="headerlink" title="5、 自定义SkyWalking链路追踪"></a>5、 自定义SkyWalking链路追踪</h2><p> 如果我们希望对项目中的业务方法，实现链路追踪，方便我们排查问题，可以使用如下的代码 </p>
+<p>引入依赖</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--	skywalking自定义监控链路,注意版本要对应	--></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.skywalking<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>server-storage-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>8.5.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>   
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-1-Trace将方法加入追踪链路"><a href="#5-1-Trace将方法加入追踪链路" class="headerlink" title="5.1 @Trace将方法加入追踪链路"></a>5.1 @Trace将方法加入追踪链路</h3><p> 如果一个业务方法想在ui界面的跟踪链路上显示出来，只需要在业务方法上加上@Trace注解即可</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208165538889.png"></p>
+<h3 id="5-2-加入-Tags或-Tag"><a href="#5-2-加入-Tags或-Tag" class="headerlink" title="5.2 加入@Tags或@Tag"></a>5.2 加入@Tags或@Tag</h3><p>我们还可以为追踪链路增加其他额外的信息，比如记录参数和返回信息。实现方式：在方法上增加@Tag或者@Tags。</p>
+<p> @Tag 注解中 key = 方法名 ； value = returnedObj 返回值 arg[0] 参数</p>
+<p>注：使用这两个注解之前方法上一定要有@Trace注解否则会失效</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Trace</span>
+<span class="token annotation punctuation">@Tag</span><span class="token punctuation">(</span>key <span class="token operator">=</span> <span class="token string">"list"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"returnedObj"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">User</span><span class="token punctuation">></span></span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@Trace</span>
+<span class="token annotation punctuation">@Tags</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token annotation punctuation">@Tag</span><span class="token punctuation">(</span>key <span class="token operator">=</span> <span class="token string">"param"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"arg[0]"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token annotation punctuation">@Tag</span><span class="token punctuation">(</span>key <span class="token operator">=</span> <span class="token string">"user"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token string">"returnedObj"</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">User</span> <span class="token function">getById</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> id<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> userMapper<span class="token punctuation">.</span><span class="token function">getById</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-3-性能分析"><a href="#5-3-性能分析" class="headerlink" title="5.3 性能分析"></a>5.3 性能分析</h3><p> skywalking的性能分析，在根据服务名称、端点名称，以及相应的规则建立了任务列表后，在调用了此任务列表的端点 后。skywalking会自动记录，剖析当前端口，生成剖析结果，具体流程如图：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208170401717.png"></p>
+<p>按照项目信息填写以下信息即可</p>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208170507467.png" alt=" " style="zoom:67%;" />
+
+<h2 id="6、-Skywalking集成日志框架"><a href="#6、-Skywalking集成日志框架" class="headerlink" title="6、 Skywalking集成日志框架"></a>6、 Skywalking集成日志框架</h2><p> [logback官方配置](<a target="_blank" rel="noopener" href="https://github.com/apache/skywalking/blob/v8.5.0/docs/en/setup/service-agent/java-agent/Application-toolkit-logback-1.x.md">skywalking/Application-toolkit-logback-1.x.md at v8.5.0 · apache/skywalking · GitHub</a>)</p>
+<p> [log4j官方配置](<a target="_blank" rel="noopener" href="https://skywalking.apache.org/docs/main/v8.5.0/en/setup/service-agent/java-agent/application-toolkit-log4j-1.x/">Dependency the toolkit, such as using maven or gradle | Apache SkyWalking</a>)</p>
+<p> [log4j2j官方配置](<a target="_blank" rel="noopener" href="https://skywalking.apache.org/docs/main/v8.5.0/en/setup/service-agent/java-agent/application-toolkit-log4j-2.x/">Dependency the toolkit, such as using maven or gradle | Apache SkyWalking</a>)</p>
+<p>引入依赖</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!‐‐</span> <span class="token attr-name">apm‐toolkit‐logback‐1.x</span> <span class="token attr-name">注意版本‐‐</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.apache.skywalking<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>apm‐toolkit‐logback‐1.x<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>8.5.0<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>添加logback-spring.xml文件，并配置 %tid 占位符</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF‐8"?></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!‐‐</span> <span class="token attr-name">引入</span> <span class="token attr-name">Spring</span> <span class="token attr-name">Boot</span> <span class="token attr-name">默认的</span> <span class="token attr-name">logback</span> <span class="token attr-name">XML</span> <span class="token attr-name">配置文件</span> <span class="token attr-name">‐‐</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>include</span> <span class="token attr-name">resource</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org/springframework/boot/logging/logback/defaults.xml<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>console<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ch.qos.logback.core.ConsoleAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!‐‐</span> <span class="token attr-name">日志的格式化</span> <span class="token attr-name">‐‐</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ch.qos.logback.core.encoder.LayoutWrappingEncoder<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>layout</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Pattern</span><span class="token punctuation">></span></span>$&#123;CONSOLE_LOG_PATTERN&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Pattern</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>layout</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!‐‐</span> <span class="token attr-name">设置</span> <span class="token attr-name">Appender</span> <span class="token attr-name">‐‐</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span> <span class="token attr-name">level</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>INFO<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender‐ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>console<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Skywalking通过grpc上报日志 （需要v8.4.0+）</strong> </p>
+<p>gRPC报告程序可以将收集到的日志转发到SkyWalking OAP服务器上</p>
+<p>logback-spring.xml中添加</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>!‐‐</span> <span class="token attr-name">v8.4.0提供</span> <span class="token attr-name">‐‐</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>grpc‐log<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ch.qos.logback.core.encoder.LayoutWrappingEncoder<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>layout</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.apache.skywalking.apm.toolkit.log.logback.v1.x.mdc.TraceIdMDCPatternLogbackLayout<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Pattern</span><span class="token punctuation">></span></span>%d&#123;yyyy‐MM‐dd HH:mm:ss.SSS&#125; [%X&#123;tid&#125;] [%thread] %‐5level %logger&#123;36&#125; ‐%msg%n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Pattern</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>layout</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>encoder</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span> <span class="token attr-name">level</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender‐ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>grpc‐log<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208171219086.png"></p>
+<p>打开agent/config/agent.config配置文件，添加如下配置信息：</p>
+<pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token attr-name">plugin.toolkit.log.grpc.reporter.server_host</span><span class="token punctuation">=</span><span class="token attr-value">$&#123;SW_GRPC_LOG_SERVER_HOST:192.168.3.100&#125;</span>
+<span class="token attr-name">plugin.toolkit.log.grpc.reporter.server_port</span><span class="token punctuation">=</span><span class="token attr-value">$&#123;SW_GRPC_LOG_SERVER_PORT:11800&#125;</span>
+<span class="token attr-name">plugin.toolkit.log.grpc.reporter.max_message_size</span><span class="token punctuation">=</span><span class="token attr-value">$&#123;SW_GRPC_LOG_MAX_MESSAGE_SIZE:10485760&#125;</span>
+<span class="token attr-name">plugin.toolkit.log.grpc.reporter.upstream_timeout</span><span class="token punctuation">=</span><span class="token attr-value">$&#123;SW_GRPC_LOG_GRPC_UPSTREAM_TIMEOUT:30&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以上配置是默认配置信息,agent与oap在本地的可以不配</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th>解释</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>plugin.toolkit.log.transmit_formatted</td>
+<td>是否以格式化或未格式化的格式传输记录的数据</td>
+<td>true</td>
+</tr>
+<tr>
+<td>plugin.toolkit.log.grpc.reporter.server_host</td>
+<td>指定要向其报告日志数据的grpc服务器的主机</td>
+<td>127.0.0.1</td>
+</tr>
+<tr>
+<td>plugin.toolkit.log.grpc.reporter.server_port</td>
+<td>指定要向其报告日志数据的grpc服务器的端口</td>
+<td>11800</td>
+</tr>
+<tr>
+<td>plugin.toolkit.log.grpc.reporter.max_message_s  ize</td>
+<td>指定grpc客户端要报告的日志数据的最大大小</td>
+<td>10485760</td>
+</tr>
+<tr>
+<td>plugin.toolkit.log.grpc.reporter.upstream_time  out</td>
+<td>客户端向上游发送数据时将超时多长时间。单位是秒</td>
+<td>30</td>
+</tr>
+</tbody></table>
+<p>[agent配置信息详解](<a target="_blank" rel="noopener" href="https://skywalking.apache.org/docs/main/v8.4.0/en/setup/service-agent/java-agent/readme/#table-of-agent-configuration-properties">Setup java agent | Apache SkyWalking</a>)</p>
+<p>Skywalking UI效果</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208171514616.png"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/apache/skywalking-rocketbot-ui/pull/428">解决方法</a></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20211208171704963.png"></p>
+<h2 id="7、SkyWalking-告警功能"><a href="#7、SkyWalking-告警功能" class="headerlink" title="7、SkyWalking 告警功能"></a>7、SkyWalking 告警功能</h2><p> SkyWalking 告警功能是在6.x版本新增的，其核心由一组规则驱动，这些规则定义在config/alarm-settings.yml文件中。 告警规则的定 义分为两部分：</p>
+<ol>
+<li>告警规则：它们定义了应该如何触发度量警报，应该考虑什么条件。</li>
+<li>  Webhook（网络钩子）：定义当警告触发时，哪些服务终端需要被告知</li>
+</ol>
+<h3 id="告警规则"><a href="#告警规则" class="headerlink" title="告警规则"></a><strong>告警规则</strong></h3><p>SkyWalking 的发行版都会默认提供config/alarm-settings.yml文件，里面预先定义了一些常用的告警规则。如下：</p>
+<ol>
+<li>过去 3 分钟内服务平均响应时间超过 1 秒。</li>
+<li>过去 2 分钟服务成功率低于80%。 </li>
+<li>过去 3 分钟内服务响应时间超过 1s 的百分比</li>
+<li>服务实例在过去 2 分钟内平均响应时间超过 1s，并且实例名称与正则表达式匹配。</li>
+<li>过去 2 分钟内端点平均响应时间超过 1 秒。 </li>
+<li>过去 2 分钟内数据库访问平均响应时间超过 1 秒。 </li>
+<li>过去 2 分钟内端点关系平均响应时间超过 1 秒。 </li>
+</ol>
+<p>这些预定义的告警规则，打开config/alarm-settings.yml文件即可看到 </p>
+<p><strong>告警规则配置项的说明：</strong> </p>
+<ul>
+<li>Rule name：规则名称，也是在告警信息中显示的唯一名称。必须以_rule结尾，前缀可自定义</li>
+<li> Metrics name：度量名称，取值为oal脚本中的度量名，目前只支持long、double和int类型。详见Official OAL script</li>
+<li> Include names：该规则作用于哪些实体名称，比如服务名，终端名（可选，默认为全部）</li>
+<li> Exclude names：该规则作不用于哪些实体名称，比如服务名，终端名（可选，默认为空）</li>
+<li> Threshold：阈值</li>
+<li> OP： 操作符，目前支持 &gt;、&lt;、= </li>
+<li>Period：多久告警规则需要被核实一下。这是一个时间窗口，与后端部署环境时间相匹配 </li>
+<li>Count：在一个Period窗口中，如果values超过Threshold值（按op），达到Count值，需要发送警报 </li>
+<li>Silence period：在时间N中触发报警后，在TN -&gt; TN + period这个阶段不告警。 默认情况下，它和Period一样，这意味着 相同的告警（在同一个Metrics name拥有相同的Id）在同一个Period内只会触发一次 </li>
+<li>message：告警消息 Webhook（</li>
+</ul>
+<h3 id="网络钩子"><a href="#网络钩子" class="headerlink" title="网络钩子"></a>网络钩子</h3><p>Webhook可以简单理解为是一种Web层面的回调机制，通常由一些事件触发，与代码中的事件回调类似，只不过是Web层面的。由于是 Web层面的，所以当事件发生时，回调的不再是代码中的方法或函数，而是服务接口。例如，在告警这个场景，告警就是一个事件。当该 事件发生时，SkyWalking就会主动去调用一个配置好的接口，该接口就是所谓的Webhook。</p>
+<p> SkyWalking的告警消息会通过 HTTP 请求进行发送，请求方法为 POST，Content-Type 为 application/json，其JSON 数据实基于List&lt;org.apache.skywalking.oap.server.core.alarm.AlarmMessage进行序列化的。JSON数据示例：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">[</span><span class="token punctuation">&#123;</span>
+ <span class="token property">"scopeId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token property">"scope"</span><span class="token operator">:</span> <span class="token string">"SERVICE"</span><span class="token punctuation">,</span>
+ <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"serviceA"</span><span class="token punctuation">,</span>
+ <span class="token property">"id0"</span><span class="token operator">:</span> <span class="token string">"12"</span><span class="token punctuation">,</span>
+ <span class="token property">"id1"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span> 	
+ <span class="token property">"ruleName"</span><span class="token operator">:</span> <span class="token string">"service_resp_time_rule"</span><span class="token punctuation">,</span>
+ <span class="token property">"alarmMessage"</span><span class="token operator">:</span> <span class="token string">"alarmMessage xxxx"</span><span class="token punctuation">,</span>
+ <span class="token property">"startTime"</span><span class="token operator">:</span> <span class="token number">1560524171000</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+ <span class="token property">"scopeId"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+ <span class="token property">"scope"</span><span class="token operator">:</span> <span class="token string">"SERVICE"</span><span class="token punctuation">,</span>
+ <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"serviceB"</span><span class="token punctuation">,</span>
+ <span class="token property">"id0"</span><span class="token operator">:</span> <span class="token string">"23"</span><span class="token punctuation">,</span>
+ <span class="token property">"id1"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+ <span class="token property">"ruleName"</span><span class="token operator">:</span> <span class="token string">"service_resp_time_rule"</span><span class="token punctuation">,</span>
+ <span class="token property">"alarmMessage"</span><span class="token operator">:</span> <span class="token string">"alarmMessage yyy"</span><span class="token punctuation">,</span>
+ <span class="token property">"startTime"</span><span class="token operator">:</span> <span class="token number">1560524171000</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>字段说明：</p>
+<ul>
+<li> scopeId、scope：所有可用的 Scope 详见 org.apache.skywalking.oap.server.core.source.DefaultScopeDefine</li>
+<li> name：目标 Scope 的实体名称 </li>
+<li>id0：Scope 实体的 ID </li>
+<li>id1：保留字段，目前暂未使用 </li>
+<li>ruleName：告警规则名称 </li>
+<li>alarmMessage：告警消息内容</li>
+<li> startTime：告警时间，格式为时间戳</li>
+</ul>
+<h3 id="邮件告警功能实践"><a href="#邮件告警功能实践" class="headerlink" title="邮件告警功能实践"></a>邮件告警功能实践</h3><p>根据以上两个小节的介绍，可以得知：SkyWalking是不支持直接向邮箱、短信等服务发送告警信息的，SkyWalking只会在发生告警时将 告警信息发送至配置好的Webhook接口。</p>
+<p> 但我们总不能人工盯着该接口的日志信息来得知服务是否发生了告警，因此我们需要在该接口里实现发送邮件或短信等功能，从而达到个 性化的告警通知。</p>
+<p> 接下来开始动手实践，这里基于Spring Boot进行实现。首先是添加依赖：</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring‐boot‐starter‐mail<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配置邮箱服务：</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
+ port: 9134
+#邮箱配置
+spring:
+ mail:
+ host: smtp.163.com
+#发送者邮箱账号
+ username: 你的邮箱@163.com
+#发送者密钥
+ password: 你的邮箱服务密钥
+ default‐encoding: utf‐8
+ port: 465 #端口号465或587
+ protocol: smtp
+ properties:
+ mail:
+ debug:
+ false
+ smtp:
+ socketFactory:
+ class: javax.net.ssl.SSLSocketFactory<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根据SkyWalking发送的JSON数据定义一个DTO，用于接口接收数据：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwAlarmDTO</span> <span class="token punctuation">&#123;</span>
+ <span class="token keyword">private</span> <span class="token class-name">Integer</span> scopeId<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">String</span> scope<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">Integer</span> id0<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">Integer</span> id1<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">String</span> ruleName<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">String</span> alarmMessage<span class="token punctuation">;</span>
+ <span class="token keyword">private</span> <span class="token class-name">Long</span> startTime<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接着定义一个接口，实现接收SkyWalking的告警通知，并将数据发送至邮箱：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Slf4j</span>
+<span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequiredArgsConstructor</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/alarm"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SwAlarmController</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">JavaMailSender</span> sender<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"$&#123;spring.mail.username&#125;"</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> from<span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * 接收skywalking服务的告警通知并发送至邮箱
+     */</span>
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span><span class="token string">"/receive"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">receive</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SwAlarmDTO</span><span class="token punctuation">></span></span> alarmList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">SimpleMailMessage</span> message <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleMailMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 发送者邮箱</span>
+        message<span class="token punctuation">.</span><span class="token function">setFrom</span><span class="token punctuation">(</span>from<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 接收者邮箱</span>
+        message<span class="token punctuation">.</span><span class="token function">setTo</span><span class="token punctuation">(</span>from<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 主题</span>
+        message<span class="token punctuation">.</span><span class="token function">setSubject</span><span class="token punctuation">(</span><span class="token string">"告警邮件"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> content <span class="token operator">=</span> <span class="token function">getContent</span><span class="token punctuation">(</span>alarmList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 邮件内容</span>
+        message<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        sender<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"告警邮件已发送..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">String</span> <span class="token function">getContent</span><span class="token punctuation">(</span><span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">SwAlarmDTO</span><span class="token punctuation">></span></span> alarmList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">StringBuilder</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">SwAlarmDTO</span> dto <span class="token operator">:</span> alarmList<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"scopeId: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getScopeId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\nscope: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getScope</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n目标 Scope 的实体名称: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\nScope 实体的 ID: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getId0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\nid1: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getId1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n告警规则名称: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getRuleName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n告警消息内容: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getAlarmMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n告警时间: "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>dto<span class="token punctuation">.</span><span class="token function">getStartTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                  <span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\n\n‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐\n\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token punctuation">&#125;</span>
+         <span class="token keyword">return</span> sb<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">&#125;</span>
+ <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后将该接口配置到SkyWalking中，Webhook的配置位于config/alarm-settings.yml文件的末尾，格式为http://{ip}:port}/{uri}。</p>
+<p>如下示例：</p>
+<p> vim config/alarm‐settings.yml</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">webhooks:
+‐ http:&#x2F;&#x2F;127.0.0.1:9134&#x2F;alarm&#x2F;receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2021/12/05/skywalking-ying-yong/">http://wumangeng.github.io/2021/12/05/skywalking-ying-yong/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                                    <span class="chip bg-color">项目</span>
+                                </a>
+                            
+                                <a href="/tags/Skywalking/">
+                                    <span class="chip bg-color">Skywalking</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/12/05/skywalking-ying-yong/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=3980057088,1377959210&fm=26&fmt=auto" class="responsive-img" alt="链路追踪Skywalking实践">
+                        
+                        <span class="card-title">链路追踪Skywalking实践</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分布式微服务系统链路追踪-Skywalking
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Skywalking/" class="post-category">
+                                    Skywalking
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
+                    </a>
+                    
+                    <a href="/tags/Skywalking/">
+                        <span class="chip bg-color">Skywalking</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/11/15/go-ji-chu-yu-fa/">
+                    <div class="card-image">
+                        
+                        <img src="https://img1.baidu.com/it/u=2561631021,1559222725&fm=26&fmt=auto" class="responsive-img" alt="go语言基础学习">
+                        
+                        <span class="card-title">go语言基础学习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            GoLang语言基础知识
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/GoLang/" class="post-category">
+                                    GoLang
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GoLang/">
+                        <span class="chip bg-color">GoLang</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
