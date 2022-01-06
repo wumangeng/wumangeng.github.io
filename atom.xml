@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2021-12-22T08:40:45.155Z</updated>
+  <updated>2022-01-06T03:27:41.805Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GRPC</title>
+    <link href="http://wumangeng.github.io/2022/01/06/grpc/"/>
+    <id>http://wumangeng.github.io/2022/01/06/grpc/</id>
+    <published>2022-01-06T01:10:20.000Z</published>
+    <updated>2022-01-06T03:27:41.805Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GRPC&quot;&gt;&lt;a href=&quot;#GRPC&quot; class=&quot;headerlink&quot; title=&quot;GRPC&quot;&gt;&lt;/a&gt;GRPC&lt;/h1&gt;&lt;h2 id=&quot;rpc&quot;&gt;&lt;a href=&quot;#rpc&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
+    
+    
+    <category term="grpc" scheme="http://wumangeng.github.io/tags/grpc/"/>
+    
+  </entry>
   
   <entry>
     <title>数据结构和算法</title>
@@ -73,7 +98,7 @@
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2021-12-15T07:47:50.872Z</updated>
+    <updated>2021-12-24T04:26:58.522Z</updated>
     
     
       
@@ -516,33 +541,6 @@
     <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>基于java的生成大疆弓形航线算法实现</title>
-    <link href="http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/"/>
-    <id>http://wumangeng.github.io/2021/05/25/da-jiang-sheng-cheng-gong-xing-hang-dian-suan-fa-java-shi-xian/</id>
-    <published>2021-05-25T01:10:20.000Z</published>
-    <updated>2021-10-20T06:26:55.247Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;&lt;strong&gt;问题背景：本人在开发过程中，遇到给定两个点的坐标，需要生成大量的有规律的坐标（实际上就是大疆无人机的航线）。查询相关资料发现国内的博客基本都是计算两点距离，计算点到线距离的距离等，有几篇也都是C语言形式。在这些资料的基础上本人继续研究深入，最终调试出了符合本</summary>
-        
-      
-    
-    
-    
-    <category term="dji" scheme="http://wumangeng.github.io/categories/dji/"/>
-    
-    
-    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
-    
-    <category term="dji" scheme="http://wumangeng.github.io/tags/dji/"/>
     
   </entry>
   

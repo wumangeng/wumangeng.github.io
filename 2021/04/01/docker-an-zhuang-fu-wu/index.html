@@ -560,7 +560,7 @@ sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker<span aria-
 <li>命令补全工具安装：<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/completion/">https://docs.docker.com/compose/completion/</a></li>
 </ul>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#安装适应系统版本的Compose
-sudo curl -L https:&#x2F;&#x2F;github.com&#x2F;docker&#x2F;compose&#x2F;releases&#x2F;download&#x2F;1.25.1&#x2F;docker-compose-&#96;uname -s&#96;-&#96;uname -m&#96; -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
+sudo curl -L https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker&#x2F;compose&#x2F;releases&#x2F;download&#x2F;1.25.1&#x2F;docker-compose-&#96;uname -s&#96;-&#96;uname -m&#96; -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
 
 #为安装脚本添加执行权限
 chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
@@ -710,6 +710,20 @@ docker ps|grep rocketmq
 
 #通过浏览器访问console页面
 ip：8180&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="安装kafka"><a href="#安装kafka" class="headerlink" title="安装kafka"></a>安装kafka</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 安装 zookeeper
+docker run -d --name zookeeper -p 2181:2181 -v &#x2F;etc&#x2F;localtime:&#x2F;etc&#x2F;localtime wurstmeister&#x2F;zookeeper
+
+#安装kafka
+docker run  -d --name kafka -p 9092:9092 -e KAFKA_BROKER_ID&#x3D;0 -e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.5.101:2181 -e KAFKA_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;192.168.5.101:9092 -e KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;0.0.0.0:9092 -t wurstmeister&#x2F;kafka
+
+#参数意义
+-e KAFKA_BROKER_ID&#x3D;0 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
+-e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.5.101:2181&#x2F;kafka 配置zookeeper管理kafka的路径192.168.5.101:2181&#x2F;kafka
+-e KAFKA_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;192.168.5.101:9092 把kafka的地址端口注册给zookeeper
+-e KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;0.0.0.0:9092 配置kafka的监听端口
+-v &#x2F;etc&#x2F;localtime:&#x2F;etc&#x2F;localtime 容器时间同步虚拟机的时间
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#查看运行容器的宿主机进程
 ps aux|grep sleep|grep -v grep
@@ -1202,7 +1216,7 @@ netstat -luntp<span aria-hidden="true" class="line-numbers-rows"><span></span><s
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021</span>
+                <span id="year">2021-2022</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>
