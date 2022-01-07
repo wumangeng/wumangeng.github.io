@@ -42,6 +42,31 @@
   </entry>
   
   <entry>
+    <title>go-gin框架</title>
+    <link href="http://wumangeng.github.io/2021/12/25/go-gin/"/>
+    <id>http://wumangeng.github.io/2021/12/25/go-gin/</id>
+    <published>2021-12-25T01:10:20.000Z</published>
+    <updated>2022-01-07T08:09:27.164Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;gin&quot;&gt;&lt;a href=&quot;#gin&quot; class=&quot;headerlink&quot; title=&quot;gin&quot;&gt;&lt;/a&gt;gin&lt;/h1&gt;&lt;h2 id=&quot;1-快速入门&quot;&gt;&lt;a href=&quot;#1-快速入门&quot; class=&quot;headerlink&quot; title=&quot;1.</summary>
+        
+      
+    
+    
+    
+    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
+    
+    
+    <category term="gin" scheme="http://wumangeng.github.io/tags/gin/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数据结构和算法</title>
     <link href="http://wumangeng.github.io/2021/12/15/shu-ju-jie-gou/"/>
     <id>http://wumangeng.github.io/2021/12/15/shu-ju-jie-gou/</id>
@@ -514,33 +539,6 @@
     <category term="RabbitMQ" scheme="http://wumangeng.github.io/tags/RabbitMQ/"/>
     
     <category term="消息中间件" scheme="http://wumangeng.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线程池以及线程的异步编排使用</title>
-    <link href="http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/"/>
-    <id>http://wumangeng.github.io/2021/06/05/xian-cheng-chi-yi-bu-bian-pai-de-shi-yong/</id>
-    <published>2021-06-05T01:10:20.000Z</published>
-    <updated>2021-10-28T06:16:22.483Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;线程池&quot;&gt;&lt;a href=&quot;#线程池&quot; class=&quot;headerlink&quot; title=&quot;线程池&quot;&gt;&lt;/a&gt;线程池&lt;/h1&gt;&lt;h3 id=&quot;1、初始化线程的-4-种方式&quot;&gt;&lt;a href=&quot;#1、初始化线程的-4-种方式&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="多线程" scheme="http://wumangeng.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-    
-    <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   
