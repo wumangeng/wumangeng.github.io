@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-01-08T02:28:19.266Z</updated>
+  <updated>2022-01-12T09:02:20.281Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>go-请求参数校验(validator)</title>
+    <link href="http://wumangeng.github.io/2022/01/12/go-shi-yong-validator-ku-jin-xing-can-shu-xiao-yan/"/>
+    <id>http://wumangeng.github.io/2022/01/12/go-shi-yong-validator-ku-jin-xing-can-shu-xiao-yan/</id>
+    <published>2022-01-12T01:10:20.000Z</published>
+    <updated>2022-01-12T09:02:20.281Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;validator库参数校验&quot;&gt;&lt;a href=&quot;#validator库参数校验&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
+    
+    
+    <category term="gin" scheme="http://wumangeng.github.io/tags/gin/"/>
+    
+    <category term="validator" scheme="http://wumangeng.github.io/tags/validator/"/>
+    
+  </entry>
   
   <entry>
     <title>Go开发-用户密码加密</title>
@@ -404,33 +431,6 @@
     <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
     <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>go-请求参数校验(validator)</title>
-    <link href="http://wumangeng.github.io/2021/08/25/go-shi-yong-validator-ku-jin-xing-can-shu-xiao-yan/"/>
-    <id>http://wumangeng.github.io/2021/08/25/go-shi-yong-validator-ku-jin-xing-can-shu-xiao-yan/</id>
-    <published>2021-08-25T01:10:20.000Z</published>
-    <updated>2022-01-12T09:00:15.775Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;validator库参数校验&quot;&gt;&lt;a href=&quot;#validator库参数校验&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
-    
-    
-    <category term="gin" scheme="http://wumangeng.github.io/tags/gin/"/>
-    
-    <category term="validator" scheme="http://wumangeng.github.io/tags/validator/"/>
     
   </entry>
   
