@@ -491,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    4k
                 </div>
                 
 
@@ -527,149 +527,149 @@
  yum -y install lrzsz
  #上传  rz  下载 sz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#卸载系统之前的docker 
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
+<h3 id="centos7安装docker"><a href="#centos7安装docker" class="headerlink" title="centos7安装docker"></a>centos7安装docker</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#卸载系统之前的docker </span>
+<span class="token function">sudo</span> yum remove docker <span class="token punctuation">\</span>
+                  docker-client <span class="token punctuation">\</span>
+                  docker-client-latest <span class="token punctuation">\</span>
+                  docker-common <span class="token punctuation">\</span>
+                  docker-latest <span class="token punctuation">\</span>
+                  docker-latest-logrotate <span class="token punctuation">\</span>
+                  docker-logrotate <span class="token punctuation">\</span>
                   docker-engine
                   
-#安装工具                  
-sudo yum install -y yum-utils
+<span class="token comment">#安装工具                  </span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y yum-utils
 
-# 配置镜像
-sudo yum-config-manager \
-    --add-repo \
-    https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo
-# 安装    
-sudo yum install -y docker-ce docker-ce-cli containerd.io
+<span class="token comment"># 配置镜像</span>
+<span class="token function">sudo</span> yum-config-manager <span class="token punctuation">\</span>
+    --add-repo <span class="token punctuation">\</span>
+    https://download.docker.com/linux/centos/docker-ce.repo
+<span class="token comment"># 安装    </span>
+<span class="token function">sudo</span> yum <span class="token function">install</span> -y docker-ce docker-ce-cli containerd.io
 
-#启动
-sudo systemctl start docker
+<span class="token comment">#启动</span>
+<span class="token function">sudo</span> systemctl start docker
 
-# 设置开机自启动
-sudo systemctl enable docker
+<span class="token comment"># 设置开机自启动</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> docker
 
 docker -v
-sudo docker images
+<span class="token function">sudo</span> docker images
 
-# 配置（阿里云）镜像加速
-sudo mkdir -p &#x2F;etc&#x2F;docker
+<span class="token comment"># 配置（阿里云）镜像加速</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> -p /etc/docker
 
-sudo tee &#x2F;etc&#x2F;docker&#x2F;daemon.json &lt;&lt;-&#39;EOF&#39;
+<span class="token function">sudo</span> <span class="token function">tee</span> /etc/docker/daemon.json <span class="token operator">&lt;&lt;-</span><span class="token string">'EOF'
 &#123;
-  &quot;registry-mirrors&quot;: [&quot;https:&#x2F;&#x2F;pacmlq67.mirror.aliyuncs.com&quot;]
+  "registry-mirrors": ["https://pacmlq67.mirror.aliyuncs.com"]
 &#125;
-EOF
+EOF</span>
 
 
-#修改docker 支持远程访问
-vim &#x2F;lib&#x2F;systemd&#x2F;system&#x2F;docker.service
+<span class="token comment">#修改docker 支持远程访问</span>
+<span class="token function">vim</span> /lib/systemd/system/docker.service
 
-#修改这一行
-ExecStart&#x3D;&#x2F;usr&#x2F;bin&#x2F;dockerd  -H tcp:&#x2F;&#x2F;0.0.0.0:2375 -H fd:&#x2F;&#x2F; --containerd&#x3D;&#x2F;run&#x2F;containerd&#x2F;containerd.sock 
+<span class="token comment">#修改这一行</span>
+<span class="token assign-left variable">ExecStart</span><span class="token operator">=</span>/usr/bin/dockerd  -H tcp://0.0.0.0:2375 -H fd:// --containerd<span class="token operator">=</span>/run/containerd/containerd.sock 
 
-#重启
-sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#重启</span>
+<span class="token function">sudo</span> systemctl daemon-reload <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> systemctl restart docker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="centos7安装docker-compose"><a href="#centos7安装docker-compose" class="headerlink" title="centos7安装docker-compose"></a>centos7安装docker-compose</h3><p><strong>官方文档</strong></p>
 <ul>
 <li>Docker Compose安装：<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a></li>
 <li>命令补全工具安装：<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/completion/">https://docs.docker.com/compose/completion/</a></li>
 </ul>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#安装适应系统版本的Compose
-sudo curl -L https:&#x2F;&#x2F;get.daocloud.io&#x2F;docker&#x2F;compose&#x2F;releases&#x2F;download&#x2F;1.25.1&#x2F;docker-compose-&#96;uname -s&#96;-&#96;uname -m&#96; -o &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#安装适应系统版本的Compose</span>
+<span class="token function">sudo</span> <span class="token function">curl</span> -L https://get.daocloud.io/docker/compose/releases/download/1.25.1/docker-compose-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> -s<span class="token variable">`</span></span>-<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span> -m<span class="token variable">`</span></span> -o /usr/local/bin/docker-compose
 
-#为安装脚本添加执行权限
-chmod +x &#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-compose
+<span class="token comment">#为安装脚本添加执行权限</span>
+<span class="token function">chmod</span> +x /usr/local/bin/docker-compose
 
-#命令测试安装结果
+<span class="token comment">#命令测试安装结果</span>
 docker-compose --version
 
-#安装Compose命令补全工具
-curl -L https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;docker&#x2F;compose&#x2F;$(docker-compose version --short)&#x2F;contrib&#x2F;completion&#x2F;bash&#x2F;docker-compose -o &#x2F;etc&#x2F;bash_completion.d&#x2F;docker-compose<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#安装Compose命令补全工具</span>
+<span class="token function">curl</span> -L https://raw.githubusercontent.com/docker/compose/<span class="token variable"><span class="token variable">$(</span>docker-compose version --short<span class="token variable">)</span></span>/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装mysql"><a href="#docker安装mysql" class="headerlink" title="docker安装mysql"></a>docker安装mysql</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#拉取镜像
-sudo docker pull mysql:5.7
+<h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#拉取镜像</span>
+<span class="token function">sudo</span> docker pull mysql:5.7
 
-# --name指定容器名字 -v目录挂载 -p指定端口映射  -e设置mysql参数 -d后台运行
-sudo docker run -p 3306:3306 --name mysql-pro \
--v &#x2F;mydata&#x2F;mysql&#x2F;log:&#x2F;var&#x2F;log&#x2F;mysql \
--v &#x2F;mydata&#x2F;mysql&#x2F;data:&#x2F;var&#x2F;lib&#x2F;mysql \
--v &#x2F;mydata&#x2F;mysql&#x2F;conf:&#x2F;etc&#x2F;mysql \
--e TZ&#x3D;Asia&#x2F;Shanghai \
--e MYSQL_ROOT_PASSWORD&#x3D;123456 \
+<span class="token comment"># --name指定容器名字 -v目录挂载 -p指定端口映射  -e设置mysql参数 -d后台运行</span>
+<span class="token function">sudo</span> docker run -p <span class="token number">3306</span>:3306 --name mysql-pro <span class="token punctuation">\</span>
+-v /mydata/mysql/log:/var/log/mysql <span class="token punctuation">\</span>
+-v /mydata/mysql/data:/var/lib/mysql <span class="token punctuation">\</span>
+-v /mydata/mysql/conf:/etc/mysql <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">TZ</span><span class="token operator">=</span>Asia/Shanghai <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_ROOT_PASSWORD</span><span class="token operator">=</span><span class="token number">123456</span> <span class="token punctuation">\</span>
 -d mysql:5.7
 
-docker exec -it mysql bin&#x2F;bash
-exit
+docker <span class="token builtin class-name">exec</span> -it mysql bin/bash
+<span class="token builtin class-name">exit</span>
 
 因为有目录映射，所以我们可以直接在镜像外执行
-vi &#x2F;mydata&#x2F;mysql&#x2F;conf&#x2F;my.conf 
+<span class="token function">vi</span> /mydata/mysql/conf/my.conf 
 
-[client]
-default-character-set&#x3D;utf8
-[mysql]
-default-character-set&#x3D;utf8
-[mysqld]
-init_connect&#x3D;&#39;SET collation_connection &#x3D; utf8_unicode_ci&#39;
-init_connect&#x3D;&#39;SET NAMES utf8&#39;
-character-set-server&#x3D;utf8
-collation-server&#x3D;utf8_unicode_ci
-default-time-zone &#x3D; &#39;+08:00&#39;
+<span class="token punctuation">[</span>client<span class="token punctuation">]</span>
+default-character-set<span class="token operator">=</span>utf8
+<span class="token punctuation">[</span>mysql<span class="token punctuation">]</span>
+default-character-set<span class="token operator">=</span>utf8
+<span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+<span class="token assign-left variable">init_connect</span><span class="token operator">=</span><span class="token string">'SET collation_connection = utf8_unicode_ci'</span>
+<span class="token assign-left variable">init_connect</span><span class="token operator">=</span><span class="token string">'SET NAMES utf8'</span>
+character-set-server<span class="token operator">=</span>utf8
+collation-server<span class="token operator">=</span>utf8_unicode_ci
+default-time-zone <span class="token operator">=</span> <span class="token string">'+08:00'</span>
 skip-character-set-client-handshake
 skip-name-resolve
 
 docker restart mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装redis"><a href="#docker安装redis" class="headerlink" title="docker安装redis"></a>docker安装redis</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 在虚拟机中
-mkdir -p &#x2F;mydata&#x2F;redis&#x2F;conf
-touch &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf
+<h3 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 在虚拟机中</span>
+<span class="token function">mkdir</span> -p /mydata/redis/conf
+<span class="token function">touch</span> /mydata/redis/conf/redis.conf
 
 docker pull redis
 
-docker run -p 6379:6379 --name redis \
--v &#x2F;mydata&#x2F;redis&#x2F;data:&#x2F;data \
--v &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf:&#x2F;etc&#x2F;redis&#x2F;redis.conf \
--d redis redis-server &#x2F;etc&#x2F;redis&#x2F;redis.conf
+docker run -p <span class="token number">6379</span>:6379 --name redis <span class="token punctuation">\</span>
+-v /mydata/redis/data:/data <span class="token punctuation">\</span>
+-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf <span class="token punctuation">\</span>
+-d redis redis-server /etc/redis/redis.conf
 
-# 直接进去redis客户端。
-docker exec -it redis redis-cli
+<span class="token comment"># 直接进去redis客户端。</span>
+docker <span class="token builtin class-name">exec</span> -it redis redis-cli
 
-#配置持久化
-vim &#x2F;mydata&#x2F;redis&#x2F;conf&#x2F;redis.conf
-# 插入下面内容
-appendonly yes
+<span class="token comment">#配置持久化</span>
+<span class="token function">vim</span> /mydata/redis/conf/redis.conf
+<span class="token comment"># 插入下面内容</span>
+appendonly <span class="token function">yes</span>
 保存
 
 docker restart redis
-#配置开机自启
-docker update redis --restart&#x3D;always
+<span class="token comment">#配置开机自启</span>
+docker update redis --restart<span class="token operator">=</span>always
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装可视化prtainer"><a href="#docker安装可视化prtainer" class="headerlink" title="docker安装可视化prtainer"></a>docker安装可视化prtainer</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull portainer&#x2F;portainer
+<h3 id="安装可视化prtainer"><a href="#安装可视化prtainer" class="headerlink" title="安装可视化prtainer"></a>安装可视化prtainer</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker pull portainer/portainer
 
-docker run -d -p 9000:9000 --restart&#x3D;always -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock --name prtainer  portainer&#x2F;portainer
+docker run -d -p <span class="token number">9000</span>:9000 --restart<span class="token operator">=</span>always -v /var/run/docker.sock:/var/run/docker.sock --name prtainer  portainer/portainer
 
-#访问
-http:&#x2F;&#x2F;ip:9000&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#访问</span>
+http://ip:9000/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装go-fastdfs"><a href="#docker安装go-fastdfs" class="headerlink" title="docker安装go-fastdfs"></a>docker安装go-fastdfs</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#拉取镜像
-docker pull sjqzhang&#x2F;go-fastdfs:latest
+<h3 id="安装go-fastdfs"><a href="#安装go-fastdfs" class="headerlink" title="安装go-fastdfs"></a>安装go-fastdfs</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#拉取镜像</span>
+docker pull sjqzhang/go-fastdfs:latest
 
-#创建保存目录
-mkdir usr&#x2F;local&#x2F;data
-mkdir usr&#x2F;local&#x2F;fastdfs_data
+<span class="token comment">#创建保存目录</span>
+<span class="token function">mkdir</span> usr/local/data
+<span class="token function">mkdir</span> usr/local/fastdfs_data
 
-#运行
-docker run --name go-fastdfs --privileged&#x3D;true -t -p 9090:8080 -v &#x2F;usr&#x2F;local&#x2F;data&#x2F;fastdfs_data:&#x2F;data -e GO_FASTDFS_DIR&#x3D;&#x2F;data sjqzhang&#x2F;go-fastdfs
+<span class="token comment">#运行</span>
+docker run --name go-fastdfs --privileged<span class="token operator">=</span>true -t -p <span class="token number">9090</span>:8080 -v /usr/local/data/fastdfs_data:/data -e <span class="token assign-left variable">GO_FASTDFS_DIR</span><span class="token operator">=</span>/data sjqzhang/go-fastdfs
 
-#访问
-http:&#x2F;&#x2F;ip:9090&#x2F;
+<span class="token comment">#访问</span>
+http://ip:9090/
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <pre class="line-numbers language-none"><code class="language-none">go-fastdfs的目录结构一般是：
@@ -692,85 +692,393 @@ http:&#x2F;&#x2F;ip:9090&#x2F;
 └── static
     └── uppy.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#下载镜像文件
-docker pull perfree&#x2F;fastdfsweb
+<h4 id="go-fastdfs-web可视化界面"><a href="#go-fastdfs-web可视化界面" class="headerlink" title="go-fastdfs-web可视化界面"></a>go-fastdfs-web可视化界面</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#下载镜像文件</span>
+docker pull perfree/fastdfsweb
 
-#运行容器
-docker run --name fastdfsweb -d -p 8088:8088 perfree&#x2F;fastdfsweb
+<span class="token comment">#运行容器</span>
+docker run --name fastdfsweb -d -p <span class="token number">8088</span>:8088 perfree/fastdfsweb
 
-#测试是否正常访问
-http:&#x2F;&#x2F;本地ip:8088 
+<span class="token comment">#测试是否正常访问</span>
+http://本地ip:8088 
 
-#配置go-fastdfs-web
+<span class="token comment">#配置go-fastdfs-web</span>
 集群名称：随意填写
-组：对应本地映射中文件夹conf&#x2F;cfg.json 文件内容中的group
-访问地址：http:&#x2F;&#x2F;本地ip:8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+组：对应本地映射中文件夹conf/cfg.json 文件内容中的group
+访问地址：http://本地ip:8080<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装RocketMQ"><a href="#docker安装RocketMQ" class="headerlink" title="docker安装RocketMQ"></a>docker安装RocketMQ</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#查找镜像
+<h3 id="安装RocketMQ"><a href="#安装RocketMQ" class="headerlink" title="安装RocketMQ"></a>安装RocketMQ</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#查找镜像</span>
 docker search rocketmq
 
-#下载并且启动NameServer
-docker run -d -p 9876:9876 --name rmqserver  foxiswho&#x2F;rocketmq:server-4.5.1
+<span class="token comment">#下载并且启动NameServer</span>
+docker run -d -p <span class="token number">9876</span>:9876 --name rmqserver  foxiswho/rocketmq:server-4.5.1
 
-#启动broker    Broker容器中默认的配置文件的路径为：&#x2F;etc&#x2F;rocketmq&#x2F;broker.conf
-docker run -d -p 10911:10911 -p 10909:10909\
- --name rmqbroker --link rmqserver:namesrv\
- -e &quot;NAMESRV_ADDR&#x3D;namesrv:9876&quot; -e &quot;JAVA_OPTS&#x3D;-Duser.home&#x3D;&#x2F;opt&quot;\
- -e &quot;JAVA_OPT_EXT&#x3D;-server -Xms128m -Xmx128m&quot;\
- -v &#x2F;conf&#x2F;broker.conf:&#x2F;etc&#x2F;rocketmq&#x2F;broker.conf \
- foxiswho&#x2F;rocketmq:broker-4.5.1
+<span class="token comment">#启动broker    Broker容器中默认的配置文件的路径为：/etc/rocketmq/broker.conf</span>
+docker run -d -p <span class="token number">10911</span>:10911 -p <span class="token number">10909</span>:10909<span class="token punctuation">\</span>
+ --name rmqbroker --link rmqserver:namesrv<span class="token punctuation">\</span>
+ -e <span class="token string">"NAMESRV_ADDR=namesrv:9876"</span> -e <span class="token string">"JAVA_OPTS=-Duser.home=/opt"</span><span class="token punctuation">\</span>
+ -e <span class="token string">"JAVA_OPT_EXT=-server -Xms128m -Xmx128m"</span><span class="token punctuation">\</span>
+ -v /conf/broker.conf:/etc/rocketmq/broker.conf <span class="token punctuation">\</span>
+ foxiswho/rocketmq:broker-4.5.1
  
-#下载并且启动 rocketmq console
-docker run -d --name rmqconsole -p 8180:8080 --link rmqserver:namesrv\
- -e &quot;JAVA_OPTS&#x3D;-Drocketmq.namesrv.addr&#x3D;namesrv:9876\
- -Dcom.rocketmq.sendMessageWithVIPChannel&#x3D;false&quot;\
- -t styletang&#x2F;rocketmq-console-ng
+<span class="token comment">#下载并且启动 rocketmq console</span>
+docker run -d --name rmqconsole -p <span class="token number">8180</span>:8080 --link rmqserver:namesrv<span class="token punctuation">\</span>
+ -e <span class="token string">"JAVA_OPTS=-Drocketmq.namesrv.addr=namesrv:9876\
+ -Dcom.rocketmq.sendMessageWithVIPChannel=false"</span><span class="token punctuation">\</span>
+ -t styletang/rocketmq-console-ng
  
- #命令检查一下启动情况
-docker ps|grep rocketmq
+ <span class="token comment">#命令检查一下启动情况</span>
+docker <span class="token function">ps</span><span class="token operator">|</span><span class="token function">grep</span> rocketmq
 
-#通过浏览器访问console页面
-ip：8180&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#通过浏览器访问console页面</span>
+ip：8180/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装kafka"><a href="#docker安装kafka" class="headerlink" title="docker安装kafka"></a>docker安装kafka</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 安装 zookeeper
-docker run -d --name zookeeper -p 2181:2181 -v &#x2F;etc&#x2F;localtime:&#x2F;etc&#x2F;localtime wurstmeister&#x2F;zookeeper
+<h3 id="安装kafka"><a href="#安装kafka" class="headerlink" title="安装kafka"></a>安装kafka</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 安装 zookeeper</span>
+docker run -d --name zookeeper -p <span class="token number">2181</span>:2181 -v /etc/localtime:/etc/localtime wurstmeister/zookeeper
 
-#安装kafka
-docker run  -d --name kafka -p 9092:9092 -e KAFKA_BROKER_ID&#x3D;0 -e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.5.101:2181 -e KAFKA_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;192.168.5.101:9092 -e KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;0.0.0.0:9092 -t wurstmeister&#x2F;kafka
+<span class="token comment">#安装kafka</span>
+docker run  -d --name kafka -p <span class="token number">9092</span>:9092 -e <span class="token assign-left variable">KAFKA_BROKER_ID</span><span class="token operator">=</span><span class="token number">0</span> -e <span class="token assign-left variable">KAFKA_ZOOKEEPER_CONNECT</span><span class="token operator">=</span><span class="token number">192.168</span>.5.101:2181 -e <span class="token assign-left variable">KAFKA_ADVERTISED_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://192.168.5.101:9092 -e <span class="token assign-left variable">KAFKA_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://0.0.0.0:9092 -t wurstmeister/kafka
 
-#参数意义
--e KAFKA_BROKER_ID&#x3D;0 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
--e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.5.101:2181&#x2F;kafka 配置zookeeper管理kafka的路径192.168.5.101:2181&#x2F;kafka
--e KAFKA_ADVERTISED_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;192.168.5.101:9092 把kafka的地址端口注册给zookeeper
--e KAFKA_LISTENERS&#x3D;PLAINTEXT:&#x2F;&#x2F;0.0.0.0:9092 配置kafka的监听端口
--v &#x2F;etc&#x2F;localtime:&#x2F;etc&#x2F;localtime 容器时间同步虚拟机的时间
+<span class="token comment">#参数意义</span>
+-e <span class="token assign-left variable">KAFKA_BROKER_ID</span><span class="token operator">=</span><span class="token number">0</span> 在kafka集群中，每个kafka都有一个BROKER_ID来区分自己
+-e <span class="token assign-left variable">KAFKA_ZOOKEEPER_CONNECT</span><span class="token operator">=</span><span class="token number">192.168</span>.5.101:2181/kafka 配置zookeeper管理kafka的路径192.168.5.101:2181/kafka
+-e <span class="token assign-left variable">KAFKA_ADVERTISED_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://192.168.5.101:9092 把kafka的地址端口注册给zookeeper
+-e <span class="token assign-left variable">KAFKA_LISTENERS</span><span class="token operator">=</span>PLAINTEXT://0.0.0.0:9092 配置kafka的监听端口
+-v /etc/localtime:/etc/localtime 容器时间同步虚拟机的时间
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="docker安装yapi"><a href="#docker安装yapi" class="headerlink" title="docker安装yapi"></a>docker安装yapi</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#yapi官方安装文档
-https:&#x2F;&#x2F;github.com&#x2F;Ryan-Miao&#x2F;docker-yapi
+<h3 id="安装yapi"><a href="#安装yapi" class="headerlink" title="安装yapi"></a>安装yapi</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#yapi官方安装文档</span>
+https://github.com/Ryan-Miao/docker-yapi
 
-#安装yapi前要先安装docker-compose
-#1.克隆代码
-git clone https:&#x2F;&#x2F;github.com&#x2F;Ryan-Miao&#x2F;docker-yapi.git
-#2.进入目录 注：docker-compose.yml 第一次启动和第二次启动配置有区别
-cd docker-yapi
-#3.启动
+<span class="token comment">#安装yapi前要先安装docker-compose</span>
+<span class="token comment">#1.克隆代码</span>
+<span class="token function">git</span> clone https://github.com/Ryan-Miao/docker-yapi.git
+<span class="token comment">#2.进入目录 注：docker-compose.yml 第一次启动和第二次启动配置有区别</span>
+<span class="token builtin class-name">cd</span> docker-yapi
+<span class="token comment">#3.启动</span>
 docker-compose up
-#4.参考文档进行配置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#4.参考文档进行配置</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">#查看运行容器的宿主机进程
-ps aux|grep sleep|grep -v grep
+<h3 id="安装nacos"><a href="#安装nacos" class="headerlink" title="安装nacos"></a>安装nacos</h3><p>nacos官网： <a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/">https://nacos.io/zh-cn/</a></p>
+<p>springcloud-nacos-seata版本对应： <a target="_blank" rel="noopener" href="https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E">https://github.com/alibaba/spring-cloud-alibaba/wiki/版本说明</a></p>
+<h4 id="安装-nacos1-4-2"><a href="#安装-nacos1-4-2" class="headerlink" title="安装 nacos1.4.2"></a>安装 nacos1.4.2</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker run -d <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">PREFER_HOST_MODE</span><span class="token operator">=</span>ip <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MODE</span><span class="token operator">=</span>standalone <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">SPRING_DATASOURCE_PLATFORM</span><span class="token operator">=</span>mysql <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_HOST</span><span class="token operator">=</span><span class="token number">172.168</span>.1.33 <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_PORT</span><span class="token operator">=</span><span class="token number">3306</span> <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_USER</span><span class="token operator">=</span><span class="token string">'root'</span> <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_PASSWORD</span><span class="token operator">=</span><span class="token string">'root'</span> <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_DB_NAME</span><span class="token operator">=</span>nacos <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">TIME_ZONE</span><span class="token operator">=</span><span class="token string">'Asia/Shanghai'</span> <span class="token punctuation">\</span>
+-v /home/dockerdata/nacos1.4.2/logs:/home/nacos/logs <span class="token punctuation">\</span>
+-p <span class="token number">8848</span>:8848 <span class="token punctuation">\</span>
+--name nacos1.4.2 <span class="token punctuation">\</span>
+--restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
+nacos/nacos-server:1.4.2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-#进入容器内部
-docker exec -it 容器id &#x2F;bin&#x2F;sh
-#查看容器日志
+<h4 id="安装-nacos2-x"><a href="#安装-nacos2-x" class="headerlink" title="安装 nacos2.x"></a>安装 nacos2.x</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#1、搜索镜像</span>
+<span class="token function">curl</span> https://registry.hub.docker.com/v1/repositories/nacos/nacos-server/tags<span class="token punctuation">\</span>
+        <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">'[\[\]" ]'</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">'&#125;'</span> <span class="token string">'\n'</span><span class="token punctuation">\</span>
+        <span class="token operator">|</span> <span class="token function">awk</span> -F: -v <span class="token assign-left variable">image</span><span class="token operator">=</span><span class="token string">'nacos/nacos-server'</span> <span class="token string">'&#123;if(NR!=NF &amp;&amp; $3 != "")&#123;printf("%s:%s\n",image,$3)&#125;&#125;'</span>
+
+<span class="token comment">#2、拉取镜像</span>
+docker pull nacos/nacos-server:2.0.3
+
+<span class="token comment">#3、创建数据目录</span>
+<span class="token function">mkdir</span> -p /home/dockerdata/nacos2.0.3/logs
+<span class="token function">mkdir</span> -p /home/dockerdata/nacos2.0.3/conf
+
+<span class="token comment">#4、第一次运行镜像</span>
+docker run -d --name<span class="token operator">=</span>nacos2.0.3  nacos/nacos-server:2.0.3
+
+<span class="token comment">#5、拷贝配置到本地，因为直接指定配置目录，文件不会同步到主机</span>
+docker <span class="token function">cp</span> nacos2.0.3:/home/nacos/conf /home/dockerdata/nacos2.0.3 
+
+
+<span class="token comment">#6、停止并删除镜像</span>
+docker stop nacos2.0.3
+docker <span class="token function">rm</span> nacos2.0.3
+
+<span class="token comment">#7、创建数据库，默认用户名 : nacos，密码 : nacos</span>
+nacos初始化sql,需要先创建nacos（Character-set：utf8，Collation: utf8_bin）数据库后，然后执行下面的sql
+https://github.com/alibaba/nacos/blob/master/config/src/main/resources/META-INF/nacos-db.sql
+或者执行：/home/dockerdata/nacos2.0.3/conf/schema.sql
+也可以直接复制sql
+
+<span class="token comment">#8、运行镜像，Nacos2.0增加了9848，9849端口来进行GRPC通信，官网说是8848 + 1000 和 8848 + 1001得到的，</span>
+<span class="token comment">#也就是说如果nacos对外暴露的主端口是其他，那么对应的这两个对外的端口需要用暴露的端口分别+1000 和 +1001进行暴露</span>
+docker run -d <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MODE</span><span class="token operator">=</span>standalone <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">SPRING_DATASOURCE_PLATFORM</span><span class="token operator">=</span>mysql <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_HOST</span><span class="token operator">=</span><span class="token number">127.0</span>.0.1 <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_PORT</span><span class="token operator">=</span><span class="token number">3306</span> <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_USER</span><span class="token operator">=</span>root <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_PASSWORD</span><span class="token operator">=</span><span class="token number">123456</span> <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">MYSQL_SERVICE_DB_NAME</span><span class="token operator">=</span>nacos <span class="token punctuation">\</span>
+-e <span class="token assign-left variable">TIME_ZONE</span><span class="token operator">=</span><span class="token string">'Asia/Shanghai'</span> <span class="token punctuation">\</span>
+-v /home/dockerdata/nacos2.0.3/logs:/home/nacos/logs <span class="token punctuation">\</span>
+-v /home/dockerdata/nacos2.0.3/conf:/home/nacos/conf <span class="token punctuation">\</span>
+-p <span class="token number">8848</span>:8848 <span class="token punctuation">\</span>
+-p <span class="token number">9848</span>:9848 <span class="token punctuation">\</span>
+-p <span class="token number">9849</span>:9849 <span class="token punctuation">\</span>
+--name nacos2.0.3 <span class="token punctuation">\</span>
+--restart<span class="token operator">=</span>always <span class="token punctuation">\</span>
+nacos/nacos-server:2.0.3
+
+<span class="token comment"># 注:启动报错连不到数据库则，应进入/home/nacos/conf 修改配置文件的数据库路径加  &amp;serverTimezone=UTC</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<table>
+<thead>
+<tr>
+<th align="left">端口</th>
+<th>与主端口的偏移量</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">9848</td>
+<td>1000</td>
+<td>客户端gRPC请求服务端端口，用于客户端向服务端发起连接和请求</td>
+</tr>
+<tr>
+<td align="left">9849</td>
+<td>1001</td>
+<td>服务端gRPC请求服务端端口，用于服务间同步等</td>
+</tr>
+</tbody></table>
+<p>nacos创建数据库表脚本</p>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">&#x2F;*
+ * Copyright 1999-2018 Alibaba Group Holding Ltd.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http:&#x2F;&#x2F;www.apache.org&#x2F;licenses&#x2F;LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *&#x2F;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; config_info   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;config_info&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
+  &#96;data_id&#96; varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
+  &#96;group_id&#96; varchar(255) DEFAULT NULL,
+  &#96;content&#96; longtext NOT NULL COMMENT &#39;content&#39;,
+  &#96;md5&#96; varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;修改时间&#39;,
+  &#96;src_user&#96; text COMMENT &#39;source user&#39;,
+  &#96;src_ip&#96; varchar(20) DEFAULT NULL COMMENT &#39;source ip&#39;,
+  &#96;app_name&#96; varchar(128) DEFAULT NULL,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
+  &#96;c_desc&#96; varchar(256) DEFAULT NULL,
+  &#96;c_use&#96; varchar(64) DEFAULT NULL,
+  &#96;effect&#96; varchar(64) DEFAULT NULL,
+  &#96;type&#96; varchar(64) DEFAULT NULL,
+  &#96;c_schema&#96; text,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_configinfo_datagrouptenant&#96; (&#96;data_id&#96;,&#96;group_id&#96;,&#96;tenant_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;config_info&#39;;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; config_info_aggr   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;config_info_aggr&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
+  &#96;data_id&#96; varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
+  &#96;group_id&#96; varchar(255) NOT NULL COMMENT &#39;group_id&#39;,
+  &#96;datum_id&#96; varchar(255) NOT NULL COMMENT &#39;datum_id&#39;,
+  &#96;content&#96; longtext NOT NULL COMMENT &#39;内容&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL COMMENT &#39;修改时间&#39;,
+  &#96;app_name&#96; varchar(128) DEFAULT NULL,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_configinfoaggr_datagrouptenantdatum&#96; (&#96;data_id&#96;,&#96;group_id&#96;,&#96;tenant_id&#96;,&#96;datum_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;增加租户字段&#39;;
+
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; config_info_beta   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;config_info_beta&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
+  &#96;data_id&#96; varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
+  &#96;group_id&#96; varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
+  &#96;app_name&#96; varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
+  &#96;content&#96; longtext NOT NULL COMMENT &#39;content&#39;,
+  &#96;beta_ips&#96; varchar(1024) DEFAULT NULL COMMENT &#39;betaIps&#39;,
+  &#96;md5&#96; varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;修改时间&#39;,
+  &#96;src_user&#96; text COMMENT &#39;source user&#39;,
+  &#96;src_ip&#96; varchar(20) DEFAULT NULL COMMENT &#39;source ip&#39;,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_configinfobeta_datagrouptenant&#96; (&#96;data_id&#96;,&#96;group_id&#96;,&#96;tenant_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;config_info_beta&#39;;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; config_info_tag   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;config_info_tag&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
+  &#96;data_id&#96; varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
+  &#96;group_id&#96; varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;tenant_id&#39;,
+  &#96;tag_id&#96; varchar(128) NOT NULL COMMENT &#39;tag_id&#39;,
+  &#96;app_name&#96; varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
+  &#96;content&#96; longtext NOT NULL COMMENT &#39;content&#39;,
+  &#96;md5&#96; varchar(32) DEFAULT NULL COMMENT &#39;md5&#39;,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;修改时间&#39;,
+  &#96;src_user&#96; text COMMENT &#39;source user&#39;,
+  &#96;src_ip&#96; varchar(20) DEFAULT NULL COMMENT &#39;source ip&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_configinfotag_datagrouptenanttag&#96; (&#96;data_id&#96;,&#96;group_id&#96;,&#96;tenant_id&#96;,&#96;tag_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;config_info_tag&#39;;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; config_tags_relation   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;config_tags_relation&#96; (
+  &#96;id&#96; bigint(20) NOT NULL COMMENT &#39;id&#39;,
+  &#96;tag_name&#96; varchar(128) NOT NULL COMMENT &#39;tag_name&#39;,
+  &#96;tag_type&#96; varchar(64) DEFAULT NULL COMMENT &#39;tag_type&#39;,
+  &#96;data_id&#96; varchar(255) NOT NULL COMMENT &#39;data_id&#39;,
+  &#96;group_id&#96; varchar(128) NOT NULL COMMENT &#39;group_id&#39;,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;tenant_id&#39;,
+  &#96;nid&#96; bigint(20) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (&#96;nid&#96;),
+  UNIQUE KEY &#96;uk_configtagrelation_configidtag&#96; (&#96;id&#96;,&#96;tag_name&#96;,&#96;tag_type&#96;),
+  KEY &#96;idx_tenant_id&#96; (&#96;tenant_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;config_tag_relation&#39;;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; group_capacity   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;group_capacity&#96; (
+  &#96;id&#96; bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT &#39;主键ID&#39;,
+  &#96;group_id&#96; varchar(128) NOT NULL DEFAULT &#39;&#39; COMMENT &#39;Group ID，空字符表示整个集群&#39;,
+  &#96;quota&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;配额，0表示使用默认值&#39;,
+  &#96;usage&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;使用量&#39;,
+  &#96;max_size&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个配置大小上限，单位为字节，0表示使用默认值&#39;,
+  &#96;max_aggr_count&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;聚合子配置最大个数，，0表示使用默认值&#39;,
+  &#96;max_aggr_size&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值&#39;,
+  &#96;max_history_count&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;最大变更历史数量&#39;,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;修改时间&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_group_id&#96; (&#96;group_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;集群、各Group容量信息表&#39;;
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; his_config_info   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;his_config_info&#96; (
+  &#96;id&#96; bigint(64) unsigned NOT NULL,
+  &#96;nid&#96; bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  &#96;data_id&#96; varchar(255) NOT NULL,
+  &#96;group_id&#96; varchar(128) NOT NULL,
+  &#96;app_name&#96; varchar(128) DEFAULT NULL COMMENT &#39;app_name&#39;,
+  &#96;content&#96; longtext NOT NULL,
+  &#96;md5&#96; varchar(32) DEFAULT NULL,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39;,
+  &#96;src_user&#96; text,
+  &#96;src_ip&#96; varchar(20) DEFAULT NULL,
+  &#96;op_type&#96; char(10) DEFAULT NULL,
+  &#96;tenant_id&#96; varchar(128) DEFAULT &#39;&#39; COMMENT &#39;租户字段&#39;,
+  PRIMARY KEY (&#96;nid&#96;),
+  KEY &#96;idx_gmt_create&#96; (&#96;gmt_create&#96;),
+  KEY &#96;idx_gmt_modified&#96; (&#96;gmt_modified&#96;),
+  KEY &#96;idx_did&#96; (&#96;data_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;多租户改造&#39;;
+
+
+&#x2F;******************************************&#x2F;
+&#x2F;*   数据库全名 &#x3D; nacos_config   *&#x2F;
+&#x2F;*   表名称 &#x3D; tenant_capacity   *&#x2F;
+&#x2F;******************************************&#x2F;
+CREATE TABLE &#96;tenant_capacity&#96; (
+  &#96;id&#96; bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT &#39;主键ID&#39;,
+  &#96;tenant_id&#96; varchar(128) NOT NULL DEFAULT &#39;&#39; COMMENT &#39;Tenant ID&#39;,
+  &#96;quota&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;配额，0表示使用默认值&#39;,
+  &#96;usage&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;使用量&#39;,
+  &#96;max_size&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个配置大小上限，单位为字节，0表示使用默认值&#39;,
+  &#96;max_aggr_count&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;聚合子配置最大个数&#39;,
+  &#96;max_aggr_size&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;单个聚合数据的子配置大小上限，单位为字节，0表示使用默认值&#39;,
+  &#96;max_history_count&#96; int(10) unsigned NOT NULL DEFAULT &#39;0&#39; COMMENT &#39;最大变更历史数量&#39;,
+  &#96;gmt_create&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; datetime NOT NULL DEFAULT &#39;2010-05-05 00:00:00&#39; COMMENT &#39;修改时间&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_tenant_id&#96; (&#96;tenant_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;租户容量信息表&#39;;
+
+
+CREATE TABLE &#96;tenant_info&#96; (
+  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;id&#39;,
+  &#96;kp&#96; varchar(128) NOT NULL COMMENT &#39;kp&#39;,
+  &#96;tenant_id&#96; varchar(128) default &#39;&#39; COMMENT &#39;tenant_id&#39;,
+  &#96;tenant_name&#96; varchar(128) default &#39;&#39; COMMENT &#39;tenant_name&#39;,
+  &#96;tenant_desc&#96; varchar(256) DEFAULT NULL COMMENT &#39;tenant_desc&#39;,
+  &#96;create_source&#96; varchar(32) DEFAULT NULL COMMENT &#39;create_source&#39;,
+  &#96;gmt_create&#96; bigint(20) NOT NULL COMMENT &#39;创建时间&#39;,
+  &#96;gmt_modified&#96; bigint(20) NOT NULL COMMENT &#39;修改时间&#39;,
+  PRIMARY KEY (&#96;id&#96;),
+  UNIQUE KEY &#96;uk_tenant_info_kptenantid&#96; (&#96;kp&#96;,&#96;tenant_id&#96;),
+  KEY &#96;idx_tenant_id&#96; (&#96;tenant_id&#96;)
+) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;utf8 COLLATE&#x3D;utf8_bin COMMENT&#x3D;&#39;tenant_info&#39;;
+
+CREATE TABLE users (
+    username varchar(50) NOT NULL PRIMARY KEY,
+    password varchar(500) NOT NULL,
+    enabled boolean NOT NULL
+);
+
+CREATE TABLE roles (
+    username varchar(50) NOT NULL,
+    role varchar(50) NOT NULL,
+    constraint uk_username_role UNIQUE (username,role)
+);
+
+CREATE TABLE permissions (
+    role varchar(50) NOT NULL,
+    resource varchar(512) NOT NULL,
+    action varchar(8) NOT NULL,
+    constraint uk_role_permission UNIQUE (role,resource,action)
+);
+
+INSERT INTO users (username, password, enabled) VALUES (&#39;nacos&#39;, &#39;$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu&#39;, TRUE);
+
+INSERT INTO roles (username, role) VALUES (&#39;nacos&#39;, &#39;ROLE_ADMIN&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#查看运行容器的宿主机进程</span>
+<span class="token function">ps</span> aux<span class="token operator">|</span><span class="token function">grep</span> <span class="token function">sleep</span><span class="token operator">|</span><span class="token function">grep</span> -v <span class="token function">grep</span>
+
+<span class="token comment">#进入容器内部</span>
+docker <span class="token builtin class-name">exec</span> -it 容器id /bin/sh
+<span class="token comment">#查看容器日志</span>
 docker logs -f 容器id
 
-#容器内安装软件
-yum&#x2F;apt-get&#x2F;apt 
+<span class="token comment">#容器内安装软件</span>
+yum/apt-get/apt 
 
-#查看docker端口情况
-netstat -luntp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">#查看docker端口情况</span>
+<span class="token function">netstat</span> -luntp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 

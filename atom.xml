@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-01-12T09:06:52.143Z</updated>
+  <updated>2022-01-20T09:13:46.344Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>go-服务注册</title>
+    <link href="http://wumangeng.github.io/2022/01/20/go-fu-wu-zhu-ce/"/>
+    <id>http://wumangeng.github.io/2022/01/20/go-fu-wu-zhu-ce/</id>
+    <published>2022-01-20T01:10:20.000Z</published>
+    <updated>2022-01-20T09:13:46.344Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;注册到consul&quot;&gt;&lt;a href=&quot;#注册到consul&quot; class=&quot;headerlink&quot; title=&quot;注册到consul&quot;&gt;&lt;/a&gt;注册到consul&lt;/h2&gt;&lt;p&gt;先引入资源&lt;/p&gt;
+&lt;pre class=&quot;line-numbers</summary>
+        
+      
+    
+    
+    
+    <category term="Go" scheme="http://wumangeng.github.io/categories/Go/"/>
+    
+    
+    <category term="服务注册" scheme="http://wumangeng.github.io/tags/%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C/"/>
+    
+    <category term="Go" scheme="http://wumangeng.github.io/tags/Go/"/>
+    
+  </entry>
   
   <entry>
     <title>go-请求参数校验(validator)</title>
@@ -508,37 +536,6 @@
     <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
     
     <category term="Seata" scheme="http://wumangeng.github.io/tags/Seata/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java Bean校验</title>
-    <link href="http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/"/>
-    <id>http://wumangeng.github.io/2021/07/05/java-bean-yan-zheng/</id>
-    <published>2021-07-05T01:10:20.000Z</published>
-    <updated>2021-11-05T08:11:11.929Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Java-Bean校验&quot;&gt;&lt;a href=&quot;#Java-Bean校验&quot; class=&quot;headerlink&quot; title=&quot;Java Bean校验&quot;&gt;&lt;/a&gt;Java Bean校验&lt;/h1&gt;&lt;h2 id=&quot;1、-Valid-介绍&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="JSR303" scheme="http://wumangeng.github.io/categories/JSR303/"/>
-    
-    
-    <category term="springboot" scheme="http://wumangeng.github.io/tags/springboot/"/>
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-    <category term="JSR303" scheme="http://wumangeng.github.io/tags/JSR303/"/>
-    
-    <category term="java bean" scheme="http://wumangeng.github.io/tags/java-bean/"/>
     
   </entry>
   
