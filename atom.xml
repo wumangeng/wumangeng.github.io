@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-02-28T09:09:33.816Z</updated>
+  <updated>2022-03-08T12:40:56.524Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>protobuf序列化时丢失默认值字段的问题</title>
+    <link href="http://wumangeng.github.io/2022/03/08/go-protobuf-xu-lie-hua-wen-ti/"/>
+    <id>http://wumangeng.github.io/2022/03/08/go-protobuf-xu-lie-hua-wen-ti/</id>
+    <published>2022-03-08T01:10:20.000Z</published>
+    <updated>2022-03-08T12:40:56.524Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;protobuf序列化时丢失默认值字段的问题&quot;&gt;&lt;a href=&quot;#protobuf序列化时丢失默认值字段的问题&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Go" scheme="http://wumangeng.github.io/categories/Go/"/>
+    
+    
+    <category term="protobuf" scheme="http://wumangeng.github.io/tags/protobuf/"/>
+    
+  </entry>
   
   <entry>
     <title>Go数组去重&amp;切片去重</title>
@@ -38,6 +63,31 @@
     
     
     <category term="go-项目" scheme="http://wumangeng.github.io/tags/go-%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gorm的时间处理</title>
+    <link href="http://wumangeng.github.io/2022/02/12/go-gorm-de-shi-jian-chu-li/"/>
+    <id>http://wumangeng.github.io/2022/02/12/go-gorm-de-shi-jian-chu-li/</id>
+    <published>2022-02-12T01:10:20.000Z</published>
+    <updated>2022-03-03T08:38:43.302Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;gorm的时间处理&quot;&gt;&lt;a href=&quot;#gorm的时间处理&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="GO" scheme="http://wumangeng.github.io/tags/GO/"/>
+    
+    <category term="GORM" scheme="http://wumangeng.github.io/tags/GORM/"/>
     
   </entry>
   
@@ -255,7 +305,7 @@
     <link href="http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/"/>
     <id>http://wumangeng.github.io/2021/11/15/go-ji-chu-yu-fa/</id>
     <published>2021-11-15T01:10:20.000Z</published>
-    <updated>2022-02-23T09:30:17.334Z</updated>
+    <updated>2022-03-03T02:05:44.602Z</updated>
     
     
       
@@ -484,58 +534,6 @@
     
     
     <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ThreadLocal详解</title>
-    <link href="http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/"/>
-    <id>http://wumangeng.github.io/2021/08/25/threadlocal-xiang-jie/</id>
-    <published>2021-08-25T01:10:20.000Z</published>
-    <updated>2021-11-11T03:32:02.611Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;ThreadLocal是什么&quot;&gt;&lt;a href=&quot;#ThreadLocal是什么&quot; class=&quot;headerlink&quot; title=&quot;ThreadLocal是什么&quot;&gt;&lt;/a&gt;ThreadLocal是什么&lt;/h2&gt;&lt;p&gt;​   </summary>
-        
-      
-    
-    
-    
-    <category term="多线程" scheme="http://wumangeng.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-    
-    <category term="多线程" scheme="http://wumangeng.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
-    
-    <category term="java" scheme="http://wumangeng.github.io/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>5个经典的sql问题</title>
-    <link href="http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/"/>
-    <id>http://wumangeng.github.io/2021/08/11/5-ge-jing-dian-de-sql-wen-ti/</id>
-    <published>2021-08-11T01:10:20.000Z</published>
-    <updated>2021-11-09T08:07:23.351Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;一、每门课程问题&quot;&gt;&lt;a href=&quot;#一、每门课程问题&quot; class=&quot;headerlink&quot; title=&quot;一、每门课程问题&quot;&gt;&lt;/a&gt;一、每门课程问题&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;用一条 SQL 语句查询 学生表每门课都大于 80</summary>
-        
-      
-    
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
     
   </entry>
   
