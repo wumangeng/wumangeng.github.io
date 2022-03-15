@@ -487,7 +487,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    19.5k
+                    19.7k
                 </div>
                 
 
@@ -691,7 +691,10 @@ fmt<span class="token punctuation">.</span><span class="token function">Println<
 </ol>
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><img src="http://image.i-ll.cc/blog/20190304/t1jRSgll4p1M.png"/>
 
-<p>数值型中的int32又称为rune，可保存一个unicode码点。int和uint的大小和操作系统位数一样，32位OS(系统)则为4字节，64位OS则为8字节。浮点数默认64位，整数默认int。</p>
+<ul>
+<li>数值型中的int32又称为rune，可保存一个unicode码点。int和uint的大小和操作系统位数一样，32位OS(系统)则为4字节，64位OS则为8字节。浮点数默认64位，整数默认int。</li>
+<li>float32 精确度为小数点后6位，float64为14位；</li>
+</ul>
 <h4 id="值类型与引用类型"><a href="#值类型与引用类型" class="headerlink" title="值类型与引用类型"></a>值类型与引用类型</h4><p>值类型：基本数据类型、数组、结构体。变量直接存储值，通常存储于栈中，函数传参时使用值传递</p>
 <p>引用类型：指针、切片、映射、管道、接口等。变量存储的是值的地址，通常存储于堆中，会发生GC，函数传参时使用引用传递。</p>
 <p><strong>函数参数的两种传递方式</strong>：</p>
@@ -3689,7 +3692,7 @@ conn <span class="token operator">:=</span> pool<span class="token punctuation">
 */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h2><h3 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> goTime <span class="token operator">=</span> <span class="token string">"2006-01-02 15:04:05"</span>
+<h2 id="常用包"><a href="#常用包" class="headerlink" title="常用包"></a>常用包</h2><h3 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">var</span> goTime <span class="token operator">=</span> <span class="token string">"2006-01-02 15:04:05"</span>
 
 <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	<span class="token comment">//字符串转 time</span>
@@ -3707,7 +3710,33 @@ conn <span class="token operator">:=</span> pool<span class="token punctuation">
 
 	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"format1 = %v\n"</span><span class="token punctuation">,</span>format1<span class="token punctuation">)</span>
 	fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"format2 = %v\n"</span><span class="token punctuation">,</span>format2<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span>
+
+
+<span class="token keyword">func</span> <span class="token function">StrToTime</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token operator">*</span>time<span class="token punctuation">.</span>Time <span class="token punctuation">&#123;</span>
+	t<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> time<span class="token punctuation">.</span><span class="token function">ParseInLocation</span><span class="token punctuation">(</span><span class="token string">"2006-01-02 15:04:05"</span><span class="token punctuation">,</span> str<span class="token punctuation">,</span> time<span class="token punctuation">.</span>Local<span class="token punctuation">)</span>
+	<span class="token keyword">return</span> <span class="token operator">&amp;</span>t
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">TimeToStr</span><span class="token punctuation">(</span>t <span class="token operator">*</span>time<span class="token punctuation">.</span>Time<span class="token punctuation">)</span> <span class="token builtin">string</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> t<span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">"2006-01-02 15:04:05"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="strconv"><a href="#strconv" class="headerlink" title="strconv"></a>strconv</h3><pre class="line-numbers language-go" data-language="go"><code class="language-go">   <span class="token comment">//将常规的数据类型转换为string</span>
+   str <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"%d%c"</span><span class="token punctuation">,</span><span class="token number">123</span><span class="token punctuation">,</span><span class="token string">`a`</span><span class="token punctuation">)</span>
+
+<span class="token comment">// int转字符串</span>
+intSize <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">Itoa</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T  \n"</span><span class="token punctuation">,</span>intSize<span class="token punctuation">)</span>
+atoi<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">Atoi</span><span class="token punctuation">(</span>intSize<span class="token punctuation">)</span>
+<span class="token comment">// 字符串转int</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T  \n"</span><span class="token punctuation">,</span>atoi<span class="token punctuation">)</span>
+<span class="token comment">// 将int64转字符串</span>
+formatInt <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">FormatInt</span><span class="token punctuation">(</span><span class="token function">int64</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T  \n"</span><span class="token punctuation">,</span>formatInt<span class="token punctuation">)</span>
+<span class="token comment">// 将字符串转换成 10进制64位int 即int64</span>
+parseInt<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">ParseInt</span><span class="token punctuation">(</span><span class="token string">"123"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">64</span><span class="token punctuation">)</span>
+fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%T  \n"</span><span class="token punctuation">,</span>parseInt<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
