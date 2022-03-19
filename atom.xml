@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-03-08T12:40:56.524Z</updated>
+  <updated>2022-03-19T13:19:52.916Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis-bigkey问题的解决</title>
+    <link href="http://wumangeng.github.io/2022/03/17/redis-bigkey-wen-ti/"/>
+    <id>http://wumangeng.github.io/2022/03/17/redis-bigkey-wen-ti/</id>
+    <published>2022-03-17T01:10:20.000Z</published>
+    <updated>2022-03-19T13:19:52.916Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;问题：&quot;&gt;&lt;a href=&quot;#问题：&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="redis" scheme="http://wumangeng.github.io/categories/redis/"/>
+    
+    
+    <category term="redis" scheme="http://wumangeng.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>protobuf序列化时丢失默认值字段的问题</title>
@@ -96,7 +121,7 @@
     <link href="http://wumangeng.github.io/2022/02/06/go-nei-cun-mo-xing/"/>
     <id>http://wumangeng.github.io/2022/02/06/go-nei-cun-mo-xing/</id>
     <published>2022-02-06T01:10:20.000Z</published>
-    <updated>2022-02-08T01:37:15.605Z</updated>
+    <updated>2022-03-15T07:29:14.656Z</updated>
     
     
       
@@ -508,32 +533,6 @@
     
     
     <category term="NIO" scheme="http://wumangeng.github.io/tags/NIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BIO</title>
-    <link href="http://wumangeng.github.io/2021/09/06/bio/"/>
-    <id>http://wumangeng.github.io/2021/09/06/bio/</id>
-    <published>2021-09-06T07:10:30.000Z</published>
-    <updated>2021-11-15T03:08:42.507Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1、-I-O-模型&quot;&gt;&lt;a href=&quot;#1、-I-O-模型&quot; class=&quot;headerlink&quot; title=&quot;1、 I/O 模型&quot;&gt;&lt;/a&gt;1、 I/O 模型&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;I/O&lt;/code&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="BIO" scheme="http://wumangeng.github.io/tags/BIO/"/>
     
   </entry>
   
