@@ -491,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4k
+                    4.3k
                 </div>
                 
 
@@ -590,7 +590,10 @@ EOF</span>
 docker-compose --version
 
 <span class="token comment">#安装Compose命令补全工具</span>
-<span class="token function">curl</span> -L https://raw.githubusercontent.com/docker/compose/<span class="token variable"><span class="token variable">$(</span>docker-compose version --short<span class="token variable">)</span></span>/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">curl</span> -L https://raw.githubusercontent.com/docker/compose/<span class="token variable"><span class="token variable">$(</span>docker-compose version --short<span class="token variable">)</span></span>/contrib/completion/bash/docker-compose -o /etc/bash_completion.d/docker-compose
+
+<span class="token comment"># 如果不成功则手动下载上传到/usr/local/bin/下 并分配权限即可</span>
+https://github.com/docker/compose/releases/tag/1.25.0-rc4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#拉取镜像</span>
 <span class="token function">sudo</span> docker pull mysql:5.7
@@ -623,7 +626,65 @@ default-time-zone <span class="token operator">=</span> <span class="token strin
 skip-character-set-client-handshake
 skip-name-resolve
 
-docker restart mysql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+docker restart mysql
+
+<span class="token comment"># ------------------------------------mysql-8.0.25-----------------------------------</span>
+<span class="token comment"># 创建mysql文件夹</span>
+<span class="token function">mkdir</span> -p /docker/mysql/conf /docker/mysql/data /docker/mysql/logs
+<span class="token comment"># 创建配置文件</span>
+<span class="token function">vim</span> /docker/mysql/conf/my.cnf
+<span class="token comment"># 配置文件内容</span>
+<span class="token punctuation">[</span>client<span class="token punctuation">]</span>
+
+<span class="token comment">#socket = /usr/mysql/mysqld.sock</span>
+
+default-character-set <span class="token operator">=</span> utf8mb4
+
+<span class="token punctuation">[</span>mysqld<span class="token punctuation">]</span>
+
+<span class="token comment">#pid-file        = /var/run/mysqld/mysqld.pid</span>
+
+<span class="token comment">#socket          = /var/run/mysqld/mysqld.sock</span>
+
+<span class="token comment">#datadir         = /var/lib/mysql</span>
+
+<span class="token comment">#socket = /usr/mysql/mysqld.sock</span>
+
+<span class="token comment">#pid-file = /usr/mysql/mysqld.pid</span>
+
+character_set_server <span class="token operator">=</span> utf8mb4
+
+collation_server <span class="token operator">=</span> utf8mb4_bin
+
+secure-file-priv<span class="token operator">=</span> NULL
+
+<span class="token comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span>
+
+symbolic-links<span class="token operator">=</span><span class="token number">0</span>
+
+<span class="token comment"># Custom config should go here</span>
+
+<span class="token operator">!</span>includedir /etc/mysql/conf.d/
+
+<span class="token comment"># 创建容器</span>
+docker run --name mysql_8.0.25 <span class="token punctuation">\</span>
+    -v /docker/mysql/conf/my.cnf:/etc/mysql/my.cnf <span class="token punctuation">\</span>
+    -v /docker/mysql/data:/var/lib/mysql <span class="token punctuation">\</span>
+    -v /docker/mysql/logs:/var/log/mysql <span class="token punctuation">\</span>
+    -p <span class="token number">3306</span>:3306 <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">MYSQL_ROOT_PASSWORD</span><span class="token operator">=</span><span class="token number">123456</span> <span class="token punctuation">\</span>
+    -d mysql:8.0.25
+
+<span class="token comment"># 修改密码和可访问主机</span>
+docker <span class="token builtin class-name">exec</span> -it mysql_8.0.25 /bin/bash
+<span class="token comment"># 密码123456</span>
+mysql -u root -p
+<span class="token comment"># 修改密码（注意：mysql_native_password，mysql8.x版本必须使用这种模式，否则navicate无法正确连接）</span>
+use mysql
+ALTER <span class="token environment constant">USER</span> <span class="token string">'root'</span>@<span class="token string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="token string">'123456'</span><span class="token punctuation">;</span>
+<span class="token comment">#刷新</span>
+flush privileges<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 在虚拟机中</span>
 <span class="token function">mkdir</span> -p /mydata/redis/conf
