@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="elk">
+    <meta name="keywords" content="netty">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>搭建ELK并从redis上采集数据 | 山河远阔</title>
+    <title>使用netty开发长连接协议 | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -323,12 +323,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=4047698435,2067239614&fm=253&fmt=auto&app=138&f=PNG?w=1124&h=500')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=669063245,3635855165&fm=253&fmt=auto&app=138&f=JPEG?w=1010&h=449')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">搭建ELK并从redis上采集数据</h1>
+                    <h1 class="description center-align post-title">使用netty开发长连接协议</h1>
                 </div>
             </div>
         </div>
@@ -444,12 +444,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/elk/">
-                                <span class="chip bg-color">elk</span>
+                            <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                                <span class="chip bg-color">IO网络编程</span>
                             </a>
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
+                            <a href="/tags/netty/">
+                                <span class="chip bg-color">netty</span>
                             </a>
                         
                     </div>
@@ -460,8 +460,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/elk/" class="post-category">
-                                elk
+                            <a href="/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-category">
+                                IO网络编程
                             </a>
                         
                     </div>
@@ -482,7 +482,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-25
+                    2022-04-05
                 </div>
                 
 
@@ -491,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    630
+                    0
                 </div>
                 
 
@@ -516,167 +516,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="docker-compose安装elk"><a href="#docker-compose安装elk" class="headerlink" title="docker-compose安装elk"></a><strong>docker-compose安装elk</strong></h2><p><strong>创建目录和配置文件</strong></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">cd &#x2F;
-
-mkdir elk
-
-mkdir &#x2F;elk&#x2F;logstash
-
-touch  &#x2F;elk&#x2F;logstash&#x2F;logstash.conf
-
-cd &#x2F;elk&#x2F;logstash&#x2F;
-
-vim logstash.conf<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>添加配置信息</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">input <span class="token punctuation">&#123;</span>
- <span class="token comment"># 采集redis内 key为 uav:data,数据类型为list的数据</span>
-   redis <span class="token punctuation">&#123;</span>
-    <span class="token function">host</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"127.0.0.1"</span>
-    port <span class="token operator">=</span><span class="token operator">></span> <span class="token number">6379</span>
-    <span class="token builtin class-name">type</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"redis-input"</span>
-    data_type <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"list"</span>
-    key <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"uav:data"</span>
-    threads <span class="token operator">=</span><span class="token operator">></span> <span class="token number">5</span>
-    codec <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"json"</span>
-  <span class="token punctuation">&#125;</span>
-  <span class="token comment"># upms为java服务，通过logback的日志输出到4560端口</span>
-  tcp <span class="token punctuation">&#123;</span>
-   add_field <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span><span class="token string">"service"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"upms"</span><span class="token punctuation">&#125;</span>
-    mode <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"server"</span>
-    <span class="token function">host</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"0.0.0.0"</span>
-    port <span class="token operator">=</span><span class="token operator">></span> <span class="token number">4560</span>
-    codec <span class="token operator">=</span><span class="token operator">></span> json_lines
-  <span class="token punctuation">&#125;</span>
-  tcp <span class="token punctuation">&#123;</span>
-   add_field <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">&#123;</span><span class="token string">"service"</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"auth"</span><span class="token punctuation">&#125;</span>
-    mode <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"server"</span>
-    <span class="token function">host</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"0.0.0.0"</span>
-    port <span class="token operator">=</span><span class="token operator">></span> <span class="token number">4561</span>
-    codec <span class="token operator">=</span><span class="token operator">></span> json_lines
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-output <span class="token punctuation">&#123;</span>
-   <span class="token keyword">if</span> <span class="token punctuation">[</span>service<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"upms"</span><span class="token punctuation">&#123;</span>
-    elasticsearch <span class="token punctuation">&#123;</span>
-      hosts <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"127.0.0.1:9200"</span>
-      index <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"upms-logstash-%&#123;+YYYY.MM.dd&#125;"</span>
-    <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span>
-  <span class="token keyword">if</span> <span class="token punctuation">[</span>service<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"auth"</span><span class="token punctuation">&#123;</span>
-    elasticsearch <span class="token punctuation">&#123;</span>
-      hosts <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"127.0.0.1:9200"</span>
-      index <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"auth-logstash-%&#123;+YYYY.MM.dd&#125;"</span>
-    <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span>
- elasticsearch <span class="token punctuation">&#123;</span>
-    hosts <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"127.0.0.1:9200"</span>
-    index <span class="token operator">=</span><span class="token operator">></span> <span class="token string">"redis-uav-%&#123;+YYYY.MM.dd&#125;"</span>
- <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>创建docker-compose文件</strong></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">touch  &#x2F;elk&#x2F;docker-compose.yml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;3.7&#39;
-services:
-  elasticsearch:
-    image: elasticsearch:7.2.0
-    container_name: elasticsearch
-    privileged: true
-    user: root
-    environment:
-      #设置集群名称为elasticsearch
-      - cluster.name&#x3D;elasticsearch 
-      #以单一节点模式启动
-      - discovery.type&#x3D;single-node 
-      #设置使用jvm内存大小
-      - ES_JAVA_OPTS&#x3D;-Xms512m -Xmx512m 
-    volumes:
-      - &#x2F;elk&#x2F;elasticsearch&#x2F;plugins:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;plugins
-      - &#x2F;elk&#x2F;elasticsearch&#x2F;data:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;data
-    ports:
-      - 9200:9200
-      - 9300:9300
-
-  logstash:
-    image: logstash:7.2.0
-    container_name: logstash
-    ports:
-       - 4560:4560
-    environment:
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    volumes:
-      #挂载logstash的配置文件
-      - &#x2F;elk&#x2F;logstash&#x2F;logstash.conf:&#x2F;usr&#x2F;share&#x2F;logstash&#x2F;pipeline&#x2F;logstash.conf 
-    depends_on:
-      - elasticsearch 
-    links:
-      #可以用es这个域名访问elasticsearch服务
-      - elasticsearch:es  
-
-  kibana:
-    image: kibana:7.2.0
-    container_name: kibana
-    ports:
-        - 5601:5601
-    links:
-      #可以用es这个域名访问elasticsearch服务
-      - elasticsearch:es 
-    depends_on:
-	   #kibana在elasticsearch启动之后再启动
-      - elasticsearch 
-    environment:
-      #设置访问elasticsearch的地址
-      - elasticsearch.hosts&#x3D;http:&#x2F;&#x2F;elasticsearch:9200
-      <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>给文件夹授权，启动服务，安装插件</strong></p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">mkdir -p &#x2F;elk&#x2F;elasticsearch&#x2F;data
-mkdir -p &#x2F;elk&#x2F;elasticsearch&#x2F;plugins
- 
-chmod 777 &#x2F;elk&#x2F;elasticsearch&#x2F;data
- 
- 
-docker-compose up -d
-
-# logstash 安装json_lines 格式插件
-# 进入logstash容器
-docker exec -it logstash &#x2F;bin&#x2F;bash
-# 进入bin目录
-cd &#x2F;bin&#x2F;
-# 安装插件
-logstash-plugin install logstash-codec-json_lines
-# 退出容器
-exit
-# 重启logstash服务
-docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>服务整合Logstash （以UPMS模块为例）</strong></p>
-<ol>
-<li>添加pom 依赖</li>
-</ol>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--集成logstash--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>net.logstash.logback<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>logstash-logback-encoder<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>5.3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>logback-spring.xml 新增appender</li>
-</ol>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"> <span class="token comment">&lt;!--输出到logstash的appender--></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>LOGSTASH<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>net.logstash.logback.appender.LogstashTcpSocketAppender<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token comment">&lt;!--可以访问的logstash日志收集端口--></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>destination</span><span class="token punctuation">></span></span>192.168.0.31:4560<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>destination</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>encoder</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>net.logstash.logback.encoder.LogstashEncoder<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>appender</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>root</span> <span class="token attr-name">level</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>INFO<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>appender-ref</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>LOGSTASH<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>root</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+                
                 
             </div>
             <hr/>
@@ -702,7 +542,7 @@ docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2022/05/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/">http://wumangeng.github.io/2022/05/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/</a>
+                    <a href="http://wumangeng.github.io/2022/04/05/netty-kai-fa-shi-jian/">http://wumangeng.github.io/2022/04/05/netty-kai-fa-shi-jian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -740,12 +580,12 @@ docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/elk/">
-                                    <span class="chip bg-color">elk</span>
+                                <a href="/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+                                    <span class="chip bg-color">IO网络编程</span>
                                 </a>
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
+                                <a href="/tags/netty/">
+                                    <span class="chip bg-color">netty</span>
                                 </a>
                             
                         </div>
@@ -917,12 +757,11 @@ docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/05/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/">
+                <a href="/2022/04/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/">
                     <div class="card-image">
                         
                         <img src="https://img2.baidu.com/it/u=4047698435,2067239614&fm=253&fmt=auto&app=138&f=PNG?w=1124&h=500" class="responsive-img" alt="搭建ELK并从redis上采集数据">
@@ -937,9 +776,9 @@ docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span>
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-04-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -952,7 +791,6 @@ docker restart logstash<span aria-hidden="true" class="line-numbers-rows"><span>
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
