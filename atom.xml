@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-03-19T13:19:52.916Z</updated>
+  <updated>2022-04-28T09:39:49.667Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>搭建ELK并从redis上采集数据</title>
+    <link href="http://wumangeng.github.io/2022/05/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/"/>
+    <id>http://wumangeng.github.io/2022/05/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/</id>
+    <published>2022-05-25T01:10:20.000Z</published>
+    <updated>2022-04-28T09:39:49.667Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;docker-compose安装elk&quot;&gt;&lt;a href=&quot;#docker-compose安装elk&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="elk" scheme="http://wumangeng.github.io/categories/elk/"/>
+    
+    
+    <category term="elk" scheme="http://wumangeng.github.io/tags/elk/"/>
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>redis-bigkey问题的解决</title>
@@ -506,33 +533,6 @@
     
     
     <category term="循环" scheme="http://wumangeng.github.io/tags/%E5%BE%AA%E7%8E%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Netty学习笔记</title>
-    <link href="http://wumangeng.github.io/2021/10/05/netty/"/>
-    <id>http://wumangeng.github.io/2021/10/05/netty/</id>
-    <published>2021-10-05T07:10:30.000Z</published>
-    <updated>2021-11-05T01:57:34.874Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;第-1-章-Netty-介绍和应用场景&quot;&gt;&lt;a href=&quot;#第-1-章-Netty-介绍和应用场景&quot; class=&quot;headerlink&quot; title=&quot;第 1 章 Netty 介绍和应用场景&quot;&gt;&lt;/a&gt;第 1 章 Netty 介绍和应用场景&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
-    <category term="Netty" scheme="http://wumangeng.github.io/tags/Netty/"/>
     
   </entry>
   
