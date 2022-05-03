@@ -659,6 +659,8 @@ collation_server <span class="token operator">=</span> utf8mb4_bin
 
 secure-file-priv<span class="token operator">=</span> NULL
 
+<span class="token assign-left variable">max_connections</span><span class="token operator">=</span><span class="token number">1000</span>
+
 <span class="token comment"># Disabling symbolic-links is recommended to prevent assorted security risks</span>
 
 symbolic-links<span class="token operator">=</span><span class="token number">0</span>
@@ -666,6 +668,7 @@ symbolic-links<span class="token operator">=</span><span class="token number">0<
 <span class="token comment"># Custom config should go here</span>
 
 <span class="token operator">!</span>includedir /etc/mysql/conf.d/
+
 
 <span class="token comment"># 创建容器</span>
 docker run --name mysql_8.0.25 <span class="token punctuation">\</span>
@@ -685,7 +688,7 @@ use mysql
 ALTER <span class="token environment constant">USER</span> <span class="token string">'root'</span>@<span class="token string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="token string">'123456'</span><span class="token punctuation">;</span>
 <span class="token comment">#刷新</span>
 flush privileges<span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 在虚拟机中</span>
 <span class="token function">mkdir</span> -p /mydata/redis/conf
