@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-06-22T11:54:32.867Z</updated>
+  <updated>2022-07-19T07:44:21.950Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mysql常用统计sql</title>
+    <link href="http://wumangeng.github.io/2022/07/15/mysql-tong-ji/"/>
+    <id>http://wumangeng.github.io/2022/07/15/mysql-tong-ji/</id>
+    <published>2022-07-15T01:10:20.000Z</published>
+    <updated>2022-07-19T07:44:21.950Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;1 、 查看当天日期&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-sql&quot; data-language=&quot;sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>docker仓库的构建和使用</title>
@@ -502,35 +528,6 @@
     
     
     <category term="GoLang" scheme="http://wumangeng.github.io/tags/GoLang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>本地事务的坑</title>
-    <link href="http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/"/>
-    <id>http://wumangeng.github.io/2021/11/07/ben-di-shi-wu/</id>
-    <published>2021-11-07T01:10:20.000Z</published>
-    <updated>2021-11-26T01:35:41.237Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;本地事务&quot;&gt;&lt;a href=&quot;#本地事务&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
-    
-    <category term="事务" scheme="http://wumangeng.github.io/tags/%E4%BA%8B%E5%8A%A1/"/>
-    
-    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
     
   </entry>
   
