@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="docker">
+    <meta name="keywords" content="远程debug">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>docker仓库的构建和使用 | 山河远阔</title>
+    <title>idea远程debug | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -323,12 +323,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=736985938,3527126051&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656003600&t=79910f89d0b79e30abc7cbfa6a15fb71')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2520101434,3527102295&fm=253&fmt=auto&app=138&f=JPEG?w=369&h=292')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">docker仓库的构建和使用</h1>
+                    <h1 class="description center-align post-title">idea远程debug</h1>
                 </div>
             </div>
         </div>
@@ -444,8 +444,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/docker/">
-                                <span class="chip bg-color">docker</span>
+                            <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                                <span class="chip bg-color">项目</span>
                             </a>
                         
                     </div>
@@ -456,8 +456,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/docker/" class="post-category">
-                                docker
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                项目
                             </a>
                         
                     </div>
@@ -478,7 +478,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-18
+                    2022-06-27
                 </div>
                 
 
@@ -487,7 +487,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    460
+                    611
                 </div>
                 
 
@@ -512,48 +512,28 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="docker仓库"><a href="#docker仓库" class="headerlink" title="docker仓库"></a>docker仓库</h1><h2 id="1-搭建镜像仓库"><a href="#1-搭建镜像仓库" class="headerlink" title="1.搭建镜像仓库"></a>1.搭建镜像仓库</h2><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 首先，下载Registry镜像并启动
-docker pull registry
+                <h2 id="1，远程DEBUG的必要性"><a href="#1，远程DEBUG的必要性" class="headerlink" title="1，远程DEBUG的必要性"></a><strong>1，远程DEBUG的必要性</strong></h2><p>  由于部署环境的差异性，相信很多朋友都碰到过开发环境正常测试过的功能在测试环境甚至生产环境下出现bug的情况。一般情况下，生产环境可以采取的手段比较单一，即通过日志的方式获取运行中的环境上下文，分析日志文件并尝试重现bug。这会带来的问题还是不少的，首先，日志的分析是一项比较耗时的工作；其次，现有的日志记录不一定能反映出问题，你可能需要多次重复这个过程(分析日志-&gt;猜测问题-&gt;加日志-&gt;部署-&gt;获取日志)来慢慢逼近问题。倘若是测试环境，我们还多了一项可供选择的手段——远程调试——将程序在测试环境中以debug模式启动，在本机使用IDEA在工程中设置断点进行调试。 </p>
+<h2 id="2，项目配置支持远程调试"><a href="#2，项目配置支持远程调试" class="headerlink" title="2，项目配置支持远程调试"></a><strong>2，项目配置支持远程调试</strong></h2><pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>build</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugins</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>plugin</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-maven-plugin<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>jvmArguments</span><span class="token punctuation">></span></span>-Xdebug -Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=n<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>jvmArguments</span><span class="token punctuation">></span></span>
+			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugin</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>plugins</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>build</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-# 运行一个Registry镜像仓库的容器实例
-docker run -d -v &#x2F;edc&#x2F;images&#x2F;registry:&#x2F;var&#x2F;lib&#x2F;registry -p 5000:5000 --restart&#x3D;always --name docker-registry registry
-
-# 在客户端查看镜像仓库中的所有镜像
-curl http:&#x2F;&#x2F;ip:5000&#x2F;v2&#x2F;_catalog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="2-上传镜像"><a href="#2-上传镜像" class="headerlink" title="2.上传镜像"></a>2.上传镜像</h2><p>​     首先，为了让<strong>客户端</strong>服务器能够快速地访问刚刚在服务端搭建的镜像仓库（默认情况下是需要配置HTTPS证书的），这里简单在客户端配置一下私有仓库的可信任设置让我们可以通过HTTP直接访问：</p>
-<blockquote>
-<p>vim /etc/docker/daemon.json</p>
-</blockquote>
-<p>　 加上下面这一句，这里的”ip”请换为你的服务器的外网IP地址：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 大括号内第一行结尾加 , 第二行插入下面内容
-&quot;insecure-registries&quot; : [ &quot;ip:5000&quot; ] <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p><em><strong>注：</strong></em>如果不设置可信任源，又没有配置HTTPS证书，那么会遇到这个错误：<strong>error: Get <a href="https://ip:port/v1/_ping">https://ip:port/v1/_ping</a>: http: server gave HTTP response to HTTPS client.</strong></p>
-<p>为了使得配置生效，重新启动docker服务：</p>
-<blockquote>
-<p>systemctl restart docker</p>
-</blockquote>
-<p>其次，为要上传的镜像打Tag</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker tag image-name:tagname ip:5000&#x2F;image-name:tagname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>上传镜像到服务端镜像仓库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">docker push ip:5000&#x2F;image-name:tagname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>通过访问API验证镜像仓库的内容</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 在客户端查看镜像仓库中的所有镜像
-curl http:&#x2F;&#x2F;ip:5000&#x2F;v2&#x2F;_catalog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="3-下载镜像"><a href="#3-下载镜像" class="headerlink" title="3.下载镜像"></a>3.下载镜像</h2><p>拉取镜像</p>
-<pre class="line-numbers language-none"><code class="language-none">docker pull ip:5000&#x2F;image-name:tagname<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>镜像重命名</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">#  IMAGEID为 镜像id&#x2F;镜像名  REPOSITORY:TAG(仓库：标签)
-docker tag IMAGEID REPOSITORY:TAG<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>如果想要知道要下载的镜像都有哪些tag（或版本），可以通过下面这个api来获取：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">curl http:&#x2F;&#x2F;ip:5000&#x2F;v2&#x2F;image-name&#x2F;tags&#x2F;list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<p>加了此配置后，打包后的项目发布服务器，可支持远程DEBUG；<br> 具体参数详解：<br> -Xdebug 通知JVM工作在DEBUG模式下；<br> -Xrunjdwp 通知JVM使用(Java debug wire protocol)运行调试环境。该参数同时包含了一系列的调试选项；<br> transport 指定了调试数据的传送方式，dt_socket是指用SOCKET模式，另有dt_shmem指用共享内存方式，其中，dt_shmem只适用于Windows平台；<br> address 调试服务器的端口号，客户端用来连接服务器的端口号；<br> server=y/n VM 是否需要作为调试服务器执行；<br> suspend=y/n 是否在调试客户端建立连接之后启动 VM； </p>
+<h2 id="3，IDEA打包jar"><a href="#3，IDEA打包jar" class="headerlink" title="3，IDEA打包jar"></a><strong>3，IDEA打包jar</strong></h2><p>将项目打成java包上传到服务器</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20220729085415681.png"></p>
+<h2 id="4，启动jar并且带启动参数支持远程调试"><a href="#4，启动jar并且带启动参数支持远程调试" class="headerlink" title="4，启动jar并且带启动参数支持远程调试"></a><strong>4，启动jar并且带启动参数支持远程调试</strong></h2><p> 启动jar，并且支持远程DEBUG；<br> java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar xxx.jar</p>
+<h2 id="5-IDEA远程DEBUG配置"><a href="#5-IDEA远程DEBUG配置" class="headerlink" title="5,   IDEA远程DEBUG配置"></a>5,   IDEA远程DEBUG配置</h2><p> IDEA要进行远程DEBUG，需要进行配置；<br> 1，启动项下拉，选择 Edit Configurations…编辑配置</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20220729085745437.png"></p>
+<p>2,  输入ip端口后点ok</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20220729085858015.png"></p>
+<h2 id="6，测试"><a href="#6，测试" class="headerlink" title="6，测试"></a>6，测试</h2><p>使用debug的按钮运行上面配置的连接，直接在idea的代码里标记断点即可</p>
 
                 
             </div>
@@ -580,7 +560,7 @@ docker tag IMAGEID REPOSITORY:TAG<span aria-hidden="true" class="line-numbers-ro
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2022/06/18/docker-cang-ku/">http://wumangeng.github.io/2022/06/18/docker-cang-ku/</a>
+                    <a href="http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/">http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -618,8 +598,8 @@ docker tag IMAGEID REPOSITORY:TAG<span aria-hidden="true" class="line-numbers-ro
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/docker/">
-                                    <span class="chip bg-color">docker</span>
+                                <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                                    <span class="chip bg-color">项目</span>
                                 </a>
                             
                         </div>
@@ -795,72 +775,24 @@ docker tag IMAGEID REPOSITORY:TAG<span aria-hidden="true" class="line-numbers-ro
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/06/27/yuan-cheng-debug/">
+                <a href="/2022/07/15/mysql-tong-ji/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=2520101434,3527102295&fm=253&fmt=auto&app=138&f=JPEG?w=369&h=292" class="responsive-img" alt="idea远程debug">
+                        <img src="https://img1.baidu.com/it/u=741044002,1236322009&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658336400&t=4532bbb759f356649ce0f0455fe47da6" class="responsive-img" alt="mysql常用统计sql">
                         
-                        <span class="card-title">idea远程debug</span>
+                        <span class="card-title">mysql常用统计sql</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            mysql
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-27
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-15
                         </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
-                                    项目
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
-                        <span class="chip bg-color">项目</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/06/10/mysql-ji-chu-pian/">
-                    <div class="card-image">
-                        
-                        <img src="https://img1.baidu.com/it/u=741044002,1236322009&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1658336400&t=4532bbb759f356649ce0f0455fe47da6" class="responsive-img" alt="mysql基础笔记">
-                        
-                        <span class="card-title">mysql基础笔记</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            mysql基础笔记
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-10
-                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -878,6 +810,54 @@ docker tag IMAGEID REPOSITORY:TAG<span aria-hidden="true" class="line-numbers-ro
                     
                     <a href="/tags/mysql/">
                         <span class="chip bg-color">mysql</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/06/18/docker-cang-ku/">
+                    <div class="card-image">
+                        
+                        <img src="https://img1.baidu.com/it/u=736985938,3527126051&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1656003600&t=79910f89d0b79e30abc7cbfa6a15fb71" class="responsive-img" alt="docker仓库的构建和使用">
+                        
+                        <span class="card-title">docker仓库的构建和使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            docker仓库的构建和使用
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/docker/" class="post-category">
+                                    docker
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>

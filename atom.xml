@@ -68,6 +68,31 @@
   </entry>
   
   <entry>
+    <title>idea远程debug</title>
+    <link href="http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/"/>
+    <id>http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/</id>
+    <published>2022-06-27T01:10:20.000Z</published>
+    <updated>2022-07-29T01:04:37.733Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1，远程DEBUG的必要性&quot;&gt;&lt;a href=&quot;#1，远程DEBUG的必要性&quot; class=&quot;headerlink&quot; title=&quot;1，远程DEBUG的必要性&quot;&gt;&lt;/a&gt;&lt;strong&gt;1，远程DEBUG的必要性&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt; </summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>docker仓库的构建和使用</title>
     <link href="http://wumangeng.github.io/2022/06/18/docker-cang-ku/"/>
     <id>http://wumangeng.github.io/2022/06/18/docker-cang-ku/</id>
@@ -97,14 +122,14 @@
     <link href="http://wumangeng.github.io/2022/06/10/mysql-ji-chu-pian/"/>
     <id>http://wumangeng.github.io/2022/06/10/mysql-ji-chu-pian/</id>
     <published>2022-06-10T01:10:20.000Z</published>
-    <updated>2022-07-20T10:46:21.296Z</updated>
+    <updated>2022-07-25T01:38:25.094Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;第三章-最基本的SELECT语句&quot;&gt;&lt;a href=&quot;#第三章-最基本的SELECT语句&quot; class=&quot;headerlink&quot; title=&quot;第三章_最基本的SELECT语句&quot;&gt;&lt;/a&gt;第三章_最基本的SELECT语句&lt;/h1&gt;&lt;h2</summary>
+    <summary type="html">&lt;h1 id=&quot;最基本的SELECT语句&quot;&gt;&lt;a href=&quot;#最基本的SELECT语句&quot; class=&quot;headerlink&quot; title=&quot;最基本的SELECT语句&quot;&gt;&lt;/a&gt;最基本的SELECT语句&lt;/h1&gt;&lt;h2 id=&quot;1-SQL语言的规则和规范&quot;&gt;&lt;a</summary>
         
       
     
@@ -501,31 +526,6 @@
     
     
     <category term="gin" scheme="http://wumangeng.github.io/tags/gin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构和算法</title>
-    <link href="http://wumangeng.github.io/2021/12/15/shu-ju-jie-gou/"/>
-    <id>http://wumangeng.github.io/2021/12/15/shu-ju-jie-gou/</id>
-    <published>2021-12-15T01:10:20.000Z</published>
-    <updated>2021-12-22T08:40:45.155Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;数据结构和算法&quot;&gt;&lt;a href=&quot;#数据结构和算法&quot; class=&quot;headerlink&quot; title=&quot;数据结构和算法&quot;&gt;&lt;/a&gt;数据结构和算法&lt;/h1&gt;&lt;h2 id=&quot;冒泡排序&quot;&gt;&lt;a href=&quot;#冒泡排序&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构和算法" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="数据结构和算法" scheme="http://wumangeng.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

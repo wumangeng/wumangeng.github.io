@@ -512,7 +512,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="第三章-最基本的SELECT语句"><a href="#第三章-最基本的SELECT语句" class="headerlink" title="第三章_最基本的SELECT语句"></a>第三章_最基本的SELECT语句</h1><h2 id="1-SQL语言的规则和规范"><a href="#1-SQL语言的规则和规范" class="headerlink" title="1. SQL语言的规则和规范"></a>1. SQL语言的规则和规范</h2><h3 id="1-基本规则"><a href="#1-基本规则" class="headerlink" title="1) 基本规则"></a>1) 基本规则</h3><ul>
+                <h1 id="最基本的SELECT语句"><a href="#最基本的SELECT语句" class="headerlink" title="最基本的SELECT语句"></a>最基本的SELECT语句</h1><h2 id="1-SQL语言的规则和规范"><a href="#1-SQL语言的规则和规范" class="headerlink" title="1. SQL语言的规则和规范"></a>1. SQL语言的规则和规范</h2><h3 id="1-基本规则"><a href="#1-基本规则" class="headerlink" title="1) 基本规则"></a>1) 基本规则</h3><ul>
 <li>SQL 可以写在一行或者多行。为了提高可读性，各子句分行写，必要时使用缩进 </li>
 <li>每条命令以 ; 或 \g 或 \G 结束 </li>
 <li>关键字不能被缩写也不能分行 </li>
@@ -641,7 +641,7 @@ WHERE 过滤条件<span aria-hidden="true" class="line-numbers-rows"><span></spa
 FROM employees
 WHERE department_id &#x3D; 90;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="第四章-运算符"><a href="#第四章-运算符" class="headerlink" title="第四章_运算符"></a>第四章_运算符</h1><p><strong>DUAL</strong> 伪表</p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><p><strong>DUAL</strong> 伪表</p>
 <h2 id="1-算术运算符"><a href="#1-算术运算符" class="headerlink" title="1. 算术运算符"></a>1. 算术运算符</h2><pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">SELECT 100 + 0, 100 + 50 * 30, 100 - 35.5 FROM DUAL;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <blockquote>
@@ -1010,7 +1010,7 @@ FROM employees e JOIN department d
 ON e.&#96;department_id&#96; &#x3D; d.&#96;department_id&#96;
 WHERE d.&#96;department_name&#96; IN (&#39;Sales&#39;, &#39;IT&#39;);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="第七章-单行函数"><a href="#第七章-单行函数" class="headerlink" title="第七章_单行函数"></a>第七章_单行函数</h1><h2 id="1-数值函数"><a href="#1-数值函数" class="headerlink" title="1. 数值函数"></a>1. 数值函数</h2><h3 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1) 基本函数"></a>1) 基本函数</h3><table>
+<h1 id="单行函数"><a href="#单行函数" class="headerlink" title="单行函数"></a>单行函数</h1><h2 id="1-数值函数"><a href="#1-数值函数" class="headerlink" title="1. 数值函数"></a>1. 数值函数</h2><h3 id="1-基本函数"><a href="#1-基本函数" class="headerlink" title="1) 基本函数"></a>1) 基本函数</h3><table>
 <thead>
 <tr>
 <th>函数</th>
@@ -1744,7 +1744,7 @@ WHERE d.&#96;department_name&#96; IN (&#39;Sales&#39;, &#39;IT&#39;);<span aria-
 <td>将value所使用的字符编码修改为char_code</td>
 </tr>
 </tbody></table>
-<h1 id="第八章-聚合函数"><a href="#第八章-聚合函数" class="headerlink" title="第八章_聚合函数"></a>第八章_聚合函数</h1><h2 id="1-聚合函数介绍"><a href="#1-聚合函数介绍" class="headerlink" title="1. 聚合函数介绍"></a>1. 聚合函数介绍</h2><ul>
+<h1 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h1><h2 id="1-聚合函数介绍"><a href="#1-聚合函数介绍" class="headerlink" title="1. 聚合函数介绍"></a>1. 聚合函数介绍</h2><ul>
 <li>什么是聚合函数</li>
 </ul>
 <p>聚合函数作用于一组数据，并对一组数据返回一个值。</p>
@@ -1919,7 +1919,7 @@ LIMIT 2 # 顺序 7<span aria-hidden="true" class="line-numbers-rows"><span></spa
 </li>
 </ul>
 <p>同时因为 SQL 是一门类似英语的结构化查询语言，所以我们在写 SELECT 语句的时候，还要注意相应的 关键字顺序，所谓底层运行的原理，就是我们刚才讲到的执行顺序。</p>
-<h1 id="第九章-子查询"><a href="#第九章-子查询" class="headerlink" title="第九章_子查询"></a>第九章_子查询</h1><h2 id="1-基本使用-2"><a href="#1-基本使用-2" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h2><ul>
+<h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><h2 id="1-基本使用-2"><a href="#1-基本使用-2" class="headerlink" title="1. 基本使用"></a>1. 基本使用</h2><ul>
 <li>子查询的基本语法结构：</li>
 </ul>
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20220603133759153.png"></p>
@@ -2676,7 +2676,7 @@ WHERE 2 &lt; (
     WHERE l.&#96;location_id&#96; &#x3D; d.&#96;location_id&#96;
 );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="第十章-创建和管理表"><a href="#第十章-创建和管理表" class="headerlink" title="第十章_创建和管理表"></a>第十章_创建和管理表</h1><h2 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1. 基础知识"></a>1. 基础知识</h2><h3 id="1-标识符命名规则"><a href="#1-标识符命名规则" class="headerlink" title="1) 标识符命名规则"></a>1) 标识符命名规则</h3><ul>
+<h1 id="创建和管理表"><a href="#创建和管理表" class="headerlink" title="创建和管理表"></a>创建和管理表</h1><h2 id="1-基础知识"><a href="#1-基础知识" class="headerlink" title="1. 基础知识"></a>1. 基础知识</h2><h3 id="1-标识符命名规则"><a href="#1-标识符命名规则" class="headerlink" title="1) 标识符命名规则"></a>1) 标识符命名规则</h3><ul>
 <li>数据库名、表名不得超过30个字符，变量名限制为29个 </li>
 <li>必须只能包含 A–Z, a–z, 0–9, _共63个字符 </li>
 <li>数据库名、表名、字段名等对象名中间不要包含空格 </li>
