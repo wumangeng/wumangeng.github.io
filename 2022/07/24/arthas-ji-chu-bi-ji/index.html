@@ -1,0 +1,2307 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Arthas">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>性能监控-Arthas | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305153259359.png')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">性能监控-Arthas</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Arthas/">
+                                <span class="chip bg-color">Arthas</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                项目
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-07-24
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.6k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="《Arthas基础学习》"><a href="#《Arthas基础学习》" class="headerlink" title="《Arthas基础学习》"></a>《Arthas基础学习》</h1><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="Arthas（阿尔萨斯）-能为你做什么？"><a href="#Arthas（阿尔萨斯）-能为你做什么？" class="headerlink" title="Arthas（阿尔萨斯） 能为你做什么？"></a>Arthas（阿尔萨斯） 能为你做什么？</h2><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305153259359.png"> </p>
+<p><code>Arthas</code> 是Alibaba开源的Java诊断工具，深受开发者喜爱。</p>
+<p>当你遇到以下类似问题而束手无策时，<code>Arthas</code>可以帮助你解决：</p>
+<ol>
+<li>这个类从哪个 jar 包加载的？为什么会报各种类相关的 Exception？</li>
+<li>我改的代码为什么没有执行到？难道是我没 commit？分支搞错了？</li>
+<li>遇到问题无法在线上 debug，难道只能通过加日志再重新发布吗？</li>
+<li>线上遇到某个用户的数据处理有问题，但线上同样无法 debug，线下无法重现！</li>
+<li>是否有一个全局视角来查看系统的运行状况？</li>
+<li>有什么办法可以监控到JVM的实时运行状态？</li>
+<li>怎么快速定位应用的热点，生成火焰图？</li>
+</ol>
+<h2 id="运行环境要求"><a href="#运行环境要求" class="headerlink" title="运行环境要求"></a>运行环境要求</h2><p><code>Arthas</code>支持JDK 6+，支持Linux/Mac/Windows，采用命令行交互模式，同时提供丰富的 <code>Tab</code> 自动补全功能，进一步方便进行问题的定位和诊断。</p>
+<h1 id="快速安装"><a href="#快速安装" class="headerlink" title="快速安装"></a>快速安装</h1><p>下载<code>arthas-boot.jar</code>，然后用<code>java -jar</code>的方式启动：</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">curl</span> -O https://alibaba.github.io/arthas/arthas-boot.jar
+java -jar arthas-boot.jar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>注：在运行第2条命令之前，先运行一个java进程在内存中，不然会出现找不到java进程的错误。</p>
+<p>打印帮助信息</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -jar arthas-boot.jar -h<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果下载速度比较慢，可以使用aliyun的镜像：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">java -jar arthas-boot.jar --repo-mirror aliyun --use-http<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="Windows下安装"><a href="#Windows下安装" class="headerlink" title="Windows下安装"></a>Windows下安装</h2><ol>
+<li><p>在c:\下创建目录arthas，在windows命令窗口下，使用curl命令下载阿里服务器上的jar包，大小108k</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305153935492.png"> </p>
+</li>
+<li><p>使用java启动arthas-boot.jar，来安装arthas，大小约10M。运行此命令会发现java进程，输入1按回车。则自动从远程主机上下载arthas到本地目录</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305154855501.png"></p>
+</li>
+<li><p>查看安装好的目录</p>
+<pre class="line-numbers language-none"><code class="language-none">C:\Users\Administrator\.arthas\lib\3.1.7\arthas\<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305155123449.png" alt="image-20200305155123449" style="zoom: 80%;" /> </li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>下载arthas-boot.jar包</li>
+<li>执行arthas-boo.jar包，前提是必须要有java进程在运行。第一次执行这个jar包，会自动从服务器上下载arthas，大小是11M</li>
+</ol>
+<h1 id="从Maven仓库下载全量包"><a href="#从Maven仓库下载全量包" class="headerlink" title="从Maven仓库下载全量包"></a>从Maven仓库下载全量包</h1><p>如果下载速度比较慢，可以尝试用<a target="_blank" rel="noopener" href="https://maven.aliyun.com/">阿里云的镜像仓库</a></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>比如要下载<code>3.1.7</code>版本，下载的url是：</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://maven.aliyun.com/repository/public/com/taobao/arthas/arthas-packaging/3.1.7/arthas-packaging-3.1.7-bin.zip">https://maven.aliyun.com/repository/public/com/taobao/arthas/arthas-packaging/3.1.7/arthas-packaging-3.1.7-bin.zip</a></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305160520986.png"> </p>
+<ol start="2">
+<li>解压后，在文件夹里有<code>arthas-boot.jar</code>，直接用<code>java -jar</code>的方式启动：</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">java -jar arthas-boot.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p>注：如果是Linux，可以使用以下命令解压到指定的arthas目录</p>
+<pre class="line-numbers language-none"><code class="language-none">unzip -d arthas arthas-packaging-3.1.7-bin.zip<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310141654101.png" alt="image-20200310141654101" style="zoom:80%;" /> 
+
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>在Linux下在线安装的方式与在Windows下的安装相同</li>
+<li>如果要使用离线的安装方式，先下载完成的zip到本地，再解压到任意的目录即可</li>
+</ol>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><h3 id="在-Linux-Unix-Mac-平台"><a href="#在-Linux-Unix-Mac-平台" class="headerlink" title="在 Linux/Unix/Mac 平台"></a>在 Linux/Unix/Mac 平台</h3><p>删除下面文件：</p>
+<pre class="line-numbers language-none"><code class="language-none">rm -rf ~&#x2F;.arthas&#x2F;
+rm -rf ~&#x2F;logs&#x2F;arthas<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="Windows平台"><a href="#Windows平台" class="headerlink" title="Windows平台"></a>Windows平台</h3><p>直接删除user home下面的<code>.arthas</code>和<code>logs/arthas</code>目录</p>
+<ol>
+<li><p>安装主目录</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305155611311.png"> </p>
+</li>
+<li><p>日志记录目录</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305155504945.png"> </p>
+</li>
+</ol>
+<h2 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h2><p>因为jar包是绿色，要卸载的话，直接删除2个目录</p>
+<pre class="line-numbers language-none"><code class="language-none">.arthas安装目录
+logs的日志记录目录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="快速入门：attach一个进程"><a href="#快速入门：attach一个进程" class="headerlink" title="快速入门：attach一个进程"></a>快速入门：attach一个进程</h1><h2 id="目标：通过案例快速入门"><a href="#目标：通过案例快速入门" class="headerlink" title="目标：通过案例快速入门"></a>目标：通过案例快速入门</h2><ol>
+<li>执行一个jar包</li>
+<li>通过arthas来attach粘附</li>
+</ol>
+<h2 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-准备代码"><a href="#1-准备代码" class="headerlink" title="1. 准备代码"></a>1. 准备代码</h3><p>以下是一个简单的Java程序，每隔一秒生成一个随机数，再执行质因数分解，并打印出分解结果。代码的内容不用理会这不是现在关注的点。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">demo</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Random</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span></span><span class="token class-name">TimeUnit</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MathGame</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Random</span> random <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+    <span class="token comment">//用于统计生成的不合法变量的个数</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> illegalArgumentCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">MathGame</span> game <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MathGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//死循环，每过1秒调用1次下面的方法(不是开启一个线程)</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            game<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">//分解质因数</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//随机生成一个整数，有可能正，有可能负</span>
+            <span class="token keyword">int</span> number <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">10000</span><span class="token punctuation">;</span>
+            <span class="token comment">//调用方法进行质因数分解</span>
+            <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> primeFactors <span class="token operator">=</span> <span class="token function">primeFactors</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//打印结果</span>
+            <span class="token function">print</span><span class="token punctuation">(</span>number<span class="token punctuation">,</span> primeFactors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"illegalArgumentCount:%3d, "</span><span class="token punctuation">,</span> illegalArgumentCount<span class="token punctuation">)</span> <span class="token operator">+</span> e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token comment">//打印质因数分解的结果</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">,</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> primeFactors<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">StringBuffer</span> sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuffer</span><span class="token punctuation">(</span>number <span class="token operator">+</span> <span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> factor <span class="token operator">:</span> primeFactors<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>factor<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'*'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>sb<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>sb<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">'*'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            sb<span class="token punctuation">.</span><span class="token function">deleteCharAt</span><span class="token punctuation">(</span>sb<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>sb<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">//计算number的质因数分解</span>
+    <span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> <span class="token function">primeFactors</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//如果小于2，则抛出异常，并且计数加1</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            illegalArgumentCount<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string">"number is: "</span> <span class="token operator">+</span> number <span class="token operator">+</span> <span class="token string">", need >= 2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+			 <span class="token comment">//用于保存每个质数</span>
+        <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> result <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//分解过程，从2开始看能不能整除</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;=</span> number<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  <span class="token comment">//如果i大于number就退出循环</span>
+            <span class="token comment">//能整除，则i为一个因数，number为整除的结果再继续从2开始除</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>number <span class="token operator">%</span> i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                result<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                number <span class="token operator">=</span> number <span class="token operator">/</span> i<span class="token punctuation">;</span>
+                i <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                i<span class="token operator">++</span><span class="token punctuation">;</span>  <span class="token comment">//否则i++</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="2-启动Demo"><a href="#2-启动Demo" class="headerlink" title="2. 启动Demo"></a>2. 启动Demo</h3><h4 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h4><pre class="line-numbers language-none"><code class="language-none">下载已经打包好的arthas-demo.jar
+curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-demo.jar
+
+在命令行下执行
+java -jar arthas-demo.jar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305161852822.png" alt="image-20200305161852822" style="zoom:80%;" />  
+
+
+
+<h3 id="3-启动arthas"><a href="#3-启动arthas" class="headerlink" title="3. 启动arthas"></a>3. 启动arthas</h3><ol>
+<li>因为arthas-demo.jar进程打开了一个窗口，所以另开一个命令窗口执行arthas-boot.jar</li>
+<li>选择要粘附的进程：arthas-demo.jar</li>
+</ol>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305162944714.png" alt="image-20200305162944714" style="zoom:80%;" /> 
+
+<ol start="3">
+<li>如果粘附成功，在arthas-demo.jar那个窗口中会出现日志记录的信息，记录在c:\Users\Administrator\logs目录下</li>
+</ol>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305163414111.png"></p>
+<ol start="4">
+<li>如果端口号被占用，也可以通过以下命令换成另一个端口号执行</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">java -jar arthas-boot.jar --telnet-port 9998 --http-port -1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h3 id="4-通过浏览器连接arthas"><a href="#4-通过浏览器连接arthas" class="headerlink" title="4. 通过浏览器连接arthas"></a>4. 通过浏览器连接arthas</h3><p>Arthas目前支持Web Console，用户在attach成功之后，可以直接访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:3658/%E3%80%82">http://127.0.0.1:3658/。</a></p>
+<p>可以填入IP，远程连接其它机器上的arthas。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310091357372.png"></p>
+<p>默认情况下，arthas只listen 127.0.0.1，所以如果想从远程连接，则可以使用 <code>--target-ip</code>参数指定listen的IP</p>
+<h2 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>启动被诊断进程</li>
+<li>启动arthas-boot.jar，粘贴上面的进程</li>
+<li>不但可以通过命令行的方式来操作arthas也可以通过浏览器来访问arthas</li>
+</ol>
+<h1 id="快速入门：常用命令接触"><a href="#快速入门：常用命令接触" class="headerlink" title="快速入门：常用命令接触"></a>快速入门：常用命令接触</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>dashboard仪表板</li>
+<li>通过thread命令来获取到<code>arthas-demo</code>进程的Main Class</li>
+<li>通过jad来反编译Main Class</li>
+<li>watch</li>
+</ol>
+<h2 id="命令介绍"><a href="#命令介绍" class="headerlink" title="命令介绍"></a>命令介绍</h2><h3 id="1-dashboard仪表板"><a href="#1-dashboard仪表板" class="headerlink" title="1. dashboard仪表板"></a>1. dashboard仪表板</h3><p>输入dashboard(仪表板)，按<code>回车/enter</code>，会展示当前进程的信息，按<code>ctrl+c</code>可以中断执行。</p>
+<p>注：输入前面部分字母，按tab可以自动补全命令</p>
+<ol>
+<li>第一部分是显示JVM中运行的所有线程：所在线程组，优先级，线程的状态，CPU的占用率，是否是后台进程等</li>
+<li>第二部分显示的JVM内存的使用情况</li>
+<li>第三部分是操作系统的一些信息和Java版本号</li>
+</ol>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305164047346.png"></p>
+<h3 id="2-通过thread命令来获取到arthas-demo进程的Main-Class"><a href="#2-通过thread命令来获取到arthas-demo进程的Main-Class" class="headerlink" title="2. 通过thread命令来获取到arthas-demo进程的Main Class"></a>2. 通过thread命令来获取到<code>arthas-demo</code>进程的Main Class</h3><p>获取到arthas-demo进程的Main Class</p>
+<p><code>thread 1</code>会打印线程ID 1的栈，通常是main函数的线程。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305192646737.png"> </p>
+<h3 id="3-通过jad来反编译Main-Class"><a href="#3-通过jad来反编译Main-Class" class="headerlink" title="3. 通过jad来反编译Main Class"></a>3. 通过jad来反编译Main Class</h3><pre class="line-numbers language-none"><code class="language-none">jad demo.MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305194029146.png" alt="image-20200305194029146" style="zoom:80%;" /> 
+
+
+
+<h3 id="4-watch监视"><a href="#4-watch监视" class="headerlink" title="4. watch监视"></a>4. watch监视</h3><p>通过watch命令来查看<code>demo.MathGame#primeFactors</code>函数的返回值：</p>
+<pre class="line-numbers language-none"><code class="language-none">$ watch demo.MathGame primeFactors returnObj<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305194740589.png"> </p>
+<h3 id="5-退出arthas"><a href="#5-退出arthas" class="headerlink" title="5. 退出arthas"></a>5. 退出arthas</h3><p>如果只是退出当前的连接，可以用<code>quit</code>或者<code>exit</code>命令。Attach到目标进程上的arthas还会继续运行，端口会保持开放，下次连接时可以直接连接上。</p>
+<p>如果想完全退出arthas，可以执行<code>stop</code>命令。</p>
+<h2 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h2><ol>
+<li><p>如何启动arthas?</p>
+<pre class="line-numbers language-none"><code class="language-none">java -jar arthas-boot.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>说说以下命令的作用</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dashboard</td>
+<td>显示JVM中内存的情况，JVM中环境信息</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>显示当前进程所有线程信息</td>
+</tr>
+<tr>
+<td>jad</td>
+<td>反编译指定的类或方法</td>
+</tr>
+<tr>
+<td>watch</td>
+<td>监视某个方法的执行情况，监视了返回值</td>
+</tr>
+<tr>
+<td>quit，exit,  stop</td>
+<td>退出或停止arthas</td>
+</tr>
+</tbody></table>
+<h1 id="基础命令之一"><a href="#基础命令之一" class="headerlink" title="基础命令之一"></a>基础命令之一</h1><h2 id="目标-1"><a href="#目标-1" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>help</li>
+<li>cat</li>
+<li>grep</li>
+<li>pwd</li>
+<li>cls</li>
+</ol>
+<h2 id="help"><a href="#help" class="headerlink" title="help"></a>help</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>查看命令帮助信息</p>
+<h3 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310092304402.png"></p>
+<h2 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h2><h3 id="作用-1"><a href="#作用-1" class="headerlink" title="作用"></a>作用</h3><p>打印文件内容，和linux里的cat命令类似</p>
+<p>如果没有写路径，则显示当前目录下的文件</p>
+<h3 id="效果-2"><a href="#效果-2" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310094255080.png"></p>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><h3 id="作用-2"><a href="#作用-2" class="headerlink" title="作用"></a>作用</h3><p>匹配查找，和linux里的grep命令类似，但它只能用于管道命令</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><table>
+<thead>
+<tr>
+<th>参数列表</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略大小写查找</td>
+</tr>
+<tr>
+<td>-m 行数</td>
+<td>最大显示行数，要与查询字符串一起使用</td>
+</tr>
+<tr>
+<td>-e “正则表达式”</td>
+<td>使用正则表达式查找</td>
+</tr>
+</tbody></table>
+<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">只显示包含java字符串的行系统属性
+sysprop | grep java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310100425059.png" alt="image-20200310100425059" style="zoom:80%;" /> 
+
+<pre class="line-numbers language-none"><code class="language-none">显示包含java字符串的行和行号的系统属性
+sysprop | grep java -n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310100505632.png" alt="image-20200310100505632" style="zoom:80%;" /> 
+
+<pre class="line-numbers language-none"><code class="language-none">显示包含system字符串的10行信息
+thread | grep system -m 10<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310101905466.png" alt="image-20200310101905466"> </p>
+<pre class="line-numbers language-none"><code class="language-none">使用正则表达式，显示包含2个o字符的线程信息
+thread | grep -e &quot;o+&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310120512042.png"> </p>
+<h2 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h2><h3 id="作用-3"><a href="#作用-3" class="headerlink" title="作用"></a>作用</h3><p>返回当前的工作目录，和linux命令类似</p>
+<p>pwd: Print Work Directory 打印当前工作目录</p>
+<h3 id="效果-3"><a href="#效果-3" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310121645656.png"> </p>
+<h2 id="cls"><a href="#cls" class="headerlink" title="cls"></a>cls</h2><h3 id="作用-4"><a href="#作用-4" class="headerlink" title="作用"></a>作用</h3><p>清空当前屏幕区域</p>
+<h2 id="小结-5"><a href="#小结-5" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>基础命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>help</td>
+<td>查看命令帮助信息</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>打印文件内容，和linux里的cat命令类似</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>匹配查找，和linux里的grep命令类似，但它只能用于管道命令</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>打印当前目录</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>清屏</td>
+</tr>
+</tbody></table>
+<h1 id="基础命令之二"><a href="#基础命令之二" class="headerlink" title="基础命令之二"></a>基础命令之二</h1><h2 id="目标-2"><a href="#目标-2" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>session</li>
+<li>reset</li>
+<li>version</li>
+<li>quit</li>
+<li>stop</li>
+<li>keymap</li>
+</ol>
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><h3 id="作用-5"><a href="#作用-5" class="headerlink" title="作用"></a>作用</h3><p>查看当前会话的信息</p>
+<h3 id="效果-4"><a href="#效果-4" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310121756253.png"> </p>
+<h2 id="reset"><a href="#reset" class="headerlink" title="reset"></a>reset</h2><h3 id="作用-6"><a href="#作用-6" class="headerlink" title="作用"></a>作用</h3><p>重置增强类，将被 Arthas 增强过的类全部还原，Arthas 服务端关闭时会重置所有增强过的类</p>
+<h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><pre class="line-numbers language-none"><code class="language-none">还原指定类
+reset Test
+
+还原所有以List结尾的类
+reset *List
+
+还原所有的类
+reset<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="效果-5"><a href="#效果-5" class="headerlink" title="效果"></a>效果</h3><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310133822171.png" alt="image-20200310133822171" style="zoom:80%;" /> 
+
+
+
+<h2 id="version"><a href="#version" class="headerlink" title="version"></a>version</h2><h3 id="作用-7"><a href="#作用-7" class="headerlink" title="作用"></a>作用</h3><p>输出当前目标 Java 进程所加载的 Arthas 版本号</p>
+<h3 id="效果-6"><a href="#效果-6" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310135728790.png"> </p>
+<h3 id="history"><a href="#history" class="headerlink" title="history"></a>history</h3><h3 id="作用-8"><a href="#作用-8" class="headerlink" title="作用"></a>作用</h3><p>打印命令历史</p>
+<h3 id="效果-7"><a href="#效果-7" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310135806184.png"> </p>
+<h2 id="quit"><a href="#quit" class="headerlink" title="quit"></a>quit</h2><h3 id="作用-9"><a href="#作用-9" class="headerlink" title="作用"></a>作用</h3><p>退出当前 Arthas 客户端，其他 Arthas 客户端不受影响</p>
+<h2 id="stop"><a href="#stop" class="headerlink" title="stop"></a>stop</h2><h3 id="作用-10"><a href="#作用-10" class="headerlink" title="作用"></a>作用</h3><p>关闭 Arthas 服务端，所有 Arthas 客户端全部退出</p>
+<h3 id="效果-8"><a href="#效果-8" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310140114118.png"></p>
+<h2 id="keymap"><a href="#keymap" class="headerlink" title="keymap"></a>keymap</h2><h3 id="作用-11"><a href="#作用-11" class="headerlink" title="作用"></a>作用</h3><p>Arthas快捷键列表及自定义快捷键</p>
+<h3 id="效果-9"><a href="#效果-9" class="headerlink" title="效果"></a>效果</h3><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310140330818.png" alt="image-20200310140330818" style="zoom:80%;" /> 
+
+
+
+<h3 id="Arthas-命令行快捷键"><a href="#Arthas-命令行快捷键" class="headerlink" title="Arthas 命令行快捷键"></a>Arthas 命令行快捷键</h3><table>
+<thead>
+<tr>
+<th>快捷键说明</th>
+<th>命令说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl + a</td>
+<td>跳到行首</td>
+</tr>
+<tr>
+<td>ctrl + e</td>
+<td>跳到行尾</td>
+</tr>
+<tr>
+<td>ctrl + f</td>
+<td>向前移动一个单词</td>
+</tr>
+<tr>
+<td>ctrl + b</td>
+<td>向后移动一个单词</td>
+</tr>
+<tr>
+<td>键盘左方向键</td>
+<td>光标向前移动一个字符</td>
+</tr>
+<tr>
+<td>键盘右方向键</td>
+<td>光标向后移动一个字符</td>
+</tr>
+<tr>
+<td>键盘下方向键</td>
+<td>下翻显示下一个命令</td>
+</tr>
+<tr>
+<td>键盘上方向键</td>
+<td>上翻显示上一个命令</td>
+</tr>
+<tr>
+<td>ctrl + h</td>
+<td>向后删除一个字符</td>
+</tr>
+<tr>
+<td>ctrl + shift + /</td>
+<td>向后删除一个字符</td>
+</tr>
+<tr>
+<td>ctrl + u</td>
+<td>撤销上一个命令，相当于清空当前行</td>
+</tr>
+<tr>
+<td>ctrl + d</td>
+<td>删除当前光标所在字符</td>
+</tr>
+<tr>
+<td>ctrl + k</td>
+<td>删除当前光标到行尾的所有字符</td>
+</tr>
+<tr>
+<td>ctrl + i</td>
+<td>自动补全，相当于敲<code>TAB</code></td>
+</tr>
+<tr>
+<td>ctrl + j</td>
+<td>结束当前行，相当于敲回车</td>
+</tr>
+<tr>
+<td>ctrl + m</td>
+<td>结束当前行，相当于敲回车</td>
+</tr>
+</tbody></table>
+<ul>
+<li>任何时候 <code>tab</code> 键，会根据当前的输入给出提示</li>
+<li>命令后敲 <code>-</code> 或 <code>--</code> ，然后按 <code>tab</code> 键，可以展示出此命令具体的选项</li>
+</ul>
+<h2 id="后台异步命令相关快捷键"><a href="#后台异步命令相关快捷键" class="headerlink" title="后台异步命令相关快捷键"></a>后台异步命令相关快捷键</h2><ul>
+<li>ctrl + c: 终止当前命令</li>
+<li>ctrl + z: 挂起当前命令，后续可以 bg/fg 重新支持此命令，或 kill 掉</li>
+<li>ctrl + a: 回到行首</li>
+<li>ctrl + e: 回到行尾</li>
+</ul>
+<h2 id="小结-6"><a href="#小结-6" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>session</td>
+<td>显示当前会话的信息：进程的ID，会话ID</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>重置类的增强，服务器关闭的时候会自动重置所有的类</td>
+</tr>
+<tr>
+<td>version</td>
+<td>显示arthas版本号</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出当前会话，不会影响其它的会话</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>退出arthas服务器，所有的会话都停止</td>
+</tr>
+<tr>
+<td>keymap</td>
+<td>获取快捷键</td>
+</tr>
+</tbody></table>
+<h1 id="jvm相关命令之一"><a href="#jvm相关命令之一" class="headerlink" title="jvm相关命令之一"></a>jvm相关命令之一</h1><h2 id="目标-3"><a href="#目标-3" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>dashboard 仪表板</li>
+<li>thread 线程相关</li>
+<li>jvm 虚拟机相关</li>
+<li>sysprop 系统属性相关</li>
+</ol>
+<h2 id="dashboard"><a href="#dashboard" class="headerlink" title="dashboard"></a>dashboard</h2><h3 id="作用-12"><a href="#作用-12" class="headerlink" title="作用"></a>作用</h3><p>显示当前系统的实时数据面板，按q或ctrl+c退出</p>
+<h3 id="效果-10"><a href="#效果-10" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310154559668.png"></p>
+<h3 id="数据说明"><a href="#数据说明" class="headerlink" title="数据说明"></a>数据说明</h3><ul>
+<li>ID: Java级别的线程ID，注意这个ID不能跟jstack中的nativeID一一对应</li>
+<li>NAME: 线程名</li>
+<li>GROUP: 线程组名</li>
+<li>PRIORITY: 线程优先级, 1~10之间的数字，越大表示优先级越高</li>
+<li>STATE: 线程的状态</li>
+<li>CPU%: 线程消耗的cpu占比，采样100ms，将所有线程在这100ms内的cpu使用量求和，再算出每个线程的cpu使用占比。</li>
+<li>TIME: 线程运行总时间，数据格式为<code>分：秒</code></li>
+<li>INTERRUPTED: 线程当前的中断位状态</li>
+<li>DAEMON: 是否是daemon线程</li>
+</ul>
+<h2 id="thread线程相关"><a href="#thread线程相关" class="headerlink" title="thread线程相关"></a>thread线程相关</h2><h3 id="作用-13"><a href="#作用-13" class="headerlink" title="作用"></a>作用</h3><p>查看当前 JVM 的线程堆栈信息</p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数字</td>
+<td>线程id</td>
+</tr>
+<tr>
+<td>[n:]</td>
+<td>指定最忙的前N个线程并打印堆栈</td>
+</tr>
+<tr>
+<td>[b]</td>
+<td>找出当前阻塞其他线程的线程</td>
+</tr>
+<tr>
+<td>[i &lt;value&gt;]</td>
+<td>指定cpu占比统计的采样间隔，单位为毫秒</td>
+</tr>
+</tbody></table>
+<h3 id="举例-1"><a href="#举例-1" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">展示当前最忙的前3个线程并打印堆栈
+thread -n 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310155221455.png"> </p>
+<pre class="line-numbers language-none"><code class="language-none">当没有参数时，显示所有线程的信息
+thread<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">显示1号线程的运行堆栈
+thread 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310155351705.png"> </p>
+<pre class="line-numbers language-none"><code class="language-none">找出当前阻塞其他线程的线程，有时候我们发现应用卡住了， 通常是由于某个线程拿住了某个锁， 并且其他线程都在等待这把锁造成的。 为了排查这类问题， arthas提供了thread -b， 一键找出那个罪魁祸首。
+thread -b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="assets/image-20200310155534864.png" alt="image-20200310155534864"> </p>
+<pre class="line-numbers language-none"><code class="language-none">指定采样时间间隔，每过1000毫秒采样，显示最占时间的3个线程
+thread -i 1000 -n 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310155902397.png"> </p>
+<pre class="line-numbers language-none"><code class="language-none">查看处于等待状态的线程
+thread --state WAITING<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310160036202.png"> </p>
+<h2 id="jvm"><a href="#jvm" class="headerlink" title="jvm"></a>jvm</h2><h3 id="作用-14"><a href="#作用-14" class="headerlink" title="作用"></a>作用</h3><p>查看当前 JVM 的信息</p>
+<h3 id="效果-11"><a href="#效果-11" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310160418837.png"> </p>
+<h3 id="THREAD相关"><a href="#THREAD相关" class="headerlink" title="THREAD相关"></a>THREAD相关</h3><ul>
+<li>COUNT: JVM当前活跃的线程数</li>
+<li>DAEMON-COUNT: JVM当前活跃的守护线程数</li>
+<li>PEAK-COUNT: 从JVM启动开始曾经活着的最大线程数</li>
+<li>STARTED-COUNT: 从JVM启动开始总共启动过的线程次数</li>
+<li>DEADLOCK-COUNT: JVM当前死锁的线程数</li>
+</ul>
+<h3 id="文件描述符相关"><a href="#文件描述符相关" class="headerlink" title="文件描述符相关"></a>文件描述符相关</h3><ul>
+<li>MAX-FILE-DESCRIPTOR-COUNT：JVM进程最大可以打开的文件描述符数</li>
+<li>OPEN-FILE-DESCRIPTOR-COUNT：JVM当前打开的文件描述符数</li>
+</ul>
+<h2 id="sysprop"><a href="#sysprop" class="headerlink" title="sysprop"></a>sysprop</h2><h3 id="作用-15"><a href="#作用-15" class="headerlink" title="作用"></a>作用</h3><p>查看和修改JVM的系统属性</p>
+<h3 id="举例-2"><a href="#举例-2" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">查看所有属性
+sysprop
+
+查看单个属性，支持通过tab补全
+sysprop java.version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310161328775.png"> </p>
+<pre class="line-numbers language-none"><code class="language-none">修改单个属性
+sysprop user.country
+user.country&#x3D;US
+
+sysprop user.country CN
+Successfully changed the system property.
+user.country&#x3D;CN<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310161425897.png"> </p>
+<h2 id="小结-7"><a href="#小结-7" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>jvm相关命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dashboard</td>
+<td>显示线程，内存，GC，系统环境等信息</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>显示线程信息</td>
+</tr>
+<tr>
+<td>jvm</td>
+<td>与JVM相关的信息</td>
+</tr>
+<tr>
+<td>sysprop</td>
+<td>显示系统属性信息，也可以修改某个属性</td>
+</tr>
+</tbody></table>
+<h1 id="jvm相关命令之二"><a href="#jvm相关命令之二" class="headerlink" title="jvm相关命令之二"></a>jvm相关命令之二</h1><h2 id="目标-4"><a href="#目标-4" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>sysenv</li>
+<li>vmoption</li>
+<li>getstatic</li>
+<li>ognl</li>
+</ol>
+<h2 id="sysenv"><a href="#sysenv" class="headerlink" title="sysenv"></a>sysenv</h2><h3 id="作用-16"><a href="#作用-16" class="headerlink" title="作用"></a>作用</h3><p>查看当前JVM的环境属性(<code>System Environment Variables</code>)</p>
+<h3 id="举例-3"><a href="#举例-3" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">查看所有环境变量
+sysenv
+
+查看单个环境变量
+sysenv USER<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="效果-12"><a href="#效果-12" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310161659199.png"> </p>
+<h2 id="vmoption"><a href="#vmoption" class="headerlink" title="vmoption"></a>vmoption</h2><h3 id="作用-17"><a href="#作用-17" class="headerlink" title="作用"></a>作用</h3><p>查看，更新VM诊断相关的参数</p>
+<h3 id="举例-4"><a href="#举例-4" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">查看所有的选项
+vmoption
+
+查看指定的选项
+vmoption PrintGCDetails<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310162027027.png"> </p>
+<pre class="line-numbers language-none"><code class="language-none">更新指定的选项
+vmoption PrintGCDetails true<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310162052792.png" alt="image-20200310162052792" style="zoom:80%;" /> 
+
+
+
+<h2 id="getstatic"><a href="#getstatic" class="headerlink" title="getstatic"></a>getstatic</h2><h3 id="作用-18"><a href="#作用-18" class="headerlink" title="作用"></a>作用</h3><p>通过getstatic命令可以方便的查看类的静态属性</p>
+<h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><pre class="line-numbers language-none"><code class="language-none">getstatic 类名 属性名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="举例-5"><a href="#举例-5" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">显示demo.MathGame类中静态属性random
+getstatic demo.MathGame random<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310163124333.png" alt="image-20200310163124333" style="zoom:80%;" />  
+
+
+
+<h2 id="ognl"><a href="#ognl" class="headerlink" title="ognl"></a>ognl</h2><h3 id="作用-19"><a href="#作用-19" class="headerlink" title="作用"></a>作用</h3><p>执行ognl表达式，这是从3.0.5版本新增的功能</p>
+<h3 id="OGNL语法"><a href="#OGNL语法" class="headerlink" title="OGNL语法"></a>OGNL语法</h3><pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;commons.apache.org&#x2F;proper&#x2F;commons-ognl&#x2F;language-guide.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200319143015562.png"></p>
+<h3 id="参数说明-1"><a href="#参数说明-1" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>express</em></td>
+<td>执行的表达式</td>
+</tr>
+<tr>
+<td><code>[c:]</code></td>
+<td>执行表达式的 ClassLoader 的 hashcode，默认值是SystemClassLoader</td>
+</tr>
+<tr>
+<td>[x]</td>
+<td>结果对象的展开层次，默认值1</td>
+</tr>
+</tbody></table>
+<h3 id="举例-6"><a href="#举例-6" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">调用静态函数
+ognl &#39;@java.lang.System@out.println(&quot;hello&quot;)&#39;
+
+获取静态类的静态字段
+ognl &#39;@demo.MathGame@random&#39;
+
+执行多行表达式，赋值给临时变量，返回一个List
+ognl &#39;#value1&#x3D;@System@getProperty(&quot;java.home&quot;), #value2&#x3D;@System@getProperty(&quot;java.runtime.name&quot;), &#123;#value1, #value2&#125;&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="效果-13"><a href="#效果-13" class="headerlink" title="效果"></a>效果</h3><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310165348164.png"></p>
+<h2 id="小结-8"><a href="#小结-8" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>jvm相关命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sysenv</td>
+<td>查看JVM环境变量的值</td>
+</tr>
+<tr>
+<td>vmoption</td>
+<td>查看JVM中选项，可以修改</td>
+</tr>
+<tr>
+<td>getstatic</td>
+<td>获取静态成员变量</td>
+</tr>
+<tr>
+<td>ognl</td>
+<td>执行一个ognl表达式</td>
+</tr>
+</tbody></table>
+<h1 id="class-classloader相关命令之一"><a href="#class-classloader相关命令之一" class="headerlink" title="class/classloader相关命令之一"></a>class/classloader相关命令之一</h1><h2 id="目标-5"><a href="#目标-5" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>sc: Search Class</li>
+<li>sm: Search Method</li>
+</ol>
+<h2 id="sc"><a href="#sc" class="headerlink" title="sc"></a>sc</h2><h3 id="作用-20"><a href="#作用-20" class="headerlink" title="作用"></a>作用</h3><p>查看JVM已加载的类信息，“Search-Class” 的简写，这个命令能搜索出所有已经加载到 JVM 中的 Class 信息</p>
+<p>sc 默认开启了子类匹配功能，也就是说所有当前类的子类也会被搜索出来，想要精确的匹配，请打开<code>options disable-sub-class true</code>开关</p>
+<h3 id="参数说明-2"><a href="#参数说明-2" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>class-pattern</em></td>
+<td>类名表达式匹配，支持全限定名，如com.taobao.test.AAA，也支持com/taobao/test/AAA这样的格式，这样，我们从异常堆栈里面把类名拷贝过来的时候，不需要在手动把<code>/</code>替换为<code>.</code>啦。</td>
+</tr>
+<tr>
+<td><em>method-pattern</em></td>
+<td>方法名表达式匹配</td>
+</tr>
+<tr>
+<td>[d]</td>
+<td>输出当前类的详细信息，包括这个类所加载的原始文件来源、类的声明、加载的ClassLoader等详细信息。 如果一个类被多个ClassLoader所加载，则会出现多次</td>
+</tr>
+<tr>
+<td>[E]</td>
+<td>开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+<tr>
+<td>[f]</td>
+<td>输出当前类的成员变量信息（需要配合参数-d一起使用）</td>
+</tr>
+</tbody></table>
+<h3 id="举例-7"><a href="#举例-7" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">模糊搜索，demo包下所有的类
+sc demo.*
+
+打印类的详细信息
+sc -d demo.MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310183345427.png" alt="image-20200310183345427" style="zoom: 67%;" /> 
+
+<pre class="line-numbers language-none"><code class="language-none">打印出类的Field信息
+sc -df demo.MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310183455546.png" alt="image-20200310183455546" style="zoom: 67%;" /> 
+
+
+
+<h2 id="sm"><a href="#sm" class="headerlink" title="sm"></a>sm</h2><h3 id="作用-21"><a href="#作用-21" class="headerlink" title="作用"></a>作用</h3><p>查看已加载类的方法信息</p>
+<p>“Search-Method” 的简写，这个命令能搜索出所有已经加载了 Class 信息的方法信息。</p>
+<p><code>sm</code> 命令只能看到由当前类所声明 (declaring) 的方法，父类则无法看到。</p>
+<h3 id="参数说明-3"><a href="#参数说明-3" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>class-pattern</em></td>
+<td>类名表达式匹配</td>
+</tr>
+<tr>
+<td><em>method-pattern</em></td>
+<td>方法名表达式匹配</td>
+</tr>
+<tr>
+<td>[d]</td>
+<td>展示每个方法的详细信息</td>
+</tr>
+<tr>
+<td>[E]</td>
+<td>开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+</tbody></table>
+<h3 id="举例-8"><a href="#举例-8" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">显示String类加载的方法
+sm java.lang.String<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310195834379.png" alt="image-20200310195834379" style="zoom:80%;" /> 
+
+<pre class="line-numbers language-none"><code class="language-none">显示String中的toString方法详细信息
+sm -d java.lang.String toString<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310195915544.png" alt="image-20200310195915544" style="zoom:80%;" /> 
+
+
+
+<h2 id="小结-9"><a href="#小结-9" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>与类相关的命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sc</td>
+<td>Search Class 显示类相关的信息</td>
+</tr>
+<tr>
+<td>sm</td>
+<td>Search Method 显示方法相关的信息</td>
+</tr>
+</tbody></table>
+<h1 id="class-classloader相关命令之二"><a href="#class-classloader相关命令之二" class="headerlink" title="class/classloader相关命令之二"></a>class/classloader相关命令之二</h1><h2 id="目标-6"><a href="#目标-6" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>jad 把字节码文件反编译成源代码</li>
+<li>mc 在内存中把源代码编译成字节码文件</li>
+<li>redefine 把新生成的字节码文件在内存中执行</li>
+</ol>
+<h2 id="jad"><a href="#jad" class="headerlink" title="jad"></a>jad</h2><h3 id="作用-22"><a href="#作用-22" class="headerlink" title="作用"></a>作用</h3><p>反编译指定已加载类源码</p>
+<blockquote>
+<p><code>jad</code> 命令将 JVM 中实际运行的 class 的 byte code 反编译成 java 代码，便于你理解业务逻辑；</p>
+<p>在 Arthas Console 上，反编译出来的源码是带语法高亮的，阅读更方便</p>
+<p>当然，反编译出来的 java 代码可能会存在语法错误，但不影响你进行阅读理解</p>
+</blockquote>
+<h3 id="参数说明-4"><a href="#参数说明-4" class="headerlink" title="参数说明"></a>参数说明</h3><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>class-pattern</em></td>
+<td>类名表达式匹配</td>
+</tr>
+<tr>
+<td>[E]</td>
+<td>开启正则表达式匹配，默认为通配符匹配</td>
+</tr>
+</tbody></table>
+<h3 id="举例-9"><a href="#举例-9" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">编译java.lang.String
+jad java.lang.String<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">反编绎时只显示源代码，默认情况下，反编译结果里会带有ClassLoader信息，通过--source-only选项，可以只打印源代码。方便和mc&#x2F;redefine命令结合使用。
+jad --source-only demo.MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+ <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310214123430.png" alt="image-20200310214123430" style="zoom: 67%;" /> 
+
+<pre class="line-numbers language-none"><code class="language-none">反编译指定的函数
+jad demo.MathGame main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310214327498.png" alt="image-20200310214327498" style="zoom: 67%;" /> 
+
+
+
+<h2 id="mc"><a href="#mc" class="headerlink" title="mc"></a>mc</h2><h3 id="作用-23"><a href="#作用-23" class="headerlink" title="作用"></a>作用</h3><p>Memory Compiler/内存编译器，编译<code>.java</code>文件生成<code>.class</code></p>
+<h3 id="举例-10"><a href="#举例-10" class="headerlink" title="举例"></a>举例</h3><pre class="line-numbers language-none"><code class="language-none">在内存中编译Hello.java为Hello.class
+mc &#x2F;root&#x2F;Hello.java
+
+可以通过-d命令指定输出目录
+mc -d &#x2F;root&#x2F;bbb &#x2F;root&#x2F;Hello.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="效果-14"><a href="#效果-14" class="headerlink" title="效果"></a>效果</h3><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310215259222.png" alt="image-20200310215259222" style="zoom:80%;" /> 
+
+
+
+<h2 id="redefine"><a href="#redefine" class="headerlink" title="redefine"></a>redefine</h2><h3 id="作用-24"><a href="#作用-24" class="headerlink" title="作用"></a>作用</h3><p>加载外部的<code>.class</code>文件，redefine到JVM里</p>
+<blockquote>
+<p>注意， redefine后的原来的类不能恢复，redefine有可能失败（比如增加了新的field）。</p>
+</blockquote>
+<blockquote>
+<p><code>reset</code>命令对<code>redefine</code>的类无效。如果想重置，需要<code>redefine</code>原始的字节码。</p>
+</blockquote>
+<blockquote>
+<p><code>redefine</code>命令和<code>jad</code>/<code>watch</code>/<code>trace</code>/<code>monitor</code>/<code>tt</code>等命令会冲突。执行完<code>redefine</code>之后，如果再执行上面提到的命令，则会把<code>redefine</code>的字节码重置。</p>
+</blockquote>
+<h3 id="redefine的限制"><a href="#redefine的限制" class="headerlink" title="redefine的限制"></a>redefine的限制</h3><ul>
+<li>不允许新增加field/method</li>
+<li>正在跑的函数，没有退出不能生效，比如下面新增加的<code>System.out.println</code>，只有<code>run()</code>函数里的会生效</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MathGame</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">MathGame</span> game <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">MathGame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            game<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">TimeUnit</span><span class="token punctuation">.</span>SECONDS<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">// 这个不生效，因为代码一直跑在 while里</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"in loop"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 这个生效，因为run()函数每次都可以完整结束</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"call run()"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> number <span class="token operator">=</span> random<span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> primeFactors <span class="token operator">=</span> <span class="token function">primeFactors</span><span class="token punctuation">(</span>number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">print</span><span class="token punctuation">(</span>number<span class="token punctuation">,</span> primeFactors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">"illegalArgumentCount:%3d, "</span><span class="token punctuation">,</span> illegalArgumentCount<span class="token punctuation">)</span> <span class="token operator">+</span> e<span class="token punctuation">.</span><span class="token function">getMessage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+	
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="案例：结合-jad-mc-命令使用"><a href="#案例：结合-jad-mc-命令使用" class="headerlink" title="案例：结合 jad/mc 命令使用"></a>案例：结合 jad/mc 命令使用</h3><h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4><pre class="line-numbers language-none"><code class="language-none">1. 使用jad反编译demo.MathGame输出到&#x2F;root&#x2F;MathGame.java
+jad --source-only demo.MathGame &gt; &#x2F;root&#x2F;MathGame.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">2.按上面的代码编辑完毕以后，使用mc内存中对新的代码编译
+mc &#x2F;root&#x2F;MathGame.java -d &#x2F;root<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">3.使用redefine命令加载新的字节码
+redefine &#x2F;root&#x2F;demo&#x2F;MathGame.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310222846411.png" alt="image-20200310222846411" style="zoom: 67%;" /> 
+
+<img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200310222756483.png" alt="image-20200310222756483" style="zoom: 67%;" /> 
+
+<h2 id="小结-10"><a href="#小结-10" class="headerlink" title="小结"></a>小结</h2><table>
+<thead>
+<tr>
+<th>类相关的命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>jad</td>
+<td>反编译字节码文件得到java的源代码</td>
+</tr>
+<tr>
+<td>mc</td>
+<td>在内存中将源代码编译成字节码</td>
+</tr>
+<tr>
+<td>redefine</td>
+<td>将字节码文件重新加载到内存中执行</td>
+</tr>
+</tbody></table>
+<h1 id="学习总结"><a href="#学习总结" class="headerlink" title="学习总结"></a>学习总结</h1><ol>
+<li><p>安装arthas的方法</p>
+<p>既可以安装在windows下也可以安装在Linux</p>
+<ol>
+<li>在线安装</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">curl -O https:&#x2F;&#x2F;alibaba.github.io&#x2F;arthas&#x2F;arthas-boot.jar
+java -jar arthas-boot.jar<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li><p>离线安装</p>
+<p>将从maven仓库中下载的zip包直接解压就可以使用</p>
+</li>
+<li><p>卸载方式</p>
+<p>直接删除2个文件夹：.arthas和logs</p>
+</li>
+</ol>
+</li>
+<li><p>基础命令</p>
+<table>
+<thead>
+<tr>
+<th>基础命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>help</td>
+<td>显示所有arthas命令，每个命令都可以使用-h的参数，显示它的参数信息</td>
+</tr>
+<tr>
+<td>cat</td>
+<td>显示文本文件内容</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>对内容进行过滤，只显示关心的行</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>显示当前的工作路径</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>清除屏幕</td>
+</tr>
+<tr>
+<td>session</td>
+<td>显示当前连接的会话ID</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>重置arthas增强的类</td>
+</tr>
+<tr>
+<td>version</td>
+<td>显示当前arthas的版本号</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出当前的会话</td>
+</tr>
+<tr>
+<td>stop</td>
+<td>结束arthas服务器，退出所有的会话</td>
+</tr>
+<tr>
+<td>keymap</td>
+<td>显示所有的快捷键</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>jvm相关命令</p>
+<table>
+<thead>
+<tr>
+<th>jvm相关命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dashboard</td>
+<td>仪表板，可以显示：线程，内存，堆栈，GC，Runtime等信息</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>显示线程的堆栈</td>
+</tr>
+<tr>
+<td>jvm</td>
+<td>显示java虚拟机信息</td>
+</tr>
+<tr>
+<td>sysprop</td>
+<td>显示jvm中系统属性，也可以修改某个属性</td>
+</tr>
+<tr>
+<td>sysenv</td>
+<td>显示jvm中系统环境变量配置信息</td>
+</tr>
+<tr>
+<td>vmoption</td>
+<td>显示jvm中选项信息</td>
+</tr>
+<tr>
+<td>getstatic</td>
+<td>获取类中静态成员变量</td>
+</tr>
+<tr>
+<td>ognl</td>
+<td>执行一条ognl表达式，对象图导航语言</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>class和classloader相关命令</p>
+<table>
+<thead>
+<tr>
+<th>类，类加载相关的命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sc</td>
+<td>Search Class 查看运行中的类信息</td>
+</tr>
+<tr>
+<td>sm</td>
+<td>Search Method 查看类中方法的信息</td>
+</tr>
+<tr>
+<td>jad</td>
+<td>反编译字节码为源代码</td>
+</tr>
+<tr>
+<td>mc</td>
+<td>Memory Compile 将源代码编译成字节码</td>
+</tr>
+<tr>
+<td>redefine</td>
+<td>将编译好的字节码文件加载到jvm中运行</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2022/07/24/arthas-ji-chu-bi-ji/">http://wumangeng.github.io/2022/07/24/arthas-ji-chu-bi-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Arthas/">
+                                    <span class="chip bg-color">Arthas</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/07/25/arthas-jin-jie-bi-ji/">
+                    <div class="card-image">
+                        
+                        <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/image-20200305153259359.png" class="responsive-img" alt="性能监控-Arthas">
+                        
+                        <span class="card-title">性能监控-Arthas</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            性能监控工具Arthas进阶使用
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Arthas/">
+                        <span class="chip bg-color">Arthas</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/07/21/t212-xie-yi-gong-ju/">
+                    <div class="card-image">
+                        
+                        <img src="https://img0.baidu.com/it/u=3940277641,4095882545&fm=253&fmt=auto&app=138&f=JPG?w=652&h=500" class="responsive-img" alt="hj/t212协议工具类">
+                        
+                        <span class="card-title">hj/t212协议工具类</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            国标hj/t212协议Java解析
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/t212/" class="post-category">
+                                    t212
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/t212/">
+                        <span class="chip bg-color">t212</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2022</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
