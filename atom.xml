@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-08-01T08:25:41.355Z</updated>
+  <updated>2022-08-30T13:04:43.612Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>shell集群间发送文件</title>
+    <link href="http://wumangeng.github.io/2022/08/15/shi-yong-shell-ji-qun-jian-fa-song-wen-jian/"/>
+    <id>http://wumangeng.github.io/2022/08/15/shi-yong-shell-ji-qun-jian-fa-song-wen-jian/</id>
+    <published>2022-08-15T01:10:20.000Z</published>
+    <updated>2022-08-30T13:04:43.612Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;参考资料&quot;&gt;&lt;a href=&quot;#参考资料&quot; class=&quot;headerlink&quot; title=&quot;参考资料&quot;&gt;&lt;/a&gt;参考资料&lt;/h2&gt;&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Linux" scheme="http://wumangeng.github.io/categories/Linux/"/>
+    
+    
+    <category term="shell" scheme="http://wumangeng.github.io/tags/shell/"/>
+    
+  </entry>
   
   <entry>
     <title>性能监控-Arthas</title>
@@ -501,31 +526,6 @@
     <category term="gin" scheme="http://wumangeng.github.io/tags/gin/"/>
     
     <category term="validator" scheme="http://wumangeng.github.io/tags/validator/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go开发-用户密码加密</title>
-    <link href="http://wumangeng.github.io/2022/01/08/go-yong-hu-mi-ma-jia-mi/"/>
-    <id>http://wumangeng.github.io/2022/01/08/go-yong-hu-mi-ma-jia-mi/</id>
-    <published>2022-01-08T01:41:36.912Z</published>
-    <updated>2022-01-08T02:28:19.266Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Go语言用户密码加密&quot;&gt;&lt;a href=&quot;#Go语言用户密码加密&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
-    
-    
-    <category term="go-项目" scheme="http://wumangeng.github.io/tags/go-%E9%A1%B9%E7%9B%AE/"/>
     
   </entry>
   

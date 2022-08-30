@@ -603,7 +603,7 @@
 </tr>
 </tbody></table>
 <p><strong>配置docker内部网络</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker network create --subnet&#x3D;172.18.0.0&#x2F;16 redisnetwork<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker network create --subnet<span class="token operator">=</span><span class="token number">172.18</span>.0.0/16 redisnetwork<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Redis配置文件"><a href="#Redis配置文件" class="headerlink" title="Redis配置文件"></a>Redis配置文件</h2><p>在docker环境中，配置文件映射宿主机的时候，(宿主机)必须有配置文件。<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/antirez/redis/5.0.7/redis.conf">附件</a>在这里。大家可以根据自己的需求定制配置文件。</p>
 <p>下边是我的配置文件 <code>redis-cluster.tmpl</code></p>
