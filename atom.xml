@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-09-08T23:57:06.192Z</updated>
+  <updated>2022-12-03T06:37:05.176Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,86 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>全景图切割和合成预览图</title>
+    <link href="http://wumangeng.github.io/2022/12/03/shi-yong-opencv-shi-xian-quan-jing-tu-de-qie-ge-he-he-cheng-yu-lan-tu/"/>
+    <id>http://wumangeng.github.io/2022/12/03/shi-yong-opencv-shi-xian-quan-jing-tu-de-qie-ge-he-he-cheng-yu-lan-tu/</id>
+    <published>2022-12-03T01:10:20.000Z</published>
+    <updated>2022-12-03T06:37:05.176Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-安装OpenCV&quot;&gt;&lt;a href=&quot;#1-安装OpenCV&quot; class=&quot;headerlink&quot; title=&quot;1.安装OpenCV&quot;&gt;&lt;/a&gt;1.安装OpenCV&lt;/h2&gt;&lt;p&gt;下载OpenCV：&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="opencv" scheme="http://wumangeng.github.io/categories/opencv/"/>
+    
+    
+    <category term="opencv" scheme="http://wumangeng.github.io/tags/opencv/"/>
+    
+    <category term="全景图" scheme="http://wumangeng.github.io/tags/%E5%85%A8%E6%99%AF%E5%9B%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优秀实用的开源项目</title>
+    <link href="http://wumangeng.github.io/2022/10/15/kai-yuan-xiang-mu/"/>
+    <id>http://wumangeng.github.io/2022/10/15/kai-yuan-xiang-mu/</id>
+    <published>2022-10-15T01:10:20.000Z</published>
+    <updated>2022-12-03T06:44:21.849Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;优秀实用的开源项目&quot;&gt;&lt;a href=&quot;#优秀实用的开源项目&quot; class=&quot;headerlink&quot; title=&quot;优秀实用的开源项目&quot;&gt;&lt;/a&gt;优秀实用的开源项目&lt;/h1&gt;&lt;h2 id=&quot;1-微信公众号管理平台&quot;&gt;&lt;a href=&quot;#1-微信公众号管理平台&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="github" scheme="http://wumangeng.github.io/categories/github/"/>
+    
+    
+    <category term="github" scheme="http://wumangeng.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代码生成EasyCode配置</title>
+    <link href="http://wumangeng.github.io/2022/10/04/easycodeconfig/"/>
+    <id>http://wumangeng.github.io/2022/10/04/easycodeconfig/</id>
+    <published>2022-10-04T01:10:20.000Z</published>
+    <updated>2022-12-03T06:41:45.804Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;EasyCodeConfig.json&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-json&quot; data-language=&quot;json&quot;&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;token</summary>
+        
+      
+    
+    
+    
+    <category term="Mybatis" scheme="http://wumangeng.github.io/categories/Mybatis/"/>
+    
+    
+    <category term="代码生成" scheme="http://wumangeng.github.io/tags/%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90/"/>
+    
+    <category term="EasyCode" scheme="http://wumangeng.github.io/tags/EasyCode/"/>
+    
+  </entry>
   
   <entry>
     <title>微信公众号消息推送</title>
@@ -444,81 +524,6 @@
     
     
     <category term="protobuf" scheme="http://wumangeng.github.io/tags/protobuf/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go数组去重&amp;切片去重</title>
-    <link href="http://wumangeng.github.io/2022/02/25/go-qie-pian-qu-chong/"/>
-    <id>http://wumangeng.github.io/2022/02/25/go-qie-pian-qu-chong/</id>
-    <published>2022-02-25T01:10:20.000Z</published>
-    <updated>2022-02-28T09:09:33.816Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;1-单个数组-切片去重&quot;&gt;&lt;a href=&quot;#1-单个数组-切片去重&quot; class=&quot;headerlink&quot; title=&quot;1. 单个数组/切片去重&quot;&gt;&lt;/a&gt;1.</summary>
-        
-      
-    
-    
-    
-    <category term="go-项目" scheme="http://wumangeng.github.io/categories/go-%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="go-项目" scheme="http://wumangeng.github.io/tags/go-%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>23种设计模式</title>
-    <link href="http://wumangeng.github.io/2022/02/21/she-ji-mo-shi/"/>
-    <id>http://wumangeng.github.io/2022/02/21/she-ji-mo-shi/</id>
-    <published>2022-02-21T01:10:20.000Z</published>
-    <updated>2022-04-07T08:10:00.473Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;23种设计模式&quot;&gt;&lt;a href=&quot;#23种设计模式&quot; class=&quot;headerlink&quot; title=&quot;23种设计模式&quot;&gt;&lt;/a&gt;23种设计模式&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;什么是设计模式&lt;/strong&gt;                         </summary>
-        
-      
-    
-    
-    
-    <category term="设计模式" scheme="http://wumangeng.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-    
-    <category term="设计模式" scheme="http://wumangeng.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>gorm的时间处理</title>
-    <link href="http://wumangeng.github.io/2022/02/12/go-gorm-de-shi-jian-chu-li/"/>
-    <id>http://wumangeng.github.io/2022/02/12/go-gorm-de-shi-jian-chu-li/</id>
-    <published>2022-02-12T01:10:20.000Z</published>
-    <updated>2022-03-03T08:38:43.302Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;gorm的时间处理&quot;&gt;&lt;a href=&quot;#gorm的时间处理&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-    <category term="GO" scheme="http://wumangeng.github.io/tags/GO/"/>
-    
-    <category term="GORM" scheme="http://wumangeng.github.io/tags/GORM/"/>
     
   </entry>
   
