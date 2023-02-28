@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2022-12-03T06:37:05.176Z</updated>
+  <updated>2023-02-28T00:52:56.993Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>openEuler安装mongodb</title>
+    <link href="http://wumangeng.github.io/2023/01/15/mongo-tian-jia-shu-ju-ku/"/>
+    <id>http://wumangeng.github.io/2023/01/15/mongo-tian-jia-shu-ju-ku/</id>
+    <published>2023-01-15T01:10:20.000Z</published>
+    <updated>2023-02-28T00:52:56.993Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;openEuler安装mongodb&quot;&gt;&lt;a href=&quot;#openEuler安装mongodb&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="database" scheme="http://wumangeng.github.io/categories/database/"/>
+    
+    
+    <category term="mongodb" scheme="http://wumangeng.github.io/tags/mongodb/"/>
+    
+  </entry>
   
   <entry>
     <title>全景图切割和合成预览图</title>
@@ -499,31 +524,6 @@
     
     
     <category term="redis" scheme="http://wumangeng.github.io/tags/redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>protobuf序列化时丢失默认值字段的问题</title>
-    <link href="http://wumangeng.github.io/2022/03/08/go-protobuf-xu-lie-hua-wen-ti/"/>
-    <id>http://wumangeng.github.io/2022/03/08/go-protobuf-xu-lie-hua-wen-ti/</id>
-    <published>2022-03-08T01:10:20.000Z</published>
-    <updated>2022-03-08T12:40:56.524Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;protobuf序列化时丢失默认值字段的问题&quot;&gt;&lt;a href=&quot;#protobuf序列化时丢失默认值字段的问题&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Go" scheme="http://wumangeng.github.io/categories/Go/"/>
-    
-    
-    <category term="protobuf" scheme="http://wumangeng.github.io/tags/protobuf/"/>
     
   </entry>
   
