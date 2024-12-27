@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="密码加密">
+    <meta name="keywords" content="oss">
     <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -28,7 +28,7 @@
 </script>
 
 
-    <title>Go开发-用户密码加密 | 山河远阔</title>
+    <title>如何优雅的使用OSS | 山河远阔</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -323,12 +323,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=992881976,3112014153&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1662829200&t=8d2f9d7b977cf8d61d72a131bc2db17c')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://tse1-mm.cn.bing.net/th/id/OIP-C.lAo_yB1DmMZIo4ZszeKrkQHaDy?w=317&h=178&c=7&r=0&o=5&pid=1.7')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Go开发-用户密码加密</h1>
+                    <h1 class="description center-align post-title">如何优雅的使用OSS</h1>
                 </div>
             </div>
         </div>
@@ -444,8 +444,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/go-%E9%A1%B9%E7%9B%AE/">
-                                <span class="chip bg-color">go-项目</span>
+                            <a href="/tags/oss/">
+                                <span class="chip bg-color">oss</span>
                             </a>
                         
                     </div>
@@ -456,8 +456,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/go/" class="post-category">
-                                go
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                项目
                             </a>
                         
                     </div>
@@ -478,7 +478,7 @@
 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-01-08
+                    2023-04-08
                 </div>
                 
 
@@ -487,7 +487,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    385
+                    4.2k
                 </div>
                 
 
@@ -512,54 +512,96 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Go语言用户密码加密"><a href="#Go语言用户密码加密" class="headerlink" title="Go语言用户密码加密"></a>Go语言用户密码加密</h1><p>对密码加密的常规操作是：使用md5+盐+散列。然后将加密结果保存到数据库，但是一般框架底层的加密方式通常会把使用的加密算法和盐值也一起保存到密码中，本文将使用此方式。</p>
-<h2 id="1-引入go密码加密包"><a href="#1-引入go密码加密包" class="headerlink" title="1.引入go密码加密包"></a>1.引入go密码加密包</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">go get github.com/anaskhan96/go-password-encoder<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="2-用法"><a href="#2-用法" class="headerlink" title="2.用法"></a>2.用法</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">//加密：获取原始密码和选项，返回生成的salt和十六进制编码密码</span>
-<span class="token keyword">func</span> <span class="token function">Encode</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token operator">*</span>Options<span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token comment">//验证：校验密码是否一致，返回true则一致，反之则不一致</span>
-<span class="token keyword">func</span> <span class="token function">Verify</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token operator">*</span>Options<span class="token punctuation">)</span> <span class="token builtin">bool</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> 
-
-<span class="token comment">//Options对象</span>
-<span class="token keyword">type</span> Options <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
-	SaltLen      <span class="token builtin">int</span>  <span class="token comment">//盐的长度，默认256</span>
-	Iterations   <span class="token builtin">int</span>  <span class="token comment">// 函数迭代次数（散列次数），默认10000</span>
-	KeyLen       <span class="token builtin">int</span>  <span class="token comment">// 密钥长度，默认512</span>
-	HashFunction <span class="token keyword">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> hash<span class="token punctuation">.</span>Hash <span class="token comment">//使用的算法，默认sha512</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="3-示例"><a href="#3-示例" class="headerlink" title="3.示例"></a>3.示例</h2><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">import</span> <span class="token punctuation">(</span>
-	<span class="token string">"crypto/sha512"</span>
-	<span class="token string">"fmt"</span>
-	<span class="token string">"github.com/anaskhan96/go-password-encoder"</span>
-	<span class="token string">"strings"</span>
-<span class="token punctuation">)</span>
-
-<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-	<span class="token comment">// 使用默认的Options</span>
-	<span class="token comment">//salt, encodedPwd := password.Encode("generic password", nil)</span>
-	<span class="token comment">//check := password.Verify("generic password", salt, encodedPwd, nil)</span>
-	<span class="token comment">//fmt.Println(check) // true</span>
-
-	<span class="token comment">// 自定义options</span>
-	options <span class="token operator">:=</span> <span class="token operator">&amp;</span>password<span class="token punctuation">.</span>Options<span class="token punctuation">&#123;</span><span class="token number">16</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> sha512<span class="token punctuation">.</span>New<span class="token punctuation">&#125;</span>
-	salt<span class="token punctuation">,</span> encodedPwd <span class="token operator">:=</span> password<span class="token punctuation">.</span><span class="token function">Encode</span><span class="token punctuation">(</span><span class="token string">"generic password"</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span>
-	<span class="token comment">//将盐和加密算法放入密码中使用$分割</span>
-	newPwd <span class="token operator">:=</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"pbkdf2-sha512$%s$%s"</span><span class="token punctuation">,</span>salt<span class="token punctuation">,</span>encodedPwd<span class="token punctuation">)</span>
-	<span class="token comment">//注意newPwd长度，避免数据库截断</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>newPwd<span class="token punctuation">)</span>
-    
-    <span class="token comment">// -------验证------</span>
-	<span class="token comment">//从数据库取出密码后应先处理</span>
-	pwdInfo <span class="token operator">:=</span> strings<span class="token punctuation">.</span><span class="token function">Split</span><span class="token punctuation">(</span>newPwd<span class="token punctuation">,</span> <span class="token string">"$"</span><span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>pwdInfo<span class="token punctuation">)</span>
-
-	<span class="token comment">// Verify参数：用户输入的密码，盐，数据库存储密码，加密配置参数</span>
-	check <span class="token operator">:=</span> password<span class="token punctuation">.</span><span class="token function">Verify</span><span class="token punctuation">(</span><span class="token string">"generic password"</span><span class="token punctuation">,</span> pwdInfo<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> pwdInfo<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span>
-	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>check<span class="token punctuation">)</span> <span class="token comment">// true</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+                <p>传统上，我们是前端把文件传给后端，然后后端存到自己服务器或者OSS上，现在你可以直接从前端传到OSS上，然后就没有然后了。</p>
+<p>其实OSS是个可玩性很高的东西，但是大多数开发者也就当成个“网盘”使用了，加上磨磨唧唧的逆天文档，很多人看都不想看一眼捏鼻子再用，所以对里面的东西了解不多，也经常有很多误会下面就回答一些常见误解：</p>
+<blockquote>
+<p>前端上传完，后端怎么知道上没上传完?</p>
+</blockquote>
+<p>前端上传完主动通知后端，或者OSS也有回调功能，OSS去通知后端  <a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/oss/developer-reference/callback?spm=a2c4g.11186623.0.0.64633ab4BkemwW">Callback 对存储-阿里云帮助中心</a></p>
+<blockquote>
+<p>OSS上传是需要token和秘钥的，我直接放前端那岂不是白给啊?</p>
+</blockquote>
+<p>提供token和秘钥只是上传文件的其中一种方式而已(而且很多开发者只知道这一种方式，所以一直以为前端上传不安全) ，除此之外还有其他好几种方式，比如STS，可以由后端生成临时的token和秘钥来让前端使用，超时自己销毁，但是STS仍然很麻烦直接略过</p>
+<p>我们可以使用”表单上传”的方式，简单来说后端可以根据秘钥去生成一个sign字符串，sign不会暴露秘钥，就是前端发起POST请求给OSS，请求体里附带上sign(后端给的)、key(要上传文件的位置)、file(你要上传的文件) 这几样参数就完事了，没有秘泄露，大功告成</p>
+<p>如何使用表单上传文件到指定存储空间  <a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/oss/developer-reference/form-upload-1?spm=a2c4g.11186623.0.0.38295651ODDFUI">对象存储-阿里云帮助中心</a></p>
+<blockquote>
+<p>这漏洞不就来了，key (上传位置)是前端决定的，那我只需要从你后端拿到sign，然后我上传到哪都是我自己说的算，想上传多大的文件也是我自己决定的，反正你后端验证不了，阁下该如何应对?</p>
+</blockquote>
+<p>这就得隆重请出来表单上传的重要一员: policy。</p>
+<p>它可以限制一系列上传的条件，sign里是包含policy的，你只要拿着带policy的sign，就必须遵守里面的policy条件，否则这个sign就用不了</p>
+<p>policy是一串json，有一些语法，可以限制各种你能想到的常见情况。比如必须上传到某个位置(conditions里的eq $key 你的OSS位置)、比如上传的文件最大/最小的限制 (content-length-range)、比如上传的位置已经有文件了是否允许覆盖 (x-oss-forbid-overwrite) 、比如sign值超时时间(expiration)等等都可以配置。</p>
+<p>policy都是后端生成的，前端只能在这些限制条件里上传文件，如果上传的文件不在限定条件里OSS那边直接帮你拦截，上传直接失败，根本不需要后端参与验证。<br>所以你想急中的“不安全”，比如秘钥泄露、或者我想上传到哪个位置都行剽窃你的OSS当图床用、或者直接一次性上传1TB文件塞爆你的OSS之类的事情其实加了限制是根本不存在的</p>
+<p><a target="_blank" rel="noopener" href="https://help.aliyun.com/zh/oss/developer-reference/postobject?spm=a2c4g.11186623.0.0.2322d52fisFo4M#section-d5z-1ww-wdb">PostObject 对象存储-阿里云帮助中心</a></p>
+<blockquote>
+<p>但是sign值不是一次性的啊，后端生成的sign在有效期内前端是可以一直使用的，我拿你的sign就非得做坏事，你该怎么办?</p>
+</blockquote>
+<p>所以说了policy的重要性，假如我们希望前端把文件上传到abc/1.jpg这个位置，那么后端我价的policy就定制下面的规则，前端拿着附有这个规则的sign就只能做下面的事情，做别的事情OSS自动帮你拒绝了:</p>
+<ul>
+<li>必须上传到abc/1.jpg (conditions，eq，$key，abc/1.jpg)</li>
+<li>上传的文件必须小于2MB (content-length-range，0，2097152 (字节，2x1024x1024))</li>
+<li>上传的位置如果有文件，则上传失败，防止重复上传 (conditions，eq，$x-oss-forbid-overwrite,false)</li>
+</ul>
+<p>这样我们的sign就另类的相当于“一次性”的sign了，即便你拿到了sign，也只能对着abc/1.jpg上传2MB以内的文件，并且上传一次之后就不允许在重复上传了，这个sign也就完成了任务，即便它可能还没有“过期”，但是它已经没有任何意义了，就算你把这个sign暴露给别人用，它也做不了任何事情了</p>
+<p>最主要的是，其实上传位置是否勇盖根本无所谓，激进一点甚至是否限制大小也无所谓，因为OSS的上传是免费的，这也是一种商业套路，其实OSS赚钱的大头是你存储、下载的钱，它巴不得你多上传点东西，所以上传这里是免费的。只要你指定好必须上传的位置和大小，就算有个人拿到sign对着一个地方重复上传一万次，对我来说都是无所谓不痛不痒的，反正我也不花钱，你攻击的流量是OSS又不是我，你抓捕周树人关我鲁迅屁事。</p>
+<blockquote>
+<p>整挺好，但我上传的是某些固定格式，而且我需要读取并验证的，比如我这个地方必须上传图片，而目图片的宽高都有限制的，如果按你那么做，后端不参与的话那我怎么知道前端上传的图片宽高对不对，甚至前端不上传图片上传个音频我也不知道啊?</p>
+</blockquote>
+<p>这个肯定OSS不能帮你做了，再怎么逆天也得后端参与了，如果你是后端，前端上传完毕通知后端，后端去OSS上把这个文件下载到服务器里并且读取来验证，这个是最简单可行的。</p>
+<blockquote>
+<p>越整越麻烦了，那我不如直接上传到后端就完事了，哪来这么多脱裤子放屁的事情</p>
+</blockquote>
+<p>这就是看你自己衡量了，尽管代码量可能多了一点，但前端直接上传到OSS是有很多好处的,最简单就是节省了带宽，正常我们买个云服务器，为了节约成本带宽是限制大小的，比如一般就3M、5M这种小水管，如果大量用户同时上传水管就被挤爆了，如果用户在自己的前端就上传到OSS，而不是上传到服务器，自然不会挤爆服务器了。</p>
+<p>上面说过OSS上传是免费的，而目OSS在内网下载也是免费的，意思就是你的OSS在杭州，服务器也在杭州，他俩就属于一个内网，服务器从OSS上下载东西，服务器不花带宽钱也不占用你那个3M、5M的小水管，走的是内网通道，同理OSS也不用交下载钱，这样的话即便你有上面说的“必须要校验图片”这种需求，也可以先让用户免费上传到OSS，然后免费的走内网下载到服务器上，最后进行校验，虽然可能会多耗时一点点，但是换来的是省钱省带宽，所以这个其实就是自己定夺，如果你是个人开发者我是建议走OSS直接上传的，一点点成本扩大到无数个用户也是很费钱的，那如果你是打工仔，哪有什么说法，写起来咋省事咋来就完事了，早点写完早点下班润了</p>
+<p>其实上面说的“图片校验”其实有更“云”的方法，一般云服务会有一个叫“函数计算”的东西，比如阿里云的FC、腾讯云的SFC、华为云的FG、亚马逊的lambdaq，其实都是一个玩意，这玩意简单来说就是一个能帮你执行一段代码的轻量虚拟机，支持很多种编程语言，后端可以通过http请求“去调用这些方法，速度很快，零点几秒就把你的代码执行完并目返回结果了，最主要可以无限并发，你不用考虑如何实现无限并发以及背后那些有的没的什么扩容弹性之类的词儿，跟咱们臭打工的没啥关系，咱们就很简单的调用一次收一次钱就完事了 (当然也有长时间运行的常驻服务型的FC，这里不说那种情况)</p>
+<p>但是!FC之类的每个月会有免费算力额度，而目这个额度除非你是超大型应用不然根本用不完，所以其实就是白嫖</p>
+<p>前面说到我们在后端把OSS文件拉到服务器上进行校验，其实这一步也是或多或少占用IO和CPU我们甚至可以把这一块的功能也切割出去，交给FC去处理，FC负责下载和验证一一比如我们写一个FC(任何语言实现都行)，从OSS下载指定的文件到FC的虚拟机里，然后判断它是否是图片，并目返回宽度和高度的值，然后我们在后端用SDK调用这个FC，就像调用一个函数一样，后端只需要验证FC传回来的结果就行，而不用后端自己去下载图片、读取、判断，进一步的节省了IO和CPU占用<br>这样我们的服务器就更轻量了，即便同时有100个用户上传东西，要换成以前的前后端方案，估计水管早炸了，而现在的方案服务器的压力小的跟挠痒痒一样，给前端生成个上传sign，然后调用fc去验证结果，调用几下就完事了，什么带宽什么IO什么CPU占用，关我屁事，主打的就是一个轻松休闲</p>
+<blockquote>
+<p>那我拿到某个用户的sign，往里面塞入非法文件，岂不是可以胡作非为?</p>
+</blockquote>
+<p>sign是后端生成的，而且是临时的过一会就过期了 (过期时间你可以自己配置)，而且根据上面的policy可以做到“一次性”用完就弃，如果合法用户拿到sign已经上传完毕了，那现在这个sign打印出来贴你家门口你也用不了第二次了。</p>
+<blockquote>
+<p>可是我们业务要记录上传者ip、上传的日志啊?</p>
+</blockquote>
+<p>sign是后端生成的，后端都能生成sign了，顺手把日志记录一下。</p>
+<p>咱们正常的经典上传流程:</p>
+<ol>
+<li>前端发送上传表单给后端</li>
+<li>后端拿到文件、校验、写日志或者你愿意干啥都行</li>
+</ol>
+<p>现在改成了：</p>
+<ol>
+<li>前端希望上传文件，通知后端</li>
+<li>后端生成policy、sign返回给前端 (同时也可以根据前端的申请请求记录IP、日志)</li>
+<li>前端拿着sign去上传文件到OSS</li>
+<li>后端收到上传完毕的callback，执行上传完成的相应逻辑 (这里你也可以记录日志)</li>
+</ol>
+<blockquote>
+<p>上传的“路径”是前端决定的还是后端决定的?</p>
+</blockquote>
+<p>在99.99%业务场景下，都应该是后端决定，由后端生成一个上传路径给前端，前端只负责“申请上传”，sign、policy、key (路径)都是后端发过来的。我之前说的只是一种大方向的思路，并不是“教程”手把手一步一步教你，你可以在这个“思路”下自己决定任何的事情。</p>
+<p>具体的，这个和经典前后端上传是没区别的，你经典情况下后端把文件存到硬盘，会起什么名字?是有意义的名字? 还是UUID之类的不会重复的名字? 后缀名是什么? 这些文件放在哪里? 是不是文件路径得存到教据库方便后期别人调用、展示、下载出来?</p>
+<p>上面想通了，把“硬盘”替换成“OSS”就是你的实现了。</p>
+<blockquote>
+<p>那我发现一个很重要的事情，根据你的流程，前端是首先“申请上传”，从后端拿到sign后假如我“不上传”，或者上传完毕后，如果是前端通知的而不是走OSS的callback的话，我“不通知”，那你的这套流程不就崩漫了?</p>
+</blockquote>
+<p>这个问题问非常好!说明是仔细想过这套流程里的可能出现的情况了</p>
+<p>拿我们的业务举例，正常的经典上传情况下，很少都直接传一个文件，而是带着表单其他的东西(文本、单选多选下拉选，或者任何的你需要的内容）</p>
+<p>现在我们改成前端直传的方式，首先前端调用后端的“申请上传”接口，同时附带上表单的其他数据。但是！后端拿到这些其他数据时候，并不是要你马上保存到数据库，而是缓存起来，比如借助redis来完成，我们将这些表单数据放入redis，超时的时间可以和sign超时时间一样即可，并目这条缓存数据的redis-key要返回给前端，前端通知上传完毕时要把redis-key发回来让我们后端能找到缓存的数据。</p>
+<p>也就是我们目前的后端并没有实际的往数据库写任何东西，如果前端在这个步骤“不传”了，那这个任务的状态就过期自动作废了不需要人去关心，对于后端来说并没有实际的数据改变。</p>
+<p>接下来我们前端正常的上传到OSS，然后我们前端发一个“上传完毕”通知给后端。</p>
+<p>那假如我们不发通知呢? 目前OSS上已经有这个文件了，该文件处于“游离”状态还没有绑定到实际的业务里。</p>
+<p>这里是有两种解决方法的：</p>
+<p>第一种是“主动型”，就是借助OSS的callback功能</p>
+<p>OSS本身支持callback，即文件上传后，OSS会发送你指定的url一个通知，那我们可以使用OSS的callback功能，而不是用“前端通知上传完毕”这样，这样任何的文件上传到OSS，我们后端都能知道，不会错过，但这里可能有暗坑一一</p>
+<p>前端在上传完毕后需要进一步从后端拿到某些处理结果(比如文件上传校验是否合法，不合法前端要展示alert)，这个在callback情况下做起来比较麻烦，前端还需要在自行上传完毕后调用一下后端查看结果一一这里有个坑中坑就是前端查询结果的时候可能OSS的callback还在校验中还没有出结果，会导致经典的“不同步”问题，当然也能解决，但是非常麻烦，所以我们使用方法二</p>
+<p>方法二是“被动型”，这个我们要请出来OSS的另外两个“可玩性”一一生命周期和标签</p>
+<p>生命周期是OSS可以配置的一个东西，可以允许某些文件超时自动删除，而如何让OSS知道哪些文件该删除捏，我们就得使用“标签”</p>
+<p>OSS里每个文件都可以挂上许多个标签，标签是key-value形状的，那么我可以配置以下的生命周期:</p>
+<p>所有OSS上的文件(或某些文件夹下的文件)，身上没有“donot-delete-me: true”(随便起名)标签的，将在一天后删除。</p>
+<p>这个生命周期不需要后端配置，我们打开OSS的网页界面就可以配置，注意要在测试环境先调试好以免误操作删除东西。</p>
+<p>我们仍然使用“前端通知”的方式，OSS callback是有一定暗坑的，比如上面说的不同步问题，而前端通知可以让后端处理逻辑阻塞并同步。</p>
+<p>当前端通知“上传完毕”后，后端进行正常的校验、从redis里拿到刚才的缓存写数据库，写日志或者任何你想做的事情，最主要的是，要给刚才上传的OSS文件身上挂载“donot-delete-me:true”标签，这样OSS就不会删除了。</p>
+<p>而假如前端没有通知，这个文件仍在“游离状态”，没问题，因为这个文件身上没有标签，过期后这个文件就会自行删除。</p>
 
                 
             </div>
@@ -586,7 +628,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://wumangeng.github.io/2022/01/08/go-yong-hu-mi-ma-jia-mi/">http://wumangeng.github.io/2022/01/08/go-yong-hu-mi-ma-jia-mi/</a>
+                    <a href="http://wumangeng.github.io/2023/04/08/oss-shang-chuan/">http://wumangeng.github.io/2023/04/08/oss-shang-chuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -624,8 +666,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/go-%E9%A1%B9%E7%9B%AE/">
-                                    <span class="chip bg-color">go-项目</span>
+                                <a href="/tags/oss/">
+                                    <span class="chip bg-color">oss</span>
                                 </a>
                             
                         </div>
@@ -801,30 +843,30 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/01/12/go-shi-yong-validator-ku-jin-xing-can-shu-xiao-yan/">
+                <a href="/2023/05/20/spring-integration/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=229027659,2299531363&fm=253&fmt=auto&app=138&f=JPEG?w=560&h=336" class="responsive-img" alt="go-请求参数校验(validator)">
+                        <img src="https://img0.baidu.com/it/u=4050697449,12231121&fm=253&fmt=auto&app=138&f=JPEG?w=834&h=500" class="responsive-img" alt="Spring Integration">
                         
-                        <span class="card-title">go-请求参数校验(validator)</span>
+                        <span class="card-title">Spring Integration</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            gin框架使用validator库进行参数校验
+                            Spring Integration快速入门
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-20
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/go/" class="post-category">
-                                    go
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
                                 </a>
                             
                             
@@ -834,12 +876,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/gin/">
-                        <span class="chip bg-color">gin</span>
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
                     </a>
                     
-                    <a href="/tags/validator/">
-                        <span class="chip bg-color">validator</span>
+                    <a href="/tags/Integration/">
+                        <span class="chip bg-color">Integration</span>
                     </a>
                     
                 </div>
@@ -853,30 +895,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/06/grpc/">
+                <a href="/2023/03/25/git-fen-zhi-guan-li/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=992881976,3112014153&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1662829200&t=8d2f9d7b977cf8d61d72a131bc2db17c" class="responsive-img" alt="GRPC">
+                        <img src="https://img2.baidu.com/it/u=688439171,2703151707&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=bf637a7da56a41477d6554a5d3ffd767" class="responsive-img" alt="GIT分支管理">
                         
-                        <span class="card-title">GRPC</span>
+                        <span class="card-title">GIT分支管理</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            A high-performance, open-source universal RPC framework
+                            git
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-25
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/go/" class="post-category">
-                                    go
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
                                 </a>
                             
                             
@@ -886,8 +928,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/grpc/">
-                        <span class="chip bg-color">grpc</span>
+                    <a href="/tags/git/">
+                        <span class="chip bg-color">git</span>
                     </a>
                     
                 </div>
@@ -1029,7 +1071,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2023</span>
+                <span id="year">2021-2024</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

@@ -1068,15 +1068,15 @@ channel<span class="token punctuation">.</span><span class="token function">basi
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-amqp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="2-配置配置文件"><a href="#2-配置配置文件" class="headerlink" title="2. 配置配置文件"></a>2. 配置配置文件</h5><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
-  application:
-    name: springboot_rabbitmq
-  rabbitmq:
-    host: 10.15.0.9
-    port: 5672
-    username: ems
-    password: 123
-    virtual-host: &#x2F;ems<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h5 id="2-配置配置文件"><a href="#2-配置配置文件" class="headerlink" title="2. 配置配置文件"></a>2. 配置配置文件</h5><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">application</span><span class="token punctuation">:</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> springboot_rabbitmq
+  <span class="token key atrule">rabbitmq</span><span class="token punctuation">:</span>
+    <span class="token key atrule">host</span><span class="token punctuation">:</span> 10.15.0.9
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">5672</span>
+    <span class="token key atrule">username</span><span class="token punctuation">:</span> ems
+    <span class="token key atrule">password</span><span class="token punctuation">:</span> <span class="token number">123</span>
+    <span class="token key atrule">virtual-host</span><span class="token punctuation">:</span> /ems<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><code>RabbitTemplate</code>  用来简化操作     使用时候直接在项目中注入即可使用</p>
 <h3 id="5-1-第一种hello-world模型使用"><a href="#5-1-第一种hello-world模型使用" class="headerlink" title="5.1 第一种hello world模型使用"></a>5.1 第一种hello world模型使用</h3><ol>
@@ -1847,7 +1847,7 @@ channel<span class="token punctuation">.</span><span class="token function">basi
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2023</span>
+                <span id="year">2021-2024</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

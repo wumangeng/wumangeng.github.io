@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2023-02-28T00:52:56.993Z</updated>
+  <updated>2022-09-08T23:58:18.000Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -17,11 +17,308 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Go开发-用户密码加密</title>
+    <link href="http://wumangeng.github.io/2024/12/27/go-yong-hu-mi-ma-jia-mi/"/>
+    <id>http://wumangeng.github.io/2024/12/27/go-yong-hu-mi-ma-jia-mi/</id>
+    <published>2024-12-27T02:33:29.700Z</published>
+    <updated>2022-09-08T23:58:18.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Go语言用户密码加密&quot;&gt;&lt;a href=&quot;#Go语言用户密码加密&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="go" scheme="http://wumangeng.github.io/categories/go/"/>
+    
+    
+    <category term="go-项目" scheme="http://wumangeng.github.io/tags/go-%E9%A1%B9%E7%9B%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>k8s中的资源</title>
+    <link href="http://wumangeng.github.io/2024/11/30/k8s-zi-yuan-qing-dan/"/>
+    <id>http://wumangeng.github.io/2024/11/30/k8s-zi-yuan-qing-dan/</id>
+    <published>2024-11-30T01:10:20.000Z</published>
+    <updated>2024-12-27T02:49:44.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一、k8s中的资源&quot;&gt;&lt;a href=&quot;#一、k8s中的资源&quot; class=&quot;headerlink&quot; title=&quot;一、k8s中的资源&quot;&gt;&lt;/a&gt;一、k8s中的资源&lt;/h1&gt;&lt;h2 id=&quot;1、集群资源分类&quot;&gt;&lt;a href=&quot;#1、集群资源分类&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="http://wumangeng.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="k8s中的资源" scheme="http://wumangeng.github.io/tags/k8s%E4%B8%AD%E7%9A%84%E8%B5%84%E6%BA%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>k8s组件</title>
+    <link href="http://wumangeng.github.io/2024/11/25/k8s-zu-jian/"/>
+    <id>http://wumangeng.github.io/2024/11/25/k8s-zu-jian/</id>
+    <published>2024-11-25T01:10:20.000Z</published>
+    <updated>2024-12-27T02:49:30.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;K8S&quot;&gt;&lt;a href=&quot;#K8S&quot; class=&quot;headerlink&quot; title=&quot;K8S&quot;&gt;&lt;/a&gt;K8S&lt;/h1&gt;&lt;h2 id=&quot;组件&quot;&gt;&lt;a href=&quot;#组件&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="http://wumangeng.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
+    
+    <category term="k8s组件" scheme="http://wumangeng.github.io/tags/k8s%E7%BB%84%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>openEuler安装高斯数据库</title>
+    <link href="http://wumangeng.github.io/2023/12/25/openeuler-an-zhuang-gao-si-shu-ju-ku/"/>
+    <id>http://wumangeng.github.io/2023/12/25/openeuler-an-zhuang-gao-si-shu-ju-ku/</id>
+    <published>2023-12-25T07:10:20.000Z</published>
+    <updated>2024-12-27T02:45:16.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;1-前置工作&quot;&gt;&lt;a href=&quot;#1-前置工作&quot; class=&quot;headerlink&quot; title=&quot;1.前置工作&quot;&gt;&lt;/a&gt;1.前置工作&lt;/h2&gt;&lt;h3 id=&quot;1-1-配置-hosts-文件&quot;&gt;&lt;a href=&quot;#1-1-配置-hosts-文件&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
+    
+    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
+    
+    <category term="openEuler" scheme="http://wumangeng.github.io/tags/openEuler/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>postgress</title>
+    <link href="http://wumangeng.github.io/2023/10/07/postgresql/"/>
+    <id>http://wumangeng.github.io/2023/10/07/postgresql/</id>
+    <published>2023-10-07T01:10:20.000Z</published>
+    <updated>2024-12-27T02:52:16.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;文档：&lt;a href=&quot;http://www.postgres.cn/docs/12/sql.html&quot;&gt;http://www.postgres.cn/docs/12/sql.html&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;数据类型&quot;&gt;&lt;a href=&quot;#数据类型&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
+    
+    <category term="pg" scheme="http://wumangeng.github.io/tags/pg/"/>
+    
+    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CICD</title>
+    <link href="http://wumangeng.github.io/2023/08/15/cicd/"/>
+    <id>http://wumangeng.github.io/2023/08/15/cicd/</id>
+    <published>2023-08-15T01:10:20.000Z</published>
+    <updated>2024-12-27T02:49:06.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;CICD&quot;&gt;&lt;a href=&quot;#CICD&quot; class=&quot;headerlink&quot; title=&quot;CICD&quot;&gt;&lt;/a&gt;CICD&lt;/h1&gt;&lt;p&gt;CI（持续集成）: 将各个开发人员的工作集合到一个代码仓库中，成功的 CI</summary>
+        
+      
+    
+    
+    
+    <category term="运维" scheme="http://wumangeng.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
+    
+    
+    <category term="CICD" scheme="http://wumangeng.github.io/tags/CICD/"/>
+    
+    <category term="Jenkins" scheme="http://wumangeng.github.io/tags/Jenkins/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python基础</title>
+    <link href="http://wumangeng.github.io/2023/06/01/python/"/>
+    <id>http://wumangeng.github.io/2023/06/01/python/</id>
+    <published>2023-06-01T01:10:20.000Z</published>
+    <updated>2024-12-27T02:47:26.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Python基础&quot;&gt;&lt;a href=&quot;#Python基础&quot; class=&quot;headerlink&quot; title=&quot;Python基础&quot;&gt;&lt;/a&gt;Python基础&lt;/h1&gt;&lt;h2 id=&quot;1-变量&quot;&gt;&lt;a href=&quot;#1-变量&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="http://wumangeng.github.io/categories/Python/"/>
+    
+    
+    <category term="Python基础" scheme="http://wumangeng.github.io/tags/Python%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="py" scheme="http://wumangeng.github.io/tags/py/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring Integration</title>
+    <link href="http://wumangeng.github.io/2023/05/20/spring-integration/"/>
+    <id>http://wumangeng.github.io/2023/05/20/spring-integration/</id>
+    <published>2023-05-20T01:10:20.000Z</published>
+    <updated>2024-04-14T01:31:02.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Spring-Integration快速入门&quot;&gt;&lt;a href=&quot;#Spring-Integration快速入门&quot; class=&quot;headerlink&quot; title=&quot;Spring Integration快速入门&quot;&gt;&lt;/a&gt;Spring</summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
+    
+    <category term="Integration" scheme="http://wumangeng.github.io/tags/Integration/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何优雅的使用OSS</title>
+    <link href="http://wumangeng.github.io/2023/04/08/oss-shang-chuan/"/>
+    <id>http://wumangeng.github.io/2023/04/08/oss-shang-chuan/</id>
+    <published>2023-04-08T01:10:20.000Z</published>
+    <updated>2024-04-14T01:24:54.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;传统上，我们是前端把文件传给后端，然后后端存到自己服务器或者OSS上，现在你可以直接从前端传到OSS上，然后就没有然后了。&lt;/p&gt;
+&lt;p&gt;其实OSS是个可玩性很高的东西，但是大多数开发者也就当成个“网盘”使用了，加上磨磨唧唧的逆天文档，很多人看都不想看一眼捏鼻子再用，所以对</summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="oss" scheme="http://wumangeng.github.io/tags/oss/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GIT分支管理</title>
+    <link href="http://wumangeng.github.io/2023/03/25/git-fen-zhi-guan-li/"/>
+    <id>http://wumangeng.github.io/2023/03/25/git-fen-zhi-guan-li/</id>
+    <published>2023-03-25T01:10:20.000Z</published>
+    <updated>2024-12-27T02:50:58.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GIT分支管理和代码提交规范&quot;&gt;&lt;a href=&quot;#GIT分支管理和代码提交规范&quot; class=&quot;headerlink&quot; title=&quot;GIT分支管理和代码提交规范&quot;&gt;&lt;/a&gt;GIT分支管理和代码提交规范&lt;/h1&gt;&lt;h1 id=&quot;一、总体说明&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+    <category term="git" scheme="http://wumangeng.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>怎么防止压缩炸弹</title>
+    <link href="http://wumangeng.github.io/2023/02/25/zen-me-fang-zhi-ya-suo-zha-dan/"/>
+    <id>http://wumangeng.github.io/2023/02/25/zen-me-fang-zhi-ya-suo-zha-dan/</id>
+    <published>2023-02-25T01:10:20.000Z</published>
+    <updated>2024-04-14T01:18:24.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;怎么防止压缩炸弹&quot;&gt;&lt;a href=&quot;#怎么防止压缩炸弹&quot; class=&quot;headerlink&quot; title=&quot;怎么防止压缩炸弹&quot;&gt;&lt;/a&gt;怎么防止压缩炸弹&lt;/h1&gt;&lt;h2 id=&quot;一、什么是压缩炸弹，会有什么危害&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="java" scheme="http://wumangeng.github.io/categories/java/"/>
+    
+    
+    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
+    
+    <category term="zip解压缩" scheme="http://wumangeng.github.io/tags/zip%E8%A7%A3%E5%8E%8B%E7%BC%A9/"/>
+    
+  </entry>
+  
+  <entry>
     <title>openEuler安装mongodb</title>
     <link href="http://wumangeng.github.io/2023/01/15/mongo-tian-jia-shu-ju-ku/"/>
     <id>http://wumangeng.github.io/2023/01/15/mongo-tian-jia-shu-ju-ku/</id>
     <published>2023-01-15T01:10:20.000Z</published>
-    <updated>2023-02-28T00:52:56.993Z</updated>
+    <updated>2023-02-28T00:52:58.000Z</updated>
     
     
       
@@ -46,7 +343,7 @@
     <link href="http://wumangeng.github.io/2022/12/03/shi-yong-opencv-shi-xian-quan-jing-tu-de-qie-ge-he-he-cheng-yu-lan-tu/"/>
     <id>http://wumangeng.github.io/2022/12/03/shi-yong-opencv-shi-xian-quan-jing-tu-de-qie-ge-he-he-cheng-yu-lan-tu/</id>
     <published>2022-12-03T01:10:20.000Z</published>
-    <updated>2022-12-03T06:37:05.176Z</updated>
+    <updated>2022-12-03T06:37:06.000Z</updated>
     
     
       
@@ -73,7 +370,7 @@
     <link href="http://wumangeng.github.io/2022/10/15/kai-yuan-xiang-mu/"/>
     <id>http://wumangeng.github.io/2022/10/15/kai-yuan-xiang-mu/</id>
     <published>2022-10-15T01:10:20.000Z</published>
-    <updated>2022-12-03T06:44:21.849Z</updated>
+    <updated>2022-12-03T06:44:22.000Z</updated>
     
     
       
@@ -98,7 +395,7 @@
     <link href="http://wumangeng.github.io/2022/10/04/easycodeconfig/"/>
     <id>http://wumangeng.github.io/2022/10/04/easycodeconfig/</id>
     <published>2022-10-04T01:10:20.000Z</published>
-    <updated>2022-12-03T06:41:45.804Z</updated>
+    <updated>2022-12-03T06:41:46.000Z</updated>
     
     
       
@@ -126,7 +423,7 @@
     <link href="http://wumangeng.github.io/2022/09/08/wei-xin-gong-zhong-hao-kai-fa/"/>
     <id>http://wumangeng.github.io/2022/09/08/wei-xin-gong-zhong-hao-kai-fa/</id>
     <published>2022-09-08T01:10:20.000Z</published>
-    <updated>2022-09-08T23:57:06.192Z</updated>
+    <updated>2022-09-08T23:57:08.000Z</updated>
     
     
       
@@ -151,7 +448,7 @@
     <link href="http://wumangeng.github.io/2022/08/29/buildtree/"/>
     <id>http://wumangeng.github.io/2022/08/29/buildtree/</id>
     <published>2022-08-29T01:10:20.000Z</published>
-    <updated>2022-09-08T23:53:40.667Z</updated>
+    <updated>2022-09-08T23:53:42.000Z</updated>
     
     
       
@@ -176,7 +473,7 @@
     <link href="http://wumangeng.github.io/2022/08/15/shi-yong-shell-ji-qun-jian-fa-song-wen-jian/"/>
     <id>http://wumangeng.github.io/2022/08/15/shi-yong-shell-ji-qun-jian-fa-song-wen-jian/</id>
     <published>2022-08-15T01:10:20.000Z</published>
-    <updated>2022-08-30T13:04:43.612Z</updated>
+    <updated>2022-08-30T13:04:44.000Z</updated>
     
     
       
@@ -201,7 +498,7 @@
     <link href="http://wumangeng.github.io/2022/08/03/mqtt/"/>
     <id>http://wumangeng.github.io/2022/08/03/mqtt/</id>
     <published>2022-08-03T01:10:20.000Z</published>
-    <updated>2022-11-10T13:39:47.858Z</updated>
+    <updated>2022-11-10T13:39:48.000Z</updated>
     
     
       
@@ -226,7 +523,7 @@
     <link href="http://wumangeng.github.io/2022/07/25/arthas-jin-jie-bi-ji/"/>
     <id>http://wumangeng.github.io/2022/07/25/arthas-jin-jie-bi-ji/</id>
     <published>2022-07-25T01:10:20.000Z</published>
-    <updated>2022-08-01T08:25:41.355Z</updated>
+    <updated>2022-08-01T08:25:42.000Z</updated>
     
     
       
@@ -243,287 +540,6 @@
     
     
     <category term="Arthas" scheme="http://wumangeng.github.io/tags/Arthas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>性能监控-Arthas</title>
-    <link href="http://wumangeng.github.io/2022/07/24/arthas-ji-chu-bi-ji/"/>
-    <id>http://wumangeng.github.io/2022/07/24/arthas-ji-chu-bi-ji/</id>
-    <published>2022-07-24T01:10:20.000Z</published>
-    <updated>2022-08-01T08:13:25.240Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;《Arthas基础学习》&quot;&gt;&lt;a href=&quot;#《Arthas基础学习》&quot; class=&quot;headerlink&quot; title=&quot;《Arthas基础学习》&quot;&gt;&lt;/a&gt;《Arthas基础学习》&lt;/h1&gt;&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="Arthas" scheme="http://wumangeng.github.io/tags/Arthas/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hj/t212协议工具类</title>
-    <link href="http://wumangeng.github.io/2022/07/21/t212-xie-yi-gong-ju/"/>
-    <id>http://wumangeng.github.io/2022/07/21/t212-xie-yi-gong-ju/</id>
-    <published>2022-07-21T01:10:20.000Z</published>
-    <updated>2022-07-21T08:58:48.622Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;国标hj-t212协议Java解析&quot;&gt;&lt;a href=&quot;#国标hj-t212协议Java解析&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="t212" scheme="http://wumangeng.github.io/categories/t212/"/>
-    
-    
-    <category term="t212" scheme="http://wumangeng.github.io/tags/t212/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql常用统计sql</title>
-    <link href="http://wumangeng.github.io/2022/07/15/mysql-tong-ji/"/>
-    <id>http://wumangeng.github.io/2022/07/15/mysql-tong-ji/</id>
-    <published>2022-07-15T01:10:20.000Z</published>
-    <updated>2022-07-19T07:44:21.950Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;1 、 查看当天日期&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-sql&quot; data-language=&quot;sql&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;&lt;span class=&quot;token</summary>
-        
-      
-    
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>idea远程debug</title>
-    <link href="http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/"/>
-    <id>http://wumangeng.github.io/2022/06/27/yuan-cheng-debug/</id>
-    <published>2022-06-27T01:10:20.000Z</published>
-    <updated>2022-07-29T01:04:37.733Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;1，远程DEBUG的必要性&quot;&gt;&lt;a href=&quot;#1，远程DEBUG的必要性&quot; class=&quot;headerlink&quot; title=&quot;1，远程DEBUG的必要性&quot;&gt;&lt;/a&gt;&lt;strong&gt;1，远程DEBUG的必要性&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt; </summary>
-        
-      
-    
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker仓库的构建和使用</title>
-    <link href="http://wumangeng.github.io/2022/06/18/docker-cang-ku/"/>
-    <id>http://wumangeng.github.io/2022/06/18/docker-cang-ku/</id>
-    <published>2022-06-18T01:10:20.000Z</published>
-    <updated>2022-06-22T11:54:32.867Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;docker仓库&quot;&gt;&lt;a href=&quot;#docker仓库&quot; class=&quot;headerlink&quot; title=&quot;docker仓库&quot;&gt;&lt;/a&gt;docker仓库&lt;/h1&gt;&lt;h2 id=&quot;1-搭建镜像仓库&quot;&gt;&lt;a href=&quot;#1-搭建镜像仓库&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql基础笔记</title>
-    <link href="http://wumangeng.github.io/2022/06/10/mysql-ji-chu-pian/"/>
-    <id>http://wumangeng.github.io/2022/06/10/mysql-ji-chu-pian/</id>
-    <published>2022-06-10T01:10:20.000Z</published>
-    <updated>2022-09-09T00:16:56.209Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;最基本的SELECT语句&quot;&gt;&lt;a href=&quot;#最基本的SELECT语句&quot; class=&quot;headerlink&quot; title=&quot;最基本的SELECT语句&quot;&gt;&lt;/a&gt;最基本的SELECT语句&lt;/h1&gt;&lt;h2 id=&quot;1-SQL语言的规则和规范&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql一条sql实现更新或者插入</title>
-    <link href="http://wumangeng.github.io/2022/05/25/mysql-yi-tiao-sql-shi-xian-geng-xin-huo-cha-ru/"/>
-    <id>http://wumangeng.github.io/2022/05/25/mysql-yi-tiao-sql-shi-xian-geng-xin-huo-cha-ru/</id>
-    <published>2022-05-25T01:10:20.000Z</published>
-    <updated>2022-09-09T00:16:21.953Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;mysql一条sql实现更新或者插入&quot;&gt;&lt;a href=&quot;#mysql一条sql实现更新或者插入&quot; class=&quot;headerlink&quot; title=&quot;mysql一条sql实现更新或者插入&quot;&gt;&lt;/a&gt;mysql一条sql实现更新或者插入&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/categories/mysql/"/>
-    
-    
-    <category term="mysql" scheme="http://wumangeng.github.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://wumangeng.github.io/2022/05/05/spring-du-qu-wen-jian/"/>
-    <id>http://wumangeng.github.io/2022/05/05/spring-du-qu-wen-jian/</id>
-    <published>2022-05-05T01:10:20.000Z</published>
-    <updated>2022-06-21T11:40:47.899Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Spring中读取文件的问题&quot;&gt;&lt;a href=&quot;#Spring中读取文件的问题&quot; class=&quot;headerlink&quot; title=&quot;Spring中读取文件的问题&quot;&gt;&lt;/a&gt;Spring中读取文件的问题&lt;/h1&gt;&lt;h2</summary>
-        
-      
-    
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/tags/%E9%A1%B9%E7%9B%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搭建ELK并从redis上采集数据</title>
-    <link href="http://wumangeng.github.io/2022/04/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/"/>
-    <id>http://wumangeng.github.io/2022/04/25/da-jian-elk-bing-cong-redis-chong-cai-ji-shu-ju/</id>
-    <published>2022-04-25T01:10:20.000Z</published>
-    <updated>2022-04-28T09:47:30.428Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;docker-compose安装elk&quot;&gt;&lt;a href=&quot;#docker-compose安装elk&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="elk" scheme="http://wumangeng.github.io/categories/elk/"/>
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
-    <category term="elk" scheme="http://wumangeng.github.io/tags/elk/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用netty开发长连接协议</title>
-    <link href="http://wumangeng.github.io/2022/04/05/netty-kai-fa-shi-jian/"/>
-    <id>http://wumangeng.github.io/2022/04/05/netty-kai-fa-shi-jian/</id>
-    <published>2022-04-05T01:10:20.000Z</published>
-    <updated>2022-09-09T00:12:57.771Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Netty-是什么&quot;&gt;&lt;a href=&quot;#Netty-是什么&quot; class=&quot;headerlink&quot; title=&quot;Netty 是什么&quot;&gt;&lt;/a&gt;&lt;strong&gt;Netty 是什么&lt;/strong&gt;&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt; Netty is</summary>
-        
-      
-    
-    
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/categories/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="IO网络编程" scheme="http://wumangeng.github.io/tags/IO%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/"/>
-    
-    <category term="netty" scheme="http://wumangeng.github.io/tags/netty/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>redis-bigkey问题的解决</title>
-    <link href="http://wumangeng.github.io/2022/03/17/redis-bigkey-wen-ti/"/>
-    <id>http://wumangeng.github.io/2022/03/17/redis-bigkey-wen-ti/</id>
-    <published>2022-03-17T01:10:20.000Z</published>
-    <updated>2022-09-08T23:53:24.964Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h3 id=&quot;问题：&quot;&gt;&lt;a href=&quot;#问题：&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="redis" scheme="http://wumangeng.github.io/categories/redis/"/>
-    
-    
-    <category term="redis" scheme="http://wumangeng.github.io/tags/redis/"/>
     
   </entry>
   
