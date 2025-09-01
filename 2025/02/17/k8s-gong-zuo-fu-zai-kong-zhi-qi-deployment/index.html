@@ -1,0 +1,1835 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="k8s">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>k8s | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">k8s</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Deployment/">
+                                <span class="chip bg-color">Deployment</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-02-17
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    8.2k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、引入背景"><a href="#一、引入背景" class="headerlink" title="一、引入背景"></a>一、引入背景</h1><p>在早期版本的K8s中，Pod的副本数量由<code>Replication Controller</code>（简称RC）进行管理。然而，随着K8s的不断发展，RC的功能逐渐显得捉襟见肘，无法满足复杂的应用部署需求。为了解决这个问题，K8s从V1.2版本开始引入了<code>Deployment</code>控制器。</p>
+<p><code>Deployment</code>控制器并不直接管理Pod，而是通过管理<code>ReplicaSet</code>来间接管理Pod。简单来说，Deployment管理<code>ReplicaSet</code>，而<code>ReplicaSet</code>管理Pod。这样的设计使得<code>Deployment</code>比<code>ReplicaSet</code>功能更加强大，能够满足更多样化的应用部署需求。</p>
+<p><a href="1918842874.png"><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240729232501870-1918842874.png" alt="img"></a></p>
+<p>Deployment 为 Pod 和 ReplicaSet 提供了一个<strong>声明式定义</strong>(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用</p>
+<ul>
+<li><p>声明性的东西是对终结果的陈述，表明意图而不是实现它的过程。在Kubernetes 中，这就是说“应该有一个包含三个 Pod 的 ReplicaSet”</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ kubectl apply-f deployment.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>命令式充当命令。声明式是被动的，而命令式是主动且直接的：“创建一个包含三个 Pod 的ReplicaSet”</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ kubectl replace -f deployment.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<blockquote>
+<p><strong>替换方式：</strong></p>
+<ul>
+<li><p>kubectl apply: 使用新的配置部分地更新现有资源的配置。它会根据提供的配置文件或参数，只更新与新配置中不同的部分，而不会覆盖整个资源的配置<br>字段级别的更新</p>
+</li>
+<li><p>kubectl replace: 使用新的配置完全替换掉现有资源的配置这意味着新配置将覆盖现有资源的所有字段和属性，包括未指定的字段，会导致整个资源的替</p>
+</li>
+</ul>
+<p><strong>字段级别的更新：</strong></p>
+<ul>
+<li>kubectl apply: 只更新与新配置中不同的字段和属性，保留未指定的字段不受影响</li>
+<li>kubectl replace:由于是完全替换，所以会覆盖所有字段和属性，无论是否在新配置中指定</li>
+</ul>
+<p><strong>部分更新：</strong></p>
+<ul>
+<li><p>kubectl apply: 支持部分更新，只会更新新配置中发生变化的部分，保留未指定的部分不受影响</p>
+</li>
+<li><p>kubectlreplace:不支持部分更新，它会替换整个资源的配置</p>
+</li>
+</ul>
+<p><strong>与其他配置的影响：</strong></p>
+<ul>
+<li>kubectl apply: 可以结合使用 -f 或 -k 参数，从文件或目录中读取多个资源配置，并根据当前集群中的资源状态进行更新</li>
+<li>kubectl replace: 不考虑其他资源配置的状态，直接替换资源的配置</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>比较当前资源清单和现有的服务区别</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ kubectl <span class="token function">diff</span> -f deployment.yaml <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h1 id="二、主要功能"><a href="#二、主要功能" class="headerlink" title="二、主要功能"></a>二、主要功能</h1><ul>
+<li>支持ReplicaSet的所有功能（ReplicaSet简称RS，功能与RC类似，但是RS多了标签选择的运算方式）</li>
+<li>支持发布的停止、继续</li>
+<li>支持滚动升级和回滚版本</li>
+</ul>
+<h1 id="三、资源清单"><a href="#三、资源清单" class="headerlink" title="三、资源清单"></a>三、资源清单</h1><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1 <span class="token comment"># 版本号</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment <span class="token comment"># 类型       </span>
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span> <span class="token comment"># 元数据</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> <span class="token comment"># Deploy名称 </span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> <span class="token comment"># 所属命名空间 </span>
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span> <span class="token comment">#标签</span>
+    <span class="token key atrule">controller</span><span class="token punctuation">:</span> deploy
+<span class="token key atrule">spec</span><span class="token punctuation">:</span> <span class="token comment"># 详情描述</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token comment"># 副本数量</span>
+  <span class="token key atrule">revisionHistoryLimit</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token comment"># 保留历史版本（rs，用于版本回退）</span>
+  <span class="token key atrule">paused</span><span class="token punctuation">:</span> <span class="token boolean important">false</span> <span class="token comment"># 暂停部署，默认是false</span>
+  <span class="token key atrule">progressDeadlineSeconds</span><span class="token punctuation">:</span> <span class="token number">600</span> <span class="token comment"># 部署超时时间（s），默认是600</span>
+  <span class="token key atrule">strategy</span><span class="token punctuation">:</span> <span class="token comment"># 策略</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> RollingUpdate <span class="token comment"># 滚动更新策略</span>
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span> <span class="token comment"># 滚动更新</span>
+      <span class="token key atrule">maxSurge</span><span class="token punctuation">:</span> 30% <span class="token comment"># 最大额外可以存在的副本数，可以为百分比，也可以为整数</span>
+      <span class="token key atrule">maxUnavailable</span><span class="token punctuation">:</span> 30% <span class="token comment"># 最大不可用状态的 Pod 的最大值，可以为百分比，也可以为整数</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span> <span class="token comment"># 选择器，通过它指定该控制器管理哪些pod</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span> <span class="token comment"># Labels匹配规则</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>pod
+    <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span> <span class="token comment"># Expressions匹配规则(匹配运算符：In、NotIn、Exists、DoesNotExist)</span>
+      <span class="token punctuation">-</span> <span class="token punctuation">&#123;</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> app<span class="token punctuation">,</span> <span class="token key atrule">operator</span><span class="token punctuation">:</span> In<span class="token punctuation">,</span> <span class="token key atrule">values</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> nginx<span class="token punctuation">-</span>pod <span class="token punctuation">]</span> <span class="token punctuation">&#125;</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span> <span class="token comment"># 模板，当副本数量不足时，会根据下面的模板创建pod副本</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>pod
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+          <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+          <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>selector.matchExpressions</code></p>
+<blockquote>
+<p>rs 在标签选择器上，除了可以定义键值对的选择形式，还支持 matchExpressions 字段，可以提供多种选择。目前支持的操作包括:<br>。In：label的值在某个列表中<br>。Notin：label的值不在某个列表中<br>。Exists：某个label存在<br>。DoesNotExist：某个label不存在</p>
+</blockquote>
+<h1 id="四、实例"><a href="#四、实例" class="headerlink" title="四、实例"></a>四、实例</h1><h2 id="1、流程"><a href="#1、流程" class="headerlink" title="1、流程"></a>1、流程</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#creating-a-deployment">创建 Deployment 以将 ReplicaSet 上线</a>。ReplicaSet 在后台创建 Pod。 检查 ReplicaSet 的上线状态，查看其是否成功。</li>
+<li>通过更新 Deployment 的 PodTemplateSpec，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#updating-a-deployment">声明 Pod 的新状态</a> 。 新的 ReplicaSet 会被创建，Deployment 以受控速率将 Pod 从旧 ReplicaSet 迁移到新 ReplicaSet。 每个新的 ReplicaSet 都会更新 Deployment 的修订版本。</li>
+<li>如果 Deployment 的当前状态不稳定，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#rolling-back-a-deployment">回滚到较早的 Deployment 版本</a>。 每次回滚都会更新 Deployment 的修订版本。</li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#scaling-a-deployment">扩大 Deployment 规模以承担更多负载</a>。</li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#pausing-and-resuming-a-deployment">暂停 Deployment 的上线</a> 以应用对 PodTemplateSpec 所作的多项修改， 然后恢复其执行以启动新的上线版本。</li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#deployment-status">使用 Deployment 状态</a>来判定上线过程是否出现停滞。</li>
+<li><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#clean-up-policy">清理较旧的不再需要的 ReplicaSet</a> 。</li>
+</ul>
+<h2 id="2、创建Deployment资源清单"><a href="#2、创建Deployment资源清单" class="headerlink" title="2、创建Deployment资源清单"></a>2、创建Deployment资源清单</h2><blockquote>
+<p>nginx-deployment.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>创建名为 deploy-controller（由 .metadata.name 字段标明）的 Deployment。 该名称将成为后续创建 ReplicaSet 和 Pod 的命名基础。 参阅<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#writing-a-deployment-spec">编写 Deployment 规约</a>获取更多详细信息。</p>
+</li>
+<li><p>该 Deployment 创建一个 ReplicaSet，它创建三个（由 .spec.replicas 字段标明）Pod 副本。</p>
+</li>
+<li><p><code>.spec.selector</code> 字段定义所创建的 ReplicaSet 如何查找要管理的 Pod。 在这里，你选择在 Pod 模板中定义的标签（app: nginx）。 不过，更复杂的选择规则是也可能的，只要 Pod 模板本身满足所给规则即可。</p>
+</li>
+<li><p><code>template</code>字段包含以下子字段：</p>
+<ul>
+<li>Pod 被使用 <code>.metadata.labels</code> 字段打上 app: nginx 标签。</li>
+<li>Pod 模板规约（即 <code>.template.spec</code> 字段）指示 Pod 运行一个 nginx 容器，镜像为nginx的最新版本。</li>
+<li>创建一个容器并使用 <code>.spec.template.spec.containers[0].name</code> 字段将其命名为 nginx。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3、创建Deployment"><a href="#3、创建Deployment" class="headerlink" title="3、创建Deployment"></a>3、创建Deployment</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f nginx-deployment.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232501348-1253984660.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232501348-1253984660.png" alt="img"></a></p>
+<h2 id="4、检查Deployment是否创建成功（正在创建）"><a href="#4、检查Deployment是否创建成功（正在创建）" class="headerlink" title="4、检查Deployment是否创建成功（正在创建）"></a>4、检查Deployment是否创建成功（正在创建）</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deployments -n default <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232500924-470800973.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232500924-470800973.png" alt="img"></a></p>
+<p>在检查集群中的 Deployment 时，所显示的字段有：</p>
+<ul>
+<li><code>NAME</code> 列出了名字空间中 Deployment 的名称。</li>
+<li><code>READY</code> 显示应用程序的可用的“副本”数。显示的模式是“就绪个数/期望个数”。</li>
+<li><code>UP-TO-DATE</code> 显示为了达到期望状态已经更新的副本数。</li>
+<li><code>AVAILABLE</code> 显示应用可供用户使用的副本数。</li>
+<li><code>AGE</code> 显示应用程序运行的时间。</li>
+</ul>
+<blockquote>
+<p>请注意期望副本数是根据 .spec.replicas 字段设置 3。</p>
+</blockquote>
+<h2 id="5、查看Deployment的上线状态"><a href="#5、查看Deployment的上线状态" class="headerlink" title="5、查看Deployment的上线状态"></a>5、查看Deployment的上线状态</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232500422-933635832.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232500422-933635832.png" alt="img"></a></p>
+<h2 id="6、再次查看Deployment状态（创建完成）"><a href="#6、再次查看Deployment状态（创建完成）" class="headerlink" title="6、再次查看Deployment状态（创建完成）"></a>6、再次查看Deployment状态（创建完成）</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deployments -n default <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459877-508362296.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459877-508362296.png" alt="img"></a></p>
+<blockquote>
+<p>注意 Deployment 已创建全部三个副本，并且所有副本都是最新的（它们包含最新的 Pod 模板） 并且可用</p>
+</blockquote>
+<h2 id="7、查看Deployment-创建的ReplicaSet-rs"><a href="#7、查看Deployment-创建的ReplicaSet-rs" class="headerlink" title="7、查看Deployment 创建的ReplicaSet(rs)"></a>7、查看Deployment 创建的ReplicaSet(rs)</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459482-1624349185.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459482-1624349185.png" alt="img"></a></p>
+<p>ReplicaSet 输出中包含以下字段：</p>
+<ul>
+<li><code>NAME</code> 列出名字空间中 ReplicaSet 的名称；</li>
+<li><code>DESIRED</code> 显示应用的期望副本个数，即在创建 Deployment 时所定义的值。 此为期望状态；</li>
+<li><code>CURRENT</code> 显示当前运行状态中的副本个数；</li>
+<li><code>READY</code> 显示应用中有多少副本可以为用户提供服务；</li>
+<li><code>AGE</code> 显示应用已经运行的时间长度。</li>
+</ul>
+<blockquote>
+<p>注意 ReplicaSet 的名称格式始终为 [Deployment 名称]-[哈希]。 该名称将成为所创建的 Pod 的命名基础。 其中的哈希字符串与 ReplicaSet 上的 pod-template-hash 标签一致。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459095-1316140608.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232459095-1316140608.png" alt="img"></a></p>
+<h2 id="8、查看被创建的Pod的标签"><a href="#8、查看被创建的Pod的标签" class="headerlink" title="8、查看被创建的Pod的标签"></a>8、查看被创建的Pod的标签</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods --show-labels <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232458615-552620824.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232458615-552620824.png" alt="img"></a></p>
+<ul>
+<li>所创建的 ReplicaSet 确保总是存在三个 nginx Pod。</li>
+<li>必须在 Deployment 中指定适当的Pod 模板标签（在本例中为 app: nginx）。</li>
+<li>标签最好不要与其他控制器（包括其他 Deployment 和 StatefulSet）重叠。</li>
+</ul>
+<h2 id="9、Pod-template-hash-标签"><a href="#9、Pod-template-hash-标签" class="headerlink" title="9、Pod-template-hash 标签"></a>9、Pod-template-hash 标签</h2><blockquote>
+<p>不要更改此标签</p>
+</blockquote>
+<p>Deployment 控制器将 <code>pod-template-hash</code> 标签添加到 Deployment 所创建或收留的每个 ReplicaSet 。</p>
+<p>此标签可确保 Deployment 的子 ReplicaSet 不重叠。 标签是通过对 ReplicaSet 的 <code>PodTemplate</code> 进行哈希处理。 所生成的哈希值被添加到 ReplicaSet 选择算符、Pod 模板标签，并存在于在 ReplicaSet 可能拥有的任何现有 Pod 中。</p>
+<h1 id="五、滚动更新Deployment"><a href="#五、滚动更新Deployment" class="headerlink" title="五、滚动更新Deployment"></a>五、滚动更新Deployment</h1><blockquote>
+<p>仅当 Deployment Pod 模板（即 .spec.template）发生改变时，例如模板的标签或容器镜像被更新， 才会触发 Deployment 上线。其他更新（如对 Deployment 执行扩缩容的操作）不会触发上线动作。</p>
+</blockquote>
+<h2 id="1、更新容器所使用的镜像"><a href="#1、更新容器所使用的镜像" class="headerlink" title="1、更新容器所使用的镜像"></a>1、更新容器所使用的镜像</h2><h3 id="1-1、kubectl-set-手动设置"><a href="#1-1、kubectl-set-手动设置" class="headerlink" title="1.1、kubectl set 手动设置"></a>1.1、kubectl set 手动设置</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> image deployment/nginx-deployment <span class="token assign-left variable">nginx</span><span class="token operator">=</span>nginx:1.16.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232458159-1396585016.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232458159-1396585016.png" alt="img"></a></p>
+<blockquote>
+<p>deployment/nginx-deployment 表明 Deployment 的名称</p>
+<p>nginx 表明需要进行更新的容器， 而 nginx:1.16.1 则表示镜像的新版本以及它的标签。</p>
+</blockquote>
+<h3 id="1-2、edit在线更新"><a href="#1-2、edit在线更新" class="headerlink" title="1.2、edit在线更新"></a>1.2、edit在线更新</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl edit deployment nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232457531-275200424.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232457531-275200424.png" alt="img"></a></p>
+<h2 id="2、查看上线状态"><a href="#2、查看上线状态" class="headerlink" title="2、查看上线状态"></a>2、查看上线状态</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232455088-1496912032.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232455088-1496912032.png" alt="img"></a></p>
+<h2 id="3、上线后查看Deployment"><a href="#3、上线后查看Deployment" class="headerlink" title="3、上线后查看Deployment"></a>3、上线后查看Deployment</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deploy -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232454549-2134182547.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232454549-2134182547.png" alt="img"></a></p>
+<h2 id="4、查看ReplicaSet-rs"><a href="#4、查看ReplicaSet-rs" class="headerlink" title="4、查看ReplicaSet(rs)"></a>4、查看ReplicaSet(rs)</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232454149-1820642345.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232454149-1820642345.png" alt="img"></a></p>
+<p>查看Deployment 通过创建新的 ReplicaSet 并将其扩容到 3 个副本并将旧 ReplicaSet 缩容到 0 个副本完成了 Pod 的更新操作</p>
+<h2 id="5、查看新创建的Pod"><a href="#5、查看新创建的Pod" class="headerlink" title="5、查看新创建的Pod"></a>5、查看新创建的Pod</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232453700-127669045.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232453700-127669045.png" alt="img"></a></p>
+<blockquote>
+<p>应该仅显示新的Pod信息</p>
+</blockquote>
+<p>下次要更新这些 Pod 时，只需再次更新 Deployment Pod 模板即可。</p>
+<p>Deployment 可确保在更新时仅关闭一定数量的 Pod。默认情况下，它确保至少所需 Pod 的 75% 处于运行状态（最大不可用比例为 25%）。</p>
+<p>Deployment 还确保仅所创建 Pod 数量只可能比期望 Pod 数高一点点。 默认情况下，它可确保启动的 Pod 个数比期望个数最多多出 125%（最大峰值 25%）。</p>
+<p>例如，如果仔细查看上述 Deployment ，将看到它首先创建了一个新的 Pod，然后删除旧的 Pod， 并创建了新的 Pod。它不会杀死旧 Pod，直到有足够数量的新 Pod 已经出现。 在足够数量的旧 Pod 被杀死前并没有创建新 Pod。它确保至少 3 个 Pod 可用， 同时最多总共 4 个 Pod 可用。 当 Deployment 设置为 4 个副本时，Pod 的个数会介于 3 和 5 之间。</p>
+<h2 id="6、查看Deployment详细信息"><a href="#6、查看Deployment详细信息" class="headerlink" title="6、查看Deployment详细信息"></a>6、查看Deployment详细信息</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe deployments<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232452921-1124202430.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232452921-1124202430.png" alt="img"></a></p>
+<p>可以看到，当第一次创建 Deployment 时，它创建了一个 ReplicaSet（nginx-deployment-585449566） 并将其直接扩容至 3 个副本。更新 Deployment 时，它创建了一个新的 ReplicaSet （nginx-deployment-76f59d996），并将其扩容为 1，等待其就绪；然后将旧 ReplicaSet 缩容到 2， 将新的 ReplicaSet 扩容到 2 以便至少有 3 个 Pod 可用且最多创建 4 个 Pod。 然后，它使用相同的滚动更新策略继续对新的 ReplicaSet 扩容并对旧的 ReplicaSet 缩容。 最后，你将有 3 个可用的副本在新的 ReplicaSet 中，旧 ReplicaSet 将缩容到 0。</p>
+<blockquote>
+<p>Kubernetes 在计算 availableReplicas 数值时不考虑终止过程中的 Pod， availableReplicas 的值一定介于 replicas - maxUnavailable 和 replicas + maxSurge 之间。 因此，你可能在上线期间看到 Pod 个数比预期的多，Deployment 所消耗的总的资源也大于 replicas + maxSurge 个 Pod 所用的资源，直到被终止的 Pod 所设置的 terminationGracePeriodSeconds 到期为止。</p>
+</blockquote>
+<h1 id="六、多-Deployment-动态更新"><a href="#六、多-Deployment-动态更新" class="headerlink" title="六、多 Deployment 动态更新"></a>六、多 Deployment 动态更新</h1><p>Deployment 控制器每次注意到新的 Deployment 时，都会创建一个 ReplicaSet 以启动所需的 Pod。 如果更新了 Deployment，则控制标签匹配 .spec.selector 但模板不匹配 .spec.template 的 Pod 的现有 ReplicaSet 被缩容。 最终，新的 ReplicaSet 缩放为 .spec.replicas 个副本， 所有旧 ReplicaSet 缩放为 0 个副本。</p>
+<p>当 Deployment 正在上线时被更新，Deployment 会针对更新创建一个新的 ReplicaSet 并开始对其扩容，之前正在被扩容的 ReplicaSet 会被翻转，添加到旧 ReplicaSet 列表 并开始缩容。</p>
+<p>例如，假定你在创建一个 Deployment 以生成 nginx:1.14.2 的 5 个副本，但接下来 更新 Deployment 以创建 5 个 nginx:1.16.1 的副本，而此时只有 3 个 nginx:1.14.2 副本已创建。在这种情况下，Deployment 会立即开始杀死 3 个 nginx:1.14.2 Pod， 并开始创建 nginx:1.16.1 Pod。它不会等待 nginx:1.14.2 的 5 个副本都创建完成后才开始执行变更动作。</p>
+<h1 id="七、回滚Deployment"><a href="#七、回滚Deployment" class="headerlink" title="七、回滚Deployment"></a>七、回滚Deployment</h1><p>Deployment 被触发上线时，系统就会创建 Deployment 的新的修订版本。 这意味着仅当 Deployment 的 Pod 模板（.spec.template）发生更改时，才会创建新修订版本</p>
+<p>例如，模板的标签或容器镜像发生变化。 其他更新，如 Deployment 的扩缩容操作不会创建 Deployment 修订版本。 这是为了方便同时执行手动缩放或自动缩放。 换言之，当你回滚到较早的修订版本时，只有 Deployment 的 Pod 模板部分会被回滚。</p>
+<h2 id="1、回滚场景"><a href="#1、回滚场景" class="headerlink" title="1、回滚场景"></a>1、回滚场景</h2><blockquote>
+<p>假设你在更新 Deployment 时犯了一个拼写错误，将镜像名称命名设置为 nginx:1.161 而不是 nginx:1.16.1</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> image deployment/nginx-deployment <span class="token assign-left variable">nginx</span><span class="token operator">=</span>nginx:1.161 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232451666-532817696.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232451666-532817696.png" alt="img"></a></p>
+<h2 id="2、检查上线状态来验证"><a href="#2、检查上线状态来验证" class="headerlink" title="2、检查上线状态来验证"></a>2、检查上线状态来验证</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232451260-289508188.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232451260-289508188.png" alt="img"></a></p>
+<ul>
+<li>按 Ctrl-C 停止上述上线状态观测。有关上线停滞的详细信息，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#deployment-status">参考这里</a>。</li>
+<li>你可以看到旧的副本（算上来自 <code>nginx-deployment-585449566</code> 和 <code>nginx-deployment-76f59d996</code> 的副本）有 3 个， 新的副本（来自 <code>nginx-deployment-66d646f584</code>）有 1 个：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs    <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232450819-224167045.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232450819-224167045.png" alt="img"></a></p>
+<h2 id="3、查看创建的Pod"><a href="#3、查看创建的Pod" class="headerlink" title="3、查看创建的Pod"></a>3、查看创建的Pod</h2><blockquote>
+<p>新 ReplicaSet 所创建的 1 个 Pod 卡顿在镜像拉取循环中。</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232450353-1620399369.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232450353-1620399369.png" alt="img"></a></p>
+<p>Deployment 控制器自动停止有问题的上线过程，并停止对新的 ReplicaSet 扩容。 这行为取决于所指定的 rollingUpdate 参数（具体为 maxUnavailable）。 默认情况下，Kubernetes 将此值设置为 25%。</p>
+<h2 id="4、获取Deployment详细信息"><a href="#4、获取Deployment详细信息" class="headerlink" title="4、获取Deployment详细信息"></a>4、获取Deployment详细信息</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe deployments<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232449822-494399921.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232449822-494399921.png" alt="img"></a></p>
+<blockquote>
+<p>要解决此问题，需要回滚到以前稳定的 Deployment 版本。</p>
+</blockquote>
+<h2 id="5、检查Deployment历史上线"><a href="#5、检查Deployment历史上线" class="headerlink" title="5、检查Deployment历史上线"></a>5、检查Deployment历史上线</h2><h3 id="5-1、检查-Deployment-修订历史"><a href="#5-1、检查-Deployment-修订历史" class="headerlink" title="5.1、检查 Deployment 修订历史"></a>5.1、检查 Deployment 修订历史</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout <span class="token function">history</span> deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232448832-1304540748.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232448832-1304540748.png" alt="img"></a></p>
+<h3 id="5-2、查看修订历史的详细信息"><a href="#5-2、查看修订历史的详细信息" class="headerlink" title="5.2、查看修订历史的详细信息"></a>5.2、查看修订历史的详细信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout <span class="token function">history</span> deployment/nginx-deployment --revision<span class="token operator">=</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66a7b856d9c307b7e952398d.png"><img src="https://pic.imgdb.cn/item/66a7b856d9c307b7e952398d.png" alt="img"></a></p>
+<h2 id="6、回滚到之前的版本"><a href="#6、回滚到之前的版本" class="headerlink" title="6、回滚到之前的版本"></a>6、回滚到之前的版本</h2><h3 id="6-1、撤消当前上线并回滚到以前的版本"><a href="#6-1、撤消当前上线并回滚到以前的版本" class="headerlink" title="6.1、撤消当前上线并回滚到以前的版本"></a>6.1、撤消当前上线并回滚到以前的版本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout undo deployment/nginx-deployment --to-revision<span class="token operator">=</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>与回滚相关的指令的更详细信息，请参考 <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout">kubectl rollout</a>。</p>
+<p>现在，Deployment 正在回滚到以前的稳定版本。Deployment 控制器生成了回滚到修订版本 2 的 DeploymentRollback 事件。</p>
+<h3 id="6-2、检查回滚是否成功以及-Deployment-是否正在运行"><a href="#6-2、检查回滚是否成功以及-Deployment-是否正在运行" class="headerlink" title="6.2、检查回滚是否成功以及 Deployment 是否正在运行"></a>6.2、检查回滚是否成功以及 Deployment 是否正在运行</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deployment nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232447740-1872198402.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232447740-1872198402.png" alt="img"></a></p>
+<h3 id="6-3、获取Deployment详细信息"><a href="#6-3、获取Deployment详细信息" class="headerlink" title="6.3、获取Deployment详细信息"></a>6.3、获取Deployment详细信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe deploy nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232447135-1790892277.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232447135-1790892277.png" alt="img"></a></p>
+<h1 id="八、缩放Deployment"><a href="#八、缩放Deployment" class="headerlink" title="八、缩放Deployment"></a>八、缩放Deployment</h1><h2 id="1、scale命令缩放"><a href="#1、scale命令缩放" class="headerlink" title="1、scale命令缩放"></a>1、scale命令缩放</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl scale deployment/nginx-deployment --replicas<span class="token operator">=</span><span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232446278-1611867466.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232446278-1611867466.png" alt="img"></a></p>
+<h2 id="2、自动缩放"><a href="#2、自动缩放" class="headerlink" title="2、自动缩放"></a>2、自动缩放</h2><blockquote>
+<p>假设集群启用了<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/">Pod 的水平自动缩放</a>， 你可以为 Deployment 设置自动缩放器，并基于现有 Pod 的 CPU 利用率选择要运行的 Pod 个数下限和上限。</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl autoscale deployment/nginx-deployment --min<span class="token operator">=</span><span class="token number">6</span> --max<span class="token operator">=</span><span class="token number">10</span> --cpu-percent<span class="token operator">=</span><span class="token number">60</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232445563-1180919139.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232445563-1180919139.png" alt="img"></a></p>
+<h2 id="3、比例缩放"><a href="#3、比例缩放" class="headerlink" title="3、比例缩放"></a>3、比例缩放</h2><p>RollingUpdate 的 Deployment 支持同时运行应用程序的多个版本。 当自动缩放器缩放处于上线进程（仍在进行中或暂停）中的 RollingUpdate Deployment 时， Deployment 控制器会平衡现有的活跃状态的 ReplicaSet（含 Pod 的 ReplicaSet）中的额外副本， 以降低风险。这称为 <strong>比例缩放（Proportional Scaling）</strong>。</p>
+<p>例如，你正在运行一个 10 个副本的 Deployment，其 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#max-surge">maxSurge</a>=3，<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#max-unavailable">maxUnavailable</a>=2。</p>
+<h3 id="3-1、修改资源清单"><a href="#3-1、修改资源清单" class="headerlink" title="3.1、修改资源清单"></a>3.1、修改资源清单</h3><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">10</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">strategy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> RollingUpdate
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span>
+      <span class="token key atrule">maxSurge</span><span class="token punctuation">:</span> <span class="token number">3</span>
+      <span class="token key atrule">maxUnavailable</span><span class="token punctuation">:</span> <span class="token number">2</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><code>maxSurge</code> 指定了在滚动更新期间可以比期望的副本数量多创建的最大 Pod 数量。它可以是一个绝对数字或者是相对于期望副本数量的百分比。这个字段确保在创建新的 Pod 时不会超出资源限制，并且可以控制更新的速度。<ul>
+<li>例如，在你的配置中，<code>maxSurge: 3</code> 意味着在滚动更新期间，最多可以比期望的副本数（在这个例子中是 10）多创建 3 个 Pod。</li>
+</ul>
+</li>
+<li><code>maxUnavailable</code> 指定了在滚动更新期间可以比期望的副本数量少的 Pod 的最大数量。同样，它可以是一个绝对数字或者是相对于期望副本数量的百分比。这个字段确保在删除旧的 Pod 时至少有一定数量的 Pod 可用，以保证服务的连续性。<ul>
+<li>例如，在你的配置中，<code>maxUnavailable: 2</code> 意味着在滚动更新期间，最多可以比期望的副本数少 2 个 Pod 可用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2、应用资源清单"><a href="#3-2、应用资源清单" class="headerlink" title="3.2、应用资源清单"></a>3.2、应用资源清单</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f nginx-deployment.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232444829-538527594.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232444829-538527594.png" alt="img"></a></p>
+<h3 id="3-3、确保-Deployment-的这-10-个副本都在运行"><a href="#3-3、确保-Deployment-的这-10-个副本都在运行" class="headerlink" title="3.3、确保 Deployment 的这 10 个副本都在运行"></a>3.3、确保 Deployment 的这 10 个副本都在运行</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232444315-1125164720.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232444315-1125164720.png" alt="img"></a></p>
+<h3 id="3-4、更新-Deployment-使用新镜像"><a href="#3-4、更新-Deployment-使用新镜像" class="headerlink" title="3.4、更新 Deployment 使用新镜像"></a>3.4、更新 Deployment 使用新镜像</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> image deployment/nginx-deployment <span class="token assign-left variable">nginx</span><span class="token operator">=</span>nginx:1.14.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232443706-2083436302.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232443706-2083436302.png" alt="img"></a></p>
+<h3 id="3-5、检查上线状态"><a href="#3-5、检查上线状态" class="headerlink" title="3.5、检查上线状态"></a>3.5、检查上线状态</h3><p>镜像更新使用 ReplicaSet <code>nginx-deployment-56677b7d5d</code> 启动新的上线过程， 但由于上面提到的 maxUnavailable 要求，该进程被阻塞了。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232443269-1496537934.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232443269-1496537934.png" alt="img"></a></p>
+<p>然后，出现了新的 Deployment 扩缩请求。自动缩放器将 Deployment 副本增加到 15。 Deployment 控制器需要决定在何处添加 5 个新副本。如果未使用比例缩放，所有 5 个副本 都将添加到新的 ReplicaSet 中。使用比例缩放时，可以将额外的副本分布到所有 ReplicaSet。 较大比例的副本会被添加到拥有最多副本的 ReplicaSet，而较低比例的副本会进入到 副本较少的 ReplicaSet。所有剩下的副本都会添加到副本最多的 ReplicaSet。 具有零副本的 ReplicaSet 不会被扩容。</p>
+<h3 id="3-6、查看Deployment状态"><a href="#3-6、查看Deployment状态" class="headerlink" title="3.6、查看Deployment状态"></a>3.6、查看Deployment状态</h3><p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232442777-1801177703.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232442777-1801177703.png" alt="img"></a></p>
+<h3 id="3-7、获取上线状态"><a href="#3-7、获取上线状态" class="headerlink" title="3.7、获取上线状态"></a>3.7、获取上线状态</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232442318-182769475.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232442318-182769475.png" alt="img"></a></p>
+<h1 id="九、暂停、恢复-Deployment-的上线过程"><a href="#九、暂停、恢复-Deployment-的上线过程" class="headerlink" title="九、暂停、恢复 Deployment 的上线过程"></a>九、暂停、恢复 Deployment 的上线过程</h1><p>在你更新一个 Deployment 的时候，或者计划更新它的时候， 你可以在触发一个或多个更新之前暂停 Deployment 的上线过程。 当你准备应用这些变更时，你可以重新恢复 Deployment 上线过程。 这样做使得你能够在暂停和恢复执行之间应用多个修补程序，而不会触发不必要的上线操作。</p>
+<h2 id="1、对于刚创建的Deployment"><a href="#1、对于刚创建的Deployment" class="headerlink" title="1、对于刚创建的Deployment"></a>1、对于刚创建的Deployment</h2><h3 id="1-1、获取Deployment-信息"><a href="#1-1、获取Deployment-信息" class="headerlink" title="1.1、获取Deployment 信息"></a>1.1、获取Deployment 信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441822-660295997.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441822-660295997.png" alt="img"></a></p>
+<h3 id="1-2、获取上线状态"><a href="#1-2、获取上线状态" class="headerlink" title="1.2、获取上线状态"></a>1.2、获取上线状态</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441409-1153351803.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441409-1153351803.png" alt="img"></a></p>
+<h2 id="2、暂停上线"><a href="#2、暂停上线" class="headerlink" title="2、暂停上线"></a>2、暂停上线</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout pause deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441010-855998558.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232441010-855998558.png" alt="img"></a></p>
+<h2 id="3、更新镜像"><a href="#3、更新镜像" class="headerlink" title="3、更新镜像"></a>3、更新镜像</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> image deployment/nginx-deployment <span class="token assign-left variable">nginx</span><span class="token operator">=</span>nginx:1.16.1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232440622-1930472851.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232440622-1930472851.png" alt="img"></a></p>
+<h2 id="4、查看没有触发上线状态"><a href="#4、查看没有触发上线状态" class="headerlink" title="4、查看没有触发上线状态"></a>4、查看没有触发上线状态</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout <span class="token function">history</span> deployment nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232440139-247629594.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232440139-247629594.png" alt="img"></a></p>
+<h2 id="5、获取上线状态验证现有的-ReplicaSet-没有被更改"><a href="#5、获取上线状态验证现有的-ReplicaSet-没有被更改" class="headerlink" title="5、获取上线状态验证现有的 ReplicaSet 没有被更改"></a>5、获取上线状态验证现有的 ReplicaSet 没有被更改</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232439689-1207565116.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232439689-1207565116.png" alt="img"></a></p>
+<h2 id="6、可以根据需要执行很多更新操作"><a href="#6、可以根据需要执行很多更新操作" class="headerlink" title="6、可以根据需要执行很多更新操作"></a>6、可以根据需要执行很多更新操作</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> resources deployment/nginx-deployment -c<span class="token operator">=</span>nginx --limits<span class="token operator">=</span>cpu<span class="token operator">=</span>200m,memory<span class="token operator">=</span>512Mi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232439156-144077311.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232439156-144077311.png" alt="img"></a></p>
+<p>暂停 Deployment 上线之前的初始状态将继续发挥作用，但新的更新在 Deployment 上线被暂停期间不会产生任何效果。</p>
+<h2 id="7、恢复-Deployment-上线"><a href="#7、恢复-Deployment-上线" class="headerlink" title="7、恢复 Deployment 上线"></a>7、恢复 Deployment 上线</h2><p>观察新的 ReplicaSet 的创建过程，其中包含了所应用的所有更新</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout resume deployment/nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232438753-250178746.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232438753-250178746.png" alt="img"></a></p>
+<h2 id="8、观察上线状态"><a href="#8、观察上线状态" class="headerlink" title="8、观察上线状态"></a>8、观察上线状态</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs -w<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232438329-2034249368.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232438329-2034249368.png" alt="img"></a></p>
+<h2 id="9、获取最新上线状态"><a href="#9、获取最新上线状态" class="headerlink" title="9、获取最新上线状态"></a>9、获取最新上线状态</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get rs -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232437786-10825401.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232437786-10825401.png" alt="img"></a></p>
+<blockquote>
+<p>不可以回滚处于暂停状态的 Deployment，除非先恢复其执行状态。</p>
+</blockquote>
+<h1 id="十、Deployment状态"><a href="#十、Deployment状态" class="headerlink" title="十、Deployment状态"></a>十、Deployment状态</h1><p>Deployment 的生命周期中会有许多状态。上线新的 ReplicaSet 期间可能处于 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#progressing-deployment">Progressing（进行中）</a>，可能是 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#complete-deployment">Complete（已完成）</a>，也可能是 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#failed-deployment">Failed（失败）</a>以至于无法继续进行。</p>
+<h2 id="1、进行中的Deployment"><a href="#1、进行中的Deployment" class="headerlink" title="1、进行中的Deployment"></a>1、进行中的Deployment</h2><p>执行下面的任务期间，Kubernetes 标记 Deployment 为<strong>进行中（Progressing）</strong>：</p>
+<ul>
+<li>Deployment 创建新的 ReplicaSet</li>
+<li>Deployment 正在为其最新的 ReplicaSet 扩容</li>
+<li>Deployment 正在为其旧有的 ReplicaSet(s) 缩容</li>
+<li>新的 Pod 已经就绪或者可用（就绪至少持续了 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#min-ready-seconds">MinReadySeconds</a> 秒）。</li>
+</ul>
+<p>当上线过程进入“Progressing”状态时，Deployment 控制器会向 Deployment 的 <code>.status.conditions</code> 中添加包含下面属性的状况条目：</p>
+<ul>
+<li><code>type: Progressing</code></li>
+<li><code>status: &quot;True&quot;</code></li>
+<li><code>reason: NewReplicaSetCreated</code> | <code>reason: FoundNewReplicaSet</code> | <code>reason: ReplicaSetUpdated</code></li>
+</ul>
+<p>监视 Deployment 的进度：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deploy <span class="token operator">&lt;</span>deployment-name<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="2、完成的Deployment"><a href="#2、完成的Deployment" class="headerlink" title="2、完成的Deployment"></a>2、完成的Deployment</h2><p>当 Deployment 具有以下特征时，Kubernetes 将其标记为<strong>完成（Complete）</strong>:</p>
+<ul>
+<li>与 Deployment 关联的所有副本都已更新到指定的最新版本，这意味着之前请求的所有更新都已完成。</li>
+<li>与 Deployment 关联的所有副本都可用。</li>
+<li>未运行 Deployment 的旧副本。</li>
+</ul>
+<p>当上线过程进入“Complete”状态时，Deployment 控制器会向 Deployment 的 <code>.status.conditions</code> 中添加包含下面属性的状况条目：</p>
+<ul>
+<li><code>type: Progressing</code></li>
+<li><code>status: &quot;True&quot;</code></li>
+<li><code>reason: NewReplicaSetAvailable</code></li>
+</ul>
+<p>这一 Progressing 状况的状态值会持续为 “True”，直至新的上线动作被触发。 即使副本的可用状态发生变化（进而影响 Available 状况），Progressing 状况的值也不会变化。</p>
+<h3 id="2-1、示例"><a href="#2-1、示例" class="headerlink" title="2.1、示例"></a>2.1、示例</h3><p>你可以使用 kubectl rollout status 检查 Deployment 是否已完成。 如果上线成功完成，kubectl rollout status 返回退出代码 0。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deploy nginx-deployment
+
+<span class="token builtin class-name">echo</span> <span class="token variable">$?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232437232-1617276516.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232437232-1617276516.png" alt="img"></a></p>
+<h2 id="3、失败的-Deployment"><a href="#3、失败的-Deployment" class="headerlink" title="3、失败的 Deployment"></a>3、失败的 Deployment</h2><p>Deployment 可能会在尝试部署其最新的 ReplicaSet ，一直处于未完成状态。 造成此情况一些可能因素如下：</p>
+<ul>
+<li>配额（Quota）不足</li>
+<li>就绪探测（Readiness Probe）失败</li>
+<li>镜像拉取错误</li>
+<li>权限不足</li>
+<li>限制范围（Limit Ranges）问题</li>
+<li>应用程序运行时的配置错误</li>
+</ul>
+<p>检测此状况的一种方法是在 Deployment 规约中指定截止时间参数： （<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#progress-deadline-seconds">.spec.progressDeadlineSeconds</a>）。 <code>.spec.progressDeadlineSeconds</code> 给出的是一个秒数值，Deployment 控制器在（通过 Deployment 状态） 标示 Deployment 进展停滞之前，需要等待所给的时长。</p>
+<h3 id="3-1、示例"><a href="#3-1、示例" class="headerlink" title="3.1、示例"></a>3.1、示例</h3><h4 id="3-1-1、设置progressDeadlineSeconds"><a href="#3-1-1、设置progressDeadlineSeconds" class="headerlink" title="3.1.1、设置progressDeadlineSeconds"></a>3.1.1、设置progressDeadlineSeconds</h4><p>以下 kubectl 命令设置规约中的 <code>progressDeadlineSeconds</code>，从而告知控制器 在 10 分钟后报告 Deployment 的上线没有进展：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl patch deployment/nginx-deployment -p <span class="token string">'&#123;"spec":&#123;"progressDeadlineSeconds":600&#125;&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232436852-182685146.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232436852-182685146.png" alt="img"></a></p>
+<p>超过截止时间后，Deployment 控制器将添加具有以下属性的 Deployment 状况到 Deployment 的 .status.conditions 中：</p>
+<ul>
+<li><code>type: Progressing</code></li>
+<li><code>status: &quot;False&quot;</code></li>
+<li><code>reason: ProgressDeadlineExceeded</code></li>
+</ul>
+<p>这一状况也可能会比较早地失败，因而其状态值被设置为 “False”， 其原因为 <code>ReplicaSetCreateError</code>。 一旦 Deployment 上线完成，就不再考虑其期限。</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#typical-status-properties">Kubernetes API Conventions</a> 获取更多状态状况相关的信息。</p>
+<p>Deployment 可能会出现瞬时性的错误，可能因为设置的超时时间过短， 也可能因为其他可认为是临时性的问题。</p>
+<h4 id="3-1-2、设置配额"><a href="#3-1-2、设置配额" class="headerlink" title="3.1.2、设置配额"></a>3.1.2、设置配额</h4><p>为了模拟配额不足的情况，我们需要为当前命名空间设置一个配额限制。假设我们希望限制 Pod 的数量为 1 个，我们可以创建一个配额 YAML 文件</p>
+<blockquote>
+<p>quota.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> ResourceQuota
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> pod<span class="token punctuation">-</span>quota
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hard</span><span class="token punctuation">:</span>
+    <span class="token key atrule">pods</span><span class="token punctuation">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-1-3、应用配额"><a href="#3-1-3、应用配额" class="headerlink" title="3.1.3、应用配额"></a>3.1.3、应用配额</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f quota.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>如果 Deployment 的创建时间早于 ResourceQuota 的应用时间，则 Deployment 不会受到配额限制的影响。</p>
+</blockquote>
+<h4 id="3-1-4、观察Deployment状态"><a href="#3-1-4、观察Deployment状态" class="headerlink" title="3.1.4、观察Deployment状态"></a>3.1.4、观察Deployment状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe deploy nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232436280-958094151.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232436280-958094151.png" alt="img"></a></p>
+<h4 id="3-1-5、查看报错message"><a href="#3-1-5、查看报错message" class="headerlink" title="3.1.5、查看报错message"></a>3.1.5、查看报错message</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get deploy nginx-deployment -o yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232434625-374410736.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232434625-374410736.png" alt="img"></a></p>
+<h4 id="3-1-6、检查Deployment进度"><a href="#3-1-6、检查Deployment进度" class="headerlink" title="3.1.6、检查Deployment进度"></a>3.1.6、检查Deployment进度</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deploy nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232433347-419769782.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232433347-419769782.png" alt="img"></a></p>
+<blockquote>
+<p>如果 Deployment 超过了进度期限</p>
+<p>命令将返回错误<code>error: deployment &quot;nginx-deployment&quot; exceeded its progress deadline</code></p>
+</blockquote>
+<h4 id="3-1-7、超过-Deployment-进度限期，Kubernetes-将更新状态和进度状况的原因"><a href="#3-1-7、超过-Deployment-进度限期，Kubernetes-将更新状态和进度状况的原因" class="headerlink" title="3.1.7、超过 Deployment 进度限期，Kubernetes 将更新状态和进度状况的原因"></a>3.1.7、超过 Deployment 进度限期，Kubernetes 将更新状态和进度状况的原因</h4><p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232432828-514100087.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232432828-514100087.png" alt="img"></a></p>
+<h4 id="3-1-8、解决配额问题"><a href="#3-1-8、解决配额问题" class="headerlink" title="3.1.8、解决配额问题"></a>3.1.8、解决配额问题</h4><p>增加配额限制，以便 Deployment 可以完成。我们可以通过修改 ResourceQuota 的硬限制来实现这一点：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl patch resourcequota pod-quota -p <span class="token string">'&#123;"spec":&#123;"hard":&#123;"pods":"3"&#125;&#125;&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232431636-735406343.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232431636-735406343.png" alt="img"></a></p>
+<h4 id="3-1-9、观察Deployment恢复情况"><a href="#3-1-9、观察Deployment恢复情况" class="headerlink" title="3.1.9、观察Deployment恢复情况"></a>3.1.9、观察Deployment恢复情况</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe deploy nginx-deployment<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://pic.imgdb.cn/item/66a7b7d2d9c307b7e951b6ba.png"><img src="https://pic.imgdb.cn/item/66a7b7d2d9c307b7e951b6ba.png" alt="img"></a></p>
+<p><code>type: Available</code> 加上 <code>status: True</code> 意味着 Deployment 具有最低可用性。 最低可用性由 Deployment 策略中的参数指定。</p>
+<p><code>type: Progressing</code> 加上 <code>status: True</code> 表示 Deployment 处于上线过程中，并且正在运行， 或者已成功完成进度，最小所需新副本处于可用。 在这个案例中 <code>reason: NewReplicaSetAvailable</code> 表示 Deployment 已完成。</p>
+<h4 id="3-1-10、检查-Deployment-是否未能取得进展"><a href="#3-1-10、检查-Deployment-是否未能取得进展" class="headerlink" title="3.1.10、检查 Deployment 是否未能取得进展"></a>3.1.10、检查 Deployment 是否未能取得进展</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status deploy nginx-deployment
+
+<span class="token builtin class-name">echo</span> <span class="token variable">$?</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232429367-14583239.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232429367-14583239.png" alt="img"></a></p>
+<h3 id="3-2、对失败的Deployment的操作"><a href="#3-2、对失败的Deployment的操作" class="headerlink" title="3.2、对失败的Deployment的操作"></a>3.2、对失败的Deployment的操作</h3><p>可应用于已完成的 Deployment 的所有操作也适用于失败的 Deployment。 你可以对其执行扩缩容、回滚到以前的修订版本等操作，或者在需要对 Deployment 的 Pod 模板应用多项调整时，将 Deployment 暂停。</p>
+<h1 id="十一、清理策略"><a href="#十一、清理策略" class="headerlink" title="十一、清理策略"></a>十一、清理策略</h1><p>可以在 Deployment 中设置 <code>.spec.revisionHistoryLimit</code> 字段以指定保留此 Deployment 的多少个旧有 ReplicaSet。其余的 ReplicaSet 将在后台被垃圾回收。 默认情况下，此值为 10。</p>
+<p>显式将此字段设置为 0 将导致 Deployment 的所有历史记录被清空，因此 Deployment 将无法回滚。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubeectl get deploy nginx-deployment -o yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232428728-1988235033.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232428728-1988235033.png" alt="img"></a></p>
+<h1 id="十二、金丝雀发布"><a href="#十二、金丝雀发布" class="headerlink" title="十二、金丝雀发布"></a>十二、金丝雀发布</h1><p>如果要使用 Deployment 向用户子集或服务器子集上线版本， 则可以遵循<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/manage-deployment/#canary-deployments">资源管理</a>所描述的金丝雀模式， 创建多个 Deployment，每个版本一个。</p>
+<h1 id="十三、编写Deployment规约"><a href="#十三、编写Deployment规约" class="headerlink" title="十三、编写Deployment规约"></a>十三、编写Deployment规约</h1><p>同其他 Kubernetes 配置一样， Deployment 需要 <code>.apiVersion</code>，<code>.kind</code> 和 <code>.metadata</code> 字段。 有关配置文件的其他信息，请参考<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/run-application/run-stateless-application-deployment/">部署 Deployment</a>、 配置容器和<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/object-management/">使用 kubectl 管理资源</a>等相关文档。</p>
+<p>当控制面为 Deployment 创建新的 Pod 时，Deployment 的 <code>.metadata.name</code> 是命名这些 Pod 的部分基础。 Deployment 的名称必须是一个合法的 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/names/#dns-subdomain-names">DNS 子域</a>值， 但这会对 Pod 的主机名产生意外的结果。为获得最佳兼容性，名称应遵循更严格的 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/names#dns-label-names">DNS 标签</a>规则。</p>
+<p>Deployment 还需要 <a target="_blank" rel="noopener" href="https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status">.spec 部分</a>。</p>
+<h2 id="1、Pod模版"><a href="#1、Pod模版" class="headerlink" title="1、Pod模版"></a>1、Pod模版</h2><p><code>.spec</code> 中只有 <code>.spec.template</code> 和 <code>.spec.selector</code> 是必需的字段。</p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232427672-90802434.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232427672-90802434.png" alt="img"></a></p>
+<h3 id="1-1、-spec-template"><a href="#1-1、-spec-template" class="headerlink" title="1.1、.spec.template"></a>1.1、.spec.template</h3><ul>
+<li>这个字段定义了 Deployment 创建的 Pod 的模板，它告诉 Kubernetes 每个 Pod 应该是什么样子的。</li>
+<li>包含 .spec.template.metadata.labels，这些标签用于标识由 Deployment 控制的 Pod。</li>
+<li>包含 .spec.template.spec，这描述了 Pod 的具体配置，比如容器、镜像、端口等。</li>
+</ul>
+<h3 id="1-2、-spec-selector"><a href="#1-2、-spec-selector" class="headerlink" title="1.2、.spec.selector"></a>1.2、.spec.selector</h3><ul>
+<li>这个字段指定了 Deployment 用来选择 Pod 的标签选择器。</li>
+<li>它必须与 .spec.template.metadata.labels 中定义的标签相匹配，这样才能让 Deployment 知道哪些 Pod 是它应该管理的。</li>
+</ul>
+<p>.spec.template 是一个 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/#pod-templates">Pod 模板</a>。 它和 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/">Pod</a> 的语法规则完全相同。 只是这里它是嵌套的，因此不需要 apiVersion 或 kind。</p>
+<p>除了 Pod 的必填字段外，Deployment 中的 Pod 模板必须指定适当的标签和适当的重新启动策略。 对于标签，请确保不要与其他控制器重叠。请参考<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#selector">选择算符</a>。</p>
+<p>只有 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy">.spec.template.spec.restartPolicy</a> 等于 Always 才是被允许的，这也是在没有指定时的默认设置。</p>
+<h2 id="2、副本"><a href="#2、副本" class="headerlink" title="2、副本"></a>2、副本</h2><p><code>.spec.replicas</code> 是指定所需 Pod 的可选字段。它的默认值是1。</p>
+<p>如果你对某个 Deployment 执行了手动扩缩操作（例如，通过 <code>kubectl scale deployment deployment --replicas=X</code>）， 之后基于清单对 Deployment 执行了更新操作（例如通过运行 <code>kubectl apply -f deployment.yaml</code>），那么通过应用清单而完成的更新会覆盖之前手动扩缩所作的变更。</p>
+<p>如果一个 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/run-application/horizontal-pod-autoscale/">HorizontalPodAutoscaler</a> （或者其他执行水平扩缩操作的类似 API）在管理 Deployment 的扩缩， 则不要设置 <code>.spec.replicas</code>。恰恰相反，应该允许 Kubernetes <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/reference/glossary/?all=true#term-control-plane">控制面</a>来自动管理 .spec.replicas 字段。</p>
+<h2 id="3、指定算符"><a href="#3、指定算符" class="headerlink" title="3、指定算符"></a>3、指定算符</h2><p><code>.spec.selector</code> 是指定本 Deployment 的 Pod <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/labels/">标签选择算符</a>的必需字段。</p>
+<p><code>.spec.selector</code> 必须匹配 <code>.spec.template.metadata.labels</code>，否则请求会被 API 拒绝。</p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232427085-463965969.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232427085-463965969.png" alt="img"></a></p>
+<p>在 API apps/v1版本中，<code>.spec.selector</code> 和 <code>.metadata.labels</code> 如果没有设置的话， 不会被默认设置为 .<code>spec.template.metadata.labels</code>，所以需要明确进行设置。 同时在 apps/v1版本中，Deployment 创建后 <code>.spec.selector</code> 是不可变的。</p>
+<p>当 Pod 的标签和选择算符匹配，但其模板和 <code>.spec.template</code> 不同时，或者此类 Pod 的总数超过 <code>.spec.replicas</code> 的设置时，Deployment 会终结之。 如果 Pod 总数未达到期望值，Deployment 会基于 <code>.spec.template</code> 创建新的 Pod。</p>
+<blockquote>
+<p>如果有多个控制器的选择算符发生重叠，则控制器之间会因冲突而无法正常工作。</p>
+</blockquote>
+<h2 id="4、策略"><a href="#4、策略" class="headerlink" title="4、策略"></a>4、策略</h2><p><code>.spec.strategy</code> 策略指定用于用新 Pod 替换旧 Pod 的策略。 <code>.spec.strategy.type</code> 可以是 <code>“Recreate”</code> 或 <code>“RollingUpdate”</code>。<code>“RollingUpdate” </code>是默认值。</p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232426669-810557500.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232426669-810557500.png" alt="img"></a></p>
+<h3 id="4-1、重新创建Deployment"><a href="#4-1、重新创建Deployment" class="headerlink" title="4.1、重新创建Deployment"></a>4.1、重新创建Deployment</h3><p>如果 <code>.spec.strategy.type==Recreate</code>，在创建新 Pod 之前，所有现有的 Pod 会被杀死。</p>
+<p>这只会确保为了升级而创建新 Pod 之前其他 Pod 都已终止。如果你升级一个 Deployment， 所有旧版本的 Pod 都会立即被终止。控制器等待这些 Pod 被成功移除之后， 才会创建新版本的 Pod。如果你手动删除一个 Pod，其生命周期是由 ReplicaSet 来控制的， 后者会立即创建一个替换 Pod（即使旧的 Pod 仍然处于 Terminating 状态）。 如果你需要一种“最多 n 个”的 Pod 个数保证，你需要考虑使用 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>。</p>
+<h3 id="4-2、滚动更新Deployment"><a href="#4-2、滚动更新Deployment" class="headerlink" title="4.2、滚动更新Deployment"></a>4.2、滚动更新Deployment</h3><p>Deployment 会在 <code>.spec.strategy.type==RollingUpdate</code>时，采取 滚动更新的方式更新 Pod。你可以指定 <code>maxUnavailable</code> 和 <code>maxSurge</code> 来控制滚动更新过程。</p>
+<h4 id="4-2-1、最大不可用"><a href="#4-2-1、最大不可用" class="headerlink" title="4.2.1、最大不可用"></a>4.2.1、最大不可用</h4><p><code>.spec.strategy.rollingUpdate.maxUnavailable</code> 是一个可选字段， 用来指定更新过程中不可用的 Pod 的个数上限。该值可以是绝对数字（例如，5），也可以是所需 Pod 的百分比（例如，10%）。百分比值会转换成绝对数并去除小数部分。 如果 <code>.spec.strategy.rollingUpdate.maxSurge</code> 为 0，则此值不能为 0。 默认值为 25%。</p>
+<p>例如：当此值设置为 30% 时，滚动更新开始时会立即将旧 ReplicaSet 缩容到期望 Pod 个数的70%。 新 Pod 准备就绪后，可以继续缩容旧有的 ReplicaSet，然后对新的 ReplicaSet 扩容， 确保在更新期间可用的 Pod 总数在任何时候都至少为所需的 Pod 个数的 70%。</p>
+<h4 id="4-2-2、最大峰值"><a href="#4-2-2、最大峰值" class="headerlink" title="4.2.2、最大峰值"></a>4.2.2、最大峰值</h4><p><code>.spec.strategy.rollingUpdate.maxSurge</code> 是一个可选字段，用来指定可以创建的超出期望 Pod 个数的 Pod 数量。此值可以是绝对数（例如，5）或所需 Pod 的百分比（例如，10%）。 如果 <code>MaxUnavailable</code> 为 0，则此值不能为 0。百分比值会通过向上取整转换为绝对数。 此字段的默认值为 25%。</p>
+<p>例如，当此值为 30% 时，启动滚动更新后，会立即对新的 <code>ReplicaSet</code> 扩容，同时保证新旧 Pod 的总数不超过所需 Pod 总数的 130%。一旦旧 Pod 被杀死，新的 ReplicaSet 可以进一步扩容， 同时确保更新期间的任何时候运行中的 Pod 总数最多为所需 Pod 总数的 130%。</p>
+<h4 id="4-2-3、滚动更新示例"><a href="#4-2-3、滚动更新示例" class="headerlink" title="4.2.3、滚动更新示例"></a>4.2.3、滚动更新示例</h4><ul>
+<li><p>最大不可用</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>1.14.2
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+  <span class="token key atrule">strategy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> RollingUpdate
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span>
+      <span class="token key atrule">maxUnavailable</span><span class="token punctuation">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>最大峰值</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>1.14.2
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+  <span class="token key atrule">strategy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> RollingUpdate
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span>
+      <span class="token key atrule">maxSurge</span><span class="token punctuation">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>两项混合</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>1.14.2
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+  <span class="token key atrule">strategy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> RollingUpdate
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span>
+      <span class="token key atrule">maxSurge</span><span class="token punctuation">:</span> <span class="token number">1</span>
+      <span class="token key atrule">maxUnavailable</span><span class="token punctuation">:</span> <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="5、进度期限秒数"><a href="#5、进度期限秒数" class="headerlink" title="5、进度期限秒数"></a>5、进度期限秒数</h2><p><code>.spec.progressDeadlineSeconds</code> 是一个可选字段，用于指定系统在报告 Deployment <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/#failed-deployment">进展失败</a>之前等待 Deployment 取得进展的秒数。 这类报告会在资源状态中体现为 <code>type: Progressing</code>、<code>status: False</code>、 <code>reason: ProgressDeadlineExceeded</code>。Deployment 控制器将在默认 600 毫秒内持续重试 Deployment。 将来，一旦实现了自动回滚，Deployment 控制器将在探测到这样的条件时立即回滚 Deployment。</p>
+<p>如果指定，则此字段值需要大于 <code>.spec.minReadySeconds</code> 取值。</p>
+<h2 id="6、最短就绪时间"><a href="#6、最短就绪时间" class="headerlink" title="6、最短就绪时间"></a>6、最短就绪时间</h2><p><code>.spec.minReadySeconds</code> 是一个可选字段，用于指定新创建的 Pod 在没有任意容器崩溃情况下的最小就绪时间， 只有超出这个时间 Pod 才被视为可用。默认值为 0（Pod 在准备就绪后立即将被视为可用）。 要了解何时 Pod 被视为就绪， 可参考<a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/#container-probes">容器探针</a>。</p>
+<h2 id="7、修订历史限制"><a href="#7、修订历史限制" class="headerlink" title="7、修订历史限制"></a>7、修订历史限制</h2><p>Deployment 的修订历史记录存储在它所控制的 ReplicaSet 中。</p>
+<p><code>.spec.revisionHistoryLimit</code> 是一个可选字段，用来设定出于回滚目的所要保留的旧 ReplicaSet 数量。 这些旧 ReplicaSet 会消耗 etcd 中的资源，并占用 <code>kubectl get rs</code> 的输出。 每个 Deployment 修订版本的配置都存储在其 ReplicaSet 中；因此，一旦删除了旧的 ReplicaSet， 将失去回滚到 Deployment 的对应修订版本的能力。 默认情况下，系统保留 10 个旧 ReplicaSet，但其理想值取决于新 Deployment 的频率和稳定性。</p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232426000-1915264579.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240729232426000-1915264579.png" alt="img"></a></p>
+<p>更具体地说，将此字段设置为 0 意味着将清理所有具有 0 个副本的旧 ReplicaSet。 在这种情况下，无法撤消新的 Deployment 上线，因为它的修订历史被清除了。</p>
+<h2 id="8、paused（暂停的）"><a href="#8、paused（暂停的）" class="headerlink" title="8、paused（暂停的）"></a>8、paused（暂停的）</h2><p><code>.spec.paused</code> 是用于暂停和恢复 Deployment 的可选布尔字段。 暂停的 Deployment 和未暂停的 Deployment 的唯一区别是，Deployment 处于暂停状态时， PodTemplateSpec 的任何修改都不会触发新的上线。 Deployment 在创建时是默认不会处于暂停状态。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2025/02/17/k8s-gong-zuo-fu-zai-kong-zhi-qi-deployment/">http://wumangeng.github.io/2025/02/17/k8s-gong-zuo-fu-zai-kong-zhi-qi-deployment/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Deployment/">
+                                    <span class="chip bg-color">Deployment</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/02/20/k8s-gong-zuo-fu-zai-kong-zhi-qi-daemonset/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工作负载控制器DaemonSet
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-02-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/DaemonSet/">
+                        <span class="chip bg-color">DaemonSet</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/02/07/k8s-ji-ben-dan-wei-pod/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            k8s基本单位pod
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pod/">
+                        <span class="chip bg-color">pod</span>
+                    </a>
+                    
+                    <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                        <span class="chip bg-color">k8s组件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

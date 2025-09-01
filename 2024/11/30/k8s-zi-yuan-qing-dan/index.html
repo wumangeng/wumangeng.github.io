@@ -1,0 +1,1753 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="k8s">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>k8s中的资源 | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">k8s中的资源</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/docker/">
+                                <span class="chip bg-color">docker</span>
+                            </a>
+                        
+                            <a href="/tags/k8s%E4%B8%AD%E7%9A%84%E8%B5%84%E6%BA%90/">
+                                <span class="chip bg-color">k8s中的资源</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-11-30
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.5k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、k8s中的资源"><a href="#一、k8s中的资源" class="headerlink" title="一、k8s中的资源"></a>一、k8s中的资源</h1><h2 id="1、集群资源分类"><a href="#1、集群资源分类" class="headerlink" title="1、集群资源分类"></a>1、集群资源分类</h2><ul>
+<li>命名空间级别：只在本名称空间下生效（kube-system、default）</li>
+<li>集群级别：role，在定义时未指定名称空间</li>
+<li>元数据型：HPA–通过指标进行操作</li>
+</ul>
+<h2 id="2、什么是资源"><a href="#2、什么是资源" class="headerlink" title="2、什么是资源"></a>2、什么是资源</h2><p>k8s中所有的内容都抽象为资源，资源实例化之后，叫做对象。</p>
+<h2 id="3、集群资源概述"><a href="#3、集群资源概述" class="headerlink" title="3、集群资源概述"></a>3、集群资源概述</h2><h3 id="3-1、名称空间级别"><a href="#3-1、名称空间级别" class="headerlink" title="3.1、名称空间级别"></a>3.1、名称空间级别</h3><p><em><strong>工作负载型资源（workload）：</strong></em></p>
+<ul>
+<li><strong>Pod</strong>：Kubernetes中最基本的可调度单位，可以包含一个或多个容器，共享存储和网络资源。</li>
+<li><strong>ReplicaSet</strong>：确保集群中始终运行着指定数量的Pod副本，是Deployment的基础。</li>
+<li><strong>Deployment</strong>：提供声明式的更新能力，用于管理应用的生命周期，包括滚动更新和回滚。</li>
+<li><strong>StatefulSet</strong>：为有状态应用提供管理，确保每个Pod都有一个稳定的唯一标识和持久存储。</li>
+<li><strong>DaemonSet</strong>：确保所有（或某些）节点上运行一个Pod的副本，常用于系统日志、监控等服务。</li>
+<li><strong>Job</strong>：用于完成一次性任务的资源，确保Pod成功执行并完成其工作。</li>
+<li><strong>CronJob</strong>：用于定时执行Jobs，类似于Linux的cron。</li>
+</ul>
+<p><em><strong>服务发现及负载均衡型资源（ServiceDiscovery LoadBalance)</strong></em></p>
+<ul>
+<li><strong>Service</strong>：定义应用的服务端点，用于在集群内部或外部访问应用。Service可以实现负载均衡和服务发现。</li>
+<li><strong>Ingress</strong>：提供了外部访问集群内服务的路由规则，通常与负载均衡器或反向代理结合使用。</li>
+</ul>
+<p><em><strong>配置与存储型资源：</strong></em></p>
+<ul>
+<li><strong>Volume</strong>：持久化存储的抽象，可以被Pod使用，支持多种存储类型，如空目录、主机路径、云存储等。</li>
+<li><strong>CSI</strong>：容器存储接口，允许Kubernetes与外部存储系统集成，支持广泛的存储解决方案。</li>
+</ul>
+<p><em><strong>特殊类型的存储卷：</strong></em></p>
+<ul>
+<li><strong>ConfigMap</strong>：用于存储非机密的配置数据，可以被Pod作为环境变量或文件挂载。</li>
+<li><strong>Secret</strong>：用于存储敏感信息，如密码、SSH密钥、TLS证书等，加密存储并安全传递给Pod。</li>
+<li><strong>Downward API</strong>：允许Pod访问自身和Pod的元数据，如Pod IP、节点名称、重启次数等</li>
+</ul>
+<h3 id="3-2、集群级资源"><a href="#3-2、集群级资源" class="headerlink" title="3.2、集群级资源"></a>3.2、集群级资源</h3><ul>
+<li><strong>Namespace</strong>：用于逻辑隔离资源，便于多租户和资源配额管理。</li>
+<li><strong>Node</strong>：代表集群中的物理或虚拟机器，是Pod运行的实际环境。</li>
+<li><strong>Role &amp; ClusterRole</strong>：定义权限，用于RBAC（基于角色的访问控制）。</li>
+<li><strong>RoleBinding &amp; ClusterRoleBinding</strong>：将Role或ClusterRole绑定到用户或用户组，授予他们特定的权限。</li>
+</ul>
+<h3 id="3-3、元数据型资源"><a href="#3-3、元数据型资源" class="headerlink" title="3.3、元数据型资源"></a>3.3、元数据型资源</h3><blockquote>
+<p>通过指标进行操作</p>
+</blockquote>
+<ul>
+<li>**HPA (Horizontal Pod Autoscaler)**：根据CPU使用率或其他指标自动调整Pod副本的数量。</li>
+<li><strong>PodTemplate</strong>：Pod的模板，用于创建具有相同配置的Pod。</li>
+<li><strong>LimitRange</strong>：定义资源配额，限制Pod和容器能使用的资源量，如CPU、内存。</li>
+</ul>
+<h1 id="二、查看资源清单属性"><a href="#二、查看资源清单属性" class="headerlink" title="二、查看资源清单属性"></a>二、查看资源清单属性</h1><h2 id="1、查看资源有那些资源清单属性"><a href="#1、查看资源有那些资源清单属性" class="headerlink" title="1、查看资源有那些资源清单属性"></a>1、查看资源有那些资源清单属性</h2><h3 id="1-1、格式"><a href="#1-1、格式" class="headerlink" title="1.1、格式"></a>1.1、格式</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain 资源类型<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="1-2、示例"><a href="#1-2、示例" class="headerlink" title="1.2、示例"></a>1.2、示例</h3><h4 id="1-2-1、查看pod资源的资源清单属性"><a href="#1-2-1、查看pod资源的资源清单属性" class="headerlink" title="1.2.1、查看pod资源的资源清单属性"></a>1.2.1、查看pod资源的资源清单属性</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain pod<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240716003018483-2145346171.png"><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240716003018483-2145346171.png" alt="img"></a></p>
+<h4 id="1-2-2、查看pvc资源的资源清单属性"><a href="#1-2-2、查看pvc资源的资源清单属性" class="headerlink" title="1.2.2、查看pvc资源的资源清单属性"></a>1.2.2、查看pvc资源的资源清单属性</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain pvc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240716003017864-1423636702.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240716003017864-1423636702.png" alt="img"></a></p>
+<h4 id="1-2-3、查看statefulset资源的资源清单属性"><a href="#1-2-3、查看statefulset资源的资源清单属性" class="headerlink" title="1.2.3、查看statefulset资源的资源清单属性"></a>1.2.3、查看statefulset资源的资源清单属性</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain statefulset<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240716003016895-479336387.png"><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240716003016895-479336387.png" alt="img"></a></p>
+<h2 id="2、查看属性的说明"><a href="#2、查看属性的说明" class="headerlink" title="2、查看属性的说明"></a>2、查看属性的说明</h2><h3 id="2-1、格式"><a href="#2-1、格式" class="headerlink" title="2.1、格式"></a>2.1、格式</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain 资源类型.属性<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-2、示例"><a href="#2-2、示例" class="headerlink" title="2.2、示例"></a>2.2、示例</h3><h4 id="2-2-1、查看statefulset-status属性说明"><a href="#2-2-1、查看statefulset-status属性说明" class="headerlink" title="2.2.1、查看statefulset.status属性说明"></a>2.2.1、查看statefulset.status属性说明</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl explain statefulset.status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240716003016197-1737006757.png"><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240716003016197-1737006757.png" alt="img"></a></p>
+<h1 id="三、常用字段解释"><a href="#三、常用字段解释" class="headerlink" title="三、常用字段解释"></a>三、常用字段解释</h1><h2 id="1、必选字段"><a href="#1、必选字段" class="headerlink" title="1、必选字段"></a>1、必选字段</h2><table>
+<thead>
+<tr>
+<th align="left">参数名</th>
+<th align="left">字段类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">version</td>
+<td align="left">String</td>
+<td align="left">指 K8s API 的版本，目前基本上是 v1 ，可以用 kubectl api-versions 命令查询</td>
+</tr>
+<tr>
+<td align="left">kind</td>
+<td align="left">String</td>
+<td align="left">指 yaml 文件定义的资源类型和角色，比如：Pod</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">Object</td>
+<td align="left">元数据对象</td>
+</tr>
+<tr>
+<td align="left">metadata.name</td>
+<td align="left">String</td>
+<td align="left">元数据对象的名字，比如命名 Pod 的名字</td>
+</tr>
+<tr>
+<td align="left">metadata.namespace</td>
+<td align="left">String</td>
+<td align="left">元数据对象的命名空间（默认default）</td>
+</tr>
+<tr>
+<td align="left">spec</td>
+<td align="left">Object</td>
+<td align="left">详细定义对象</td>
+</tr>
+<tr>
+<td align="left">spec.containers[]</td>
+<td align="left">List</td>
+<td align="left">容器列表的定义</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].name</td>
+<td align="left">String</td>
+<td align="left">容器的名字</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].image</td>
+<td align="left">String</td>
+<td align="left">容器镜像的名称</td>
+</tr>
+</tbody></table>
+<h2 id="2、主要字段"><a href="#2、主要字段" class="headerlink" title="2、主要字段"></a>2、主要字段</h2><table>
+<thead>
+<tr>
+<th align="left">参数名</th>
+<th align="left">字段类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">spec.containers[].imagePullPolicy</td>
+<td align="left">String</td>
+<td align="left">定义镜像的拉取策略，有Always、Never、IfNotPresent三个值可选，（1）Always：意思是每次都尝试重新拉取镜像，（2）Never：表示仅使用本地镜像，（3）IfNotPresent：如果本地有镜像就使用本地镜像，没有就拉取在线镜像。上面三个值都没设置的话，默认是Always。</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].command[]</td>
+<td align="left">List</td>
+<td align="left">指定容器启动命令，因为是数组可以指定多个，不指定则使用镜像打包时使用的启动命令。</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].args[]</td>
+<td align="left">List</td>
+<td align="left">批定容器启动命令参数，因为是数组可以指定多个。</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].workingDir</td>
+<td align="left">String</td>
+<td align="left">指定容器的工作目录</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].volumeMounts[]</td>
+<td align="left">List</td>
+<td align="left">指定容器内部的存储卷位置</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].volumeMounts[].name</td>
+<td align="left">String</td>
+<td align="left">指定可以被容器挂载的存储卷的名称</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].volumeMounts[].mountPath</td>
+<td align="left">String</td>
+<td align="left">指定可以被挂载的存储卷的路径</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].volumeMounts[].readOnly</td>
+<td align="left">String</td>
+<td align="left">设置存储卷路径的读写模式，true或者false，默认为读写模式</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].ports[]</td>
+<td align="left">List</td>
+<td align="left">指定容器需要用到的端口列表</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].ports[].name</td>
+<td align="left">String</td>
+<td align="left">指定端口名称</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].ports[].containerPort</td>
+<td align="left">String</td>
+<td align="left">指定容器需要监听的端口号</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].ports[].hostPort</td>
+<td align="left">String</td>
+<td align="left">指定容器所在主机需要监听的端口号，默认跟上面containerPort相同，注意设置了hostPort同一台主机无法启动该容器的相同副本（会端口冲突）</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].ports[].protocol</td>
+<td align="left">String</td>
+<td align="left">指定端口协议，支持TCP和UDP，默认为TCP</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].env[]</td>
+<td align="left">List</td>
+<td align="left">指定容器运行前需要设置的环境变量列表</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].env[].name</td>
+<td align="left">String</td>
+<td align="left">指定环境变量名称</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].env[].value</td>
+<td align="left">String</td>
+<td align="left">指定环境变量值</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources</td>
+<td align="left">Object</td>
+<td align="left">指定资源限制和资源请求的值（这里开始就是设置容器的资源上限）</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.limits</td>
+<td align="left">Object</td>
+<td align="left">指定设置容器运行时资源的运行上限</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.limits.cpu</td>
+<td align="left">String</td>
+<td align="left">指定CPU限制，单位为core数，将用于docker run –cpu-shares参数</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.limits.memory</td>
+<td align="left">String</td>
+<td align="left">指定MEM内存的限制，单位为MIB、GiB</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.requests</td>
+<td align="left">Object</td>
+<td align="left">指定容器启动和调度时的限制设置</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.requests.cpu</td>
+<td align="left">String</td>
+<td align="left">CPU请求，单位为core数，容器启动时初始化可用数量</td>
+</tr>
+<tr>
+<td align="left">spec.containers[].resources.requests.memory</td>
+<td align="left">String</td>
+<td align="left">内存请求，单位为MIB、GiB，容器启动时初始化可用数量</td>
+</tr>
+</tbody></table>
+<h2 id="3、额外字段"><a href="#3、额外字段" class="headerlink" title="3、额外字段"></a>3、额外字段</h2><table>
+<thead>
+<tr>
+<th align="left">参数名</th>
+<th align="left">字段类型</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">spec.restartPolicy</td>
+<td align="left">String</td>
+<td align="left">定义Pod的重启策略，可选值为Always、OnFailure、默认为Always。 1. Always：Pod一旦终止运行，则无论容器是如何终止的，kubelet服务都将重启它 2.OnFailure：只有Pod以非零退出码终止时，kubelet才会重启该容器。如果容器正常结束（退出码为0），则kubelet不会重启它。 3.Never：Pod终止后，kubelet将退出码报告给master，不会重启该Pod</td>
+</tr>
+<tr>
+<td align="left">spec.nodeSelector</td>
+<td align="left">Object</td>
+<td align="left">定义Node的Label过滤标签，以key:value格式指定</td>
+</tr>
+<tr>
+<td align="left">spec.imagePullSecrets</td>
+<td align="left">Object</td>
+<td align="left">定义pull镜像时使用secret名称，以name:secretkey格式指定</td>
+</tr>
+<tr>
+<td align="left">spec.hostNetwork</td>
+<td align="left">Boolean</td>
+<td align="left">定义是否使用主机网络模式，默认值是false，设置true表示使用主机网络，不使用docker网桥，同时设置了true将无法在同一台宿主机上启动第二个副本</td>
+</tr>
+</tbody></table>
+<h1 id="四、Pod资源清单详解"><a href="#四、Pod资源清单详解" class="headerlink" title="四、Pod资源清单详解"></a>四、Pod资源清单详解</h1><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># yaml格式的pod定义文件完整内容：</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1       <span class="token comment">#必选，版本号，例如v1</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod       <span class="token comment">#必选，Pod</span>
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>       <span class="token comment">#必选，元数据</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> string       <span class="token comment">#必选，Pod名称</span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> string    <span class="token comment">#必选，Pod所属的命名空间</span>
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>      <span class="token comment">#自定义标签</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#自定义标签名字</span>
+  <span class="token key atrule">annotations</span><span class="token punctuation">:</span>       <span class="token comment">#自定义注释列表</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>         <span class="token comment">#必选，Pod中容器的详细定义</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>      <span class="token comment">#必选，Pod中容器列表</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#必选，容器名称</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> string    <span class="token comment">#必选，容器的镜像名称</span>
+    <span class="token key atrule">imagePullPolicy</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Always <span class="token punctuation">|</span> Never <span class="token punctuation">|</span> IfNotPresent<span class="token punctuation">]</span> <span class="token comment">#获取镜像的策略 Alawys表示下载镜像 IfnotPresent表示优先使用本地镜像，否则下载镜像，Nerver表示仅使用本地镜像</span>
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>    <span class="token comment">#容器的启动命令列表，如不指定，使用打包时使用的启动命令</span>
+    <span class="token key atrule">args</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>     <span class="token comment">#容器的启动命令参数列表</span>
+    <span class="token key atrule">workingDir</span><span class="token punctuation">:</span> string     <span class="token comment">#容器的工作目录</span>
+    <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>    <span class="token comment">#挂载到容器内部的存储卷配置</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#引用pod定义的共享存储卷的名称，需用volumes[]部分定义的的卷名</span>
+      <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> string    <span class="token comment">#存储卷在容器内mount的绝对路径，应少于512字符</span>
+      <span class="token key atrule">readOnly</span><span class="token punctuation">:</span> boolean    <span class="token comment">#是否为只读模式</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>       <span class="token comment">#需要暴露的端口库号列表</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#端口号名称</span>
+      <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> int   <span class="token comment">#容器需要监听的端口号</span>
+      <span class="token key atrule">hostPort</span><span class="token punctuation">:</span> int    <span class="token comment">#容器所在主机需要监听的端口号，默认与Container相同</span>
+      <span class="token key atrule">protocol</span><span class="token punctuation">:</span> string     <span class="token comment">#端口协议，支持TCP和UDP，默认TCP</span>
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>       <span class="token comment">#容器运行前需设置的环境变量列表</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#环境变量名称</span>
+      <span class="token key atrule">value</span><span class="token punctuation">:</span> string    <span class="token comment">#环境变量的值</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>       <span class="token comment">#资源限制和请求的设置</span>
+      <span class="token key atrule">limits</span><span class="token punctuation">:</span>      <span class="token comment">#资源限制的设置</span>
+        <span class="token key atrule">cpu</span><span class="token punctuation">:</span> string    <span class="token comment">#Cpu的限制，单位为core数，将用于docker run --cpu-shares参数</span>
+        <span class="token key atrule">memory</span><span class="token punctuation">:</span> string     <span class="token comment">#内存限制，单位可以为Mib/Gib，将用于docker run --memory参数</span>
+      <span class="token key atrule">requests</span><span class="token punctuation">:</span>      <span class="token comment">#资源请求的设置</span>
+        <span class="token key atrule">cpu</span><span class="token punctuation">:</span> string    <span class="token comment">#Cpu请求，容器启动的初始可用数量</span>
+        <span class="token key atrule">memory</span><span class="token punctuation">:</span> string     <span class="token comment">#内存清楚，容器启动的初始可用数量</span>
+    <span class="token key atrule">livenessProbe</span><span class="token punctuation">:</span>     <span class="token comment">#对Pod内个容器健康检查的设置，当探测无响应几次后将自动重启该容器，检查方法有exec、httpGet和tcpSocket，对一个容器只需设置其中一种方法即可</span>
+      <span class="token key atrule">exec</span><span class="token punctuation">:</span>      <span class="token comment">#对Pod容器内检查方式设置为exec方式</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>string<span class="token punctuation">]</span>  <span class="token comment">#exec方式需要制定的命令或脚本</span>
+      <span class="token key atrule">httpGet</span><span class="token punctuation">:</span>       <span class="token comment">#对Pod内个容器健康检查方法设置为HttpGet，需要制定Path、port</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">port</span><span class="token punctuation">:</span> number
+        <span class="token key atrule">host</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">scheme</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">HttpHeaders</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+          <span class="token key atrule">value</span><span class="token punctuation">:</span> string
+      <span class="token key atrule">tcpSocket</span><span class="token punctuation">:</span>     <span class="token comment">#对Pod内个容器健康检查方式设置为tcpSocket方式</span>
+         <span class="token key atrule">port</span><span class="token punctuation">:</span> number
+       <span class="token key atrule">initialDelaySeconds</span><span class="token punctuation">:</span> <span class="token number">0</span>  <span class="token comment">#容器启动完成后首次探测的时间，单位为秒</span>
+       <span class="token key atrule">timeoutSeconds</span><span class="token punctuation">:</span> <span class="token number">0</span>   <span class="token comment">#对容器健康检查探测等待响应的超时时间，单位秒，默认1秒</span>
+       <span class="token key atrule">periodSeconds</span><span class="token punctuation">:</span> <span class="token number">0</span>    <span class="token comment">#对容器监控检查的定期探测时间设置，单位秒，默认10秒一次</span>
+       <span class="token key atrule">successThreshold</span><span class="token punctuation">:</span> <span class="token number">0</span>
+       <span class="token key atrule">failureThreshold</span><span class="token punctuation">:</span> <span class="token number">0</span>
+       <span class="token key atrule">securityContext</span><span class="token punctuation">:</span>
+         privileged<span class="token punctuation">:</span><span class="token boolean important">false</span>
+    <span class="token key atrule">restartPolicy</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>Always <span class="token punctuation">|</span> Never <span class="token punctuation">|</span> OnFailure<span class="token punctuation">]</span><span class="token comment">#Pod的重启策略，Always表示一旦不管以何种方式终止运行，kubelet都将重启，OnFailure表示只有Pod以非0退出码退出才重启，Nerver表示不再重启该Pod</span>
+    <span class="token key atrule">nodeSelector</span><span class="token punctuation">:</span> obeject  <span class="token comment">#设置NodeSelector表示将该Pod调度到包含这个label的node上，以key：value的格式指定</span>
+    <span class="token key atrule">imagePullSecrets</span><span class="token punctuation">:</span>    <span class="token comment">#Pull镜像时使用的secret名称，以key：secretkey格式指定</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+    hostNetwork<span class="token punctuation">:</span><span class="token boolean important">false</span>      <span class="token comment">#是否使用主机网络模式，默认为false，如果设置为true，表示使用宿主机网络</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>       <span class="token comment">#在该pod上定义共享存储卷列表</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string     <span class="token comment">#共享存储卷名称 （volumes类型有很多种）</span>
+      <span class="token key atrule">emptyDir</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>     <span class="token comment">#类型为emtyDir的存储卷，与Pod同生命周期的一个临时目录。为空值</span>
+      <span class="token key atrule">hostPath</span><span class="token punctuation">:</span> string     <span class="token comment">#类型为hostPath的存储卷，表示挂载Pod所在宿主机的目录</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> string     <span class="token comment">#Pod所在宿主机的目录，将被用于同期中mount的目录</span>
+      <span class="token key atrule">secret</span><span class="token punctuation">:</span>      <span class="token comment">#类型为secret的存储卷，挂载集群与定义的secre对象到容器内部</span>
+        <span class="token key atrule">scretname</span><span class="token punctuation">:</span> string  
+        <span class="token key atrule">items</span><span class="token punctuation">:</span>     
+        <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> string
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> string
+      <span class="token key atrule">configMap</span><span class="token punctuation">:</span>     <span class="token comment">#类型为configMap的存储卷，挂载预定义的configMap对象到容器内部</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+        <span class="token key atrule">items</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> string
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> string<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="五、Deployment资源清单详解"><a href="#五、Deployment资源清单详解" class="headerlink" title="五、Deployment资源清单详解"></a>五、Deployment资源清单详解</h1><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> extensions/v1beta1   <span class="token comment">#接口版本/版本</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment                 <span class="token comment">#接口类型</span>
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> cango<span class="token punctuation">-</span>demo               <span class="token comment">#Deployment名称</span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> cango<span class="token punctuation">-</span>prd           <span class="token comment">#命名空间</span>
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> cango<span class="token punctuation">-</span>demo              <span class="token comment">#标签</span>
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+   <span class="token key atrule">strategy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">rollingUpdate</span><span class="token punctuation">:</span>  <span class="token comment">##由于replicas为3,则整个升级,pod个数在2-4个之间</span>
+      <span class="token key atrule">maxSurge</span><span class="token punctuation">:</span> <span class="token number">1</span>      <span class="token comment">#滚动升级时会先启动1个pod</span>
+      <span class="token key atrule">maxUnavailable</span><span class="token punctuation">:</span> <span class="token number">1</span> <span class="token comment">#滚动升级时允许的最大Unavailable的pod个数</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>         
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> cango<span class="token punctuation">-</span>demo  <span class="token comment">#模板名称必填</span>
+    <span class="token key atrule">sepc</span><span class="token punctuation">:</span> <span class="token comment">#定义容器模板，该模板可以包含多个容器</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>                                                                   
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> cango<span class="token punctuation">-</span>demo                                                           <span class="token comment">#镜像名称</span>
+          <span class="token key atrule">image</span><span class="token punctuation">:</span> swr.cn<span class="token punctuation">-</span>east<span class="token punctuation">-</span>2.myhuaweicloud.com/cango<span class="token punctuation">-</span>prd/cango<span class="token punctuation">-</span>demo<span class="token punctuation">:</span>0.0.1<span class="token punctuation">-</span>SNAPSHOT <span class="token comment">#镜像地址</span>
+          <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span> <span class="token string">"/bin/sh"</span><span class="token punctuation">,</span><span class="token string">"-c"</span><span class="token punctuation">,</span><span class="token string">"cat /etc/config/path/to/special-key"</span> <span class="token punctuation">]</span>    <span class="token comment">#启动命令</span>
+          <span class="token key atrule">args</span><span class="token punctuation">:</span>                                                                <span class="token comment">#启动参数</span>
+            <span class="token punctuation">-</span> <span class="token string">'-storage.local.retention=$(STORAGE_RETENTION)'</span>
+            <span class="token punctuation">-</span> <span class="token string">'-storage.local.memory-chunks=$(STORAGE_MEMORY_CHUNKS)'</span>
+            <span class="token punctuation">-</span> <span class="token string">'-config.file=/etc/prometheus/prometheus.yml'</span>
+            <span class="token punctuation">-</span> <span class="token string">'-alertmanager.url=http://alertmanager:9093/alertmanager'</span>
+            <span class="token punctuation">-</span> <span class="token string">'-web.external-url=$(EXTERNAL_URL)'</span>
+    <span class="token comment">#如果command和args均没有写，那么用Docker默认的配置。</span>
+    <span class="token comment">#如果command写了，但args没有写，那么Docker默认的配置会被忽略而且仅仅执行.yaml文件的command（不带任何参数的）。</span>
+    <span class="token comment">#如果command没写，但args写了，那么Docker默认配置的ENTRYPOINT的命令行会被执行，但是调用的参数是.yaml中的args。</span>
+    <span class="token comment">#如果如果command和args都写了，那么Docker默认的配置被忽略，使用.yaml的配置。</span>
+          <span class="token key atrule">imagePullPolicy</span><span class="token punctuation">:</span> IfNotPresent  <span class="token comment">#如果不存在则拉取</span>
+          <span class="token key atrule">livenessProbe</span><span class="token punctuation">:</span>       <span class="token comment">#表示container是否处于live状态。如果LivenessProbe失败，LivenessProbe将会通知kubelet对应的container不健康了。随后kubelet将kill掉container，并根据RestarPolicy进行进一步的操作。默认情况下LivenessProbe在第一次检测之前初始化值为Success，如果container没有提供LivenessProbe，则也认为是Success；</span>
+            <span class="token key atrule">httpGet</span><span class="token punctuation">:</span>
+              <span class="token key atrule">path</span><span class="token punctuation">:</span> /health <span class="token comment">#如果没有心跳检测接口就为/</span>
+              <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+              <span class="token key atrule">scheme</span><span class="token punctuation">:</span> HTTP
+            <span class="token key atrule">initialDelaySeconds</span><span class="token punctuation">:</span> <span class="token number">60</span> <span class="token comment">##启动后延时多久开始运行检测</span>
+            <span class="token key atrule">timeoutSeconds</span><span class="token punctuation">:</span> <span class="token number">5</span>
+            <span class="token key atrule">successThreshold</span><span class="token punctuation">:</span> <span class="token number">1</span>
+            <span class="token key atrule">failureThreshold</span><span class="token punctuation">:</span> <span class="token number">5</span>
+            <span class="token key atrule">readinessProbe</span><span class="token punctuation">:</span>
+          <span class="token key atrule">readinessProbe</span><span class="token punctuation">:</span>
+            <span class="token key atrule">httpGet</span><span class="token punctuation">:</span>
+              <span class="token key atrule">path</span><span class="token punctuation">:</span> /health <span class="token comment">#如果没有心跳检测接口就为/</span>
+              <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+              <span class="token key atrule">scheme</span><span class="token punctuation">:</span> HTTP
+            <span class="token key atrule">initialDelaySeconds</span><span class="token punctuation">:</span> <span class="token number">30</span> <span class="token comment">##启动后延时多久开始运行检测</span>
+            <span class="token key atrule">timeoutSeconds</span><span class="token punctuation">:</span> <span class="token number">5</span>
+            <span class="token key atrule">successThreshold</span><span class="token punctuation">:</span> <span class="token number">1</span>
+            <span class="token key atrule">failureThreshold</span><span class="token punctuation">:</span> <span class="token number">5</span>
+          <span class="token key atrule">resources</span><span class="token punctuation">:</span>              <span class="token comment">##CPU内存限制</span>
+            <span class="token key atrule">requests</span><span class="token punctuation">:</span>
+              <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token number">2</span>
+              <span class="token key atrule">memory</span><span class="token punctuation">:</span> 2048Mi
+            <span class="token key atrule">limits</span><span class="token punctuation">:</span>
+              <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token number">2</span>
+              <span class="token key atrule">memory</span><span class="token punctuation">:</span> 2048Mi
+          <span class="token key atrule">env</span><span class="token punctuation">:</span>                    <span class="token comment">##通过环境变量的方式，直接传递pod=自定义Linux OS环境变量</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> LOCAL_KEY     <span class="token comment">#本地Key</span>
+              <span class="token key atrule">value</span><span class="token punctuation">:</span> value
+            <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> CONFIG_MAP_KEY  <span class="token comment">#局策略可使用configMap的配置Key，</span>
+              <span class="token key atrule">valueFrom</span><span class="token punctuation">:</span>
+                <span class="token key atrule">configMapKeyRef</span><span class="token punctuation">:</span>
+                  <span class="token key atrule">name</span><span class="token punctuation">:</span> special<span class="token punctuation">-</span>config   <span class="token comment">#configmap中找到name为special-config</span>
+                  <span class="token key atrule">key</span><span class="token punctuation">:</span> special.type      <span class="token comment">#找到name为special-config里data下的key</span>
+          <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> http
+              <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">8080</span> <span class="token comment">#对service暴露端口</span>
+          <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>     <span class="token comment">#挂载volumes中定义的磁盘</span>
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> log<span class="token punctuation">-</span>cache
+            <span class="token key atrule">mount</span><span class="token punctuation">:</span> /tmp/log
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> sdb       <span class="token comment">#普通用法，该卷跟随容器销毁，挂载一个目录</span>
+            <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /data/media    
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nfs<span class="token punctuation">-</span>client<span class="token punctuation">-</span>root    <span class="token comment">#直接挂载硬盘方法，如挂载下面的nfs目录到/mnt/nfs</span>
+            <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /mnt/nfs
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> example<span class="token punctuation">-</span>volume<span class="token punctuation">-</span>config  <span class="token comment">#高级用法第1种，将ConfigMap的log-script,backup-script分别挂载到/etc/config目录下的一个相对路径path/to/...下，如果存在同名文件，直接覆盖。</span>
+            <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /etc/config       
+          <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> rbd<span class="token punctuation">-</span>pvc                <span class="token comment">#高级用法第2中，挂载PVC(PresistentVolumeClaim)</span>
+ 
+<span class="token comment">#使用volume将ConfigMap作为文件或目录直接挂载，其中每一个key-value键值对都会生成一个文件，key为文件名，value为内容，</span>
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>  <span class="token comment"># 定义磁盘给上面volumeMounts挂载</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> log<span class="token punctuation">-</span>cache
+    <span class="token key atrule">emptyDir</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> sdb  <span class="token comment">#挂载宿主机上面的目录</span>
+    <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+      <span class="token key atrule">path</span><span class="token punctuation">:</span> /any/path/it/will/be/replaced
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> example<span class="token punctuation">-</span>volume<span class="token punctuation">-</span>config  <span class="token comment"># 供ConfigMap文件内容到指定路径使用</span>
+    <span class="token key atrule">configMap</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> example<span class="token punctuation">-</span>volume<span class="token punctuation">-</span>config  <span class="token comment">#ConfigMap中名称</span>
+      <span class="token key atrule">items</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> log<span class="token punctuation">-</span>script           <span class="token comment">#ConfigMap中的Key</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> path/to/log<span class="token punctuation">-</span>script  <span class="token comment">#指定目录下的一个相对路径path/to/log-script</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> backup<span class="token punctuation">-</span>script        <span class="token comment">#ConfigMap中的Key</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> path/to/backup<span class="token punctuation">-</span>script  <span class="token comment">#指定目录下的一个相对路径path/to/backup-script</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nfs<span class="token punctuation">-</span>client<span class="token punctuation">-</span>root         <span class="token comment">#供挂载NFS存储类型</span>
+    <span class="token key atrule">nfs</span><span class="token punctuation">:</span>
+      <span class="token key atrule">server</span><span class="token punctuation">:</span> 10.42.0.55          <span class="token comment">#NFS服务器地址</span>
+      <span class="token key atrule">path</span><span class="token punctuation">:</span> /opt/public           <span class="token comment">#showmount -e 看一下路径</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> rbd<span class="token punctuation">-</span>pvc                 <span class="token comment">#挂载PVC磁盘</span>
+    <span class="token key atrule">persistentVolumeClaim</span><span class="token punctuation">:</span>
+      <span class="token key atrule">claimName</span><span class="token punctuation">:</span> rbd<span class="token punctuation">-</span>pvc1         <span class="token comment">#挂载已经申请的pvc磁盘</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="六、Service资源清单详解"><a href="#六、Service资源清单详解" class="headerlink" title="六、Service资源清单详解"></a>六、Service资源清单详解</h1><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Service
+<span class="token key atrule">matadata</span><span class="token punctuation">:</span>                                <span class="token comment">#元数据</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> string                           <span class="token comment">#service的名称</span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> string                      <span class="token comment">#命名空间  </span>
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>                                <span class="token comment">#自定义标签属性列表</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">annotations</span><span class="token punctuation">:</span>                           <span class="token comment">#自定义注解属性列表  </span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>                                    <span class="token comment">#详细描述</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>                           <span class="token comment">#label selector配置，将选择具有label标签的Pod作为管理 </span>
+                                         <span class="token comment">#范围</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> string                           <span class="token comment">#service的类型，指定service的访问方式，默认为 </span>
+                                         <span class="token comment">#clusterIp</span>
+  <span class="token key atrule">clusterIP</span><span class="token punctuation">:</span> string                      <span class="token comment">#虚拟服务地址      </span>
+  <span class="token key atrule">sessionAffinity</span><span class="token punctuation">:</span> string                <span class="token comment">#是否支持session</span>
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>                                 <span class="token comment">#service需要暴露的端口列表</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> string                         <span class="token comment">#端口名称</span>
+    <span class="token key atrule">protocol</span><span class="token punctuation">:</span> string                     <span class="token comment">#端口协议，支持TCP和UDP，默认TCP</span>
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> int                            <span class="token comment">#服务监听的端口号</span>
+    <span class="token key atrule">targetPort</span><span class="token punctuation">:</span> int                      <span class="token comment">#需要转发到后端Pod的端口号</span>
+    <span class="token key atrule">nodePort</span><span class="token punctuation">:</span> int                        <span class="token comment">#当type = NodePort时，指定映射到物理机的端口号</span>
+  <span class="token key atrule">status</span><span class="token punctuation">:</span>                                <span class="token comment">#当spce.type=LoadBalancer时，设置外部负载均衡器的地址</span>
+    <span class="token key atrule">loadBalancer</span><span class="token punctuation">:</span>                        <span class="token comment">#外部负载均衡器    </span>
+      <span class="token key atrule">ingress</span><span class="token punctuation">:</span>                           <span class="token comment">#外部负载均衡器 </span>
+        <span class="token key atrule">ip</span><span class="token punctuation">:</span> string                       <span class="token comment">#外部负载均衡器的Ip地址值</span>
+        <span class="token key atrule">hostname</span><span class="token punctuation">:</span> string                 <span class="token comment">#外部负载均衡器的主机名</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在 kubernetes 中<strong>基本所有资源的一级属性都是一样的</strong>，主要包含5部分：</p>
+<ul>
+<li><strong>apiVersion 版本</strong>，由 kubernetes 内部定义，版本号必须可以用 kubectl api-versions 查询到</li>
+<li><strong>kind 类型</strong>，由 kubernetes 内部定义，类型可以用 kubectl api-resources 查询到</li>
+<li><strong>metadata 元数据</strong>，主要是资源标识和说明，常用的有 name、namespace、labels 等</li>
+<li><strong>spec 描述</strong>，这是配置中最重要的一部分，里面是对各种资源配置的详细描述</li>
+<li><strong>status 状态信息</strong>，里面的内容不需要定义，由 kubernetes 自动生成</li>
+</ul>
+<p>在上面的属性中，<strong>spec</strong> 是接下来研究的重点，继续看下它的<strong>常见子属性</strong>:</p>
+<ul>
+<li>containers &lt;[]Object&gt; 容器列表，用于定义容器的详细信息</li>
+<li>nodeName 根据 nodeName 的值将 pod 调度到指定的 Node 节点上</li>
+<li>nodeSelector &lt;map[]&gt; 根据NodeSelector中定义的信息选择将该 Pod 调度到包含这些 label 的 Node 上</li>
+<li>hostNetwork 是否使用主机网络模式，默认为 false，如果设置为 true，表示使用宿主机网络</li>
+<li>volumes &lt;[]Object&gt; 存储卷，用于定义 Pod 上面挂在的存储信息</li>
+<li>restartPolicy 重启策略，表示 Pod 在遇到故障的时候的处理策略</li>
+</ul>
+<h1 id="七、常用命令"><a href="#七、常用命令" class="headerlink" title="七、常用命令"></a>七、常用命令</h1><p><strong>获取当前的资源，pod</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl get pod <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>-A, –all-namespaces 查看当前所有名称空间的资源<br>-n  指定名称空间，默认值 default，kube-system 空间存放是当前组件资源<br>–show-labels  查看当前的标签<br>-l  筛选资源，key、key=value<br>-o wide  详细信息包括 IP、分配的节点<br>-w  监视，打印当前的资源对象的变化部分</p>
+</blockquote>
+<p><strong>进入 Pod 内部的容器执行命令</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl exec -it [podName] -c [cName] -- [command]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>​    -c  可以省略，默认进入唯一的容器内部</p>
+<p>   command  为进入的命令，例如：sh、/bin/bash    </p>
+<p><strong>查看资源的描述</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl explain pod.spec<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>查看 pod 内部容器的 日志</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl logs [podName] -c [cName]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>查看资源对象的详细描述</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl describe pod [podName]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>删除资源对象</strong></p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl delete [kindName] [objName]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>​    –all 删除当前所有的资源对象</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2024/11/30/k8s-zi-yuan-qing-dan/">http://wumangeng.github.io/2024/11/30/k8s-zi-yuan-qing-dan/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/docker/">
+                                    <span class="chip bg-color">docker</span>
+                                </a>
+                            
+                                <a href="/tags/k8s%E4%B8%AD%E7%9A%84%E8%B5%84%E6%BA%90/">
+                                    <span class="chip bg-color">k8s中的资源</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/02/07/k8s-ji-ben-dan-wei-pod/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            k8s基本单位pod
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-02-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/pod/">
+                        <span class="chip bg-color">pod</span>
+                    </a>
+                    
+                    <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                        <span class="chip bg-color">k8s组件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/11/25/k8s-zu-jian/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s组件">
+                        
+                        <span class="card-title">k8s组件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            k8s组件
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/k8s/" class="post-category">
+                                    k8s
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                        <span class="chip bg-color">k8s组件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

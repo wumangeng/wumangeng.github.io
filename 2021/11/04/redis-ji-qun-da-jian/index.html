@@ -323,7 +323,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2106353876,4138672594&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=1696534481,3796147682&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -444,12 +444,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
-                                <span class="chip bg-color">redis集群</span>
-                            </a>
-                        
                             <a href="/tags/redis/">
                                 <span class="chip bg-color">redis</span>
+                            </a>
+                        
+                            <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
+                                <span class="chip bg-color">redis集群</span>
                             </a>
                         
                     </div>
@@ -491,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    2.3k
                 </div>
                 
 
@@ -603,41 +603,41 @@
 </tr>
 </tbody></table>
 <p><strong>配置docker内部网络</strong></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker network create --subnet&#x3D;172.18.0.0&#x2F;16 redisnetwork<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">docker network create --subnet<span class="token operator">=</span><span class="token number">172.18</span>.0.0/16 redisnetwork<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Redis配置文件"><a href="#Redis配置文件" class="headerlink" title="Redis配置文件"></a>Redis配置文件</h2><p>在docker环境中，配置文件映射宿主机的时候，(宿主机)必须有配置文件。<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/antirez/redis/5.0.7/redis.conf">附件</a>在这里。大家可以根据自己的需求定制配置文件。</p>
 <p>下边是我的配置文件 <code>redis-cluster.tmpl</code></p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># redis端口
-port $&#123;PORT&#125;
-# 关闭保护模式(保护模式，默认值 yes，即开启。开启保护模式以后，需配置 bind ip 或者设置访问密码；关闭保护模式，外部网络可以直接访问)
-protected-mode no
-# 允许访问端口
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token comment"># redis端口</span>
+port $<span class="token punctuation">&#123;</span>PORT<span class="token punctuation">&#125;</span>
+<span class="token comment"># 关闭保护模式(保护模式，默认值 yes，即开启。开启保护模式以后，需配置 bind ip 或者设置访问密码；关闭保护模式，外部网络可以直接访问)</span>
+protected<span class="token punctuation">-</span>mode no
+<span class="token comment"># 允许访问端口</span>
 bind 0.0.0.0  
-# 登录密码(这里可以自己改 我的为123456)         
+<span class="token comment"># 登录密码(这里可以自己改 我的为123456)         </span>
 requirepass 123456
-# 开启主节点访问认证(这里可以自己改 我的为123456)
+<span class="token comment"># 开启主节点访问认证(这里可以自己改 我的为123456)</span>
 masterauth  123456
-# 开启集群
-cluster-enabled yes
-# 集群节点配置
-cluster-config-file nodes.conf
-# 超时
-cluster-node-timeout 5000
-# 集群节点IP host模式为宿主机IP
-cluster-announce-ip 192.168.5.40
-# 集群节点端口 7001 - 7006
-cluster-announce-port $&#123;PORT&#125;
-cluster-announce-bus-port 1$&#123;PORT&#125;
-# 开启 appendonly 备份模式
+<span class="token comment"># 开启集群</span>
+cluster<span class="token punctuation">-</span>enabled yes
+<span class="token comment"># 集群节点配置</span>
+cluster<span class="token punctuation">-</span>config<span class="token punctuation">-</span>file nodes.conf
+<span class="token comment"># 超时</span>
+cluster<span class="token punctuation">-</span>node<span class="token punctuation">-</span>timeout 5000
+<span class="token comment"># 集群节点IP host模式为宿主机IP</span>
+cluster<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>ip 192.168.5.40
+<span class="token comment"># 集群节点端口 7001 - 7006</span>
+cluster<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>port $<span class="token punctuation">&#123;</span>PORT<span class="token punctuation">&#125;</span>
+cluster<span class="token punctuation">-</span>announce<span class="token punctuation">-</span>bus<span class="token punctuation">-</span>port 1$<span class="token punctuation">&#123;</span>PORT<span class="token punctuation">&#125;</span>
+<span class="token comment"># 开启 appendonly 备份模式</span>
 appendonly yes
-# 每秒钟备份
+<span class="token comment"># 每秒钟备份</span>
 appendfsync everysec
-# 对aof文件进行压缩时，是否执行同步操作
-no-appendfsync-on-rewrite no
-# 当目前aof文件大小超过上一次重写时的aof文件大小的100%时会再次进行重写
-auto-aof-rewrite-percentage 100
-# 重写前AOF文件的大小最小值 默认 64mb
-auto-aof-rewrite-min-size 64mb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment"># 对aof文件进行压缩时，是否执行同步操作</span>
+no<span class="token punctuation">-</span>appendfsync<span class="token punctuation">-</span>on<span class="token punctuation">-</span>rewrite no
+<span class="token comment"># 当目前aof文件大小超过上一次重写时的aof文件大小的100%时会再次进行重写</span>
+auto<span class="token punctuation">-</span>aof<span class="token punctuation">-</span>rewrite<span class="token punctuation">-</span>percentage 100
+<span class="token comment"># 重写前AOF文件的大小最小值 默认 64mb</span>
+auto<span class="token punctuation">-</span>aof<span class="token punctuation">-</span>rewrite<span class="token punctuation">-</span>min<span class="token punctuation">-</span>size 64mb<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>现在通过脚本 <code>redis-cluster-config.sh</code> 批量生成配置文件</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token for-or-select variable">port</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">seq</span> <span class="token number">7001</span> <span class="token number">7006</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token punctuation">\</span>
@@ -650,131 +650,131 @@ auto-aof-rewrite-min-size 64mb<span aria-hidden="true" class="line-numbers-rows"
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/1683301-20200301191646698-1620681875.png" alt="img"></p>
 <h2 id="Docker环境搭建"><a href="#Docker环境搭建" class="headerlink" title="Docker环境搭建"></a>Docker环境搭建</h2><h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><p>这里还是通过docker-compose进行测试环境的docker编排。</p>
 <p><strong>docker-compose.yml</strong></p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">version: &#39;2&#39;
-networks:
-  redisnetwork:
-    external: true
-services:
-  cluster_7001:
-    image: redis:6.0
-    container_name: cluster_7001
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7001&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7001&#x2F;data:&#x2F;data
-    ports:
-      - 7001:7001
-      - 17001:17001
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7001
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.3
-  cluster_7002:
-    image: redis:6.0
-    container_name: cluster_7002
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7002&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7002&#x2F;data:&#x2F;data
-    ports:
-      - 7002:7002
-      - 17002:17002
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7002
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.4
-  cluster_7003:
-    image: redis:6.0
-    container_name: cluster_7003
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7003&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7003&#x2F;data:&#x2F;data
-    ports:
-      - 7003:7003
-      - 17003:17003
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7003
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.5
-  cluster_7004:
-    image: redis:6.0
-    container_name: cluster_7004
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7004&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7004&#x2F;data:&#x2F;data
-    ports:
-      - 7004:7004
-      - 17004:17004
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7004
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.6
-  cluster_7005:
-    image: redis:6.0
-    container_name: cluster_7005
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7005&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7005&#x2F;data:&#x2F;data
-    ports:
-      - 7005:7005
-      - 17005:17005
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7005
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.7
-  cluster_7006:
-    image: redis:6.0
-    container_name: cluster_7006
-    command:
-      [&quot;redis-server&quot;, &quot;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf&quot;]
-    volumes:
-      - .&#x2F;redis-cluster&#x2F;7006&#x2F;conf&#x2F;redis.conf:&#x2F;usr&#x2F;local&#x2F;etc&#x2F;redis&#x2F;redis.conf
-      - .&#x2F;redis-cluster&#x2F;7006&#x2F;data:&#x2F;data
-    ports:
-      - 7006:7006
-      - 17006:17006
-    environment:
-      # 设置时区为上海，否则时间会有问题
-      - TZ&#x3D;Asia&#x2F;Shanghai
-    restart: always
-    hostname: cluster_7006
-    networks:
-    # 指定自定义网络和IP
-      redisnetwork:
-        ipv4_address: 172.18.0.8
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'2'</span>
+<span class="token key atrule">networks</span><span class="token punctuation">:</span>
+  <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+    <span class="token key atrule">external</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">cluster_7001</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7001
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7001/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7001/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7001<span class="token punctuation">:</span><span class="token number">7001</span>
+      <span class="token punctuation">-</span> 17001<span class="token punctuation">:</span><span class="token number">17001</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7001
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.3
+  <span class="token key atrule">cluster_7002</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7002
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7002/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7002/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7002<span class="token punctuation">:</span><span class="token number">7002</span>
+      <span class="token punctuation">-</span> 17002<span class="token punctuation">:</span><span class="token number">17002</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7002
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.4
+  <span class="token key atrule">cluster_7003</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7003
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7003/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7003/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7003<span class="token punctuation">:</span><span class="token number">7003</span>
+      <span class="token punctuation">-</span> 17003<span class="token punctuation">:</span><span class="token number">17003</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7003
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.5
+  <span class="token key atrule">cluster_7004</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7004
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7004/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7004/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7004<span class="token punctuation">:</span><span class="token number">7004</span>
+      <span class="token punctuation">-</span> 17004<span class="token punctuation">:</span><span class="token number">17004</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7004
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.6
+  <span class="token key atrule">cluster_7005</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7005
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7005/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7005/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7005<span class="token punctuation">:</span><span class="token number">7005</span>
+      <span class="token punctuation">-</span> 17005<span class="token punctuation">:</span><span class="token number">17005</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7005
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.7
+  <span class="token key atrule">cluster_7006</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> redis<span class="token punctuation">:</span><span class="token number">6.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> cluster_7006
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">[</span><span class="token string">"redis-server"</span><span class="token punctuation">,</span> <span class="token string">"/usr/local/etc/redis/redis.conf"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7006/conf/redis.conf<span class="token punctuation">:</span>/usr/local/etc/redis/redis.conf
+      <span class="token punctuation">-</span> ./redis<span class="token punctuation">-</span>cluster/7006/data<span class="token punctuation">:</span>/data
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> 7006<span class="token punctuation">:</span><span class="token number">7006</span>
+      <span class="token punctuation">-</span> 17006<span class="token punctuation">:</span><span class="token number">17006</span>
+    <span class="token key atrule">environment</span><span class="token punctuation">:</span>
+      <span class="token comment"># 设置时区为上海，否则时间会有问题</span>
+      <span class="token punctuation">-</span> TZ=Asia/Shanghai
+    <span class="token key atrule">restart</span><span class="token punctuation">:</span> always
+    <span class="token key atrule">hostname</span><span class="token punctuation">:</span> cluster_7006
+    <span class="token key atrule">networks</span><span class="token punctuation">:</span>
+    <span class="token comment"># 指定自定义网络和IP</span>
+      <span class="token key atrule">redisnetwork</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ipv4_address</span><span class="token punctuation">:</span> 172.18.0.8
   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>配置完成在当前路径下运行</p>
@@ -832,28 +832,28 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>commons-pool2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="2-application-yml"><a href="#2-application-yml" class="headerlink" title="2. application.yml"></a>2. application.yml</h4><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">spring:
-  redis:
-    timeout: 6000
-    password: 123456
-    cluster:
-      max-redirects: 3 # 获取失败 最大重定向次数 
-      nodes:
-        - 192.168.5.40:7001
-        - 192.168.5.40:7002
-        - 192.168.5.40:7003
-        - 192.168.5.40:7004
-        - 192.168.5.40:7005
-        - 192.168.5.40:7006
-    lettuce:
-      pool:
-        max-active: 1000 #连接池最大连接数（使用负值表示没有限制）
-        max-idle: 10 # 连接池中的最大空闲连接
-        min-idle: 5 # 连接池中的最小空闲连接
-        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
-  cache:
-    jcache:
-      config: classpath:ehcache.xml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2-application-yml"><a href="#2-application-yml" class="headerlink" title="2. application.yml"></a>2. application.yml</h4><pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">spring</span><span class="token punctuation">:</span>
+  <span class="token key atrule">redis</span><span class="token punctuation">:</span>
+    <span class="token key atrule">timeout</span><span class="token punctuation">:</span> <span class="token number">6000</span>
+    <span class="token key atrule">password</span><span class="token punctuation">:</span> <span class="token number">123456</span>
+    <span class="token key atrule">cluster</span><span class="token punctuation">:</span>
+      <span class="token key atrule">max-redirects</span><span class="token punctuation">:</span> <span class="token number">3</span> <span class="token comment"># 获取失败 最大重定向次数 </span>
+      <span class="token key atrule">nodes</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7001</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7002</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7003</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7004</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7005</span>
+        <span class="token punctuation">-</span> 192.168.5.40<span class="token punctuation">:</span><span class="token number">7006</span>
+    <span class="token key atrule">lettuce</span><span class="token punctuation">:</span>
+      <span class="token key atrule">pool</span><span class="token punctuation">:</span>
+        <span class="token key atrule">max-active</span><span class="token punctuation">:</span> <span class="token number">1000</span> <span class="token comment">#连接池最大连接数（使用负值表示没有限制）</span>
+        <span class="token key atrule">max-idle</span><span class="token punctuation">:</span> <span class="token number">10</span> <span class="token comment"># 连接池中的最大空闲连接</span>
+        <span class="token key atrule">min-idle</span><span class="token punctuation">:</span> <span class="token number">5</span> <span class="token comment"># 连接池中的最小空闲连接</span>
+        <span class="token key atrule">max-wait</span><span class="token punctuation">:</span> <span class="token number">-1</span> <span class="token comment"># 连接池最大阻塞等待时间（使用负值表示没有限制）</span>
+  <span class="token key atrule">cache</span><span class="token punctuation">:</span>
+    <span class="token key atrule">jcache</span><span class="token punctuation">:</span>
+      <span class="token key atrule">config</span><span class="token punctuation">:</span> classpath<span class="token punctuation">:</span>ehcache.xml<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3-redis配置"><a href="#3-redis配置" class="headerlink" title="3. redis配置"></a>3. redis配置</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
 <span class="token annotation punctuation">@AutoConfigureAfter</span><span class="token punctuation">(</span><span class="token class-name">RedisAutoConfiguration</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
@@ -944,12 +944,12 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
-                                    <span class="chip bg-color">redis集群</span>
-                                </a>
-                            
                                 <a href="/tags/redis/">
                                     <span class="chip bg-color">redis</span>
+                                </a>
+                            
+                                <a href="/tags/redis%E9%9B%86%E7%BE%A4/">
+                                    <span class="chip bg-color">redis集群</span>
                                 </a>
                             
                         </div>
@@ -1128,7 +1128,7 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                 <a href="/2021/11/07/ben-di-shi-wu/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=2675676491,1895675049&fm=26&fmt=auto" class="responsive-img" alt="本地事务的坑">
+                        <img src="https://img0.baidu.com/it/u=4006291486,1725940627&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" class="responsive-img" alt="本地事务的坑">
                         
                         <span class="card-title">本地事务的坑</span>
                     </div>
@@ -1162,12 +1162,12 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                         <span class="chip bg-color">mysql</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                        <span class="chip bg-color">事务</span>
-                    </a>
-                    
                     <a href="/tags/Spring/">
                         <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                        <span class="chip bg-color">事务</span>
                     </a>
                     
                 </div>
@@ -1184,7 +1184,7 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
                 <a href="/2021/10/19/cron-biao-da-shi-fan-yi/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=1402424473,3283865348&fm=26&fmt=auto" class="responsive-img" alt="cron表达式转中文">
+                        <img src="https://img0.baidu.com/it/u=4006291486,1725940627&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" class="responsive-img" alt="cron表达式转中文">
                         
                         <span class="card-title">cron表达式转中文</span>
                     </div>
@@ -1357,7 +1357,7 @@ get name<span aria-hidden="true" class="line-numbers-rows"><span></span><span></
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2025</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

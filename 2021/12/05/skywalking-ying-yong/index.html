@@ -323,7 +323,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=3980057088,1377959210&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=2162428260,3935042879&fm=253&fmt=auto&app=138&f=JPEG?w=853&h=500')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -982,26 +982,26 @@ dataSource.password: <span class="token variable">$&#123;SW_DATA_SOURCE_PASSWORD
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>配置邮箱服务：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">server:
- port: 9134
-#邮箱配置
-spring:
- mail:
- host: smtp.163.com
-#发送者邮箱账号
- username: 你的邮箱@163.com
-#发送者密钥
- password: 你的邮箱服务密钥
- default‐encoding: utf‐8
- port: 465 #端口号465或587
- protocol: smtp
- properties:
- mail:
- debug:
- false
- smtp:
- socketFactory:
- class: javax.net.ssl.SSLSocketFactory<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">server</span><span class="token punctuation">:</span>
+ <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">9134</span>
+<span class="token comment">#邮箱配置</span>
+<span class="token key atrule">spring</span><span class="token punctuation">:</span>
+ <span class="token key atrule">mail</span><span class="token punctuation">:</span>
+ <span class="token key atrule">host</span><span class="token punctuation">:</span> smtp.163.com
+<span class="token comment">#发送者邮箱账号</span>
+ <span class="token key atrule">username</span><span class="token punctuation">:</span> 你的邮箱@163.com
+<span class="token comment">#发送者密钥</span>
+ <span class="token key atrule">password</span><span class="token punctuation">:</span> 你的邮箱服务密钥
+ <span class="token key atrule">default‐encoding</span><span class="token punctuation">:</span> utf‐8
+ <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">465</span> <span class="token comment">#端口号465或587</span>
+ <span class="token key atrule">protocol</span><span class="token punctuation">:</span> smtp
+ <span class="token key atrule">properties</span><span class="token punctuation">:</span>
+ <span class="token key atrule">mail</span><span class="token punctuation">:</span>
+ <span class="token key atrule">debug</span><span class="token punctuation">:</span>
+ <span class="token boolean important">false</span>
+ <span class="token key atrule">smtp</span><span class="token punctuation">:</span>
+ <span class="token key atrule">socketFactory</span><span class="token punctuation">:</span>
+ <span class="token key atrule">class</span><span class="token punctuation">:</span> javax.net.ssl.SSLSocketFactory<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>根据SkyWalking发送的JSON数据定义一个DTO，用于接口接收数据：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
@@ -1067,8 +1067,8 @@ spring:
 <p>最后将该接口配置到SkyWalking中，Webhook的配置位于config/alarm-settings.yml文件的末尾，格式为http://{ip}:port}/{uri}。</p>
 <p>如下示例：</p>
 <p> vim config/alarm‐settings.yml</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">webhooks:
-‐ http:&#x2F;&#x2F;127.0.0.1:9134&#x2F;alarm&#x2F;receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">webhooks</span><span class="token punctuation">:</span>
+‐ http<span class="token punctuation">:</span>//127.0.0.1<span class="token punctuation">:</span>9134/alarm/receive<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
                 
@@ -1318,7 +1318,7 @@ spring:
                 <a href="/2021/12/15/shu-ju-jie-gou/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=303924581,4042052696&fm=26&fmt=auto" class="responsive-img" alt="数据结构和算法">
+                        <img src="https://img2.baidu.com/it/u=706417487,3797132983&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" class="responsive-img" alt="数据结构和算法">
                         
                         <span class="card-title">数据结构和算法</span>
                     </div>
@@ -1366,7 +1366,7 @@ spring:
                 <a href="/2021/11/15/go-ji-chu-yu-fa/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2561631021,1559222725&fm=26&fmt=auto" class="responsive-img" alt="go语言基础学习">
+                        <img src="https://img1.baidu.com/it/u=3565933611,2185295392&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" class="responsive-img" alt="go语言基础学习">
                         
                         <span class="card-title">go语言基础学习</span>
                     </div>
@@ -1539,7 +1539,7 @@ spring:
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2025</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

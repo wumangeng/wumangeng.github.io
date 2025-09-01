@@ -323,7 +323,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img0.baidu.com/it/u=131035171,517969727&fm=253&fmt=auto&app=138&f=PNG?w=851&h=382')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3565933611,2185295392&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -491,7 +491,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    877
+                    865
                 </div>
                 
 
@@ -517,11 +517,11 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="注册到consul"><a href="#注册到consul" class="headerlink" title="注册到consul"></a>注册到consul</h2><p>先引入资源</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">go get -u go.uber.org&#x2F;zap
-go get -u google.golang.org&#x2F;grpc
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">go get -u go.uber.org/zap
+go get -u google.golang.org/grpc
 
-_ &quot;github.com&#x2F;mbobakov&#x2F;grpc-consul-resolver&quot;
-&quot;github.com&#x2F;satori&#x2F;go.uuid&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+_ <span class="token string">"github.com/mbobakov/grpc-consul-resolver"</span>
+<span class="token string">"github.com/satori/go.uuid"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>grpc服务端注册到consul</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">func</span> <span class="token function">InitGrpc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token punctuation">&#123;</span>
@@ -589,7 +589,7 @@ _ &quot;github.com&#x2F;mbobakov&#x2F;grpc-consul-resolver&quot;
 	global<span class="token punctuation">.</span>UserSrvClient <span class="token operator">=</span> proto<span class="token punctuation">.</span><span class="token function">NewUserClient</span><span class="token punctuation">(</span>userConn<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="注册到nacos"><a href="#注册到nacos" class="headerlink" title="注册到nacos"></a>注册到nacos</h2><p>获取sdk</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ go get -u github.com&#x2F;nacos-group&#x2F;nacos-sdk-go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">$ go get -u github.com/nacos-group/nacos-sdk-go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>将服务注册到nacos（注：配置文件为json格式，viper暂不支持yml）</p>
 <pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token comment">//InitNacos  连接nacos，拉取配置，将服务注册到nacos，</span>
@@ -929,30 +929,30 @@ _ &quot;github.com&#x2F;mbobakov&#x2F;grpc-consul-resolver&quot;
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/02/06/go-nei-cun-mo-xing/">
+                <a href="/2022/01/25/yan-zheng-ma-sheng-cheng-gong-ju-lei/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=3806254865,2912731236&fm=26&fmt=auto" class="responsive-img" alt="">
+                        <img src="https://img0.baidu.com/it/u=2971234416,1228887469&fm=253&fmt=auto&app=138&f=JPEG?w=270&h=270" class="responsive-img" alt="验证码生成工具类">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">验证码生成工具类</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Go内存模型
+                            项目
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-06
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-25
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Go/" class="post-category">
-                                    Go
+                            <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="post-category">
+                                    项目
                                 </a>
                             
                             
@@ -962,12 +962,8 @@ _ &quot;github.com&#x2F;mbobakov&#x2F;grpc-consul-resolver&quot;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/go%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
-                        <span class="chip bg-color">go内存模型</span>
-                    </a>
-                    
-                    <a href="/tags/goroutine/">
-                        <span class="chip bg-color">goroutine</span>
+                    <a href="/tags/%E9%A1%B9%E7%9B%AE/">
+                        <span class="chip bg-color">项目</span>
                     </a>
                     
                 </div>
@@ -1161,7 +1157,7 @@ _ &quot;github.com&#x2F;mbobakov&#x2F;grpc-consul-resolver&quot;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2025</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

@@ -1,0 +1,1917 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="k8s">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>k8s | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">k8s</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/pod/">
+                                <span class="chip bg-color">pod</span>
+                            </a>
+                        
+                            <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                                <span class="chip bg-color">k8s组件</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-02-07
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>Pod 是 Kubernetes 中最小的调度和管理单元，它代表着集群中运行的一个或多个容器实例。在一个 Pod 中，所有容器共享相同的网络命名空间、进程命名空间和存储卷，因此它们可以互相通信和共享数据。Pod 可以通过控制器进行创建、扩缩容和更新等操作。</p>
+<p><a href=""><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240721112347578-1403221146.png" alt="img"></a></p>
+<h1 id="二、Pod的基本操作"><a href="#二、Pod的基本操作" class="headerlink" title="二、Pod的基本操作"></a>二、Pod的基本操作</h1><h2 id="1、创建Pod"><a href="#1、创建Pod" class="headerlink" title="1、创建Pod"></a>1、创建Pod</h2><h3 id="1-1、命令行方式启动"><a href="#1-1、命令行方式启动" class="headerlink" title="1.1、命令行方式启动"></a>1.1、命令行方式启动</h3><pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">kubectl create deploy (pod控制器名称) [参数] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl create deploy nginx-deployment01 --image<span class="token operator">=</span>nginx --port<span class="token operator">=</span><span class="token number">8088</span> -n dev1
+deployment.apps/nginx-deployment created<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112345155-1342624171.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112345155-1342624171.png" alt="img"></a></p>
+<blockquote>
+<p>–-image 指定Pod的镜像</p>
+<p>–port 指定端口</p>
+<p>–n 指定namespace</p>
+</blockquote>
+<h3 id="1-2、创建Deployment资源清单启动"><a href="#1-2、创建Deployment资源清单启动" class="headerlink" title="1.2、创建Deployment资源清单启动"></a>1.2、创建Deployment资源清单启动</h3><blockquote>
+<p>nginx-deployment02.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment02
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> dev2
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">chapter</span><span class="token punctuation">:</span> first<span class="token punctuation">-</span>app
+    <span class="token key atrule">function</span><span class="token punctuation">:</span> test
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+     <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+       <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span> <span class="token punctuation">:</span> nginx02
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">8081</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f nginx-deployment02.yaml
+deployment.apps/nginx-deployment02 created<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112344616-2023450873.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112344616-2023450873.png" alt="img"></a></p>
+<h3 id="1-3、直接创建Pod-资源清单"><a href="#1-3、直接创建Pod-资源清单" class="headerlink" title="1.3、直接创建Pod(资源清单)"></a>1.3、直接创建Pod(资源清单)</h3><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx03
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> dev3
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">function</span><span class="token punctuation">:</span> test
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> pod
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>port
+      <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+      <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TCP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f pod-nginx03.yaml
+pod/nginx03 created<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112344102-1276929367.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112344102-1276929367.png" alt="img"></a></p>
+<h3 id="1-4、直接创建-kubectl-run"><a href="#1-4、直接创建-kubectl-run" class="headerlink" title="1.4、直接创建(kubectl run)"></a>1.4、直接创建(kubectl run)</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl run pod nginx04 --image<span class="token operator">=</span>nginx -n dev4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112343567-1570846576.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112343567-1570846576.png" alt="img"></a></p>
+<h2 id="2、查询"><a href="#2、查询" class="headerlink" title="2、查询"></a>2、查询</h2><h3 id="2-1、查询指定命名空间下所有的Pod"><a href="#2-1、查询指定命名空间下所有的Pod" class="headerlink" title="2.1、查询指定命名空间下所有的Pod"></a>2.1、查询指定命名空间下所有的Pod</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pod -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-2、查询指定Pod的信息"><a href="#2-2、查询指定Pod的信息" class="headerlink" title="2.2、查询指定Pod的信息"></a>2.2、查询指定Pod的信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods <span class="token operator">&lt;</span>pod_name<span class="token operator">></span> -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-3、对Pod状态进行实时监控"><a href="#2-3、对Pod状态进行实时监控" class="headerlink" title="2.3、对Pod状态进行实时监控"></a>2.3、对Pod状态进行实时监控</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span> -w<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-4、格式化输出"><a href="#2-4、格式化输出" class="headerlink" title="2.4、格式化输出"></a>2.4、格式化输出</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span> -o json<span class="token operator">|</span>yaml<span class="token operator">|</span>name<span class="token operator">|</span>go-template<span class="token operator">|</span>go-template-file<span class="token operator">|</span>template<span class="token operator">|</span>templatefile<span class="token operator">|</span>jsonpath<span class="token operator">|</span>jsonpath-as-json<span class="token operator">|</span>jsonpath-file<span class="token operator">|</span>custom-columns-file<span class="token operator">|</span>custom-columns<span class="token operator">|</span>wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-5、显示详细信息-包括Events"><a href="#2-5、显示详细信息-包括Events" class="headerlink" title="2.5、显示详细信息(包括Events)"></a>2.5、显示详细信息(包括Events)</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe pods <span class="token operator">&lt;</span>pod_name<span class="token operator">></span> -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-6、查看Pod的日志信息"><a href="#2-6、查看Pod的日志信息" class="headerlink" title="2.6、查看Pod的日志信息"></a>2.6、查看Pod的日志信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl logs <span class="token operator">&lt;</span>pod_name<span class="token operator">></span> -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="2-7、显示Pod的对应标签"><a href="#2-7、显示Pod的对应标签" class="headerlink" title="2.7、显示Pod的对应标签"></a>2.7、显示Pod的对应标签</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pod <span class="token operator">&lt;</span>pod_name<span class="token operator">></span> -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span> --show-labels<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="3、修改Pod"><a href="#3、修改Pod" class="headerlink" title="3、修改Pod"></a>3、修改Pod</h2><h3 id="3-1、修改已存在的Pod属性（不是由控制器创建的）"><a href="#3-1、修改已存在的Pod属性（不是由控制器创建的）" class="headerlink" title="3.1、修改已存在的Pod属性（不是由控制器创建的）"></a>3.1、修改已存在的Pod属性（不是由控制器创建的）</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl replcae -f <span class="token operator">&lt;</span>createpods.yaml<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>前提是Pod不是由更高级别的控制器（如Deployment）管理的。</p>
+</blockquote>
+<ul>
+<li>修改创建pod的资源清单</li>
+</ul>
+<blockquote>
+<p>cp pod-nginx03.yaml replcae-pod-nginx03.yaml &amp;&amp; vim replcae-pod-nginx03.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx03
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> dev3
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">function</span><span class="token punctuation">:</span> replace
+    <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> pod
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> <span class="token string">"echo 'Hello Kubernetes replaced!'; sleep 3600"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>port
+      <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+      <span class="token key atrule">protocol</span><span class="token punctuation">:</span> TCP<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>重建Pod</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl replace -f replcae-pod-nginx03.yaml --force<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112342894-2127102809.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112342894-2127102809.png" alt="img"></a></p>
+<blockquote>
+<p>#Pod有很多属性是无法修改的，如果一定要修改，需要加上 –force 参数，相当于重建 Pod</p>
+</blockquote>
+<ul>
+<li>查看这个Pod的日志</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl logs nginx03 -n dev3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112342369-2044149416.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112342369-2044149416.png" alt="img"></a></p>
+<h3 id="3-2、修改已存在的Pod属性-由控制器创建的"><a href="#3-2、修改已存在的Pod属性-由控制器创建的" class="headerlink" title="3.2、修改已存在的Pod属性(由控制器创建的)"></a>3.2、修改已存在的Pod属性(由控制器创建的)</h3><ul>
+<li>查看原本的Deployment资源清单</li>
+</ul>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment02
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> dev2
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">chapter</span><span class="token punctuation">:</span> first<span class="token punctuation">-</span>app
+    <span class="token key atrule">function</span><span class="token punctuation">:</span> test
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+     <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+       <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span> <span class="token punctuation">:</span> nginx02
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">8081</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>修改后的Deployment资源清单</li>
+</ul>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Deployment
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>deployment02
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> dev2
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">chapter</span><span class="token punctuation">:</span> first<span class="token punctuation">-</span>app
+    <span class="token key atrule">function</span><span class="token punctuation">:</span> test
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+     <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+       <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+  <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">1</span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span> <span class="token punctuation">:</span> nginx02
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">8081</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> <span class="token string">"echo 'Hello Kubernetes updated!'; sleep 3600"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>apply -f 更新Deployment</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f nginx-deployment02.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112341930-2088587490.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112341930-2088587490.png" alt="img"></a></p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112341487-1537825309.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112341487-1537825309.png" alt="img"></a></p>
+<h3 id="3-3、edit在线编辑"><a href="#3-3、edit在线编辑" class="headerlink" title="3.3、edit在线编辑"></a>3.3、edit在线编辑</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl edit nginx-deployment02-58759c87cb-dvg62 -n dev2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>:wq保存退出后也可以达到更新的效果</p>
+</blockquote>
+<h2 id="4、删除Pod"><a href="#4、删除Pod" class="headerlink" title="4、删除Pod"></a>4、删除Pod</h2><h3 id="4-1、未经Deployment创建的Pod"><a href="#4-1、未经Deployment创建的Pod" class="headerlink" title="4.1、未经Deployment创建的Pod"></a>4.1、未经Deployment创建的Pod</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl delete <span class="token operator">&lt;</span>pod_name<span class="token operator">></span> -n <span class="token operator">&lt;</span>namespace<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112340592-1926137958.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112340592-1926137958.png" alt="img"></a></p>
+<h3 id="4-2、通过Deployment创建的Pod"><a href="#4-2、通过Deployment创建的Pod" class="headerlink" title="4.2、通过Deployment创建的Pod"></a>4.2、通过Deployment创建的Pod</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl delete -f <span class="token operator">&lt;</span>createpods.yaml<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112339587-1081882456.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112339587-1081882456.png" alt="img"></a></p>
+<h1 id="二、Pod的生命周期"><a href="#二、Pod的生命周期" class="headerlink" title="二、Pod的生命周期"></a>二、Pod的生命周期</h1><p><a href=""><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3332572-20240721112338350-1960558933.jpg" alt="img"></a></p>
+<h2 id="1、Pod的状态"><a href="#1、Pod的状态" class="headerlink" title="1、Pod的状态"></a>1、Pod的状态</h2><p>我们可以通过 kubectl explain pod.status 命令来了解关于 Pod 状态的一些信息</p>
+<p>Pod 的状态定义在 PodStatus 对象中，其中有一个 phase 字段，下面是 phase 的可能取值：</p>
+<ul>
+<li>挂起（Pending）：Pod 信息已经提交给了集群，但是还没有被调度器调度到合适的节点或者 Pod 里的镜像正在下载</li>
+<li>运行中（Running）：该 Pod 已经绑定到了一个节点上，Pod 中所有的容器都已被创建。至少有一个容器正在运行，或者正处于启动或重启状态</li>
+<li>成功（Succeeded）：Pod 中的所有容器都被成功终止，并且不会再重启</li>
+<li>失败（Failed）：Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止</li>
+<li>未知（Unknown）：因为某些原因无法取得 Pod 的状态，通常是因为与 Pod 所在主机通信失败导致的</li>
+</ul>
+<p>除此之外，PodStatus 对象中还包含一个 PodCondition 的数组，里面包含的属性有：</p>
+<ul>
+<li>lastProbeTime：最后一次探测 Pod Condition 的时间戳。</li>
+<li>lastTransitionTime：上次 Condition 从一种状态转换到另一种状态的时间。</li>
+<li>message：上次 Condition 状态转换的详细描述。</li>
+<li>reason：Condition 最后一次转换的原因。</li>
+<li>status：Condition 状态类型，可以为 “True”, “False”, and “Unknown”.</li>
+<li>type：Condition 类型，包括以下方面：<ul>
+<li>PodScheduled（Pod 已经被调度到其他 node 里）</li>
+<li>Ready（Pod 能够提供服务请求，可以被添加到所有可匹配服务的负载平衡池中）</li>
+<li>Initialized（所有的init containers已经启动成功）</li>
+<li>Unschedulable（调度程序现在无法调度 Pod，例如由于缺乏资源或其他限制）</li>
+<li>ContainersReady（Pod 里的所有容器都是 ready 状态）</li>
+</ul>
+</li>
+</ul>
+<h2 id="2、重启策略"><a href="#2、重启策略" class="headerlink" title="2、重启策略"></a>2、重启策略</h2><p>我们可以通过配置restartPolicy字段来设置 Pod 中所有容器的重启策略，其可能值为Always，OnFailure 和 Never，默认值为 Always。restartPolicy 仅指通过 kubelet 在同一节点上重新启动容器。通过 kubelet 重新启动的退出容器将以指数增加延迟（10s，20s，40s…）重新启动，上限为 5 分钟，并在成功执行 10 分钟后重置。不同类型的的控制器可以控制 Pod 的重启策略：</p>
+<ul>
+<li>Job：适用于一次性任务如批量计算，任务结束后 Pod 会被此类控制器清除。Job 的重启策略只能是”OnFailure”或者”Never”。</li>
+<li>Replication Controller, ReplicaSet, or Deployment，此类控制器希望 Pod 一直运行下去，它们的重启策略只能是”Always”。</li>
+<li>DaemonSet：每个节点上启动一个 Pod，很明显此类控制器的重启策略也应该是”Always”。</li>
+</ul>
+<h2 id="3、初始化容器"><a href="#3、初始化容器" class="headerlink" title="3、初始化容器"></a>3、初始化容器</h2><p>了解了 Pod 状态后，首先来了解下 Pod 中最新启动的 <code>Init Container</code>，也就是我们平时常说的<strong>初始化容器</strong>。<code>Init Container</code>就是用来做初始化工作的容器，可以是一个或者多个，如果有多个的话，这些容器会按定义的顺序依次执行。我们知道一个 Pod 里面的所有容器是共享数据卷和Network Namespace 的，所以<code>Init Container</code>里面产生的数据可以被主容器使用到。从上面的 Pod 生命周期的图中可以看出初始化容器是独立与主容器之外的，只有所有的初始化容器执行完之后，主容器才会被启动。那么初始化容器有哪些应用场景呢：</p>
+<ul>
+<li>等待其他模块 Ready：这个可以用来解决服务之间的依赖问题，比如我们有一个 Web 服务，该服务又依赖于另外一个数据库服务，但是在我们启动这个 Web 服务的时候我们并不能保证依赖的这个数据库服务就已经启动起来了，所以可能会出现一段时间内 Web 服务连接数据库异常。要解决这个问题的话我们就可以在 Web 服务的 Pod 中使用一个 InitContainer，在这个初始化容器中去检查数据库是否已经准备好了，准备好了过后初始化容器就结束退出，然后我们主容器的 Web 服务才被启动起来，这个时候去连接数据库就不会有问题了。</li>
+<li>做初始化配置：比如集群里检测所有已经存在的成员节点，为主容器准备好集群的配置信息，这样主容器起来后就能用这个配置信息加入集群。</li>
+<li>其它场景：如将 Pod 注册到一个中央数据库、配置中心等。</li>
+</ul>
+<p>比如现在我们来实现一个功能，在 Nginx Pod 启动之前去重新初始化首页内容，如下所示的资源清单</p>
+<blockquote>
+<p>init-pod.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> init<span class="token punctuation">-</span>demo
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> workdir
+    <span class="token key atrule">emptyDir</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+  <span class="token key atrule">initContainers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> install
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> busybox
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> wget
+    <span class="token punctuation">-</span> <span class="token string">"-O"</span>
+    <span class="token punctuation">-</span> <span class="token string">"/work-dir/index.html"</span>
+    <span class="token punctuation">-</span> http<span class="token punctuation">:</span>//www.baidu.com
+    <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> workdir
+      <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> <span class="token string">"/work-dir"</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> workdir
+      <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /usr/share/nginx/html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>上面的资源清单中我们首先在 Pod 顶层声明了一个名为 workdir 的 Volume，前面我们用了 hostPath 的模式，这里我们使用的是 emptyDir{}，这个是一个临时的目录，数据会保存在 kubelet 的工作目录下面，生命周期等同于 Pod 的生命周期。</p>
+</blockquote>
+<blockquote>
+<p>然后我们定义了一个初始化容器，该容器会下载一个 html 文件到 /work-dir 目录下面，但是由于我们又将该目录声明挂载到了全局的 Volume，同样的主容器 nginx 也将目录 /usr/share/nginx/html 声明挂载到了全局的 Volume，所以在主容器的该目录下面会同步初始化容器中创建的 index.html 文件。</p>
+</blockquote>
+<ul>
+<li>直接应用资源清单来创建上面的Pod</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f init-pod.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112334778-2090845428.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112334778-2090845428.png" alt="img"></a></p>
+<ul>
+<li>创建完成后可以查看该 Pod 的状态</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112334215-1063829278.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112334215-1063829278.png" alt="img"></a></p>
+<blockquote>
+<p>可以发现 Pod 现在的状态处于 Init:0/1 状态，意思就是现在第一个初始化容器还在执行过程中</p>
+</blockquote>
+<ul>
+<li>此时我们可以查看 Pod 的详细信息</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe pods init-demo -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Name:         init-demo
+Namespace:    default
+Priority:     <span class="token number">0</span>
+Node:         k8s-node2/192.168.112.60
+Start Time:   Thu, <span class="token number">18</span> Jul <span class="token number">2024</span> <span class="token number">23</span>:53:56 +0800
+Labels:       <span class="token operator">&lt;</span>none<span class="token operator">></span>
+Annotations:  <span class="token operator">&lt;</span>none<span class="token operator">></span>
+Status:       Pending
+IP:           <span class="token number">10.244</span>.2.41
+IPs:
+  IP:  <span class="token number">10.244</span>.2.41
+Init Containers:
+  install:
+    Container ID:  docker://d7ab75ce40d80daa676a547482ee32eba9f2488a9c791051fb5aa5ddcfbcc5b1
+    Image:         busybox
+    Image ID:      docker-pullable://busybox@sha256:5acba83a746c7608ed544dc1533b87c737a0b0fb730301639a0179f9344b1678
+    Port:          <span class="token operator">&lt;</span>none<span class="token operator">></span>
+    Host Port:     <span class="token operator">&lt;</span>none<span class="token operator">></span>
+    Command:
+      <span class="token function">wget</span>
+      -O
+      /work-dir/index.html
+      http://www.baidu.com
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    <span class="token number">0</span>
+      Started:      Thu, <span class="token number">18</span> Jul <span class="token number">2024</span> <span class="token number">23</span>:56:21 +0800
+      Finished:     Thu, <span class="token number">18</span> Jul <span class="token number">2024</span> <span class="token number">23</span>:56:24 +0800
+    Ready:          True
+    Restart Count:  <span class="token number">0</span>
+    Environment:    <span class="token operator">&lt;</span>none<span class="token operator">></span>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2kmc4 <span class="token punctuation">(</span>ro<span class="token punctuation">)</span>
+      /work-dir from workdir <span class="token punctuation">(</span>rw<span class="token punctuation">)</span>
+Containers:
+  nginx:
+    Container ID:
+    Image:          nginx
+    Image ID:
+    Port:           <span class="token number">80</span>/TCP
+    Host Port:      <span class="token number">0</span>/TCP
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+    Restart Count:  <span class="token number">0</span>
+    Environment:    <span class="token operator">&lt;</span>none<span class="token operator">></span>
+    Mounts:
+      /usr/share/nginx/html from workdir <span class="token punctuation">(</span>rw<span class="token punctuation">)</span>
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2kmc4 <span class="token punctuation">(</span>ro<span class="token punctuation">)</span>
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  workdir:
+    Type:       EmptyDir <span class="token punctuation">(</span>a temporary directory that shares a pod's lifetime<span class="token punctuation">)</span>
+    Medium:
+    SizeLimit:  <span class="token operator">&lt;</span>unset<span class="token operator">></span>
+  kube-api-access-2kmc4:
+    Type:                    Projected <span class="token punctuation">(</span>a volume that contains injected data from multiple sources<span class="token punctuation">)</span>
+    TokenExpirationSeconds:  <span class="token number">3607</span>
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <span class="token operator">&lt;</span>nil<span class="token operator">></span>
+    DownwardAPI:             <span class="token boolean">true</span>
+QoS Class:                   BestEffort
+Node-Selectors:              <span class="token operator">&lt;</span>none<span class="token operator">></span>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute <span class="token assign-left variable">op</span><span class="token operator">=</span>Exists <span class="token keyword">for</span> 300s
+                             node.kubernetes.io/unreachable:NoExecute <span class="token assign-left variable">op</span><span class="token operator">=</span>Exists <span class="token keyword">for</span> 300s
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  2m49s                default-scheduler  Successfully assigned default/init-demo to k8s-node2
+  Warning  Failed     64s                  kubelet            Failed to pull image <span class="token string">"busybox"</span><span class="token builtin class-name">:</span> rpc error: code <span class="token operator">=</span> Unknown desc <span class="token operator">=</span> Error response from daemon: Get <span class="token string">"https://registry-1.docker.io/v2/"</span><span class="token builtin class-name">:</span> net/http: TLS handshake <span class="token function">timeout</span>
+  Warning  Failed     64s                  kubelet            Error: ErrImagePull
+  Normal   BackOff    63s                  kubelet            Back-off pulling image <span class="token string">"busybox"</span>
+  Warning  Failed     63s                  kubelet            Error: ImagePullBackOff
+  Normal   Pulling    51s <span class="token punctuation">(</span>x2 over 2m49s<span class="token punctuation">)</span>  kubelet            Pulling image <span class="token string">"busybox"</span>
+  Normal   Pulled     25s                  kubelet            Successfully pulled image <span class="token string">"busybox"</span> <span class="token keyword">in</span> <span class="token number">26</span>.135324609s
+  Normal   Created    25s                  kubelet            Created container <span class="token function">install</span>
+  Normal   Started    25s                  kubelet            Started container <span class="token function">install</span>
+  Normal   Pulling    21s                  kubelet            Pulling image <span class="token string">"nginx"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从上面的描述信息里面可以看到初始化容器已经启动了，现在处于 Running 状态，所以还需要稍等，到初始化容器执行完成后退出初始化容器会变成 Completed 状态，然后才会启动主容器。待到主容器也启动完成后，Pod 就会变成Running 状态</p>
+<ul>
+<li>然后我们去访问下 Pod 主页，验证下是否有我们初始化容器中下载的页面信息：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kuebctl get pods -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112333634-1636083996.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112333634-1636083996.png" alt="img"></a></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> <span class="token number">10.244</span>.2.41<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112332940-834067516.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112332940-834067516.png" alt="img"></a></p>
+<h2 id="4、pod-hook"><a href="#4、pod-hook" class="headerlink" title="4、pod hook"></a>4、pod hook</h2><p>我们知道 Pod 是 Kubernetes 集群中的最小单元，而 Pod 是由容器组成的，所以在讨论 Pod 的生命周期的时候我们可以先来讨论下容器的生命周期。</p>
+<p>实际上 Kubernetes 为我们的容器提供了生命周期的钩子，就是我们说的Pod Hook，Pod Hook 是由 kubelet 发起的，当容器中的进程启动前或者容器中的进程终止之前运行，这是包含在容器的生命周期之中。我们可以同时为 Pod 中的所有容器都配置 hook。</p>
+<h3 id="4-1、两种钩子函数"><a href="#4-1、两种钩子函数" class="headerlink" title="4.1、两种钩子函数"></a>4.1、两种钩子函数</h3><p>Kubernetes 为我们提供了两种钩子函数：</p>
+<ul>
+<li>PostStart：这个钩子在容器创建后立即执行。但是，并不能保证钩子将在容器 ENTRYPOINT 之前运行，因为没有参数传递给处理程序。主要用于资源部署、环境准备等。不过需要注意的是如果钩子花费太长时间以至于不能运行或者挂起，容器将不能达到 running 状态。</li>
+<li>PreStop：这个钩子在容器终止之前立即被调用。它是阻塞的，意味着它是同步的，所以它必须在删除容器的调用发出之前完成。主要用于优雅关闭应用程序、通知其他系统等。如果钩子在执行期间挂起，Pod 阶段将停留在 running 状态并且永不会达到 failed 状态。</li>
+</ul>
+<p>如果 PostStart 或者 PreStop 钩子失败， 它会杀死容器。所以我们应该让钩子函数尽可能的轻量。当然有些情况下，长时间运行命令是合理的， 比如在停止容器之前预先保存状态。</p>
+<h3 id="4-2、两种实现方式"><a href="#4-2、两种实现方式" class="headerlink" title="4.2、两种实现方式"></a>4.2、两种实现方式</h3><ul>
+<li>Exec - 用于执行一段特定的命令，不过要注意的是该命令消耗的资源会被计入容器。</li>
+<li>HTTP - 对容器上的特定的端点执行 HTTP 请求。</li>
+</ul>
+<h3 id="4-3、PostStart钩子函数"><a href="#4-3、PostStart钩子函数" class="headerlink" title="4.3、PostStart钩子函数"></a>4.3、PostStart钩子函数</h3><p>以下示例中，定义了一个 Nginx Pod，其中设置了 PostStart 钩子函数，即在容器创建成功后，写入一句话到 /usr/share/message 文件中：</p>
+<blockquote>
+<p>pod-poststart.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo1
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo1
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+      <span class="token key atrule">postStart</span><span class="token punctuation">:</span>
+        <span class="token key atrule">exec</span><span class="token punctuation">:</span>
+          <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> <span class="token string">"echo Hello from the postStart handler > /usr/share/message"</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>应用资源清单</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f pod-poststart.yaml
+ 
+kubectl get pods
+ 
+NAME                            READY   STATUS    RESTARTS   AGE
+hook-demo1                      <span class="token number">1</span>/1     Running   <span class="token number">0</span>          43s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>创建成功后查看容器中的 <code>/usr/share/message </code>文件是否内容正确</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112331723-219147814.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112331723-219147814.png" alt="img"></a></p>
+<h3 id="4-4-、PreStop钩子函数"><a href="#4-4-、PreStop钩子函数" class="headerlink" title="4.4.、PreStop钩子函数"></a>4.4.、PreStop钩子函数</h3><p>当用户请求删除含有 Pod 的资源对象时（如 Deployment 等），K8S 为了让应用程序优雅关闭（即让应用程序完成正在处理的请求后，再关闭软件），K8S 提供两种信息通知：</p>
+<ul>
+<li>默认：K8S 通知 node 执行docker stop命令，docker 会先向容器中 PID 为 1 的进程发送系统信号SIGTERM，然后等待容器中的应用程序终止执行，如果等待时间达到设定的超时时间，或者默认超时时间（30s），会继续发送SIGKILL的系统信号强行 kill 掉进程</li>
+<li>使用 Pod 生命周期（利用PreStop回调函数），它在发送终止信号之前执行默认所有的优雅退出时间都在30秒内。kubectl delete 命令支持 –grace-period=选项，这个选项允许用户用他们自己指定的值覆盖默认值。值’0’代表强制删除 pod。 在 kubectl 1.5 及以上的版本里，执行强制删除时必须同时指定 –force –grace-period=0。</li>
+</ul>
+<p>强制删除一个 pod 是从集群状态还有 etcd 里立刻删除这个 pod，只是当 Pod 被强制删除时， APIServer 不会等待来自 Pod 所在节点上的 kubelet 的确认信息：pod 已经被终止。在 API 里 pod 会被立刻删除，在节点上， pods 被设置成立刻终止后，在强行杀掉前还会有一个很小的宽限期。</p>
+<p>以下示例中，定义了一个 Nginx Pod，其中设置了PreStop钩子函数，即在容器退出之前，优雅的关闭 Nginx</p>
+<blockquote>
+<p>pod-prestop.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo2
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo2
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preStop</span><span class="token punctuation">:</span>
+        <span class="token key atrule">exec</span><span class="token punctuation">:</span>
+          <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"/usr/sbin/nginx"</span><span class="token punctuation">,</span><span class="token string">"-s"</span><span class="token punctuation">,</span><span class="token string">"quit"</span><span class="token punctuation">]</span>  <span class="token comment"># 优雅退出</span>
+ 
+<span class="token punctuation">---</span>
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo3
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> message
+    <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+      <span class="token key atrule">path</span><span class="token punctuation">:</span> /tmp
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> hook<span class="token punctuation">-</span>demo2
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> message
+      <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /usr/share/
+    <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preStop</span><span class="token punctuation">:</span>
+        <span class="token key atrule">exec</span><span class="token punctuation">:</span>
+          <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'/bin/sh'</span><span class="token punctuation">,</span> <span class="token string">'-c'</span><span class="token punctuation">,</span> <span class="token string">'echo Hello from the preStop Handler > /usr/share/message'</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上面定义的两个 Pod，一个是利用 preStop 来进行优雅删除，另外一个是利用 preStop 来做一些信息记录的事情</p>
+<ul>
+<li>同样直接应用资源清单创建上面的 Pod：</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f pod-prestop.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112330118-502122752.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112330118-502122752.png" alt="img"></a></p>
+<ul>
+<li>查看对应Pod状态</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods <span class="token operator">|</span><span class="token function">grep</span> ^hook<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112328613-955281043.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112328613-955281043.png" alt="img"></a></p>
+<p>创建完成后，我们可以直接删除 hook-demo2 这个 Pod，在容器删除之前会执行 preStop 里面的优雅关闭命令，这个用法在后面我们的滚动更新的时候用来保证我们的应用零宕机非常有用。</p>
+<p>第二个 Pod 我们声明了一个 hostPath 类型的 Volume，在容器里面声明挂载到了这个 Volume，所以当我们删除 Pod，退出容器之前，在容器里面输出的信息也会同样的保存到宿主机（一定要是 Pod 被调度到的目标节点）的 /tmp 目录下面</p>
+<ul>
+<li>查看 hook-demo3 这个 Pod 被调度的节点</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe pods hook-demo3<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112327361-569245143.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112327361-569245143.png" alt="img"></a></p>
+<p>可以看到这个 Pod 被调度到了 k8s-node1 这个节点上，我们可以先到该节点上查看 /tmp 目录下面目前没有想要的内容：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> /tmp/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112323546-1466575511.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112323546-1466575511.png" alt="img"></a></p>
+<ul>
+<li>删除hook-demo3</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl delete pod hook-demo3 <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112319662-1043134600.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112319662-1043134600.png" alt="img"></a></p>
+<p>现在我们来删除 hook-demo3 这个 Pod，安装我们的设定在容器退出之前会执行 preStop 里面的命令，也就是会往 message 文件中输出一些信息</p>
+<ul>
+<li>回到被调度到的节点<code>/tmp/</code>目录下查看</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ls</span> /tmp
+
+<span class="token function">cat</span> /tmp/message   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112318652-202261838.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112318652-202261838.png" alt="img"></a></p>
+<p>另外 Hook 调用的日志没有暴露个给 Pod，所以只能通过 describe 命令来获取，如果有错误将可以看到 FailedPostStartHook 或 FailedPreStopHook 这样的 event。</p>
+<h1 id="三、Pod健康检查"><a href="#三、Pod健康检查" class="headerlink" title="三、Pod健康检查"></a>三、Pod健康检查</h1><p>在Kubernetes中，Pod健康检查是通过使用探针（probes）来实现的，这些探针用于确定Pod中的容器是否处于健康状态。健康检查机制允许Kubernetes系统在容器出现问题时做出响应，例如重启容器或从服务路由中移除容器。</p>
+<h2 id="1、Kubernetes中三种主要的探针类型"><a href="#1、Kubernetes中三种主要的探针类型" class="headerlink" title="1、Kubernetes中三种主要的探针类型"></a>1、Kubernetes中三种主要的探针类型</h2><h3 id="1-1、存活探针（Liveness-Probes）"><a href="#1-1、存活探针（Liveness-Probes）" class="headerlink" title="1.1、存活探针（Liveness Probes）"></a>1.1、存活探针（Liveness Probes）</h3><p>存活探针用于检查容器是否正在运行并响应。如果存活探针失败，Kubernetes将根据Pod的restartPolicy重启容器。这通常用于检测应用程序的崩溃或陷入死锁的情况。存活探针可以配置为以下几种类型：</p>
+<ul>
+<li><strong>HTTP GET</strong>：对容器的 IP 地址上指定端口和路径执行 HTTP GET 请求。如果响应的状态码大于等于 200 且小于 400，则诊断被认为是成功的。</li>
+<li><strong>TCP Socket</strong>：对容器的 IP 地址上的指定端口执行 TCP 检查。如果端口打开，则诊断被认为是成功的。 如果远程系统（容器）在打开连接后立即将其关闭，这算作是健康的。</li>
+<li><strong>Exec</strong>：在容器内执行指定命令。如果命令退出时返回码为 0 则认为诊断成功。</li>
+<li><strong>gRPC</strong>：使用 <a target="_blank" rel="noopener" href="https://grpc.io/">gRPC</a> 执行一个远程过程调用。 目标应该实现 <a target="_blank" rel="noopener" href="https://grpc.io/grpc/core/md_doc_health-checking.html">gRPC 健康检查</a>。 如果响应的状态是 “SERVING”，则认为诊断成功。</li>
+</ul>
+<p><strong>注：如果pod内部不指定存活探测，可能会发生容器运行但是无法提供服务的情况</strong></p>
+<h3 id="1-2、-就绪探针（Readiness-Probes）"><a href="#1-2、-就绪探针（Readiness-Probes）" class="headerlink" title="1.2、 就绪探针（Readiness Probes）"></a>1.2、 就绪探针（Readiness Probes）</h3><p>就绪探针用于确认容器是否准备好接收流量。如果就绪探针失败，Kubernetes将不会把该Pod视为服务的活动实例，这意味着不会将网络流量路由到该Pod。一旦就绪探针开始成功，Pod将开始接收流量。就绪探针可以是以下几种类型：</p>
+<ul>
+<li><strong>HTTP GET</strong></li>
+<li><strong>TCP Socket</strong></li>
+<li><strong>Exec</strong></li>
+<li><strong>gRPC</strong></li>
+</ul>
+<p><strong>注：如果pod内部的 C 不添加就绪探测，默认就绪。如果添加了就绪探测，只有就绪探测通过后才标记修改为就绪状态。</strong></p>
+<h3 id="1-3、启动探针（Startup-Probes）"><a href="#1-3、启动探针（Startup-Probes）" class="headerlink" title="1.3、启动探针（Startup Probes）"></a>1.3、启动探针（Startup Probes）</h3><p>启动探针用于检测容器是否已启动并运行。在启动探针成功之前，其他探针（如存活探针和就绪探针）不会执行。这有助于避免在容器初始化阶段错误地重启或标记容器未准备好。启动探针同样可以配置为：</p>
+<ul>
+<li><strong>HTTP GET</strong></li>
+<li><strong>TCP Socket</strong></li>
+<li><strong>Exec</strong></li>
+<li><strong>gRPC</strong></li>
+</ul>
+<h2 id="2、探针配置参数"><a href="#2、探针配置参数" class="headerlink" title="2、探针配置参数"></a>2、探针配置参数</h2><p>探针配置包含几个重要的参数：</p>
+<ul>
+<li><strong>initialDelaySeconds</strong>：探针开始执行前等待的秒数。</li>
+<li><strong>periodSeconds</strong>：探针执行之间的间隔秒数。</li>
+<li><strong>timeoutSeconds</strong>：探针执行超时秒数。</li>
+<li><strong>successThreshold</strong>：连续成功多少次后探针被认为是成功的。</li>
+<li><strong>failureThreshold</strong>：连续失败多少次后探针被认为是失败的。</li>
+</ul>
+<h2 id="3、探针状态"><a href="#3、探针状态" class="headerlink" title="3、探针状态"></a>3、探针状态</h2><p>探针的结果可以是：</p>
+<ul>
+<li><strong>Success</strong>：容器通过了探针的检查。</li>
+<li><strong>Failure</strong>：容器没有通过探针的检查。</li>
+<li><strong>Unknown</strong>：探针执行失败或未知状态，此时不采取任何行动，kubelet会继续检查。</li>
+</ul>
+<h2 id="4、示例（存活探针–exec）"><a href="#4、示例（存活探针–exec）" class="headerlink" title="4、示例（存活探针–exec）"></a>4、示例（存活探针–exec）</h2><p>用 exec 执行命令的方式来检测容器的存活</p>
+<h3 id="4-1、编写资源清单"><a href="#4-1、编写资源清单" class="headerlink" title="4.1、编写资源清单"></a>4.1、编写资源清单</h3><blockquote>
+<p>liveness-exec.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> liveness<span class="token punctuation">-</span>exec
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> liveness
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> busybox
+    <span class="token key atrule">args</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> /bin/sh
+    <span class="token punctuation">-</span> <span class="token punctuation">-</span>c
+    <span class="token punctuation">-</span> touch /tmp/healthy; sleep 30; rm <span class="token punctuation">-</span>rf /tmp/healthy; sleep 600
+    <span class="token key atrule">livenessProbe</span><span class="token punctuation">:</span>
+      <span class="token key atrule">exec</span><span class="token punctuation">:</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> cat
+        <span class="token punctuation">-</span> /tmp/healthy
+      <span class="token key atrule">initialDelaySeconds</span><span class="token punctuation">:</span> <span class="token number">5</span>
+      <span class="token key atrule">periodSeconds</span><span class="token punctuation">:</span> <span class="token number">5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<ul>
+<li>periodSeconds：表示让 kubelet 每隔5秒执行一次存活探针，也就是每5秒执行一次上面的cat /tmp/healthy命令，如果命令执行成功了，将返回0，那么 kubelet 就会认为当前这个容器是存活的，如果返回的是非0值，那么 kubelet 就会把该容器杀掉然后重启它。默认是10秒，最小1秒。</li>
+<li>initialDelaySeconds：表示在第一次执行探针的时候要等待5秒，这样能够确保我们的容器能够有足够的时间启动起来。大家可以想象下，如果你的第一次执行探针等候的时间太短，是不是很有可能容器还没正常启动起来，所以存活探针很可能始终都是失败的，这样就会无休止的重启下去了</li>
+</ul>
+</blockquote>
+<h3 id="4-2、-spec-containers-args"><a href="#4-2、-spec-containers-args" class="headerlink" title="4.2、.spec.containers.args"></a>4.2、.spec.containers.args</h3><blockquote>
+<p>我们在容器启动的时候，执行了如下命令：</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/bin/sh -c <span class="token string">"touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>意思是说在容器最开始的30秒内创建了一个/tmp/healthy文件，在这30秒内执行cat /tmp/healthy命令都会返回一个成功的返回码。30 秒后，我们删除这个文件，现在执行cat /tmp/healthy是不是就会失败了（默认检测失败3次才认为失败），所以这个时候就会重启容器了。</p>
+<h3 id="4-3、创建该pod"><a href="#4-3、创建该pod" class="headerlink" title="4.3、创建该pod"></a>4.3、创建该pod</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f liveness-exec.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="4-4、查看Pod的Event"><a href="#4-4、查看Pod的Event" class="headerlink" title="4.4、查看Pod的Event"></a>4.4、查看Pod的Event</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe pod liveness-exec<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112311276-886682291.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112311276-886682291.png" alt="img"></a></p>
+<p>我们可以观察到容器是正常启动的，在隔一会儿，再查看下 Pod 的 Event，在最下面有一条信息显示 liveness probe 失败了，容器将要重启。然后可以查看到 Pod 的 RESTARTS 值加 1 了：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods<span class="token operator">|</span><span class="token function">grep</span> ^live<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112259942-107317794.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112259942-107317794.png" alt="img"></a></p>
+<h2 id="5、示例（存活探针–HTTP-GET）"><a href="#5、示例（存活探针–HTTP-GET）" class="headerlink" title="5、示例（存活探针–HTTP GET）"></a>5、示例（存活探针–HTTP GET）</h2><h3 id="5-1、编写资源清单"><a href="#5-1、编写资源清单" class="headerlink" title="5.1、编写资源清单"></a>5.1、编写资源清单</h3><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> liveness<span class="token punctuation">-</span>http
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> liveness
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> cnych/liveness
+    <span class="token key atrule">args</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> /server
+    <span class="token key atrule">livenessProbe</span><span class="token punctuation">:</span>
+      <span class="token key atrule">httpGet</span><span class="token punctuation">:</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> /healthz
+        <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">8080</span>
+        <span class="token key atrule">httpHeaders</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> X<span class="token punctuation">-</span>Custom<span class="token punctuation">-</span>Header
+          <span class="token key atrule">value</span><span class="token punctuation">:</span> Awesome
+      <span class="token key atrule">initialDelaySeconds</span><span class="token punctuation">:</span> <span class="token number">3</span>
+      <span class="token key atrule">periodSeconds</span><span class="token punctuation">:</span> <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>同样的，根据 periodSeconds 属性我们可以知道 kubelet 需要每隔3秒执行一次 liveness Probe，该探针将向容器中的 server 的 8080 端口发送一个 HTTP GET 请求。如果 server 的 /healthz 路径的 handler 返回一个成功的返回码，kubelet 就会认定该容器是活着的并且很健康，如果返回失败的返回码，kubelet 将杀掉该容器并重启它。initialDelaySeconds 指定kubelet 在该执行第一次探测之前需要等待3秒钟。</p>
+<blockquote>
+<p>通常来说，任何大于200小于400的状态码都会认定是成功的返回码。其他返回码都会被认为是失败的返回码。</p>
+</blockquote>
+<h1 id="四、Pod资源配置"><a href="#四、Pod资源配置" class="headerlink" title="四、Pod资源配置"></a>四、Pod资源配置</h1><p>实际上上面几个步骤就是影响一个 Pod 生命周期的大的部分，但是还有一些细节也会在 Pod 的启动过程进行设置，比如在容器启动之前还会为当前的容器设置分配的 CPU、内存等资源，我们知道我们可以通过 CGroup 来对容器的资源进行限制，同样的，在 Pod 中我们也可以直接配置某个容器的使用的 CPU 或者内存的上限。那么 Pod 是如何来使用和控制这些资源的分配的呢？</p>
+<p>首先对于 CPU，我们知道计算机里 CPU 的资源是按“时间片”的方式来进行分配的，系统里的每一个操作都需要 CPU 的处理，所以，哪个任务要是申请的 CPU 时间片越多，那么它得到的 CPU 资源就越多。</p>
+<h2 id="1、CGroup-里面对于-CPU-资源的单位换算"><a href="#1、CGroup-里面对于-CPU-资源的单位换算" class="headerlink" title="1、CGroup 里面对于 CPU 资源的单位换算"></a>1、CGroup 里面对于 CPU 资源的单位换算</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span> CPU <span class="token operator">=</span>  <span class="token number">1000</span> millicpu（1 Core <span class="token operator">=</span> 1000m）
+ 
+<span class="token number">0.5</span> CPU <span class="token operator">=</span> <span class="token number">500</span> millicpu （0.5 Core <span class="token operator">=</span> 500m）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里的 m 就是毫、毫核的意思，Kubernetes 集群中的每一个节点可以通过操作系统的命令来确认本节点的 CPU 内核数量，然后将这个数量乘以1000，得到的就是节点总 CPU 总毫数。比如一个节点有四核，那么该节点的 CPU 总毫量为 4000m，如果你要使用0.5 core，则你要求的是 4000*0.5 = 2000m。在 Pod 里面我们可以通过下面的两个参数来现在和请求 CPU 资源：</p>
+<ul>
+<li><code>spec.containers[].resources.limits.cpu</code>：CPU 上限值，可以短暂超过，容器也不会被停止</li>
+<li><code>spec.containers[].resources.requests.cpu</code>：CPU请求值，Kubernetes 调度算法里的依据值，可以超过</li>
+</ul>
+<p>这里需要明白的是，如果resources.requests.cpu设置的值大于集群里每个节点的最大 CPU 核心数，那么这个 Pod 将无法调度，因为没有节点能满足它。</p>
+<p>到这里应该明白了，requests 是用于集群调度使用的资源，而 limits 才是真正的用于资源限制的配置，如果你需要保证的你应用优先级很高，也就是资源吃紧的情况下最后再杀掉你的 Pod，那么你就把你的 requests 和 limits 的值设置成一致。</p>
+<h2 id="2、创建容器的资源清单"><a href="#2、创建容器的资源清单" class="headerlink" title="2、创建容器的资源清单"></a>2、创建容器的资源清单</h2><h3 id="2-1、编写资源清单"><a href="#2-1、编写资源清单" class="headerlink" title="2.1、编写资源清单"></a>2.1、编写资源清单</h3><blockquote>
+<p>pod-resource-demo1.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Pod
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> resource<span class="token punctuation">-</span>demo1
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> resource<span class="token punctuation">-</span>demo1
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">requests</span><span class="token punctuation">:</span>
+        <span class="token key atrule">memory</span><span class="token punctuation">:</span> 50Mi
+        <span class="token key atrule">cpu</span><span class="token punctuation">:</span> 50m
+      <span class="token key atrule">limits</span><span class="token punctuation">:</span>
+        <span class="token key atrule">memory</span><span class="token punctuation">:</span> 100Mi
+        <span class="token key atrule">cpu</span><span class="token punctuation">:</span> 100m<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里，CPU 我们给的是 50m，也就是 0.05core，这 0.05 core 也就是占了 1 CPU 里的 5% 的资源时间。而限制资源是给的是 100m，但是需要注意的是 CPU 资源是可压缩资源，也就是容器达到了这个设定的上限后，容器性能会下降，但是不会终止或退出。</p>
+<h3 id="2-2、创建该Pod"><a href="#2-2、创建该Pod" class="headerlink" title="2.2、创建该Pod"></a>2.2、创建该Pod</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f pod-resource-demo1.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112258412-2124370398.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112258412-2124370398.png" alt="img"></a></p>
+<h3 id="2-3、查看被调度到的节点"><a href="#2-3、查看被调度到的节点" class="headerlink" title="2.3、查看被调度到的节点"></a>2.3、查看被调度到的节点</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods resource-demo1 -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112253977-1592617006.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112253977-1592617006.png" alt="img"></a></p>
+<p>可以看到Pod被调度到k8s-node2这个节点上了</p>
+<h3 id="2-4、查看Pod里的容器"><a href="#2-4、查看Pod里的容器" class="headerlink" title="2.4、查看Pod里的容器"></a>2.4、查看Pod里的容器</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker <span class="token function">ps</span> <span class="token operator">|</span><span class="token function">grep</span> resource-demo1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112249292-1186695598.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112249292-1186695598.png" alt="img"></a></p>
+<p>其中第一个容器就是我们的主容器，第二容器是 Infra 容器</p>
+<h3 id="2-5、查看主容器的信息"><a href="#2-5、查看主容器的信息" class="headerlink" title="2.5、查看主容器的信息"></a>2.5、查看主容器的信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">docker inspect 78638fd35d88   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112243068-1475764689.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112243068-1475764689.png" alt="img"></a></p>
+<p>实际上我们就可以看到这个容器的一些资源情况，Pod 上的资源配置最终也还是通过底层的容器运行时去控制 CGroup 来实现的，我们可以进入对应目录查看 CGroup 的配置，该目录就是 CGroup 父级目录，而 CGroup 是通过文件系统来进行资源限制的，所以我们上面限制容器的资源就可以在该目录下面反映出来：</p>
+<blockquote>
+<p>截图里CgroupParent对应的目录名</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/kubepods-burstable-poda77b9886_5413_4368_8ee0_5e4c153c8d01.slice
+
+<span class="token function">cat</span> cpu.cfs_quota_us <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112232413-926883166.png"><img src="https://img2023.cnblogs.com/blog/3332572/202407/3332572-20240721112232413-926883166.png" alt="img"></a></p>
+<p>其中 <code>cpu.cfs_quota_us</code> 就是 CPU 的限制值，如果要查看具体的容器的资源，我们也可以进入到容器目录下面去查看即可。</p>
+<blockquote>
+<p>内存是可压缩性资源，如果容器使用内存资源到达了上限，那么会OOM，造成内存溢出，容器就会终止和退出。</p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2025/02/07/k8s-ji-ben-dan-wei-pod/">http://wumangeng.github.io/2025/02/07/k8s-ji-ben-dan-wei-pod/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/pod/">
+                                    <span class="chip bg-color">pod</span>
+                                </a>
+                            
+                                <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                                    <span class="chip bg-color">k8s组件</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/02/17/k8s-gong-zuo-fu-zai-kong-zhi-qi-deployment/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工作负载控制器Deployment
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-02-17
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deployment/">
+                        <span class="chip bg-color">Deployment</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/11/30/k8s-zi-yuan-qing-dan/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s中的资源">
+                        
+                        <span class="card-title">k8s中的资源</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            k8s中的资源
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-11-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/k8s%E4%B8%AD%E7%9A%84%E8%B5%84%E6%BA%90/">
+                        <span class="chip bg-color">k8s中的资源</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

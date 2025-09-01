@@ -1,0 +1,1838 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="k8s">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>k8s | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">k8s</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DaemonSet/">
+                                <span class="chip bg-color">DaemonSet</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                运维
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-02-20
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p><strong>DaemonSet</strong> 确保全部（或者某些）节点上运行一个 Pod 的副本。 当有节点加入集群时， 也会为他们新增一个 Pod 。 当有节点从集群移除时，这些 Pod 也会被回收。删除 DaemonSet 将会删除它创建的所有 Pod。</p>
+<p><strong>DaemonSet</strong> 的主要作用，是在 Kubernetes 集群里，运行一个 Daemon Pod。 DaemonSet 只管理 Pod 对象，然后通过 nodeAffinity 和 Toleration 这两个调度器参数的功能，保证了每个节点上有且只有一个 Pod</p>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000918650-1311169029.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000918650-1311169029.png" alt="img"></a></p>
+<h1 id="二、适用场景"><a href="#二、适用场景" class="headerlink" title="二、适用场景"></a>二、适用场景</h1><blockquote>
+<p>DaemonSet适用于每个node节点均需要部署一个守护进程的场景</p>
+</blockquote>
+<ul>
+<li>日志采集agent，如fluentd或logstash</li>
+<li>监控采集agent，如<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/tmp?from_column=20065&from=20065">Prometheus</a> Node Exporter,Sysdig Agent,Ganglia gmond</li>
+<li>分布式集群组件，如Ceph MON，Ceph OSD，glusterd，Hadoop Yarn NodeManager等</li>
+<li>k8s必要运行组件，如网络flannel，weave，calico，kube-proxy等</li>
+</ul>
+<h1 id="三、基本操作"><a href="#三、基本操作" class="headerlink" title="三、基本操作"></a>三、基本操作</h1><h2 id="1、官网的DaemonSet资源清单"><a href="#1、官网的DaemonSet资源清单" class="headerlink" title="1、官网的DaemonSet资源清单"></a>1、官网的DaemonSet资源清单</h2><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> kube<span class="token punctuation">-</span>system
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+    <span class="token key atrule">k8s-app</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>logging
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">tolerations</span><span class="token punctuation">:</span>
+      <span class="token comment"># 这些容忍度设置是为了让该守护进程集在控制平面节点上运行</span>
+      <span class="token comment"># 如果你不希望自己的控制平面节点运行 Pod，可以删除它们</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>role.kubernetes.io/control<span class="token punctuation">-</span>plane
+        <span class="token key atrule">operator</span><span class="token punctuation">:</span> Exists
+        <span class="token key atrule">effect</span><span class="token punctuation">:</span> NoSchedule
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>role.kubernetes.io/master
+        <span class="token key atrule">operator</span><span class="token punctuation">:</span> Exists
+        <span class="token key atrule">effect</span><span class="token punctuation">:</span> NoSchedule
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> quay.io/fluentd_elasticsearch/fluentd<span class="token punctuation">:</span>v2.5.2
+        <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+          <span class="token key atrule">limits</span><span class="token punctuation">:</span>
+            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 200Mi
+          <span class="token key atrule">requests</span><span class="token punctuation">:</span>
+            <span class="token key atrule">cpu</span><span class="token punctuation">:</span> 100m
+            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 200Mi
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> varlog
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /var/log
+      <span class="token comment"># 可能需要设置较高的优先级类以确保 DaemonSet Pod 可以抢占正在运行的 Pod</span>
+      <span class="token comment"># priorityClassName: important</span>
+      <span class="token key atrule">terminationGracePeriodSeconds</span><span class="token punctuation">:</span> <span class="token number">30</span>
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> varlog
+        <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> /var/log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="2、字段解释"><a href="#2、字段解释" class="headerlink" title="2、字段解释"></a>2、字段解释</h2><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1    <span class="token comment">#指定YAML文件的API版本，这里是apps/v1</span>
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet    <span class="token comment">#定义资源类型，这里是DaemonSet</span>
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>    <span class="token comment">#包含DaemonSet的元数据</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch     <span class="token comment">#此DaemonSet的名称</span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> kube<span class="token punctuation">-</span>system    <span class="token comment">#定义DaemonSet所属的命名空间</span>
+  <span class="token key atrule">labels</span><span class="token punctuation">:</span>    <span class="token comment">#定义标签</span>
+    <span class="token key atrule">k8s-app</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>logging    <span class="token comment">#此标签表示该DaemonSet与日志处理有关</span>
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>    <span class="token comment">#DaemonSet的规约，包含了DaemonSet的规格和行为的详细配置</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>    <span class="token comment">#定义了DaemonSet所管理的Pods的标签选择器，即哪些Pods应该被这个DaemonSet管理。这里matchLabels必须与template.metadata.labels相匹配。</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>    <span class="token comment">#Pod的模板，用于创建和管理DaemonSet下的Pods</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>    <span class="token comment">#Pod的元数据，这里包含了与spec.selector.matchLabels相匹配的标签。</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>    <span class="token comment">#Pod的规约</span>
+      <span class="token key atrule">tolerations</span><span class="token punctuation">:</span>     <span class="token comment">#定义了Pod可以容忍的节点污点，允许Pod在带有特定污点的节点上运行。这里配置了两个容忍度，分别针对控制平面节点和标记为master的节点，确保日志采集容器可以在这些特殊节点上运行。</span>
+      <span class="token comment"># 这些容忍度设置是为了让该守护进程集在控制平面节点上运行</span>
+      <span class="token comment"># 如果你不希望自己的控制平面节点运行 Pod，可以删除它们</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>role.kubernetes.io/control<span class="token punctuation">-</span>plane    <span class="token comment">#污点的键,通常表示控制平面节点的标签。</span>
+        <span class="token key atrule">operator</span><span class="token punctuation">:</span> Exists    <span class="token comment">#Exists，表示只要节点上有与key匹配的污点，无论其值是什么，都将被视为匹配</span>
+        <span class="token key atrule">effect</span><span class="token punctuation">:</span> NoSchedule    <span class="token comment">#NoSchedule，表示如果节点上存在与key匹配的污点，则默认情况下不允许Pod被调度到该节点。但是，由于这个Pod声明了对该污点的容忍度，所以Pod可以被调度到带有node-role.kubernetes.io/control-plane污点的节点上。</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> node<span class="token punctuation">-</span>role.kubernetes.io/master    <span class="token comment">#指向标记为master的节点的污点键。</span>
+        <span class="token key atrule">operator</span><span class="token punctuation">:</span> Exists    <span class="token comment">#只要节点上有与key匹配的污点，无论其值是什么，都将被视为匹配。</span>
+        <span class="token key atrule">effect</span><span class="token punctuation">:</span> NoSchedule    <span class="token comment">#表明默认情况下，没有相应容忍度的Pod将不能被调度到带有node-role.kubernetes.io/master污点的节点上。但是，由于这个Pod声明了对该污点的容忍度，所以Pod可以被调度到带有node-role.kubernetes.io/master污点的节点上。</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>    <span class="token comment">#Pod的容器配置</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> fluentd<span class="token punctuation">-</span>elasticsearch    <span class="token comment">#容器的名称</span>
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> quay.io/fluentd_elasticsearch/fluentd<span class="token punctuation">:</span>v2.5.2    <span class="token comment">#指定容器的镜像来源</span>
+        <span class="token key atrule">resources</span><span class="token punctuation">:</span>    <span class="token comment">#定义了容器的资源限制和请求</span>
+          <span class="token key atrule">limits</span><span class="token punctuation">:</span>    <span class="token comment">#容器的最大资源限制</span>
+            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 200Mi
+          <span class="token key atrule">requests</span><span class="token punctuation">:</span>    <span class="token comment">#容器启动时请求的最小资源量</span>
+            <span class="token key atrule">cpu</span><span class="token punctuation">:</span> 100m
+            <span class="token key atrule">memory</span><span class="token punctuation">:</span> 200Mi
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>    <span class="token comment">#容器如何挂载卷</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> varlog    <span class="token comment">#指定了要挂载的卷的名称</span>
+          <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /var/log    <span class="token comment">#定义了容器内部挂载卷的路径</span>
+      <span class="token comment"># 可能需要设置较高的优先级类以确保 DaemonSet Pod 可以抢占正在运行的 Pod</span>
+      <span class="token comment"># priorityClassName: important</span>
+      <span class="token key atrule">terminationGracePeriodSeconds</span><span class="token punctuation">:</span> <span class="token number">30</span>    <span class="token comment">#定义了当Pod被删除时，Kubernetes等待的秒数，以允许容器优雅地关闭。</span>
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>    <span class="token comment">#定义Pod可以使用的卷</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> varlog    <span class="token comment">#定义了一个卷的名称</span>
+        <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>    <span class="token comment">#指定了这个卷的主机路径</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> /var/log<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="3、编写DaemonSet资源清单"><a href="#3、编写DaemonSet资源清单" class="headerlink" title="3、编写DaemonSet资源清单"></a>3、编写DaemonSet资源清单</h2><blockquote>
+<p>daemonset.yaml</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> simple<span class="token punctuation">-</span>daemonset
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> default
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">app</span><span class="token punctuation">:</span> simple<span class="token punctuation">-</span>daemonset<span class="token punctuation">-</span>app
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">app</span><span class="token punctuation">:</span> simple<span class="token punctuation">-</span>daemonset<span class="token punctuation">-</span>app
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> nginx<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="4、基于yaml创建DaemonSet"><a href="#4、基于yaml创建DaemonSet" class="headerlink" title="4、基于yaml创建DaemonSet"></a>4、基于yaml创建DaemonSet</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset.yaml <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000918298-537015512.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000918298-537015512.png" alt="img"></a></p>
+<h2 id="5、注意点"><a href="#5、注意点" class="headerlink" title="5、注意点"></a>5、注意点</h2><h3 id="5-1、必须字段"><a href="#5-1、必须字段" class="headerlink" title="5.1、必须字段"></a>5.1、必须字段</h3><blockquote>
+<p>DaemonSet需要apiVersion、kind 、metadata 和spec字段</p>
+<p>以下是DaemonSetYAML定义中最基本的必需字段：</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> &lt;daemonset<span class="token punctuation">-</span>name<span class="token punctuation">></span>
+  <span class="token key atrule">namespace</span><span class="token punctuation">:</span> &lt;namespace<span class="token punctuation">></span>
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">&lt;label-key></span><span class="token punctuation">:</span> &lt;label<span class="token punctuation">-</span>value<span class="token punctuation">></span>
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">&lt;label-key></span><span class="token punctuation">:</span> &lt;label<span class="token punctuation">-</span>value<span class="token punctuation">></span>
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> &lt;container<span class="token punctuation">-</span>name<span class="token punctuation">></span>
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> &lt;image<span class="token punctuation">-</span>name<span class="token punctuation">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><strong>apiVersion</strong>：指定YAML文件使用的Kubernetes API版本。对于DaemonSet，通常使用apps/v1。</p>
+</li>
+<li><p><strong>kind</strong>：指定资源类型，这里应为DaemonSet。</p>
+</li>
+<li><p><strong>metadata</strong>：</p>
+<ul>
+<li><strong>name</strong>：DaemonSet的名称，必须是唯一的。</li>
+<li><strong>namespace</strong>：DaemonSet所在的命名空间，默认为default，但强烈建议明确指定。</li>
+</ul>
+</li>
+<li><p><strong>spec</strong>：DaemonSet的规格，定义了它的行为和管理的Pod的模板。</p>
+<ul>
+<li><p><strong>selector</strong>：选择器，用于标识DaemonSet管理的Pods。</p>
+<ul>
+<li><strong>matchLabels</strong>：一个键值对的映射，用于匹配DaemonSet管理的Pods的标签。这是必须的，用于确保DaemonSet管理的Pods与之关联。</li>
+</ul>
+</li>
+<li><p><strong>template</strong>：Pod的模板，定义了DaemonSet创建的Pods的结构。</p>
+<ul>
+<li><p><strong>metadata</strong>：Pod的元数据，其中必须包含与spec.selector.matchLabels相匹配的labels字段。</p>
+</li>
+<li><p>spec</p>
+<p>：Pod的规格，定义了容器、卷、网络设置等。</p>
+<ul>
+<li><strong>containers</strong>：一个或多个容器的列表，每个容器都需要定义name和image。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-2、DaemonSet-对象的名称"><a href="#5-2、DaemonSet-对象的名称" class="headerlink" title="5.2、DaemonSet 对象的名称"></a>5.2、DaemonSet 对象的名称</h3><p>DaemonSet 对象的名称必须是一个合法的 <a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/names#dns-subdomain-names">DNS 子域名</a>。</p>
+<ul>
+<li>不能超过 253 个字符</li>
+<li>只能包含小写字母、数字，以及 ‘-‘ 和 ‘.’</li>
+<li>必须以字母数字开头</li>
+<li>必须以字母数字结尾</li>
+</ul>
+<h3 id="5-3、-spec-selector-与-spec-template-metadata-labels之间的关系"><a href="#5-3、-spec-selector-与-spec-template-metadata-labels之间的关系" class="headerlink" title="5.3、.spec.selector 与 .spec.template.metadata.labels之间的关系"></a>5.3、.spec.selector 与 .spec.template.metadata.labels之间的关系</h3><p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917885-710484839.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917885-710484839.png" alt="img"></a></p>
+<p><code>.spec.selector</code> 必须与 <code>.spec.template.metadata.labels</code> 匹配。这意味着 <code>matchLabels</code> 中定义的每个键值对都必须存在于 <code>.spec.template.metadata.labels</code> 中，以确保DaemonSet能够正确地选择它所创建的Pods。如果 <code>.spec.selector</code> 中的标签是 <code>.spec.template.metadata.labels</code> 的子集，则这种匹配是有效的。但如果 <code>.spec.template.metadata.labels</code> 中缺少 <code>.spec.selector</code> 中的任何一个标签，或者标签值不同，那么配置将被视为无效，Kubernetes API将拒绝这个配置。</p>
+<h2 id="6、查看DaemonSet"><a href="#6、查看DaemonSet" class="headerlink" title="6、查看DaemonSet"></a>6、查看DaemonSet</h2><h3 id="6-1、查看DaemonSet列表"><a href="#6-1、查看DaemonSet列表" class="headerlink" title="6.1、查看DaemonSet列表"></a>6.1、查看DaemonSet列表</h3><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">kubectl get ds <span class="token punctuation">-</span>n default <span class="token punctuation">-</span>o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917497-65207364.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917497-65207364.png" alt="img"></a></p>
+<p><strong>NAME</strong>：DaemonSet的名称。在这个例子中，DaemonSet的名称是simple-daemonset。</p>
+<p><strong>DESIRED</strong>：这是DaemonSet期望在集群中运行的Pod数量。对于DaemonSet而言，这通常是集群中节点的数量，因为DaemonSet的目标是在每个节点上运行至少一个Pod的实例。在这个例子中，DESIRED的值是2，是因为集群有两个节点。</p>
+<p><strong>CURRENT</strong>：这是DaemonSet当前管理的Pod数量。理想情况下，CURRENT的值应该等于DESIRED的值，这意味着DaemonSet已经达到了其目标状态。在这个例子中，CURRENT的值也是2，与DESIRED相匹配。</p>
+<p><strong>READY</strong>：这是DaemonSet管理的Pod中处于就绪状态的数量。就绪状态（Ready）意味着Pod中的所有容器都已经启动并且健康检查（如果有的话）已通过。在这个例子中，READY的值是2，表明Pod已经准备好并正在运行。</p>
+<p><strong>UP-TO-DATE</strong>：这是当前正在运行的Pod中与DaemonSet最新模板匹配的数量。当DaemonSet更新其Pod模板时，这个数字可以帮助你跟踪更新进度。在这个例子中，UP-TO-DATE的值是2，意味着所有运行的Pod都使用了最新的模板。</p>
+<p><strong>AVAILABLE</strong>：这是DaemonSet管理的Pod中可以服务流量的数量。这个数字通常与READY相同，除非某些Pod由于某种原因被标记为不可用。在这个例子中，AVAILABLE的值是2，与READY一致。</p>
+<p><strong>NODE SELECTOR</strong>：这是DaemonSet使用的节点选择器，它定义了哪些节点可以运行DaemonSet的Pod。表示DaemonSet没有使用节点选择器，它的Pod可以在任何节点上运行。如果NODE SELECTOR包含特定的键值对，那么DaemonSet的Pod将仅在具有相应标签的节点上运行。</p>
+<p><strong>AGE</strong>：这是DaemonSet的创建时间，以持续时间的形式给出。在这个例子中，DaemonSet的AGE是65s，意味着它在65秒前创建。</p>
+<h3 id="6-2、查看-DaemonSet-控制器所创建的-Pod-副本信息"><a href="#6-2、查看-DaemonSet-控制器所创建的-Pod-副本信息" class="headerlink" title="6.2、查看 DaemonSet 控制器所创建的 Pod 副本信息"></a>6.2、查看 DaemonSet 控制器所创建的 Pod 副本信息</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -n default -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917003-229002390.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000917003-229002390.png" alt="img"></a></p>
+<h2 id="7、滚动更新"><a href="#7、滚动更新" class="headerlink" title="7、滚动更新"></a>7、滚动更新</h2><h3 id="7-1、查看DaemonSet详情"><a href="#7-1、查看DaemonSet详情" class="headerlink" title="7.1、查看DaemonSet详情"></a>7.1、查看DaemonSet详情</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get ds -n default
+ 
+kubectl get daemonset simple-daemonset -n default -o json <span class="token operator">|</span> jq <span class="token string">'.spec.updateStrategy'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000916605-489952475.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000916605-489952475.png" alt="img"></a></p>
+<blockquote>
+<p>可以看到DaemonSet支持RollingUpdate滚动更新策略</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000916187-1212219029.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000916187-1212219029.png" alt="img"></a></p>
+<ul>
+<li><strong>RollingUpdate</strong>：这是默认的更新策略。使用 RollingUpdate 更新策略时，在更新 DaemonSet 模板后， 老的 DaemonSet Pod 将被终止，并且将以受控方式自动创建新的 DaemonSet Pod。 更新期间，最多只能有 DaemonSet 的一个 Pod 运行于每个节点上。</li>
+<li><strong>maxSurge</strong>：定义了在更新过程中可以超出desiredNumberScheduled（期望的Pod数量）的额外Pod数量。在这个例子中，maxSurge设置为0，意味着在更新过程中不会创建超过当前期望数量的额外Pod。换句话说，DaemonSet在终止一个旧的Pod之前不会创建一个新的Pod。</li>
+<li><strong>maxUnavailable</strong>：定义了在更新过程中可以有多少Pod不可用。maxUnavailable设置为1，意味着在更新过程中，可以有最多1个Pod不可用。这通常发生在旧的Pod被终止，而新的Pod尚未完全启动并变得可用时。</li>
+<li><strong>type</strong> ：为 <strong>RollingUpdate</strong> 是要启用 DaemonSet 的滚动更新功能必须设置的</li>
+</ul>
+<h3 id="7-2、更新nginx镜像版本"><a href="#7-2、更新nginx镜像版本" class="headerlink" title="7.2、更新nginx镜像版本"></a>7.2、更新nginx镜像版本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl <span class="token builtin class-name">set</span> image daemonsets simple-daemonset nginx-container<span class="token operator">=</span>nginx:1.14.0 -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000915720-235946215.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000915720-235946215.png" alt="img"></a></p>
+<h3 id="7-3、查看滚动更新状态"><a href="#7-3、查看滚动更新状态" class="headerlink" title="7.3、查看滚动更新状态"></a>7.3、查看滚动更新状态</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout status ds simple-daemonset -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000915332-988845934.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000915332-988845934.png" alt="img"></a></p>
+<h3 id="7-4、查看DS滚动更新过程"><a href="#7-4、查看DS滚动更新过程" class="headerlink" title="7.4、查看DS滚动更新过程"></a>7.4、查看DS滚动更新过程</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe ds simple-daemonset -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000914684-818307853.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000914684-818307853.png" alt="img"></a></p>
+<h3 id="7-5、查看DS滚动更新版本"><a href="#7-5、查看DS滚动更新版本" class="headerlink" title="7.5、查看DS滚动更新版本"></a>7.5、查看DS滚动更新版本</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout <span class="token function">history</span> ds simple-daemonset -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000913872-693366981.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000913872-693366981.png" alt="img"></a></p>
+<blockquote>
+<p>REVERSION1就是初始版本</p>
+</blockquote>
+<h2 id="8、版本回退"><a href="#8、版本回退" class="headerlink" title="8、版本回退"></a>8、版本回退</h2><h3 id="8-1、回滚"><a href="#8-1、回滚" class="headerlink" title="8.1、回滚"></a>8.1、回滚</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl rollout undo daemonset -n default simple-daemonset --to-revision<span class="token operator">=</span><span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000913439-712280068.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000913439-712280068.png" alt="img"></a></p>
+<h3 id="8-2、查看版本回退情况"><a href="#8-2、查看版本回退情况" class="headerlink" title="8.2、查看版本回退情况"></a>8.2、查看版本回退情况</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl describe ds simple-daemonset -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000912945-582640000.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000912945-582640000.png" alt="img"></a></p>
+<h2 id="9、删除DaemonSet"><a href="#9、删除DaemonSet" class="headerlink" title="9、删除DaemonSet"></a>9、删除DaemonSet</h2><h3 id="9-1、直接删除DS"><a href="#9-1、直接删除DS" class="headerlink" title="9.1、直接删除DS"></a>9.1、直接删除DS</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl delete ds simple-daemonset -n default<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000910036-204513807.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000910036-204513807.png" alt="img"></a></p>
+<h3 id="9-2、基于创建的资源清单删除DS"><a href="#9-2、基于创建的资源清单删除DS" class="headerlink" title="9.2、基于创建的资源清单删除DS"></a>9.2、基于创建的资源清单删除DS</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl delete -f daemonset.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000909634-27388395.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000909634-27388395.png" alt="img"></a></p>
+<h1 id="四、DaemonSet调度"><a href="#四、DaemonSet调度" class="headerlink" title="四、DaemonSet调度"></a>四、DaemonSet调度</h1><h2 id="1、调度方式"><a href="#1、调度方式" class="headerlink" title="1、调度方式"></a>1、调度方式</h2><p>DaemonSet通过kubernetes默认的调度器scheduler会在所有的node节点上运行一个Pod副本，可以通过如下三种方式将Pod运行在部分节点上</p>
+<ul>
+<li>指定 <code>nodeName</code> 节点运行</li>
+<li>通过标签运行 <code>nodeSelector</code></li>
+<li>通过亲和力调度 <code>node Affinity</code> 和 <code>node Anti-affinity</code></li>
+<li>污点与容忍度（<code>Tolerations</code> 和 <code>Taints</code>）</li>
+<li><code>Priority</code> 和 <code>Preemption</code> (优先级和抢占)</li>
+</ul>
+<h2 id="2、指定nodeName节点运行"><a href="#2、指定nodeName节点运行" class="headerlink" title="2、指定nodeName节点运行"></a>2、指定nodeName节点运行</h2><p>这种方式通常不用于 DaemonSet，因为 DaemonSet 的目标是在尽可能多的节点上运行 Pod 副本。但是可以通过 <code>.spec.nodeName</code> 来指定特定节点运行 Pod。</p>
+<h3 id="2-1、原理机制"><a href="#2-1、原理机制" class="headerlink" title="2.1、原理机制"></a>2.1、原理机制</h3><ul>
+<li>当为 Pod 指定了具体的 <code>nodeName</code> 后，Kubernetes 调度器将跳过调度过程，直接将 Pod 分配给指定的节点。</li>
+<li>这种方式通常用于测试目的或者在特殊场景下使用，例如当您需要确保某个 Pod 在特定节点上运行时。</li>
+</ul>
+<h3 id="2-2、示例"><a href="#2-2、示例" class="headerlink" title="2.2、示例"></a>2.2、示例</h3><h4 id="2-2-1、创建一个DaemonSet资源清单，指定nodeName"><a href="#2-2-1、创建一个DaemonSet资源清单，指定nodeName" class="headerlink" title="2.2.1、创建一个DaemonSet资源清单，指定nodeName"></a>2.2.1、创建一个DaemonSet资源清单，指定nodeName</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cat &lt;&lt;EOF <span class="token punctuation">></span> daemonset<span class="token punctuation">-</span>nodename.yaml
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>nodename
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> nodename
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> nodename
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">nodeName</span><span class="token punctuation">:</span> k8s<span class="token punctuation">-</span>node1  <span class="token comment"># 指定 nodeName</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemon<span class="token punctuation">-</span>nodename<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-2-2、应用-DaemonSet"><a href="#2-2-2、应用-DaemonSet" class="headerlink" title="2.2.2、应用 DaemonSet"></a>2.2.2、应用 DaemonSet</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset-nodename.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="2-2-3、查看-DaemonSet-Pod-的状态"><a href="#2-2-3、查看-DaemonSet-Pod-的状态" class="headerlink" title="2.2.3、查看 DaemonSet Pod 的状态"></a>2.2.3、查看 DaemonSet Pod 的状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -l <span class="token assign-left variable">way</span><span class="token operator">=</span>nodename -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000909211-2106569070.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000909211-2106569070.png" alt="img"></a></p>
+<h2 id="3、通过标签运行-nodeSelector"><a href="#3、通过标签运行-nodeSelector" class="headerlink" title="3、通过标签运行 (nodeSelector)"></a>3、通过标签运行 (nodeSelector)</h2><ul>
+<li><code>nodeSelector</code> 是一种简单的方式，用于指定 Pod 应该运行在具有特定标签的节点上。</li>
+<li>当在 Pod 模板中定义了 <code>nodeSelector</code>，Kubernetes 调度器会将 Pod 分配到具有相应标签的节点上。</li>
+</ul>
+<h3 id="3-1、原理机制"><a href="#3-1、原理机制" class="headerlink" title="3.1、原理机制"></a>3.1、原理机制</h3><ul>
+<li>需要在节点上设置特定的标签。</li>
+<li>在 DaemonSet 的 Pod 模板中定义 <code>nodeSelector</code>，指定节点标签。</li>
+<li>Kubernetes 调度器会根据 <code>nodeSelector</code> 将 Pod 分配到符合条件的节点上。</li>
+</ul>
+<h3 id="3-2、示例"><a href="#3-2、示例" class="headerlink" title="3.2、示例"></a>3.2、示例</h3><h4 id="3-2-1、给-k8s-node1-添加标签"><a href="#3-2-1、给-k8s-node1-添加标签" class="headerlink" title="3.2.1、给 k8s-node1 添加标签"></a>3.2.1、给 k8s-node1 添加标签</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl label nodes k8s-node1 <span class="token assign-left variable">role</span><span class="token operator">=</span>worker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000908661-198213622.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000908661-198213622.png" alt="img"></a></p>
+<h4 id="3-2-2、创建DaemonSet-资源清单，使用nodeSelector"><a href="#3-2-2、创建DaemonSet-资源清单，使用nodeSelector" class="headerlink" title="3.2.2、创建DaemonSet 资源清单，使用nodeSelector"></a>3.2.2、创建DaemonSet 资源清单，使用nodeSelector</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cat &lt;&lt;EOF <span class="token punctuation">></span> daemonset<span class="token punctuation">-</span>nodeselector.yaml
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>nodeselector
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> nodeSelector
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> nodeSelector
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">nodeSelector</span><span class="token punctuation">:</span>  <span class="token comment"># 使用 nodeSelector</span>
+        <span class="token key atrule">role</span><span class="token punctuation">:</span> worker
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>nodeselector<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-2-3、应用-DaemonSet"><a href="#3-2-3、应用-DaemonSet" class="headerlink" title="3.2.3、应用 DaemonSet"></a>3.2.3、应用 DaemonSet</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset-nodeselector.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="3-2-4、查看-DaemonSet-Pod-的状态"><a href="#3-2-4、查看-DaemonSet-Pod-的状态" class="headerlink" title="3.2.4、查看 DaemonSet Pod 的状态"></a>3.2.4、查看 DaemonSet Pod 的状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -l <span class="token assign-left variable">way</span><span class="token operator">=</span>nodeSelector -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000906212-2107345130.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000906212-2107345130.png" alt="img"></a></p>
+<h4 id="3-2-5、删除k8s-node1上的标签"><a href="#3-2-5、删除k8s-node1上的标签" class="headerlink" title="3.2.5、删除k8s-node1上的标签"></a>3.2.5、删除k8s-node1上的标签</h4><p>测试完及时删除标签</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl label nodes k8s-node1 role-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000905544-1717972465.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000905544-1717972465.png" alt="img"></a></p>
+<h2 id="4、通过亲和力调度-node-Affinity-和-node-Anti-affinity"><a href="#4、通过亲和力调度-node-Affinity-和-node-Anti-affinity" class="headerlink" title="4、通过亲和力调度 (node Affinity 和 node Anti-affinity)"></a>4、通过亲和力调度 (node Affinity 和 node Anti-affinity)</h2><h3 id="4-1、Node-Affinity-节点亲和性"><a href="#4-1、Node-Affinity-节点亲和性" class="headerlink" title="4.1、Node Affinity (节点亲和性)"></a>4.1、Node Affinity (节点亲和性)</h3><h4 id="4-1-1、原理"><a href="#4-1-1、原理" class="headerlink" title="4.1.1、原理"></a>4.1.1、原理</h4><ul>
+<li><strong>Node Affinity</strong> 是一种调度策略，允许定义的 Pod 必须或应该调度到哪些节点上。</li>
+<li>这种策略分为两类：<code>requiredDuringSchedulingIgnoredDuringExecution</code> 和 <code>preferredDuringSchedulingIgnoredDuringExecution</code>。</li>
+<li><code>requiredDuringSchedulingIgnoredDuringExecution</code> 表示必须满足的硬性要求。</li>
+<li><code>preferredDuringSchedulingIgnoredDuringExecution</code> 表示可选的偏好。</li>
+</ul>
+<h4 id="4-1-2、给node-k8s2添加标签"><a href="#4-1-2、给node-k8s2添加标签" class="headerlink" title="4.1.2、给node-k8s2添加标签"></a>4.1.2、给node-k8s2添加标签</h4><blockquote>
+<p>按照节点亲和性原理，pod最终会被调度到k8s-node2这个节点上</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl label nodes k8s-node2 <span class="token assign-left variable">role</span><span class="token operator">=</span>worker<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000904681-850314699.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000904681-850314699.png" alt="img"></a></p>
+<h4 id="4-1-3、创建-DaemonSet-资源清单，使用-nodeAffinity"><a href="#4-1-3、创建-DaemonSet-资源清单，使用-nodeAffinity" class="headerlink" title="4.1.3、创建 DaemonSet 资源清单，使用 nodeAffinity"></a>4.1.3、创建 DaemonSet 资源清单，使用 nodeAffinity</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cat &lt;&lt;EOF<span class="token punctuation">></span> daemonset<span class="token punctuation">-</span>affinity.yaml
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>affinity
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> nodeAffinity
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> nodeAffinity
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+        <span class="token key atrule">nodeAffinity</span><span class="token punctuation">:</span>
+          <span class="token key atrule">requiredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+            <span class="token key atrule">nodeSelectorTerms</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+              <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> role
+                <span class="token key atrule">operator</span><span class="token punctuation">:</span> In
+                <span class="token key atrule">values</span><span class="token punctuation">:</span>
+                <span class="token punctuation">-</span> worker
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemon<span class="token punctuation">-</span>affinity<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-1-4、应用DaemonSet"><a href="#4-1-4、应用DaemonSet" class="headerlink" title="4.1.4、应用DaemonSet"></a>4.1.4、应用DaemonSet</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset-affinity.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="4-1-5、查看-DaemonSet-Pod-的状态"><a href="#4-1-5、查看-DaemonSet-Pod-的状态" class="headerlink" title="4.1.5、查看 DaemonSet Pod 的状态"></a>4.1.5、查看 DaemonSet Pod 的状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -l <span class="token assign-left variable">way</span><span class="token operator">=</span>nodeAffinity -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000902958-1886531020.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000902958-1886531020.png" alt="img"></a></p>
+<h3 id="4-2、Node-Anti-affinity-节点反亲和性"><a href="#4-2、Node-Anti-affinity-节点反亲和性" class="headerlink" title="4.2、Node Anti-affinity (节点反亲和性)"></a>4.2、Node Anti-affinity (节点反亲和性)</h3><h4 id="4-2-1、原理"><a href="#4-2-1、原理" class="headerlink" title="4.2.1、原理"></a>4.2.1、原理</h4><ul>
+<li><strong>Node Anti-affinity</strong> 是一种调度策略，允许您定义 Pod 不应该调度到哪些节点上。</li>
+<li>这种策略也是分为两类：<code>requiredDuringSchedulingIgnoredDuringExecution</code> 和 <code>preferredDuringSchedulingIgnoredDuringExecution</code>。</li>
+<li><code>requiredDuringSchedulingIgnoredDuringExecution</code> 表示必须满足的硬性要求。</li>
+<li><code>preferredDuringSchedulingIgnoredDuringExecution</code> 表示可选的偏好。</li>
+</ul>
+<h4 id="4-2-2、给node-k8s2添加标签"><a href="#4-2-2、给node-k8s2添加标签" class="headerlink" title="4.2.2、给node-k8s2添加标签"></a>4.2.2、给node-k8s2添加标签</h4><blockquote>
+<p>按照节点反亲和性原理，节点不会被调度到k8s-node2上</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl label node k8s-node2 <span class="token assign-left variable">ROLE</span><span class="token operator">=</span>worker2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000902470-794080174.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000902470-794080174.png" alt="img"></a></p>
+<h4 id="4-2-3、创建-DaemonSet-资源清单，使用-node-Anti-affinity"><a href="#4-2-3、创建-DaemonSet-资源清单，使用-node-Anti-affinity" class="headerlink" title="4.2.3、创建 DaemonSet 资源清单，使用 node Anti-affinity"></a>4.2.3、创建 DaemonSet 资源清单，使用 node Anti-affinity</h4><pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cat &lt;&lt;EOF <span class="token punctuation">></span> daemonset<span class="token punctuation">-</span>Anti<span class="token punctuation">-</span>affinity.yaml
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>anti<span class="token punctuation">-</span>affinity
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> Anti<span class="token punctuation">-</span>affinity
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> Anti<span class="token punctuation">-</span>affinity
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">affinity</span><span class="token punctuation">:</span>
+        <span class="token key atrule">nodeAffinity</span><span class="token punctuation">:</span>
+          <span class="token key atrule">requiredDuringSchedulingIgnoredDuringExecution</span><span class="token punctuation">:</span>
+            <span class="token key atrule">nodeSelectorTerms</span><span class="token punctuation">:</span>
+            <span class="token punctuation">-</span> <span class="token key atrule">matchExpressions</span><span class="token punctuation">:</span>
+              <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> ROLE
+                <span class="token key atrule">operator</span><span class="token punctuation">:</span> DoesNotExist
+              <span class="token punctuation">-</span> <span class="token key atrule">key</span><span class="token punctuation">:</span> ROLE
+                <span class="token key atrule">operator</span><span class="token punctuation">:</span> NotIn
+                <span class="token key atrule">values</span><span class="token punctuation">:</span>
+                <span class="token punctuation">-</span> worker2
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>anti<span class="token punctuation">-</span>affinity<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-2-4、应用DaemonSet"><a href="#4-2-4、应用DaemonSet" class="headerlink" title="4.2.4、应用DaemonSet"></a>4.2.4、应用DaemonSet</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset-Anti-affinity.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="4-2-5、查看-DaemonSet-Pod-的状态"><a href="#4-2-5、查看-DaemonSet-Pod-的状态" class="headerlink" title="4.2.5、查看 DaemonSet Pod 的状态"></a>4.2.5、查看 DaemonSet Pod 的状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -l <span class="token assign-left variable">way</span><span class="token operator">=</span>Anti-affinity -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000901667-1201072179.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000901667-1201072179.png" alt="img"></a></p>
+<h2 id="5、污点与容忍度（Tolerations-和-Taints）"><a href="#5、污点与容忍度（Tolerations-和-Taints）" class="headerlink" title="5、污点与容忍度（Tolerations 和 Taints）"></a>5、污点与容忍度（<code>Tolerations</code> 和 <code>Taints</code>）</h2><ul>
+<li><strong>Taints（污点）</strong> 是节点上的标记，用于排斥 Pod。</li>
+<li><strong>Tolerations（容忍度）</strong> 则是 Pod 上的配置，用于容忍节点上的 taints。</li>
+</ul>
+<h3 id="5-1、原理"><a href="#5-1、原理" class="headerlink" title="5.1、原理"></a>5.1、原理</h3><ul>
+<li>节点可以设置 taints 来排斥 Pod。</li>
+<li>Pod 可以设置 tolerations 来容忍这些 taints。</li>
+<li>Kubernetes 调度器会根据 tolerations 和 taints 的匹配情况来决定 Pod 是否可以被调度到节点上。</li>
+</ul>
+<h3 id="5-2、示例"><a href="#5-2、示例" class="headerlink" title="5.2、示例"></a>5.2、示例</h3><h4 id="5-2-1、给-k8s-node1-添加-taint"><a href="#5-2-1、给-k8s-node1-添加-taint" class="headerlink" title="5.2.1、给 k8s-node1 添加 taint"></a>5.2.1、给 k8s-node1 添加 taint</h4><blockquote>
+<ul>
+<li><code>k8s-node1</code>: 有污点 <code>example.com/taint-key=taint-value:NoSchedule</code></li>
+<li><code>k8s-node2</code>: 没有污点</li>
+</ul>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl taint nodes k8s-node1 example.com/taint-key<span class="token operator">=</span>taint-value:NoExecute<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="5-2-2、创建-DaemonSet-资源清单"><a href="#5-2-2、创建-DaemonSet-资源清单" class="headerlink" title="5.2.2、创建 DaemonSet 资源清单"></a>5.2.2、创建 DaemonSet 资源清单</h4><blockquote>
+<p>省略了 <code>tolerations</code> 部分。这意味着 DaemonSet 的 Pod 不会容忍任何污点，因此它将不会被调度到带有 <code>example.com/taint-key=taint-value:NoExecute</code> 污点的节点上。</p>
+</blockquote>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml">cat &lt;&lt;EOF <span class="token punctuation">></span> daemonset<span class="token punctuation">-</span>no<span class="token punctuation">-</span>tolerations.yaml
+<span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>no<span class="token punctuation">-</span>tolerations
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> no<span class="token punctuation">-</span>tolerations
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> no<span class="token punctuation">-</span>tolerations
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>no<span class="token punctuation">-</span>tolerations<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+EOF<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="5-2-3、应用Daemonset"><a href="#5-2-3、应用Daemonset" class="headerlink" title="5.2.3、应用Daemonset"></a>5.2.3、应用Daemonset</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl apply -f daemonset-no-tolerations.yaml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="5-2-4、-查看-DaemonSet-Pod-的状态"><a href="#5-2-4、-查看-DaemonSet-Pod-的状态" class="headerlink" title="5.2.4、 查看 DaemonSet Pod 的状态"></a>5.2.4、 查看 DaemonSet Pod 的状态</h4><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get pods -l <span class="token assign-left variable">way</span><span class="token operator">=</span>no-tolerations -o wide<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000900158-93269465.png"><img src="https://img2023.cnblogs.com/blog/3332572/202408/3332572-20240805000900158-93269465.png" alt="img"></a></p>
+<h1 id="五、如何与-DaemonSet-中的-Pod-进行通信"><a href="#五、如何与-DaemonSet-中的-Pod-进行通信" class="headerlink" title="五、如何与 DaemonSet 中的 Pod 进行通信"></a>五、如何与 DaemonSet 中的 Pod 进行通信</h1><h2 id="1、-推送（Push）"><a href="#1、-推送（Push）" class="headerlink" title="1、 推送（Push）"></a>1、 推送（Push）</h2><ul>
+<li><strong>推送模式</strong>是指 DaemonSet 中的 Pod 主动将数据发送到其他服务或系统中，如统计数据库或其他后端服务。</li>
+<li>这种模式不需要外部客户端主动连接到 DaemonSet 中的 Pod。</li>
+</ul>
+<h3 id="1-1、实现"><a href="#1-1、实现" class="headerlink" title="1.1、实现"></a>1.1、实现</h3><ul>
+<li><p>配置 DaemonSet</p>
+<p>:</p>
+<ul>
+<li>需要在 DaemonSet 中的 Pod 规格中配置相应的逻辑，使其能够主动发送数据。</li>
+<li>通常，这涉及到使用像 HTTP 请求、消息队列或其他通信协议来发送数据。</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2、示例"><a href="#1-2、示例" class="headerlink" title="1.2、示例"></a>1.2、示例</h3><p><strong>日志聚合</strong>:</p>
+<ul>
+<li>可以使用像 Fluentd 或 Logstash 这样的工具，配置它们将日志数据推送到像 Elasticsearch 或 Splunk 这样的后端。</li>
+<li>在 <code>daemonset-tolerations.yaml</code> 文件中，您需要配置容器以发送日志数据：</li>
+</ul>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>tolerations
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>tolerations<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+        <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"sh"</span><span class="token punctuation">,</span> <span class="token string">"-c"</span><span class="token punctuation">,</span> <span class="token string">"while true; do echo 'Log message'; sleep 10; done | fluentd -t -l /dev/stdin"</span><span class="token punctuation">]</span>
+        <span class="token key atrule">volumeMounts</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">mountPath</span><span class="token punctuation">:</span> /var/log/nginx
+          <span class="token key atrule">name</span><span class="token punctuation">:</span> log<span class="token punctuation">-</span>volume
+      <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> log<span class="token punctuation">-</span>volume
+        <span class="token key atrule">hostPath</span><span class="token punctuation">:</span>
+          <span class="token key atrule">path</span><span class="token punctuation">:</span> /var/log/nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>这里我们假设 Fluentd 服务已经配置好，并且 Pod 将日志数据推送给 Fluentd。</p>
+</blockquote>
+<h2 id="2、-NodeIP-和已知端口"><a href="#2、-NodeIP-和已知端口" class="headerlink" title="2、 NodeIP 和已知端口"></a>2、 NodeIP 和已知端口</h2><ul>
+<li><strong>NodeIP 和已知端口</strong>是指 DaemonSet 中的 Pod 使用 <code>hostPort</code>，这意味着它们监听在节点的主机端口上。</li>
+<li>外部客户端可以通过节点的 IP 地址和预先定义的端口来连接到这些 Pod。</li>
+</ul>
+<h3 id="2-1、实现"><a href="#2-1、实现" class="headerlink" title="2.1、实现"></a>2.1、实现</h3><ul>
+<li>配置 DaemonSet:<ul>
+<li>在 DaemonSet 中的 Pod 规格中暴露 <code>hostPort</code>。</li>
+<li>客户端可以通过查询节点列表或通过其他方式获得节点 IP 地址，并使用预先定义的端口进行连接。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2、示例-1"><a href="#2-2、示例-1" class="headerlink" title="2.2、示例"></a>2.2、示例</h3><p><strong>监控系统</strong>:</p>
+<ul>
+<li>假设有一个监控系统，需要从每个节点收集指标。</li>
+<li>可以配置 DaemonSet 中的每个 Pod 监听在节点的一个特定端口上，比如 9100。</li>
+<li>在 <code>daemonset-tolerations.yaml</code> 文件中，配置容器以暴露端口：</li>
+</ul>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> apps/v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> DaemonSet
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>tolerations
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">matchLabels</span><span class="token punctuation">:</span>
+      <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+  <span class="token key atrule">template</span><span class="token punctuation">:</span>
+    <span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+      <span class="token key atrule">labels</span><span class="token punctuation">:</span>
+        <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+    <span class="token key atrule">spec</span><span class="token punctuation">:</span>
+      <span class="token key atrule">containers</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> daemonset<span class="token punctuation">-</span>tolerations<span class="token punctuation">-</span>container
+        <span class="token key atrule">image</span><span class="token punctuation">:</span> nginx<span class="token punctuation">:</span>latest
+        <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+        <span class="token punctuation">-</span> <span class="token key atrule">containerPort</span><span class="token punctuation">:</span> <span class="token number">80</span>
+          <span class="token key atrule">hostPort</span><span class="token punctuation">:</span> <span class="token number">9100</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>获取节点ip</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kubectl get nodes -o <span class="token assign-left variable">jsonpath</span><span class="token operator">=</span><span class="token string">'&#123;range .items[*]&#125;&#123;.status.addresses[?(@.type=="ExternalIP")].address&#125;&#123;"\n"&#125;&#123;end&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="3、DNS"><a href="#3、DNS" class="headerlink" title="3、DNS"></a>3、DNS</h2><ul>
+<li><strong>DNS 模式</strong>是指创建一个无头服务（Headless Service），它使用与 DaemonSet 中的 Pod 相同的选择器。</li>
+<li>无头服务会创建一个 DNS 记录，该记录解析为 DaemonSet 中所有 Pod 的 IP 地址。</li>
+</ul>
+<h3 id="3-1、实现"><a href="#3-1、实现" class="headerlink" title="3.1、实现"></a>3.1、实现</h3><ul>
+<li>创建无头服务:<ul>
+<li>创建一个无头服务，其选择器与 DaemonSet 的选择器相同。</li>
+<li>无头服务将自动创建一个 DNS 记录，该记录指向所有匹配的 Pod 的 IP 地址。</li>
+<li>客户端可以通过查询 DNS 记录来获取所有 Pod 的 IP 地址列表，并进行通信。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2、示例-1"><a href="#3-2、示例-1" class="headerlink" title="3.2、示例"></a>3.2、示例</h3><p>创建一个无头服务 <code>my-daemonset-service</code>，其选择器与 DaemonSet 相同。</p>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Service
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>daemonset<span class="token punctuation">-</span>service
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">clusterIP</span><span class="token punctuation">:</span> None
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> http
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">targetPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>客户端查询 DNS:<ul>
+<li>客户端可以通过查询 DNS 记录 <code>my-daemonset-service.default.svc.cluster.local</code> 来获取所有 Pod 的 IP 地址。</li>
+<li>可以通过 <code>nslookup</code> 或 <code>dig</code> 命令来查询 DNS 记录：</li>
+</ul>
+</li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">nslookup</span> my-daemonset-service.default.svc.cluster.local<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="4、Service"><a href="#4、Service" class="headerlink" title="4、Service"></a>4、Service</h2><ul>
+<li><strong>Service 模式</strong>是指创建一个服务，其选择器与 DaemonSet 中的 Pod 相同。</li>
+<li>客户端可以通过服务名称来访问 DaemonSet 中的任意 Pod。</li>
+</ul>
+<h3 id="4-1、实现"><a href="#4-1、实现" class="headerlink" title="4.1、实现"></a>4.1、实现</h3><ul>
+<li>创建服务:<ul>
+<li>创建一个服务，其选择器与 DaemonSet 的选择器相同。</li>
+<li>服务将自动创建一个 DNS 记录，该记录解析为当前活动的 Pod 的 IP 地址。</li>
+<li>客户端可以通过服务名称来访问 Pod。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2、示例"><a href="#4-2、示例" class="headerlink" title="4.2、示例"></a>4.2、示例</h3><ul>
+<li>创建一个服务 <code>my-daemonset-service</code>，其选择器与 DaemonSet 相同。</li>
+</ul>
+<pre class="line-numbers language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">apiVersion</span><span class="token punctuation">:</span> v1
+<span class="token key atrule">kind</span><span class="token punctuation">:</span> Service
+<span class="token key atrule">metadata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>daemonset<span class="token punctuation">-</span>service
+<span class="token key atrule">spec</span><span class="token punctuation">:</span>
+  <span class="token key atrule">selector</span><span class="token punctuation">:</span>
+    <span class="token key atrule">way</span><span class="token punctuation">:</span> tolerations
+  <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> http
+    <span class="token key atrule">port</span><span class="token punctuation">:</span> <span class="token number">80</span>
+    <span class="token key atrule">targetPort</span><span class="token punctuation">:</span> <span class="token number">80</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>客户端访问服务:<ul>
+<li>客户端可以通过服务名称 <code>my-daemonset-service.default.svc.cluster.local</code> 来访问 DaemonSet 中的任意 Pod。</li>
+<li>由于服务是负载均衡的，客户端可能会随机连接到不同的 Pod。</li>
+</ul>
+</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2025/02/20/k8s-gong-zuo-fu-zai-kong-zhi-qi-daemonset/">http://wumangeng.github.io/2025/02/20/k8s-gong-zuo-fu-zai-kong-zhi-qi-daemonset/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DaemonSet/">
+                                    <span class="chip bg-color">DaemonSet</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/02/22/k8s-gong-zuo-fu-zai-kong-zhi-qi-statefulset/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工作负载控制器StatefulSet
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-02-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/StatefulSet/">
+                        <span class="chip bg-color">StatefulSet</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/02/17/k8s-gong-zuo-fu-zai-kong-zhi-qi-deployment/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            工作负载控制器Deployment
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-02-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Deployment/">
+                        <span class="chip bg-color">Deployment</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

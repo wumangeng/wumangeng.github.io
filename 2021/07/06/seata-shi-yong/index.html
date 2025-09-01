@@ -323,7 +323,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=449400955,1923468352&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img2.baidu.com/it/u=1360466580,3761621666&fm=253&fmt=auto&app=138&f=JPEG?w=799&h=500')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -824,29 +824,29 @@ CREATE TABLE IF NOT EXISTS &#96;undo_log&#96;
 <p>seata1.4.2之后，需要回滚的表<strong>日期类型不能使用datetime</strong>，可以使用timestamp</p>
 <h2 id="4-客户端配置"><a href="#4-客户端配置" class="headerlink" title="4.客户端配置"></a>4.客户端配置</h2><p>需要开启seata事务的客户端，需要配置seata的注册和配置中心，使用相关注解进行事务开启。</p>
 <h5 id="（1）bootstrap-yml"><a href="#（1）bootstrap-yml" class="headerlink" title="（1）bootstrap.yml"></a>（1）bootstrap.yml</h5><p>向项目中添加配置信息，配置项的值与seata服务器的registry.conf中一致。</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">seata:
-  enabled: true
-  enable-auto-data-source-proxy: true #是否开启数据源自动代理,默认为true
-  tx-service-group: my_test_tx_group  #要与配置文件中的vgroupMapping一致
-  registry:  #registry根据seata服务端的registry配置
-    type: nacos #默认为file
-    nacos:
-      application: seata-server #配置自己的seata服务
-      server-addr: #根据自己的seata服务配置
-      username: nacos #根据自己的seata服务配置
-      password: nacos #根据自己的seata服务配置
-      namespace:  #根据自己的seata服务配置
-      cluster: default # 配置自己的seata服务cluster, 默认为 default
-      group: SEATA_GROUP #根据自己的seata服务配置
-  config:
-    type: nacos #默认file,如果使用file不配置下面的nacos,直接配置seata.service
-    nacos:
-      server-addr: #配置自己的nacos地址
-      group: SEATA_GROUP #配置自己的dev
-      username: nacos #配置自己的username
-      password: nacos #配置自己的password
-      namespace:  #配置自己的namespace
-      dataId: seataServer.properties #配置自己的dataId,由于搭建服务端时把客户端的配置也写在了seataServer.properties,所以这里用了和服务端一样的配置文件,实际客户端和服务端的配置文件分离出来更好
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"><span class="token key atrule">seata</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enabled</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">enable-auto-data-source-proxy</span><span class="token punctuation">:</span> <span class="token boolean important">true</span> <span class="token comment">#是否开启数据源自动代理,默认为true</span>
+  <span class="token key atrule">tx-service-group</span><span class="token punctuation">:</span> my_test_tx_group  <span class="token comment">#要与配置文件中的vgroupMapping一致</span>
+  <span class="token key atrule">registry</span><span class="token punctuation">:</span>  <span class="token comment">#registry根据seata服务端的registry配置</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nacos <span class="token comment">#默认为file</span>
+    <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
+      <span class="token key atrule">application</span><span class="token punctuation">:</span> seata<span class="token punctuation">-</span>server <span class="token comment">#配置自己的seata服务</span>
+      <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> <span class="token comment">#根据自己的seata服务配置</span>
+      <span class="token key atrule">username</span><span class="token punctuation">:</span> nacos <span class="token comment">#根据自己的seata服务配置</span>
+      <span class="token key atrule">password</span><span class="token punctuation">:</span> nacos <span class="token comment">#根据自己的seata服务配置</span>
+      <span class="token key atrule">namespace</span><span class="token punctuation">:</span>  <span class="token comment">#根据自己的seata服务配置</span>
+      <span class="token key atrule">cluster</span><span class="token punctuation">:</span> default <span class="token comment"># 配置自己的seata服务cluster, 默认为 default</span>
+      <span class="token key atrule">group</span><span class="token punctuation">:</span> SEATA_GROUP <span class="token comment">#根据自己的seata服务配置</span>
+  <span class="token key atrule">config</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nacos <span class="token comment">#默认file,如果使用file不配置下面的nacos,直接配置seata.service</span>
+    <span class="token key atrule">nacos</span><span class="token punctuation">:</span>
+      <span class="token key atrule">server-addr</span><span class="token punctuation">:</span> <span class="token comment">#配置自己的nacos地址</span>
+      <span class="token key atrule">group</span><span class="token punctuation">:</span> SEATA_GROUP <span class="token comment">#配置自己的dev</span>
+      <span class="token key atrule">username</span><span class="token punctuation">:</span> nacos <span class="token comment">#配置自己的username</span>
+      <span class="token key atrule">password</span><span class="token punctuation">:</span> nacos <span class="token comment">#配置自己的password</span>
+      <span class="token key atrule">namespace</span><span class="token punctuation">:</span>  <span class="token comment">#配置自己的namespace</span>
+      <span class="token key atrule">dataId</span><span class="token punctuation">:</span> seataServer.properties <span class="token comment">#配置自己的dataId,由于搭建服务端时把客户端的配置也写在了seataServer.properties,所以这里用了和服务端一样的配置文件,实际客户端和服务端的配置文件分离出来更好</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="2）spring-boot-启动程序添加数据自动代理"><a href="#2）spring-boot-启动程序添加数据自动代理" class="headerlink" title="2）spring boot 启动程序添加数据自动代理"></a>2）spring boot 启动程序添加数据自动代理</h4><p>使用注解：@EnableAutoDataSourceProxy 例子：</p>
@@ -1119,7 +1119,7 @@ CREATE TABLE IF NOT EXISTS &#96;undo_log&#96;
                 <a href="/2021/08/05/wen-jian-jia-bian-li/">
                     <div class="card-image">
                         
-                        <img src="https://img0.baidu.com/it/u=3022703260,2559614959&fm=26&fmt=auto" class="responsive-img" alt="使用Netty遍历文件">
+                        <img src="https://img0.baidu.com/it/u=3719532600,4261418219&fm=253&fmt=auto&app=138&f=JPEG?w=625&h=500" class="responsive-img" alt="使用Netty遍历文件">
                         
                         <span class="card-title">使用Netty遍历文件</span>
                     </div>
@@ -1167,7 +1167,7 @@ CREATE TABLE IF NOT EXISTS &#96;undo_log&#96;
                 <a href="/2021/07/05/java-bean-yan-zheng/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=2638050182,2028521818&fm=15&fmt=auto" class="responsive-img" alt="Java Bean校验">
+                        <img src="https://img2.baidu.com/it/u=1727169976,2813991021&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=501" class="responsive-img" alt="Java Bean校验">
                         
                         <span class="card-title">Java Bean校验</span>
                     </div>
@@ -1352,7 +1352,7 @@ CREATE TABLE IF NOT EXISTS &#96;undo_log&#96;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2025</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>

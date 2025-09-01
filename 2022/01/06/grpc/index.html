@@ -323,7 +323,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=2017248660,3731918072&fm=26&fmt=auto')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=3565933611,2185295392&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -805,7 +805,7 @@
 <p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2020/zip/159615/1603012438943-0f20e6d0-f381-4dc7-a99d-2a77031a03b1.zip">protoc-3.13.0-win64.zip</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.yuque.com/attachments/yuque/0/2020/zip/159615/1603012438961-8d1df617-b453-4934-8ebe-262e6c3df02d.zip">protoc-3.13.0-linux-x86_64.zip</a></p>
 <p>下载完成后解压后将路径添加到环境变量中</p>
-<h4 id="2-下载go的依赖包"><a href="#2-下载go的依赖包" class="headerlink" title="2. 下载go的依赖包"></a>2. 下载go的依赖包</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">go get github.com&#x2F;golang&#x2F;protobuf&#x2F;protoc-gen-go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="2-下载go的依赖包"><a href="#2-下载go的依赖包" class="headerlink" title="2. 下载go的依赖包"></a>2. 下载go的依赖包</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">go get github.com/golang/protobuf/protoc-gen-go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="3-proto文件"><a href="#3-proto文件" class="headerlink" title="3. proto文件"></a>3. proto文件</h4><pre class="line-numbers language-go" data-language="go"><code class="language-go">syntax <span class="token operator">=</span> <span class="token string">"proto3"</span><span class="token punctuation">;</span>
 option go_package <span class="token operator">=</span> <span class="token string">".;proto"</span><span class="token punctuation">;</span>
@@ -821,7 +821,7 @@ message HelloReply <span class="token punctuation">&#123;</span>
   <span class="token builtin">string</span> message <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="4-生成go文件"><a href="#4-生成go文件" class="headerlink" title="4. 生成go文件"></a>4. 生成go文件</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">protoc -I . goods.proto --go_out&#x3D;plugins&#x3D;grpc:.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h4 id="4-生成go文件"><a href="#4-生成go文件" class="headerlink" title="4. 生成go文件"></a>4. 生成go文件</h4><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">protoc -I <span class="token builtin class-name">.</span> goods.proto --go_out<span class="token operator">=</span>plugins<span class="token operator">=</span>grpc:.<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="5-服务端代码"><a href="#5-服务端代码" class="headerlink" title="5. 服务端代码"></a>5. 服务端代码</h4><pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
 
@@ -1317,7 +1317,7 @@ message HelloReply <span class="token punctuation">&#123;</span>
                 <a href="/2022/01/08/go-yong-hu-mi-ma-jia-mi/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=3367639535,3751686903&fm=26&fmt=auto" class="responsive-img" alt="Go开发-用户密码加密">
+                        <img src="https://img1.baidu.com/it/u=3565933611,2185295392&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" class="responsive-img" alt="Go开发-用户密码加密">
                         
                         <span class="card-title">Go开发-用户密码加密</span>
                     </div>
@@ -1365,7 +1365,7 @@ message HelloReply <span class="token punctuation">&#123;</span>
                 <a href="/2021/12/25/go-gin/">
                     <div class="card-image">
                         
-                        <img src="https://img1.baidu.com/it/u=54950935,2100161924&fm=26&fmt=auto" class="responsive-img" alt="go-gin框架">
+                        <img src="https://img1.baidu.com/it/u=3565933611,2185295392&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500" class="responsive-img" alt="go-gin框架">
                         
                         <span class="card-title">go-gin框架</span>
                     </div>
@@ -1538,7 +1538,7 @@ message HelloReply <span class="token punctuation">&#123;</span>
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2021-2022</span>
+                <span id="year">2021-2025</span>
             
             <span id="year">2021</span>
             <a href="/about" target="_blank">wumangeng</a>
