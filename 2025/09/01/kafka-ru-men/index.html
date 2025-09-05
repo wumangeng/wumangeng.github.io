@@ -1,0 +1,1505 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="kafka">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>kafka基础 | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/u%3D1630380167%2C564781265%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG.webp')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">kafka基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/kafka/">
+                                <span class="chip bg-color">kafka</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/kafka/" class="post-category">
+                                kafka
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2025-09-01
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.1k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="kafka基础"><a href="#kafka基础" class="headerlink" title="kafka基础"></a>kafka基础</h3><h4 id="什么是-Kafka"><a href="#什么是-Kafka" class="headerlink" title="什么是 Kafka"></a>什么是 Kafka</h4><p><code>Kafka</code> 是一个分布式流式平台，它有三个关键能力</p>
+<ol>
+<li>订阅发布记录流，它类似于企业中的<code>消息队列</code> 或 <code>企业消息传递系统</code></li>
+<li>以容错的方式存储记录流</li>
+<li>实时记录流</li>
+</ol>
+<h4 id="Kafka-的应用"><a href="#Kafka-的应用" class="headerlink" title="Kafka 的应用"></a>Kafka 的应用</h4><ol>
+<li>作为消息系统</li>
+<li>作为存储系统</li>
+<li>作为流处理器</li>
+</ol>
+<p>Kafka 可以建立流数据管道，可靠性的在系统或应用之间获取数据。</p>
+<p>建立流式应用传输和响应数据。</p>
+<h4 id="Kafka-作为消息系统"><a href="#Kafka-作为消息系统" class="headerlink" title="Kafka 作为消息系统"></a>Kafka 作为消息系统</h4><p>Kafka 作为消息系统，它有三个基本组件</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/ryvo719t39.jpeg" alt="img"></p>
+<ul>
+<li>Producer : 发布消息的客户端</li>
+<li>Broker：一个从生产者接受并存储消息的客户端</li>
+<li>Consumer : 消费者从 Broker 中读取消息</li>
+</ul>
+<p>在大型系统中，会需要和很多子系统做交互，也需要消息传递，在诸如此类系统中，你会找到源系统（消息发送方）和 目的系统（消息接收方）。为了在这样的消息系统中传输数据，你需要有合适的数据管道</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/hv8blk35b3.jpeg" alt="img"></p>
+<p>这种数据的交互看起来就很混乱，如果我们使用消息传递系统，那么系统就会变得更加简单和整洁</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/eq9cnn2yjj.jpeg" alt="img"></p>
+<ul>
+<li>Kafka 运行在一个或多个数据中心的<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/cvm?from_column=20065&from=20065">服务器</a>上作为集群运行</li>
+<li>Kafka 集群存储消息记录的目录被称为 <code>topics</code></li>
+<li>每一条消息记录包含三个要素：<strong>键（key）、值（value）、时间戳（Timestamp）</strong></li>
+</ul>
+<h4 id="核心-API"><a href="#核心-API" class="headerlink" title="核心 API"></a>核心 API</h4><p>Kafka 有四个核心API，它们分别是</p>
+<ul>
+<li>Producer API，它允许应用程序向一个或多个 topics 上发送消息记录</li>
+<li>Consumer API，允许应用程序订阅一个或多个 topics 并处理为其生成的记录流</li>
+<li>Streams API，它允许应用程序作为流处理器，从一个或多个主题中消费输入流并为其生成输出流，有效的将输入流转换为输出流。</li>
+<li>Connector API，它允许构建和运行将 Kafka 主题连接到现有应用程序或数据系统的可用生产者和消费者。例如，关系<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/tencentdb-catalog?from_column=20065&from=20065">数据库</a>的连接器可能会捕获对表的所有更改</li>
+</ul>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/onx06znm68.jpeg" alt="img"></p>
+<h4 id="Kafka-基本概念"><a href="#Kafka-基本概念" class="headerlink" title="Kafka 基本概念"></a>Kafka 基本概念</h4><p>Kafka 作为一个高度可扩展可容错的消息系统，它有很多基本概念，下面就来认识一下这些 Kafka 专属的概念</p>
+<h4 id="topic"><a href="#topic" class="headerlink" title="topic"></a>topic</h4><p>Topic 被称为主题，在 kafka 中，使用一个类别属性来划分消息的所属类，划分消息的这个类称为 topic。topic 相当于消息的分配标签，是一个逻辑概念。主题好比是数据库的表，或者文件系统中的文件夹。</p>
+<h4 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h4><p>partition 译为分区，topic 中的消息被分割为一个或多个的 partition，它是一个物理概念，对应到系统上的就是一个或若干个目录，一个分区就是一个 <code>提交日志</code>。消息以追加的形式写入分区，先后以顺序的方式读取。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/6t8f9krkgx.jpeg" alt="img"></p>
+<blockquote>
+<p>注意：由于一个主题包含无数个分区，因此无法保证在整个 topic 中有序，但是单个 Partition 分区可以保证有序。消息被迫加写入每个分区的尾部。Kafka 通过分区来实现数据冗余和伸缩性</p>
+</blockquote>
+<p>分区可以分布在不同的服务器上，也就是说，一个主题可以跨越多个服务器，以此来提供比单个服务器更强大的性能。</p>
+<h4 id="segment"><a href="#segment" class="headerlink" title="segment"></a>segment</h4><p>Segment 被译为段，将 Partition 进一步细分为若干个 segment，每个 segment 文件的大小相等。</p>
+<h4 id="broker"><a href="#broker" class="headerlink" title="broker"></a>broker</h4><p>Kafka 集群包含一个或多个服务器<a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://www.cuirushipeixun.cn/jinpaiyuesao&objectId=1772942&objectType=1&contentType=undefined">，</a>每个 Kafka 中服务器被称为 broker。broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。broker 为消费者提供服务，对读取分区的请求作出响应，返回已经提交到磁盘上的消息。</p>
+<p>broker 是集群的组成部分，每个集群中都会有一个 broker 同时充当了 <code>集群控制器(Leader)</code>的角色，它是由集群中的活跃成员选举出来的。每个集群中的成员都有可能充当 Leader，Leader 负责管理工作，包括将分区分配给 broker 和监控 broker。集群中，一个分区从属于一个 Leader，但是一个分区可以分配给多个 broker（非Leader），这时候会发生分区复制。这种复制的机制为分区提供了消息冗余，如果一个 broker 失效，那么其他活跃用户会重新选举一个 Leader 接管。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/cxv2gl4fgg.jpeg" alt="img"></p>
+<h4 id="producer"><a href="#producer" class="headerlink" title="producer"></a>producer</h4><p>生产者，即消息的发布者，其会将某 topic 的消息发布到相应的 partition 中。生产者在默认情况下把消息均衡地分布到主题的所有分区上，而并不关心特定消息会被写到哪个分区。不过，在某些情况下，生产者会把消息直接写到指定的分区。</p>
+<h4 id="consumer"><a href="#consumer" class="headerlink" title="consumer"></a>consumer</h4><p>消费者，即消息的使用者，一个消费者可以消费多个 topic 的消息，对于某一个 topic 的消息，其只会消费同一个 partition 中的消息</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/lxmp5xs1v0.jpeg" alt="img"></p>
+<p>在了解完 Kafka 的基本概念之后，我们通过搭建 Kafka 集群来进一步深刻认识一下 Kafka。</p>
+<h4 id="确保安装环境"><a href="#确保安装环境" class="headerlink" title="确保安装环境"></a>确保安装环境</h4><h4 id="安装-Java-环境"><a href="#安装-Java-环境" class="headerlink" title="安装 Java 环境"></a>安装 Java 环境</h4><p>在安装 Kafka 之前，先确保Linux 环境上是否有 Java 环境，使用 <code>java -version</code> 命令查看 Java 版本，推荐使用Jdk 1.8 ，如果没有安装 Java 环境的话，可以按照这篇文章进行安装（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zs-notes/p/8535275.html%EF%BC%89">https://www.cnblogs.com/zs-notes/p/8535275.html）</a></p>
+<h4 id="安装-Zookeeper-环境"><a href="#安装-Zookeeper-环境" class="headerlink" title="安装 Zookeeper 环境"></a>安装 Zookeeper 环境</h4><p>Kafka 的底层使用 Zookeeper 储存元数据，确保一致性，所以安装 Kafka 前需要先安装 Zookeeper，Kafka 的发行版自带了 Zookeeper ，可以直接使用脚本来启动，不过安装一个 Zookeeper 也不费劲</p>
+<h4 id="Zookeeper-单机搭建"><a href="#Zookeeper-单机搭建" class="headerlink" title="Zookeeper 单机搭建"></a>Zookeeper 单机搭建</h4><p>Zookeeper 单机搭建比较简单，直接从</p>
+<pre class="line-numbers language-none"><code class="language-none">https:&#x2F;&#x2F;www.apache.org&#x2F;dyn&#x2F;closer.cgi&#x2F;zookeeper&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 官网下载一个稳定版本的 Zookeeper ，这里我使用的是 <code>3.4.10</code>，下载完成后，在 Linux 系统中的 <code>/usr/local</code> 目录下创建 zookeeper 文件夹，使用 <code>xftp</code> 工具(xftp 和 xshell 工具都可以在官网</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">www<span class="token punctuation">.</span>netsarang<span class="token punctuation">.</span>com<span class="token operator">/</span>zh<span class="token operator">/</span>xshell<span class="token operator">/</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 申请免费的家庭版)把下载好的 zookeeper 压缩包放到 /usr/local/zookeeper 目录下。</p>
+<p>如果下载的是一个 tar.gz 包的话，直接使用 <code>tar -zxvf zookeeper-3.4.10.tar.gz</code>解压即可</p>
+<p>如果下载的是 zip 包的话，还要检查一下 Linux 中是否有 unzip 工具，如果没有的话，使用 <code>yum install unzip</code> 安装 zip 解压工具，完成后使用 <code>unzip zookeeper-3.4.10.zip</code> 解压即可。</p>
+<p>解压完成后，cd 到 <code>/usr/local/zookeeper/zookeeper-3.4.10</code> ，创建一个 data 文件夹，然后进入到 conf 文件夹下，使用 <code>mv zoo_sample.cfg zoo.cfg</code> 进行重命名操作</p>
+<p>然后使用 vi 打开 zoo.cfg ，更改一下<code>dataDir = /usr/local/zookeeper/zookeeper-3.4.10/data</code> ，保存。</p>
+<p>进入bin目录，启动服务输入命令<code> ./zkServer.sh start</code> 输出下面内容表示搭建成功 </p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/xsfgz8xuy5.jpeg" alt="img"></p>
+<p>关闭服务输入命令，<code>./zkServer.sh stop</code></p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/iqt0ubf7y7.jpeg" alt="img"></p>
+<p>使用 <code>./zkServer.sh status</code> 可以查看状态信息。</p>
+<h5 id="Zookeeper-集群搭建"><a href="#Zookeeper-集群搭建" class="headerlink" title="Zookeeper 集群搭建"></a>Zookeeper 集群搭建</h5><h5 id="准备条件"><a href="#准备条件" class="headerlink" title="准备条件"></a>准备条件</h5><p>准备条件：需要三个服务器，这里我使用了CentOS7 并安装了三个虚拟机，并为各自的虚拟机分配了<code>1GB</code>的内存，在每个 <code>/usr/local/</code> 下面新建 zookeeper 文件夹，把 zookeeper 的压缩包挪过来，解压，完成后会有 zookeeper-3.4.10 文件夹，进入到文件夹，新建两个文件夹，分别是 <code>data</code> 和<code>log</code>文件夹</p>
+<blockquote>
+<p>注：上一节单机搭建中已经创建了一个data 文件夹，就不需要重新创建了，直接新建一个 log 文件夹，对另外两个新增的服务需要新建这两个文件夹。</p>
+</blockquote>
+<h5 id="设置集群"><a href="#设置集群" class="headerlink" title="设置集群"></a>设置集群</h5><p>新建完成后，需要编辑 conf/zoo.cfg 文件，三个文件的内容如下</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">tickTime<span class="token operator">=</span><span class="token number">2000</span>
+initLimit<span class="token operator">=</span><span class="token number">10</span>
+syncLimit<span class="token operator">=</span><span class="token number">5</span>
+dataDir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>data
+dataLogDir<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>log
+clientPort<span class="token operator">=</span><span class="token number">12181</span>
+server<span class="token punctuation">.</span><span class="token number">1</span><span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">12888</span><span class="token operator">:</span><span class="token number">13888</span>
+server<span class="token punctuation">.</span><span class="token number">2</span><span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.8</span><span class="token operator">:</span><span class="token number">12888</span><span class="token operator">:</span><span class="token number">13888</span>
+server<span class="token punctuation">.</span><span class="token number">3</span><span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.9</span><span class="token operator">:</span><span class="token number">12888</span><span class="token operator">:</span><span class="token number">13888</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>server.1 中的这个 1 表示的是服务器的标识也可以是其他数字，表示这是第几号服务器，这个标识要和下面我们配置的 <code>myid</code> 的标识一致可以。</p>
+<p><code>192.168.1.7:12888:13888</code> 为集群中的 ip 地址，第一个端口表示的是 master 与 slave 之间的通信接口，默认是 2888，第二个端口是leader选举的端口，集群刚启动的时候选举或者leader挂掉之后进行新的选举的端口，默认是 3888</p>
+<p><strong>现在对上面的配置文件进行解释</strong></p>
+<p><code>tickTime</code>: 这个时间是作为 Zookeeper 服务器之间或客户端与服务器之间<code>维持心跳</code>的时间间隔，也就是每个 tickTime 时间就会发送一个心跳。</p>
+<p><code>initLimit</code>：这个配置项是用来配置 Zookeeper 接受客户端（这里所说的客户端不是用户连接 Zookeeper 服务器的客户端，而是 Zookeeper 服务器集群中连接到 Leader 的 Follower 服务器）初始化连接时最长能忍受多少个心跳时间间隔数。当已经超过 5个心跳的时间（也就是 tickTime）长度后 Zookeeper 服务器还没有收到客户端的返回信息，那么表明这个客户端连接失败。总的时间长度就是 5*2000=10 秒</p>
+<p><code>syncLimit</code>: 这个配置项标识 Leader 与Follower 之间发送消息，请求和应答时间长度，最长不能超过多少个 tickTime 的时间长度，总的时间长度就是5*2000=10秒</p>
+<p><code>dataDir</code>: 快照日志的存储路径</p>
+<p><code>dataLogDir</code>: 事务日志的存储路径，如果不配置这个那么事务日志会默认存储到dataDir指定的目录，这样会严重影响zk的性能，当zk吞吐量较大的时候，产生的事务日志、快照日志太多</p>
+<p><code>clientPort</code>: 这个端口就是客户端连接 Zookeeper 服务器的端口，Zookeeper 会监听这个端口，接受客户端的访问请求。</p>
+<h5 id="创建-myid-文件"><a href="#创建-myid-文件" class="headerlink" title="创建 myid 文件"></a>创建 myid 文件</h5><p>在了解完其配置文件后，现在来创建每个集群节点的 myid ，我们上面说过，这个 myid 就是 <code>server.1</code> 的这个 1 ，类似的，需要为集群中的每个服务都指定标识，使用 <code>echo</code> 命令进行创建</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># server<span class="token punctuation">.</span><span class="token number">1</span>
+echo <span class="token string">"1"</span> <span class="token operator">></span> <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>data<span class="token operator">/</span>myid
+# server<span class="token punctuation">.</span><span class="token number">2</span>
+echo <span class="token string">"2"</span> <span class="token operator">></span> <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>data<span class="token operator">/</span>myid
+# server<span class="token punctuation">.</span><span class="token number">3</span>
+echo <span class="token string">"3"</span> <span class="token operator">></span> <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>data<span class="token operator">/</span>myid<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="启动服务并测试"><a href="#启动服务并测试" class="headerlink" title="启动服务并测试"></a>启动服务并测试</h5><p>配置完成，为每个 zk 服务启动并测试，我在 windows 电脑的测试结果如下</p>
+<p><strong>启动服务（每台都需要执行）</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">cd <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>zookeeper<span class="token operator">/</span>zookeeper<span class="token operator">-</span><span class="token number">3.4</span><span class="token number">.10</span><span class="token operator">/</span>bin
+<span class="token punctuation">.</span><span class="token operator">/</span>zkServer<span class="token punctuation">.</span>sh start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>检查服务状态</strong></p>
+<p>使用 <code>./zkServer.sh status</code> 命令检查服务状态</p>
+<p>192.168.1.7 — follower</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/j33bmc42ek.jpeg" alt="img"></p>
+<p>192.168.1.8 — leader</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/v07lu4irbk.jpeg" alt="img"></p>
+<p>192.168.1.9 — follower</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/v1ywofl2mm.jpeg" alt="img"></p>
+<p>zk集群一般只有一个leader，多个follower，主一般是相应客户端的读写请求，而从主同步数据，当主挂掉之后就会从follower里投票选举一个leader出来。</p>
+<h3 id="Kafka-集群搭建"><a href="#Kafka-集群搭建" class="headerlink" title="Kafka 集群搭建"></a>Kafka 集群搭建</h3><h4 id="准备条件-1"><a href="#准备条件-1" class="headerlink" title="准备条件"></a>准备条件</h4><ul>
+<li>搭建好的 Zookeeper 集群</li>
+<li>Kafka 压缩包 （<a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz%EF%BC%89">https://www.apache.org/dyn/closer.cgi?path=/kafka/2.3.0/kafka_2.12-2.3.0.tgz）</a></li>
+</ul>
+<p>在 <code>/usr/local</code> 下新建 <code>kafka</code> 文件夹，然后把下载完成的 tar.gz 包移到 /usr/local/kafka 目录下，使用 <code>tar -zxvf 压缩包</code> 进行解压，解压完成后，进入到 kafka_2.12-2.3.0 目录下，新建 log 文件夹，进入到 config 目录下</p>
+<p>我们可以看到有很多 properties 配置文件，这里主要关注 <code>server.properties</code> 这个文件即可。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/mnbilhizca.jpeg" alt="img"></p>
+<p>kafka 启动方式有两种，一种是使用 kafka 自带的 zookeeper 配置文件来启动（可以按照官网来进行启动，并使用单个服务多个节点来模拟集群<a target="_blank" rel="noopener" href="http://kafka.apache.org/quickstart#quickstart_multibroker%EF%BC%89%EF%BC%8C%E4%B8%80%E7%A7%8D%E6%98%AF%E9%80%9A%E8%BF%87%E4%BD%BF%E7%94%A8%E7%8B%AC%E7%AB%8B%E7%9A%84zk%E9%9B%86%E7%BE%A4%E6%9D%A5%E5%90%AF%E5%8A%A8%EF%BC%8C%E8%BF%99%E9%87%8C%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%8C%E4%BD%BF%E7%94%A8">http://kafka.apache.org/quickstart#quickstart_multibroker），一种是通过使用独立的zk集群来启动，这里推荐使用第二种方式，使用</a> zk 集群来启动</p>
+<h4 id="修改配置项"><a href="#修改配置项" class="headerlink" title="修改配置项"></a>修改配置项</h4><p>需要为<code>每个服务</code>都修改一下配置项，也就是<code>server.properties</code>， 需要更新和添加的内容有</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">broker<span class="token punctuation">.</span>id<span class="token operator">=</span><span class="token number">0</span> <span class="token comment">//初始是0，每个 server 的broker.id 都应该设置为不一样的，就和 myid 一样 我的三个服务分别设置的是 1,2,3</span>
+log<span class="token punctuation">.</span>dirs<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>kafka<span class="token operator">/</span>kafka_2<span class="token punctuation">.</span><span class="token number">12</span><span class="token operator">-</span><span class="token number">2.3</span><span class="token number">.0</span><span class="token operator">/</span>log
+
+#在log<span class="token punctuation">.</span>retention<span class="token punctuation">.</span>hours<span class="token operator">=</span><span class="token number">168</span> 下面新增下面三项
+message<span class="token punctuation">.</span>max<span class="token punctuation">.</span>byte<span class="token operator">=</span><span class="token number">5242880</span>
+<span class="token keyword">default</span><span class="token punctuation">.</span>replication<span class="token punctuation">.</span>factor<span class="token operator">=</span><span class="token number">2</span>
+replica<span class="token punctuation">.</span>fetch<span class="token punctuation">.</span>max<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">5242880</span>
+
+#设置zookeeper的连接端口
+zookeeper<span class="token punctuation">.</span>connect<span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">2181</span><span class="token punctuation">,</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.8</span><span class="token operator">:</span><span class="token number">2181</span><span class="token punctuation">,</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.9</span><span class="token operator">:</span><span class="token number">2181</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配置项的含义</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">broker<span class="token punctuation">.</span>id<span class="token operator">=</span><span class="token number">0</span>  #当前机器在集群中的唯一标识，和zookeeper的myid性质一样
+port<span class="token operator">=</span><span class="token number">9092</span> #当前kafka对外提供服务的端口默认是<span class="token number">9092</span>
+host<span class="token punctuation">.</span>name<span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span> #这个参数默认是关闭的，在<span class="token number">0.8</span><span class="token number">.1</span>有个bug，<span class="token constant">DNS</span>解析问题，失败率的问题。
+num<span class="token punctuation">.</span>network<span class="token punctuation">.</span>threads<span class="token operator">=</span><span class="token number">3</span> #这个是borker进行网络处理的线程数
+num<span class="token punctuation">.</span>io<span class="token punctuation">.</span>threads<span class="token operator">=</span><span class="token number">8</span> #这个是borker进行<span class="token constant">I</span><span class="token operator">/</span><span class="token constant">O</span>处理的线程数
+log<span class="token punctuation">.</span>dirs<span class="token operator">=</span><span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>kafka<span class="token operator">/</span>kafka_2<span class="token punctuation">.</span><span class="token number">12</span><span class="token operator">-</span><span class="token number">2.3</span><span class="token number">.0</span><span class="token operator">/</span>log #消息存放的目录，这个目录可以配置为“，”逗号分割的表达式，上面的num<span class="token punctuation">.</span>io<span class="token punctuation">.</span>threads要大于这个目录的个数这个目录，如果配置多个目录，新创建的topic他把消息持久化的地方是，当前以逗号分割的目录中，那个分区数最少就放那一个
+socket<span class="token punctuation">.</span>send<span class="token punctuation">.</span>buffer<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">102400</span> #发送缓冲区buffer大小，数据不是一下子就发送的，先回存储到缓冲区了到达一定的大小后在发送，能提高性能
+socket<span class="token punctuation">.</span>receive<span class="token punctuation">.</span>buffer<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">102400</span> #kafka接收缓冲区大小，当数据到达一定大小后在序列化到磁盘
+socket<span class="token punctuation">.</span>request<span class="token punctuation">.</span>max<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">104857600</span> #这个参数是向kafka请求消息或者向kafka发送消息的请请求的最大数，这个值不能超过java的堆栈大小
+num<span class="token punctuation">.</span>partitions<span class="token operator">=</span><span class="token number">1</span> #默认的分区数，一个topic默认<span class="token number">1</span>个分区数
+log<span class="token punctuation">.</span>retention<span class="token punctuation">.</span>hours<span class="token operator">=</span><span class="token number">168</span> #默认消息的最大持久化时间，<span class="token number">168</span>小时，<span class="token number">7</span>天
+message<span class="token punctuation">.</span>max<span class="token punctuation">.</span>byte<span class="token operator">=</span><span class="token number">5242880</span>  #消息保存的最大值<span class="token number">5</span>M
+<span class="token keyword">default</span><span class="token punctuation">.</span>replication<span class="token punctuation">.</span>factor<span class="token operator">=</span><span class="token number">2</span>  #kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务
+replica<span class="token punctuation">.</span>fetch<span class="token punctuation">.</span>max<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">5242880</span>  #取消息的最大直接数
+log<span class="token punctuation">.</span>segment<span class="token punctuation">.</span>bytes<span class="token operator">=</span><span class="token number">1073741824</span> #这个参数是：因为kafka的消息是以追加的形式落地到文件，当超过这个值的时候，kafka会新起一个文件
+log<span class="token punctuation">.</span>retention<span class="token punctuation">.</span>check<span class="token punctuation">.</span>interval<span class="token punctuation">.</span>ms<span class="token operator">=</span><span class="token number">300000</span> #每隔<span class="token number">300000</span>毫秒去检查上面配置的log失效时间（log<span class="token punctuation">.</span>retention<span class="token punctuation">.</span>hours<span class="token operator">=</span><span class="token number">168</span> ），到目录查看是否有过期的消息如果有，删除
+log<span class="token punctuation">.</span>cleaner<span class="token punctuation">.</span>enable<span class="token operator">=</span><span class="token boolean">false</span> #是否启用log压缩，一般不用启用，启用的话可以提高性能
+zookeeper<span class="token punctuation">.</span>connect<span class="token operator">=</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">2181</span><span class="token punctuation">,</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.8</span><span class="token operator">:</span><span class="token number">2181</span><span class="token punctuation">,</span><span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.9</span><span class="token operator">:</span><span class="token number">2181</span> #设置zookeeper的连接端口<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> 启动 Kafka 集群并测试</p>
+<p>启动服务，进入到 <code>/usr/local/kafka/kafka_2.12-2.3.0/bin</code> 目录下</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 启动后台进程
+<span class="token punctuation">.</span><span class="token operator">/</span>kafka<span class="token operator">-</span>server<span class="token operator">-</span>start<span class="token punctuation">.</span>sh <span class="token operator">-</span>daemon <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">/</span>config<span class="token operator">/</span>server<span class="token punctuation">.</span>properties<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>检查服务是否启动</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 执行命令 jps
+<span class="token number">6201</span> QuorumPeerMain
+<span class="token number">7035</span> Jps
+<span class="token number">6972</span> Kafka<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>kafka 已经启动</li>
+<li>创建 Topic 来验证是否创建成功# cd .. 往回退一层 到 /usr/local/kafka/kafka_2.12-2.3.0 目录下 bin/kafka-topics.sh –create –zookeeper 192.168.1.7:2181 –replication-factor 2 –partitions 1 –topic cxuan 对上面的解释 –replication-factor 2 复制两份 –partitions 1 创建1个分区 –topic 创建主题 查看我们的主题是否出创建成功 bin/kafka-topics.sh –list –zookeeper 192.168.1.7:2181</li>
+</ul>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/mzo86rzjqr.jpeg" alt="img"></p>
+<p>启动一个服务就能把集群启动起来 <strong>在一台机器上创建一个发布者</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 创建一个broker，发布者
+<span class="token punctuation">.</span><span class="token operator">/</span>kafka<span class="token operator">-</span>console<span class="token operator">-</span>producer<span class="token punctuation">.</span>sh <span class="token operator">--</span>broker<span class="token operator">-</span>list <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">9092</span> <span class="token operator">--</span>topic cxuantopic<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>在一台服务器上创建一个订阅者</strong></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 创建一个consumer， 消费者
+bin<span class="token operator">/</span>kafka<span class="token operator">-</span>console<span class="token operator">-</span>consumer<span class="token punctuation">.</span>sh <span class="token operator">--</span>bootstrap<span class="token operator">-</span>server <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">9092</span> <span class="token operator">--</span>topic cxuantopic <span class="token operator">--</span>from<span class="token operator">-</span>beginning<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：这里使用 –zookeeper 的话可能出现 <code>zookeeper is not a recognized option</code> 的错误，这是因为 kafka 版本太高，需要使用 <code>--bootstrap-server</code> 指令</p>
+</blockquote>
+<p><strong>测试结果</strong></p>
+<p>发布</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/vqvp1lgy0q.jpeg" alt="img"></p>
+<p>消费</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/9yr30xmiak.jpeg" alt="img"></p>
+<h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><p>显示 topic</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">bin<span class="token operator">/</span>kafka<span class="token operator">-</span>topics<span class="token punctuation">.</span>sh <span class="token operator">--</span>list <span class="token operator">--</span>zookeeper <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">2181</span>
+
+# 显示
+cxuantopic<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>查看 topic 状态</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">bin<span class="token operator">/</span>kafka<span class="token operator">-</span>topics<span class="token punctuation">.</span>sh <span class="token operator">--</span>describe <span class="token operator">--</span>zookeeper <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">2181</span> <span class="token operator">--</span>topic cxuantopic
+
+# 下面是显示的详细信息
+Topic<span class="token operator">:</span>cxuantopic PartitionCount<span class="token operator">:</span><span class="token number">1</span> ReplicationFactor<span class="token operator">:</span><span class="token number">2</span> Configs<span class="token operator">:</span>
+Topic<span class="token operator">:</span> cxuantopic Partition<span class="token operator">:</span> <span class="token number">0</span> Leader<span class="token operator">:</span> <span class="token number">1</span> Replicas<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span> Isr<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span>
+
+# 分区为为<span class="token number">1</span>  复制因子为<span class="token number">2</span>   主题 cxuantopic 的分区为<span class="token number">0</span> 
+# Replicas<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">1</span>   复制的为<span class="token number">1</span>，<span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>Leader</code> 负责给定分区的所有读取和写入的节点，每个节点都会通过随机选择成为 leader。</p>
+<p><code>Replicas</code> 是为该分区复制日志的节点列表，无论它们是 Leader 还是当前处于活动状态。</p>
+<p><code>Isr</code> 是同步副本的集合。它是副本列表的子集，当前仍处于活动状态并追随Leader。</p>
+<p>至此，kafka 集群搭建完毕。</p>
+<h4 id="验证多节点接收数据"><a href="#验证多节点接收数据" class="headerlink" title="验证多节点接收数据"></a>验证多节点接收数据</h4><p>刚刚我们都使用的是 相同的ip 服务，下面使用其他集群中的节点，验证是否能够接受到服务</p>
+<p>在另外两个节点上使用</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">bin<span class="token operator">/</span>kafka<span class="token operator">-</span>console<span class="token operator">-</span>consumer<span class="token punctuation">.</span>sh <span class="token operator">--</span>bootstrap<span class="token operator">-</span>server <span class="token number">192.168</span><span class="token number">.1</span><span class="token number">.7</span><span class="token operator">:</span><span class="token number">9092</span> <span class="token operator">--</span>topic cxuantopic <span class="token operator">--</span>from<span class="token operator">-</span>beginning<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 然后再使用 broker 进行消息发送，经测试三个节点都可以接受到消息。</p>
+<h3 id="配置详解"><a href="#配置详解" class="headerlink" title="配置详解"></a>配置详解</h3><p>在搭建 Kafka 的时候我们简单介绍了一下 <code>server.properties</code> 中配置的含义，现在我们来详细介绍一下参数的配置和概念</p>
+<h4 id="常规配置"><a href="#常规配置" class="headerlink" title="常规配置"></a>常规配置</h4><p>这些参数是 kafka 中最基本的配置</p>
+<ul>
+<li>broker.id</li>
+</ul>
+<p>每个 broker 都需要有一个标识符，使用 broker.id 来表示。它的默认值是 0，它可以被设置成其他任意整数，在集群中需要保证每个节点的 broker.id 都是唯一的。</p>
+<ul>
+<li>port</li>
+</ul>
+<p>如果使用配置样本来启动 kafka ，它会监听 9092 端口，修改 port 配置参数可以把它设置成其他任意可用的端口。</p>
+<ul>
+<li>zookeeper.connect</li>
+</ul>
+<p>用于保存 broker 元数据的地址是通过 zookeeper.connect 来指定。 localhost:2181 表示运行在本地 2181 端口。该配置参数是用逗号分隔的一组 hostname:port/path 列表，每一部分含义如下：</p>
+<p>hostname 是 zookeeper 服务器的服务名或 IP 地址</p>
+<p>port 是 zookeeper 连接的端口</p>
+<p>/path 是可选的 zookeeper 路径，作为 Kafka 集群的 chroot 环境。如果不指定，默认使用跟路径</p>
+<ul>
+<li>log.dirs</li>
+</ul>
+<p>Kafka 把消息都保存在磁盘上，存放这些日志片段的目录都是通过 <code>log.dirs</code> 来指定的。它是一组用逗号分隔的本地文件系统路径。如果指定了多个路径，那么 broker 会根据 “最少使用” 原则，把同一分区的日志片段保存到同一路径下。要注意，broker 会向拥有最少数目分区的路径新增分区，而不是向拥有最小磁盘空间的路径新增分区。</p>
+<ul>
+<li>num.recovery.threads.per.data.dir</li>
+</ul>
+<p>对于如下 3 种情况，Kafka 会使用可配置的线程池来处理日志片段</p>
+<p>服务器正常启动，用于打开每个分区的日志片段；</p>
+<p>服务器崩溃后启动，用于检查和截断每个分区的日志片段；</p>
+<p>服务器正常关闭，用于关闭日志片段</p>
+<p>默认情况下，每个日志目录只使用一个线程。因为这些线程只是在服务器启动和关闭时会用到，所以完全可以设置大量的线程来达到井行操作的目的。特别是对于包含大量分区的服务器来说，一旦发生崩愤，在进行恢复时使用井行操作可能会省下数小时的时间。设置此参数时需要注意，所配置的数字对应的是 log.dirs 指定的单个日志目录。也就是说，如果 num.recovery.threads.per.data.dir 被设为 8，并且 log.dir 指定了 3 个路径，那么总共需要 24 个线程。</p>
+<ul>
+<li>auto.create.topics.enable</li>
+</ul>
+<p>默认情况下，Kafka 会在如下 3 种情况下创建主题</p>
+<p>当一个生产者开始往主题写入消息时</p>
+<p>当一个消费者开始从主题读取消息时</p>
+<p>当任意一个客户向主题发送元数据请求时</p>
+<ul>
+<li>delete.topic.enable</li>
+</ul>
+<p>如果你想要删除一个主题，你可以使用主题管理工具。默认情况下，是不允许删除主题的，delete.topic.enable 的默认值是 false 因此你不能随意删除主题。这是对生产环境的合理性保护，但是在开发环境和测试环境，是可以允许你删除主题的，所以，如果你想要删除主题，需要把 delete.topic.enable 设为 true。</p>
+<h4 id="主题默认配置"><a href="#主题默认配置" class="headerlink" title="主题默认配置"></a>主题默认配置</h4><p>Kafka 为新创建的主题提供了很多默认配置参数，下面就来一起认识一下这些参数</p>
+<ul>
+<li>num.partitions</li>
+</ul>
+<p>num.partitions 参数指定了新创建的主题需要包含多少个分区。如果启用了主题自动创建功能（该功能是默认启用的），主题分区的个数就是该参数指定的值。该参数的默认值是 1。要注意，我们可以增加主题分区的个数，但不能减少分区的个数。</p>
+<ul>
+<li>default.replication.factor</li>
+</ul>
+<p>这个参数比较简单，它表示 kafka保存消息的副本数，如果一个副本失效了，另一个还可以继续提供服务default.replication.factor 的默认值为1，这个参数在你启用了主题自动创建功能后有效。</p>
+<ul>
+<li>log.retention.ms</li>
+</ul>
+<p>Kafka 通常根据时间来决定数据可以保留多久。默认使用 log.retention.hours 参数来配置时间，默认是 168 个小时，也就是一周。除此之外，还有两个参数 log.retention.minutes 和 log.retentiion.ms 。这三个参数作用是一样的，都是决定消息多久以后被删除，推荐使用 log.retention.ms。</p>
+<ul>
+<li>log.retention.bytes</li>
+</ul>
+<p>另一种保留消息的方式是判断消息是否过期。它的值通过参数 <code>log.retention.bytes</code> 来指定，作用在每一个分区上。也就是说，如果有一个包含 8 个分区的主题，并且 log.retention.bytes 被设置为 1GB，那么这个主题最多可以保留 8GB 数据。所以，当主题的分区个数增加时，整个主题可以保留的数据也随之增加。</p>
+<ul>
+<li>log.segment.bytes</li>
+</ul>
+<p>上述的日志都是作用在日志片段上，而不是作用在单个消息上。当消息到达 broker 时，它们被追加到分区的当前日志片段上，当日志片段大小到达 log.segment.bytes 指定上限（默认为 1GB）时，当前日志片段就会被关闭，一个新的日志片段被打开。如果一个日志片段被关闭，就开始等待过期。这个参数的值越小，就越会频繁的关闭和分配新文件，从而降低磁盘写入的整体效率。</p>
+<ul>
+<li>log.segment.ms</li>
+</ul>
+<p>上面提到日志片段经关闭后需等待过期，那么 <code>log.segment.ms</code> 这个参数就是指定日志多长时间被关闭的参数和，log.segment.ms 和 log.retention.bytes 也不存在互斥问题。日志片段会在大小或时间到达上限时被关闭，就看哪个条件先得到满足。</p>
+<ul>
+<li>message.max.bytes</li>
+</ul>
+<p>broker 通过设置 <code>message.max.bytes</code> 参数来限制单个消息的大小，默认是 1000 000， 也就是 1MB，如果生产者尝试发送的消息超过这个大小，不仅消息不会被接收，还会收到 broker 返回的错误消息。跟其他与字节相关的配置参数一样，该参数指的是压缩后的消息大小，也就是说，只要压缩后的消息小于 mesage.max.bytes，那么消息的实际大小可以大于这个值</p>
+<p>这个值对性能有显著的影响。值越大，那么负责处理网络连接和请求的线程就需要花越多的时间来处理这些请求。它还会增加磁盘写入块的大小，从而影响 IO 吞吐量。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2025/09/01/kafka-ru-men/">http://wumangeng.github.io/2025/09/01/kafka-ru-men/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/kafka/">
+                                    <span class="chip bg-color">kafka</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2025/09/02/springboot-ji-cheng-kafka/">
+                    <div class="card-image">
+                        
+                        <img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/u%3D1630380167%2C564781265%26fm%3D253%26fmt%3Dauto%26app%3D120%26f%3DJPEG.webp" class="responsive-img" alt="Springboot集成Kafka">
+                        
+                        <span class="card-title">Springboot集成Kafka</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Springboot集成Kafka
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2025-09-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Kafka/" class="post-category">
+                                    Kafka
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Kafka/">
+                        <span class="chip bg-color">Kafka</span>
+                    </a>
+                    
+                    <a href="/tags/Springboot/">
+                        <span class="chip bg-color">Springboot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2025/04/20/k8s-tian-yi-yun-cce-ying-yong-bu-shu-shou-ce/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        
+                        <span class="card-title">k8s</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            部署手册
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
+                                    运维
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E9%83%A8%E7%BD%B2/">
+                        <span class="chip bg-color">部署</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

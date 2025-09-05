@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2025-09-01T13:56:06.929Z</updated>
+  <updated>2025-09-05T03:11:31.473Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Springboot集成Kafka</title>
+    <link href="http://wumangeng.github.io/2025/09/02/springboot-ji-cheng-kafka/"/>
+    <id>http://wumangeng.github.io/2025/09/02/springboot-ji-cheng-kafka/</id>
+    <published>2025-09-02T01:10:20.000Z</published>
+    <updated>2025-09-05T03:11:31.473Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;2-Springboot集成Kafka&quot;&gt;&lt;a href=&quot;#2-Springboot集成Kafka&quot; class=&quot;headerlink&quot; title=&quot;2.Springboot集成Kafka&quot;&gt;&lt;/a&gt;2.Springboot集成Kafka&lt;/h2&gt;&lt;h3</summary>
+        
+      
+    
+    
+    
+    <category term="Kafka" scheme="http://wumangeng.github.io/categories/Kafka/"/>
+    
+    
+    <category term="Kafka" scheme="http://wumangeng.github.io/tags/Kafka/"/>
+    
+    <category term="Springboot" scheme="http://wumangeng.github.io/tags/Springboot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>kafka基础</title>
+    <link href="http://wumangeng.github.io/2025/09/01/kafka-ru-men/"/>
+    <id>http://wumangeng.github.io/2025/09/01/kafka-ru-men/</id>
+    <published>2025-09-01T07:10:20.000Z</published>
+    <updated>2025-09-05T06:05:31.286Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h3 id=&quot;kafka基础&quot;&gt;&lt;a href=&quot;#kafka基础&quot; class=&quot;headerlink&quot; title=&quot;kafka基础&quot;&gt;&lt;/a&gt;kafka基础&lt;/h3&gt;&lt;h4 id=&quot;什么是-Kafka&quot;&gt;&lt;a href=&quot;#什么是-Kafka&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="kafka" scheme="http://wumangeng.github.io/categories/kafka/"/>
+    
+    
+    <category term="kafka" scheme="http://wumangeng.github.io/tags/kafka/"/>
+    
+  </entry>
   
   <entry>
     <title>k8s</title>
@@ -299,11 +351,11 @@
     <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
+    <category term="openEuler" scheme="http://wumangeng.github.io/tags/openEuler/"/>
     
     <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
     
-    <category term="openEuler" scheme="http://wumangeng.github.io/tags/openEuler/"/>
+    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
     
   </entry>
   
@@ -329,11 +381,11 @@
     <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
+    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
+    
     <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
     
     <category term="pg" scheme="http://wumangeng.github.io/tags/pg/"/>
-    
-    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
     
   </entry>
   
@@ -488,58 +540,6 @@
     
     
     <category term="MySQL" scheme="http://wumangeng.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Spring Cloud</title>
-    <link href="http://wumangeng.github.io/2022/11/04/wei-fu-wu-springcloud-bi-ji/"/>
-    <id>http://wumangeng.github.io/2022/11/04/wei-fu-wu-springcloud-bi-ji/</id>
-    <published>2022-11-04T01:10:20.000Z</published>
-    <updated>2025-09-01T14:03:27.126Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;什么是微服务架构：&lt;/p&gt;
-&lt;p&gt;SpringCloud 是微服务一站式服务解决方案，微服务全家桶。它是微服务开发的主流技术栈。它采用了名称，而非数字版本号。&lt;/p&gt;
-&lt;p&gt;springCloud 和 springCloud Alibaba</summary>
-        
-      
-    
-    
-    
-    <category term="Spring Cloud" scheme="http://wumangeng.github.io/categories/Spring-Cloud/"/>
-    
-    
-    <category term="SpringCloud" scheme="http://wumangeng.github.io/tags/SpringCloud/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>设计模式</title>
-    <link href="http://wumangeng.github.io/2022/04/25/she-ji-mo-shi/"/>
-    <id>http://wumangeng.github.io/2022/04/25/she-ji-mo-shi/</id>
-    <published>2022-04-25T01:10:20.000Z</published>
-    <updated>2025-09-01T14:14:58.764Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;JAVA设计模式总结之23种设计模式&quot;&gt;&lt;a href=&quot;#JAVA设计模式总结之23种设计模式&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="设计模式" scheme="http://wumangeng.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
