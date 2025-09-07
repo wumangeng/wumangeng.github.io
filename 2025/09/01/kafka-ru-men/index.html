@@ -41,9 +41,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
 </head>
 
 
@@ -487,7 +487,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.1k
+                    9.7k
                 </div>
                 
 
@@ -525,6 +525,12 @@
 </ol>
 <p>Kafka 可以建立流数据管道，可靠性的在系统或应用之间获取数据。</p>
 <p>建立流式应用传输和响应数据。</p>
+<h4 id="Kafka-的其他特性"><a href="#Kafka-的其他特性" class="headerlink" title="Kafka 的其他特性"></a><strong>Kafka 的其他特性</strong></h4><ul>
+<li>持久化存储: 消息被持久化到磁盘，具有高可靠性，可以防止数据丢失。</li>
+<li>分布式架构: Kafka 集群可以扩展到数百台服务器，处理海量数据。</li>
+<li>高吞吐量: Kafka 能够处理每秒数百万条消息。</li>
+<li>实时性: Kafka 能够提供低延迟的消息传输。</li>
+</ul>
 <h4 id="Kafka-作为消息系统"><a href="#Kafka-作为消息系统" class="headerlink" title="Kafka 作为消息系统"></a>Kafka 作为消息系统</h4><p>Kafka 作为消息系统，它有三个基本组件</p>
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/ryvo719t39.jpeg" alt="img"></p>
 <ul>
@@ -541,6 +547,13 @@
 <li>Kafka 集群存储消息记录的目录被称为 <code>topics</code></li>
 <li>每一条消息记录包含三个要素：<strong>键（key）、值（value）、时间戳（Timestamp）</strong></li>
 </ul>
+<h4 id="Kafka-的架构"><a href="#Kafka-的架构" class="headerlink" title="Kafka 的架构"></a>Kafka 的架构</h4><p>Kafka 的核心设计理念是基于分布式日志，它将消息持久化地存储在磁盘上，并通过分区和副本机制实现高吞吐量、高可靠性和可扩展性。Kafka 只写数据到 leader 副本，也只从 leader 副本获取数据。如果 leader 失效，会重新选择出 leader。这种架构类似于 MySQL 的主从复制，但 Kafka 的读取操作也只能从 Leader 节点进行。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/20250421-6e7a794b.png" alt="img"></p>
+<ol>
+<li>Kafka 存储的消息来自任意多被称为 Producer（生产者） 的进程。数据从而可以被发布到不同的 Topic（主题） 下的不同 Partition（分区）。</li>
+<li>在一个分区内，这些消息被索引并连同时间戳存储在一起。其它被称为 Consumer（消费者） 的进程可以从分区订阅消息。</li>
+<li>Kafka 运行在一个由一台或多台服务器组成的集群上，并且分区可以跨集群结点分布。</li>
+</ol>
 <h4 id="核心-API"><a href="#核心-API" class="headerlink" title="核心 API"></a>核心 API</h4><p>Kafka 有四个核心API，它们分别是</p>
 <ul>
 <li>Producer API，它允许应用程序向一个或多个 topics 上发送消息记录</li>
@@ -551,13 +564,28 @@
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/onx06znm68.jpeg" alt="img"></p>
 <h4 id="Kafka-基本概念"><a href="#Kafka-基本概念" class="headerlink" title="Kafka 基本概念"></a>Kafka 基本概念</h4><p>Kafka 作为一个高度可扩展可容错的消息系统，它有很多基本概念，下面就来认识一下这些 Kafka 专属的概念</p>
 <h4 id="topic"><a href="#topic" class="headerlink" title="topic"></a>topic</h4><p>Topic 被称为主题，在 kafka 中，使用一个类别属性来划分消息的所属类，划分消息的这个类称为 topic。topic 相当于消息的分配标签，是一个逻辑概念。主题好比是数据库的表，或者文件系统中的文件夹。</p>
-<h4 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h4><p>partition 译为分区，topic 中的消息被分割为一个或多个的 partition，它是一个物理概念，对应到系统上的就是一个或若干个目录，一个分区就是一个 <code>提交日志</code>。消息以追加的形式写入分区，先后以顺序的方式读取。</p>
+<h4 id="partition（分区）"><a href="#partition（分区）" class="headerlink" title="partition（分区）"></a>partition（分区）</h4><p>partition 译为分区，Topic 的物理分片，topic 中的消息被分割为一个或多个的 partition，它是一个物理概念，对应到系统上的就是一个或若干个目录，一个分区就是一个 <code>提交日志</code>。消息以追加的形式写入分区，先后以顺序的方式读取。</p>
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/6t8f9krkgx.jpeg" alt="img"></p>
 <blockquote>
 <p>注意：由于一个主题包含无数个分区，因此无法保证在整个 topic 中有序，但是单个 Partition 分区可以保证有序。消息被迫加写入每个分区的尾部。Kafka 通过分区来实现数据冗余和伸缩性</p>
 </blockquote>
 <p>分区可以分布在不同的服务器上，也就是说，一个主题可以跨越多个服务器，以此来提供比单个服务器更强大的性能。</p>
 <h4 id="segment"><a href="#segment" class="headerlink" title="segment"></a>segment</h4><p>Segment 被译为段，将 Partition 进一步细分为若干个 segment，每个 segment 文件的大小相等。</p>
+<h4 id="Replication（副本）"><a href="#Replication（副本）" class="headerlink" title="Replication（副本）"></a>Replication（副本）</h4><p>为了保证数据的可靠性和高可用性，Kafka 会为每个 Partition 创建多个副本。</p>
+<ul>
+<li>概念：每一个分区都有多个副本，用于数据冗余和故障恢复。</li>
+<li>作用：<ul>
+<li>提高数据可靠性：当 Leader 分区发生故障时，可以从 Follower 分区中选举出新的 Leader，保证数据不丢失。</li>
+<li>提高可用性：即使部分 Broker 宕机，Kafka 集群仍然可以正常提供服务。</li>
+</ul>
+</li>
+<li>数量限制：<ul>
+<li>Kafka 中默认副本的最大数量是 10 个。</li>
+<li>副本的数量不能大于 Broker 的数量。</li>
+<li>Follower 和 Leader 必须在不同的机器上，同一机器对同一个分区也只可能存放一个副本。</li>
+</ul>
+</li>
+</ul>
 <h4 id="broker"><a href="#broker" class="headerlink" title="broker"></a>broker</h4><p>Kafka 集群包含一个或多个服务器<a href="https://cloud.tencent.com/developer/tools/blog-entry?target=https://www.cuirushipeixun.cn/jinpaiyuesao&objectId=1772942&objectType=1&contentType=undefined">，</a>每个 Kafka 中服务器被称为 broker。broker 接收来自生产者的消息，为消息设置偏移量，并提交消息到磁盘保存。broker 为消费者提供服务，对读取分区的请求作出响应，返回已经提交到磁盘上的消息。</p>
 <p>broker 是集群的组成部分，每个集群中都会有一个 broker 同时充当了 <code>集群控制器(Leader)</code>的角色，它是由集群中的活跃成员选举出来的。每个集群中的成员都有可能充当 Leader，Leader 负责管理工作，包括将分区分配给 broker 和监控 broker。集群中，一个分区从属于一个 Leader，但是一个分区可以分配给多个 broker（非Leader），这时候会发生分区复制。这种复制的机制为分区提供了消息冗余，如果一个 broker 失效，那么其他活跃用户会重新选举一个 Leader 接管。</p>
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/cxv2gl4fgg.jpeg" alt="img"></p>
@@ -565,7 +593,184 @@
 <h4 id="consumer"><a href="#consumer" class="headerlink" title="consumer"></a>consumer</h4><p>消费者，即消息的使用者，一个消费者可以消费多个 topic 的消息，对于某一个 topic 的消息，其只会消费同一个 partition 中的消息</p>
 <p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/lxmp5xs1v0.jpeg" alt="img"></p>
 <p>在了解完 Kafka 的基本概念之后，我们通过搭建 Kafka 集群来进一步深刻认识一下 Kafka。</p>
-<h4 id="确保安装环境"><a href="#确保安装环境" class="headerlink" title="确保安装环境"></a>确保安装环境</h4><h4 id="安装-Java-环境"><a href="#安装-Java-环境" class="headerlink" title="安装 Java 环境"></a>安装 Java 环境</h4><p>在安装 Kafka 之前，先确保Linux 环境上是否有 Java 环境，使用 <code>java -version</code> 命令查看 Java 版本，推荐使用Jdk 1.8 ，如果没有安装 Java 环境的话，可以按照这篇文章进行安装（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zs-notes/p/8535275.html%EF%BC%89">https://www.cnblogs.com/zs-notes/p/8535275.html）</a></p>
+<h4 id="Leader"><a href="#Leader" class="headerlink" title="Leader"></a>Leader</h4><p>每个 Partition 的多个副本中，只有一个会被选为 Leader。</p>
+<ul>
+<li>作用：<ul>
+<li>负责处理来自 Producer 的写入请求。</li>
+<li>负责处理来自 Consumer 的读取请求。</li>
+<li>将数据同步到 Follower 副本。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Follower"><a href="#Follower" class="headerlink" title="Follower"></a>Follower</h4><p>每个 Partition 的其他副本被称为 Follower。</p>
+<ul>
+<li>作用：<ul>
+<li>实时从 Leader 中同步数据，保持和 Leader 数据的同步。</li>
+<li>当 Leader 发生故障时，某个 Follower 还会被选举成为新的 Leader。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Offset"><a href="#Offset" class="headerlink" title="Offset"></a>Offset</h4><p>分区中每条消息的唯一标识，表示 Consumer 消费的位置。</p>
+<ul>
+<li>概念：消费者消费的位置信息，用于跟踪数据消费进度。</li>
+<li>作用：<ul>
+<li>监控数据消费到什么位置。</li>
+<li>当 Consumer 挂掉再重新恢复的时候，可以从上次的消费位置继续消费，实现断点续传。</li>
+</ul>
+</li>
+<li>特点：同一主题，不同的分区，它们的 Offset 是独立的。</li>
+</ul>
+<h4 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h4><p>Kafka 集群依赖 ZooKeeper 来存储和管理集群的元数据信息。</p>
+<ul>
+<li>作用：<ul>
+<li>存储 Broker 的注册信息。</li>
+<li>维护 Topic 的分区信息。</li>
+<li>管理 Consumer Group 的信息。</li>
+<li>进行 Leader 选举。</li>
+</ul>
+</li>
+</ul>
+<h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/20250421-d9eb54dd.png" alt="img"></p>
+<ol>
+<li>Offset 独立性：不同的 Partition 的 Offset 是独立的，每个 Consumer Group 维护自己的 Offset。</li>
+<li>Topic 与 Partition 关系：Kafka 中消息是以 Topic 进行分类的，Producer 生产消息，Consumer 消费消息，面向的都是同一个 Topic。</li>
+<li>Topic 与 Partition 物理对应：Topic 是逻辑上的概念，而 Partition 是物理上的概念，每个 Partition 对应于一个 log 文件，该 log 文件中存储的就是 Producer 生产的数据。</li>
+<li>消息追加与 Offset：Producer 生产的数据会不断追加到该 log 文件末端，且每条数据都有自己的 Offset。</li>
+<li>Consumer Offset 记录：Consumer 组中的每个 Consumer，都会实时记录自己消费到了哪个 Offset，以便出错恢复时，从上次的位置继续消费。</li>
+<li>日志存储位置：默认情况下，日志文件存储在 <code>/tmp/kafka-logs</code> 目录下 (生产环境需要修改配置)。</li>
+</ol>
+<h4 id="数据可靠性保证"><a href="#数据可靠性保证" class="headerlink" title="数据可靠性保证"></a>数据可靠性保证</h4><p>为保证 Producer 发送的数据，能可靠地发送到指定的 Topic，Topic 的每个 Partition 收到 Producer 发送的数据后，都需要向 Producer 发送 ACK（ACKnowledge 确认收到）。如果 Producer 收到 ACK，就会进行下一轮的发送，否则重新发送数据。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/20250421-2e45ba19.png" alt="img"></p>
+<h4 id="副本数据同步策略"><a href="#副本数据同步策略" class="headerlink" title="副本数据同步策略"></a>副本数据同步策略</h4><p>确保有 Follower 与 Leader 同步完成，Leader 再发送 ACK，这样才能保证 Leader 挂掉之后，能在 Follower 中选举出新的 Leader 而不丢数据。</p>
+<table>
+<thead>
+<tr>
+<th align="left">方案</th>
+<th align="left">优点</th>
+<th align="left">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">半数以上完成同步，就发送 ACK</td>
+<td align="left">延迟低</td>
+<td align="left">选举新的 leader 时，容忍 n 台节点故障，需要 2n+1 个副本。</td>
+</tr>
+<tr>
+<td align="left">全部完成同步，才发送 ACK</td>
+<td align="left">选举新的 leader 时，容忍 n 台节点故障，需要 n+1 个副本。</td>
+<td align="left">延迟高。</td>
+</tr>
+</tbody></table>
+<p>当采用第二种方案时，所有 Follower 完成同步，Producer 才能继续发送数据。设想有一个 Follower 因为某种原因出现故障，那 Leader 就要一直等到它完成同步。这个问题怎么解决？</p>
+<ol>
+<li>Leader 维护了一个动态的 in-sync replica set（ISR）：和 Leader 保持同步的 Follower 集合。</li>
+<li>当 ISR 集合中的 Follower 完成数据的同步之后，Leader 就会给 Follower 发送 ACK。</li>
+<li>如果 Follower 长时间未向 Leader 同步数据，则该 Follower 将被踢出 ISR 集合，该时间阈值由 <code>replica.lag.time.max.ms</code> 参数设定。Leader 发生故障后，就会从 ISR 中选举出新的 Leader。</li>
+</ol>
+<h4 id="ACK-应答机制"><a href="#ACK-应答机制" class="headerlink" title="ACK 应答机制"></a>ACK 应答机制</h4><p>Kafka 为用户提供了三种可靠性级别，用户根据可靠性和延迟的要求进行权衡，选择以下的配置。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/20250421-12ea3488.png" alt="img"></p>
+<p>ACK 参数配置：</p>
+<ol>
+<li><code>acks=0</code>：Producer 不等待 Broker 的 ACK，这提供了最低延迟，Broker 一收到数据还没有写入磁盘就已经返回，当 Broker 故障时有可能丢失数据。</li>
+<li><code>acks=1</code>：Producer 等待 Broker 的 ACK，Partition 的 Leader 落盘成功后返回 ACK，如果在 Follower 同步成功之前 Leader 故障，那么将会丢失数据。</li>
+<li><code>acks=-1 或 all</code>：Producer 等待 Broker 的 ACK，Partition 的 Leader 和 Follower 全部落盘成功后才返回 ACK。但是在 Broker 发送 ACK 时，Leader 发生故障，则会造成数据重复。 这是最安全的模式，但延迟也相对较高。</li>
+</ol>
+<h4 id="可靠性指标"><a href="#可靠性指标" class="headerlink" title="可靠性指标"></a>可靠性指标</h4><ol>
+<li><p>分区副本：你可以创建更多的分区来提升可靠性，但是分区数过多也会带来性能上的开销，一般来说，3 个副本就能满足对大部分场景的可靠性要求。</p>
+</li>
+<li><p>ACKS：生产者发送消息的可靠性，也就是我要保证我这个消息一定是到了 broker 并且完成了多副本的持久化。</p>
+</li>
+<li><p>保障消息到了 broker 之后，消费者也需要有一定的保证，因为消费者也可能出现某些问题导致消息没有消费到。</p>
+</li>
+<li><p><code>enable.auto.commit</code> 默认为 <code>true</code>，也就是自动提交 offset。自动提交是批量执行的，有一个时间窗口，这种方式会带来重复提交或者消息丢失的问题，所以对于高可靠性要求的程序，要使用手动提交。对于高可靠要求的应用来说，宁愿重复消费也不应该因为消费异常而导致消息丢失。</p>
+</li>
+</ol>
+<h3 id="kafka幂等性"><a href="#kafka幂等性" class="headerlink" title="kafka幂等性"></a>kafka幂等性</h3><h4 id="Kafka为啥需要幂等性？"><a href="#Kafka为啥需要幂等性？" class="headerlink" title="Kafka为啥需要幂等性？"></a>Kafka为啥需要幂等性？</h4><p>Producer在生产发送消息时，难免会重复发送消息。Producer进行retry时会产生重试机制，发生消息重复发送。而引入幂等性后，重复发送只会生成一条有效的消息。Kafka作为分布式消息系统，它的使用场景常见与分布式系统中，比如消息推送系统、业务平台系统（如物流平台、银行结算平台等）。以银行结算平台来说，业务方作为上游把数据上报到银行结算平台，如果一份数据被计算、处理多次，那么产生的影响会很严重。</p>
+<h4 id="影响Kafka幂等性的因素有哪些？"><a href="#影响Kafka幂等性的因素有哪些？" class="headerlink" title="影响Kafka幂等性的因素有哪些？"></a>影响Kafka幂等性的因素有哪些？</h4><p>在使用Kafka时，需要确保Exactly-Once语义。分布式系统中，一些不可控因素有很多，比如网络、OOM、FullGC等。在Kafka Broker确认Ack时，出现网络异常、FullGC、OOM等问题时导致Ack超时，Producer会进行重复发送。可能出现的情况如下：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/3prwuekbri.png" alt="img"></p>
+<h4 id="Kafka的幂等性是如何实现的？"><a href="#Kafka的幂等性是如何实现的？" class="headerlink" title="Kafka的幂等性是如何实现的？"></a>Kafka的幂等性是如何实现的？</h4><p>Kafka为了实现幂等性，它在底层设计架构中引入了ProducerID和SequenceNumber。那这两个概念的用途是什么呢？</p>
+<ul>
+<li>ProducerID：在每个新的Producer初始化时，会被分配一个唯一的ProducerID，这个ProducerID对客户端使用者是不可见的。</li>
+<li>SequenceNumber：对于每个ProducerID，Producer发送数据的每个Topic和Partition都对应一个从0开始单调递增的SequenceNumber值。</li>
+</ul>
+<h4 id="幂等性引入之前的问题？"><a href="#幂等性引入之前的问题？" class="headerlink" title="幂等性引入之前的问题？"></a>幂等性引入之前的问题？</h4><p>Kafka在引入幂等性之前，Producer向Broker发送消息，然后Broker将消息追加到消息流中后给Producer返回Ack信号值。实现流程如下：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/whynd0lkzs.png" alt="img"></p>
+<p>上图的实现流程是一种理想状态下的消息发送情况，但是实际情况中，会出现各种不确定的因素，比如在Producer在发送给Broker的时候出现网络异常。比如以下这种异常情况的出现：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/52nnaiztx5.png" alt="img"></p>
+<p>上图这种情况，当Producer第一次发送消息给Broker时，Broker将消息(x2,y2)追加到了消息流中，但是在返回Ack信号给Producer时失败了（比如网络异常） 。此时，Producer端触发重试机制，将消息(x2,y2)重新发送给Broker，Broker接收到消息后，再次将该消息追加到消息流中，然后成功返回Ack信号给Producer。这样下来，消息流中就被重复追加了两条相同的(x2,y2)的消息。</p>
+<h4 id="幂等性引入之后解决了什么问题？"><a href="#幂等性引入之后解决了什么问题？" class="headerlink" title="幂等性引入之后解决了什么问题？"></a>幂等性引入之后解决了什么问题？</h4><p>面对这样的问题，Kafka引入了幂等性。那么幂等性是如何解决这类重复发送消息的问题的呢？下面我们可以先来看看流程图：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/pfnoz03plv.png" alt="img"></p>
+<p>同样，这是一种理想状态下的发送流程。实际情况下，会有很多不确定的因素，比如Broker在发送Ack信号给Producer时出现网络异常，导致发送失败。异常情况如下图所示：</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/b87xnfpi7x.png" alt="img"></p>
+<p>当Producer发送消息(x2,y2)给Broker时，Broker接收到消息并将其追加到消息流中。此时，Broker返回Ack信号给Producer时，发生异常导致Producer接收Ack信号失败。对于Producer来说，会触发重试机制，将消息(x2,y2)再次发送，但是，由于引入了幂等性，在每条消息中附带了PID（ProducerID）和SequenceNumber。相同的PID和SequenceNumber发送给Broker，而之前Broker缓存过之前发送的相同的消息，那么在消息流中的消息就只有一条(x2,y2)，不会出现重复发送的情况。</p>
+<h4 id="ProducerID是如何生成的？"><a href="#ProducerID是如何生成的？" class="headerlink" title="ProducerID是如何生成的？"></a>ProducerID是如何生成的？</h4><p>客户端在生成Producer时，会实例化如下代码：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 实例化一个Producer对象</span>
+Producer<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> producer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">KafkaProducer</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>在org.apache.kafka.clients.producer.internals.Sender类中，在run()中有一个maybeWaitForPid()方法，用来生成一个ProducerID，实现代码如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">maybeWaitForPid</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>transactionState <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>transactionState<span class="token punctuation">.</span><span class="token function">hasPid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                Node node <span class="token operator">=</span> <span class="token function">awaitLeastLoadedNodeReady</span><span class="token punctuation">(</span>requestTimeout<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>node <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    ClientResponse response <span class="token operator">=</span> <span class="token function">sendAndAwaitInitPidRequest</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">hasResponse</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>response<span class="token punctuation">.</span><span class="token function">responseBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">instanceof</span> <span class="token class-name">InitPidResponse</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        InitPidResponse initPidResponse <span class="token operator">=</span> <span class="token punctuation">(</span>InitPidResponse<span class="token punctuation">)</span> response<span class="token punctuation">.</span><span class="token function">responseBody</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        transactionState<span class="token punctuation">.</span><span class="token function">setPidAndEpoch</span><span class="token punctuation">(</span>initPidResponse<span class="token punctuation">.</span><span class="token function">producerId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> initPidResponse<span class="token punctuation">.</span><span class="token function">epoch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                        log<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">"Received an unexpected response type for an InitPidRequest from &#123;&#125;. "</span> <span class="token operator">+</span>
+                                <span class="token string">"We will back off and try again."</span><span class="token punctuation">,</span> node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                    log<span class="token punctuation">.</span><span class="token function">debug</span><span class="token punctuation">(</span><span class="token string">"Could not find an available broker to send InitPidRequest to. "</span> <span class="token operator">+</span>
+                            <span class="token string">"We will back off and try again."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                log<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">"Received an exception while trying to get a pid. Will back off and retry."</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            log<span class="token punctuation">.</span><span class="token function">trace</span><span class="token punctuation">(</span><span class="token string">"Retry InitPidRequest in &#123;&#125;ms."</span><span class="token punctuation">,</span> retryBackoffMs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            time<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span>retryBackoffMs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            metadata<span class="token punctuation">.</span><span class="token function">requestUpdate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>与幂等性有关的另外一个特性就是事务。Kafka中的事务与数据库的事务类似，Kafka中的事务属性是指一系列的Producer生产消息和消费消息提交Offsets的操作在一个事务中，即原子性操作。对应的结果是同时成功或者同时失败。</p>
+<p>这里需要与数据库中事务进行区别，操作数据库中的事务指一系列的增删查改，对Kafka来说，操作事务是指一系列的生产和消费等原子性操作。</p>
+<h4 id="Kafka引入事务的用途？"><a href="#Kafka引入事务的用途？" class="headerlink" title="Kafka引入事务的用途？"></a>Kafka引入事务的用途？</h4><p>在事务属性引入之前，先引入Producer的幂等性，它的作用为：</p>
+<ul>
+<li>Producer多次发送消息可以封装成一个原子性操作，即同时成功，或者同时失败；</li>
+<li>消费者&amp;生产者模式下，因为Consumer在Commit Offsets出现问题时，导致重复消费消息时，Producer重复生产消息。需要将这个模式下Consumer的Commit Offsets操作和Producer一系列生产消息的操作封装成一个原子性操作。</li>
+</ul>
+<p>产生的场景有：</p>
+<p>比如，在Consumer中Commit Offsets时，当Consumer在消费完成时Commit的Offsets为100（假设最近一次Commit的Offsets为50），那么执行触发Balance时，其他Consumer就会重复消费消息（消费的Offsets介于50~100之间的消息）。</p>
+<p><strong>kafka的生产者事务是为了实现消息的精准处理一致性而产生的</strong></p>
+<h4 id="事务提供了哪些可使用的API？"><a href="#事务提供了哪些可使用的API？" class="headerlink" title="事务提供了哪些可使用的API？"></a>事务提供了哪些可使用的API？</h4><p>Producer提供了五种事务方法，它们分别是：initTransactions()、beginTransaction()、sendOffsetsToTransaction()、commitTransaction()、abortTransaction()，代码定义在org.apache.kafka.clients.producer.Producer&lt;K,V&gt;接口中，具体定义接口如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// 初始化事务，需要注意确保transation.id属性被分配</span>
+<span class="token keyword">void</span> <span class="token function">initTransactions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 开启事务</span>
+<span class="token keyword">void</span> <span class="token function">beginTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> throws ProducerFencedException<span class="token punctuation">;</span>
+
+<span class="token comment">// 为Consumer提供的在事务内Commit Offsets的操作</span>
+<span class="token keyword">void</span> <span class="token function">sendOffsetsToTransaction</span><span class="token punctuation">(</span>Map<span class="token operator">&lt;</span>TopicPartition<span class="token punctuation">,</span> OffsetAndMetadata<span class="token operator">></span> offsets<span class="token punctuation">,</span>
+                              String consumerGroupId<span class="token punctuation">)</span> throws ProducerFencedException<span class="token punctuation">;</span>
+
+<span class="token comment">// 提交事务</span>
+<span class="token keyword">void</span> <span class="token function">commitTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> throws ProducerFencedException<span class="token punctuation">;</span>
+
+<span class="token comment">// 放弃事务，类似于回滚事务的操作</span>
+<span class="token keyword">void</span> <span class="token function">abortTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> throws ProducerFencedException<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="事务的实际应用场景有哪些？"><a href="#事务的实际应用场景有哪些？" class="headerlink" title="事务的实际应用场景有哪些？"></a>事务的实际应用场景有哪些？</h4><p>在Kafka事务中，一个原子性操作，根据操作类型可以分为3种情况。情况如下：</p>
+<ul>
+<li>只有Producer生产消息，这种场景需要事务的介入；</li>
+<li>消费消息和生产消息并存，比如Consumer&amp;Producer模式，这种场景是一般Kafka项目中比较常见的模式，需要事务介入；</li>
+<li>只有Consumer消费消息，这种操作在实际项目中意义不大，和手动Commit Offsets的结果一样，而且这种场景不是事务的引入目的。</li>
+</ul>
+<h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><h4 id="安装-Java-环境"><a href="#安装-Java-环境" class="headerlink" title="安装 Java 环境"></a>安装 Java 环境</h4><p>在安装 Kafka 之前，先确保Linux 环境上是否有 Java 环境，使用 <code>java -version</code> 命令查看 Java 版本，推荐使用Jdk 1.8 ，如果没有安装 Java 环境的话，可以按照这篇文章进行安装（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zs-notes/p/8535275.html%EF%BC%89">https://www.cnblogs.com/zs-notes/p/8535275.html）</a></p>
 <h4 id="安装-Zookeeper-环境"><a href="#安装-Zookeeper-环境" class="headerlink" title="安装 Zookeeper 环境"></a>安装 Zookeeper 环境</h4><p>Kafka 的底层使用 Zookeeper 储存元数据，确保一致性，所以安装 Kafka 前需要先安装 Zookeeper，Kafka 的发行版自带了 Zookeeper ，可以直接使用脚本来启动，不过安装一个 Zookeeper 也不费劲</p>
 <h4 id="Zookeeper-单机搭建"><a href="#Zookeeper-单机搭建" class="headerlink" title="Zookeeper 单机搭建"></a>Zookeeper 单机搭建</h4><p>Zookeeper 单机搭建比较简单，直接从</p>
 <pre class="line-numbers language-none"><code class="language-none">https:&#x2F;&#x2F;www.apache.org&#x2F;dyn&#x2F;closer.cgi&#x2F;zookeeper&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -1089,30 +1294,30 @@ Topic<span class="token operator">:</span> cxuantopic Partition<span class="toke
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2025/04/20/k8s-tian-yi-yun-cce-ying-yong-bu-shu-shou-ce/">
+                <a href="/2025/05/08/ben-di-xiao-xi-biao/">
                     <div class="card-image">
                         
-                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s">
+                        <img src="https://img0.baidu.com/it/u=3683065822,2974080352&fm=253&fmt=auto&app=120&f=JPEG?w=748&h=500" class="responsive-img" alt="Spring Boot 实现分布式事务的优雅方案">
                         
-                        <span class="card-title">k8s</span>
+                        <span class="card-title">Spring Boot 实现分布式事务的优雅方案</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            部署手册
+                            Spring Boot 实现分布式事务的优雅方案
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2025-04-20
+                                <i class="far fa-clock fa-fw icon-date"></i>2025-05-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%BF%90%E7%BB%B4/" class="post-category">
-                                    运维
+                            <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/" class="post-category">
+                                    分布式事务
                                 </a>
                             
                             
@@ -1122,8 +1327,12 @@ Topic<span class="token operator">:</span> cxuantopic Partition<span class="toke
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%83%A8%E7%BD%B2/">
-                        <span class="chip bg-color">部署</span>
+                    <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">
+                        <span class="chip bg-color">分布式事务</span>
+                    </a>
+                    
+                    <a href="/tags/Spring-Boot/">
+                        <span class="chip bg-color">Spring Boot</span>
                     </a>
                     
                 </div>
