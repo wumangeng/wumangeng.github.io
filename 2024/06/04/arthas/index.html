@@ -1,0 +1,1796 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Arthas">
+    <meta name="description" content="曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', '');
+</script>
+
+
+    <title>Arthas | 山河远阔</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="山河远阔" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">山河远阔</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>时光轴</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">山河远阔</div>
+        <div class="logo-desc">
+            
+            曾梦想仗剑走天涯，后来喝多了，剑丢了马也被偷了，就没去了
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			时光轴
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/wumangeng/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/wumangeng/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://img1.baidu.com/it/u=2731985686,1747722656&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Arthas</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Arthas/">
+                                <span class="chip bg-color">Arthas</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                                <span class="chip bg-color">运维</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Arthas/" class="post-category">
+                                Arthas
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+         
+                
+
+                <!-- 增加在文章页显示作者名的功能 -->
+                <div class="text-color" align=center style="font-size:large">
+                    
+                        <i class="far fa-square"></i> wmg
+                    
+                </div>
+
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-06-04
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    6.2k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>当涉及到 Java 应用程序的诊断和调优时，Arthas 是一款备受推崇的开源工具，无论是线上问题的定位，还是实时<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/apm?from_column=20065&from=20065">性能监控</a>和分析，Arthas 都能为您提供强大的支持。</p>
+<p>本文将介绍 Arthas 的常用命令和使用技巧，帮助您更好地利用该工具进行故障排查和性能优化。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h3><p>在开始本文之前，先推荐两个东西：</p>
+<p>一个是 Arthas 官网：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/%EF%BC%8C%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E5%AF%B9">https://arthas.aliyun.com/doc/，官方文档对</a> Arthas 的每个命令都做出了介绍和解释，并且还有在线教程，方便大家学习和熟悉命令。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/d4b6c4d65f86c580a94ceabf36ddbd52.png" alt="img"></p>
+<p>另外还有一个向大家推荐的是一款名为 <strong>Arthas Idea</strong> 的 IDEA 插件。</p>
+<p>这是一款能快速生成 Arthas命令的插件，可快速生成可用于该类或该方法的 Arthas 命令，大大提高排查问题的效率。</p>
+<p><img src="https://wumangeng-github-io.oss-cn-guangzhou.aliyuncs.com/hexo-blog/blog-image/f02f1a1b4f6c1c009b98f68eb5f6582b.png" alt="img"></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a><strong>常用命令</strong></h3><p>尽管 Arthas 命令众多，但在实际使用中我们只需聚焦于那些常用命令。本文旨在重点介绍这些常用命令，并提供使用技巧和最佳实践，帮助您更好地运用 Arthas。</p>
+<h4 id="类命令"><a href="#类命令" class="headerlink" title="类命令"></a><strong>类命令</strong></h4><h5 id="getstatic"><a href="#getstatic" class="headerlink" title="getstatic"></a><strong>getstatic</strong></h5><p>查看类的静态属性。推荐直接使用 <code>ognl</code> 命令，更加灵活。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># getstatic class_name field_name
+getstatic demo<span class="token punctuation">.</span>MathGame random
+
+# 如果该静态属性是一个复杂对象，还可以支持在该属性上通过 ognl 表达式进行遍历，过滤，访问对象的内部属性等操作。
+# 例如，假设 n 是一个 Map，Map 的 Key 是一个 Enum，我们想过滤出 Map 中 Key 为某个 Enum 的值，可以写如下命令
+getstatic com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>arthas<span class="token punctuation">.</span>Test n <span class="token string">'entrySet().iterator.&#123;? #this.key.name()=="STOP"&#125;'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="jad"><a href="#jad" class="headerlink" title="jad"></a><strong>jad</strong></h5><p>反编译指定已加载类的源码。<code>jad</code> 只能反编译单个类，如需批量下载指定包的目录的 class 字节码请使用 <code>dump</code> 命令。</p>
+<p>比如我们想知道自己提交的代码是否生效了，这种场景<code>jad</code> 命令就特别有用。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 反编译 java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String
+jad java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String
+# 默认情况下，反编译结果里会带有 ClassLoader 信息，通过 <span class="token operator">--</span>source<span class="token operator">-</span>only 选项，可以只打印源代码。方便和 mc<span class="token operator">/</span>retransform 命令结合使用。
+jad <span class="token operator">--</span>source<span class="token operator">-</span>only java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String
+# 反编译指定的函数
+jad java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String substring
+# 当有多个 ClassLoader 都加载了这个类时，jad 命令会输出对应 ClassLoader 实例的 hashcode
+# 然后你只需要重新执行 jad 命令，并使用参数 <span class="token operator">-</span>c <span class="token operator">&lt;</span>hashcode<span class="token operator">></span> 就可以反编译指定 ClassLoader 加载的那个类了
+jad org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>log4j<span class="token punctuation">.</span>Logger <span class="token operator">-</span>c <span class="token number">69</span>dcaba4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="retransform"><a href="#retransform" class="headerlink" title="retransform"></a><strong>retransform</strong></h5><p>加载外部的 <code>.class</code> 文件，retransform jvm 已加载的类。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 结合 jad<span class="token operator">/</span>mc 命令使用，jad 命令反编译，然后可以用其它编译器，比如 vim 来修改源码
+jad <span class="token operator">--</span>source<span class="token operator">-</span>only com<span class="token punctuation">.</span>example<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>arthas<span class="token punctuation">.</span>user<span class="token punctuation">.</span>UserController <span class="token operator">></span> <span class="token operator">/</span>tmp<span class="token operator">/</span>UserController<span class="token punctuation">.</span>java
+# mc 命令来内存编译修改过的代码
+mc <span class="token operator">/</span>tmp<span class="token operator">/</span>UserController<span class="token punctuation">.</span>java <span class="token operator">-</span>d <span class="token operator">/</span>tmp
+# 用 retransform 命令加载新的字节码
+retransform <span class="token operator">/</span>tmp<span class="token operator">/</span>com<span class="token operator">/</span>example<span class="token operator">/</span>demo<span class="token operator">/</span>arthas<span class="token operator">/</span>user<span class="token operator">/</span>UserController<span class="token punctuation">.</span>class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>加载指定的 .class 文件，然后解析出 class name，再 retransform jvm 中已加载的对应的类。每加载一个 .class 文件，则会记录一个 retransform entry。</p>
+<p>如果多次执行 retransform 加载同一个 class 文件，则会有多条 retransform entry。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 查看 retransform entry
+retransform <span class="token operator">-</span>l
+# 删除指定 retransform entry，需要指定 id：
+retransform <span class="token operator">-</span>d <span class="token number">1</span>
+# 删除所有 retransform entry
+retransform <span class="token operator">--</span>deleteAll
+# 显式触发 retransform
+retransform <span class="token operator">--</span>classPattern demo<span class="token punctuation">.</span>MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果对某个类执行 retransform 之后，想消除 retransform 的影响，则需要：</p>
+<ul>
+<li>删除这个类对应的 retransform entry。</li>
+<li>重新显式触发 retransform。</li>
+</ul>
+<p>retransform 的限制：</p>
+<ul>
+<li>不允许新增加 field/method。</li>
+<li>正在跑的函数，没有退出不能生效。</li>
+</ul>
+<p>使用 <code>mc</code> 命令来编译 <code>jad</code> 的反编译的代码有可能失败。可以在本地修改代码，编译好后再上传到<a target="_blank" rel="noopener" href="https://cloud.tencent.com/product/cvm?from_column=20065&from=20065">服务器</a>上。有的服务器不允许直接上传文件，可以使用 <code>base64</code> 命令来绕过。</p>
+<ol>
+<li>在本地先转换 <code>.class</code> 文件为 base64，再保存为 result.txt。</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">base64  <span class="token operator">-</span>i <span class="token operator">/</span>tmp<span class="token operator">/</span>test<span class="token punctuation">.</span>class <span class="token operator">-</span>o <span class="token operator">/</span>tmp<span class="token operator">/</span>result<span class="token punctuation">.</span>txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>到服务器上，新建并编辑 result.txt，复制本地的内容，粘贴再保存。</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">vim  <span class="token operator">/</span>tmp<span class="token operator">/</span>result<span class="token punctuation">.</span>txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>把服务器上的 <code>result.txt </code>还原为<code>.class</code>。</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">base64 <span class="token operator">-</span>d <span class="token operator">/</span>tmp<span class="token operator">/</span>result<span class="token punctuation">.</span>txt <span class="token operator">></span> <span class="token operator">/</span>tmp<span class="token operator">/</span>test<span class="token punctuation">.</span>class<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol>
+<li>用 md5 命令计算哈希值，校验是否一致。</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">md5sum  <span class="token operator">/</span>tmp<span class="token operator">/</span>test<span class="token punctuation">.</span>class<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="监测排查命令"><a href="#监测排查命令" class="headerlink" title="监测排查命令"></a><strong>监测排查命令</strong></h4><p>监测排查命令是 Arthas 中最常用的命令。</p>
+<blockquote>
+<p>请注意，这些命令，都通过字节码增强技术来实现的，会在指定类的方法中插入一些切面来实现数据统计和观测，因此在线上、预发使用时，请尽量明确需要观测的类、方法以及条件，诊断结束要执行 <code>stop</code> 或将增强过的类执行 <code>reset</code> 命令。</p>
+</blockquote>
+<h5 id="monitor"><a href="#monitor" class="headerlink" title="monitor"></a><strong>monitor</strong></h5><p>方法执行监控。可对方法的调用次数，成功次数，失败次数等维度进行统计。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span><span class="token function">b：计算条件表达式过滤统计结果</span><span class="token punctuation">(</span>方法执行完毕之前<span class="token punctuation">)</span>，默认是方法执行之后过滤
+# <span class="token operator">-</span>c：统计周期，默认值为 <span class="token number">120</span> 秒
+# params<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token number">2</span>：过滤条件，方法第一个参数小于等于<span class="token number">2</span>
+monitor <span class="token operator">-</span>b <span class="token operator">-</span>c <span class="token number">5</span> com<span class="token punctuation">.</span>test<span class="token punctuation">.</span>testes<span class="token punctuation">.</span>MathGame primeFactors <span class="token string">"params[0] &lt;= 2"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="stack"><a href="#stack" class="headerlink" title="stack"></a><strong>stack</strong></h5><p>输出当前方法被调用的调用路径。</p>
+<p>很多时候我们都知道一个方法被执行，但这个方法被执行的路径非常多，或者你根本就不知道这个方法是从那里被执行了，此时你需要的是 <code>stack</code> 命令。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span>n：执行次数
+stack demo<span class="token punctuation">.</span>MathGame primeFactors  <span class="token operator">-</span>n  <span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h5 id="thread"><a href="#thread" class="headerlink" title="thread"></a><strong>thread</strong></h5><p>查看当前线程信息，查看线程的堆栈。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 没有参数时，默认按照 <span class="token constant">CPU</span> 增量时间降序排列，只显示第一页数据
+# <span class="token operator">-</span>i <span class="token number">1000</span>： 统计最近 <span class="token number">1000</span>ms 内的线程 <span class="token constant">CPU</span> 时间
+# <span class="token operator">-</span>n <span class="token number">3</span>： 展示当前最忙的前 <span class="token constant">N</span> 个线程并打印堆栈
+# <span class="token operator">--</span>state <span class="token constant">WAITING</span>：查看指定状态的线程
+thread
+
+# 显示指定线程的运行堆栈
+thread id
+
+# 找出当前阻塞其他线程的线程，注意，目前只支持找出 synchronized 关键字阻塞住的线程， 如果是 java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>concurrent<span class="token punctuation">.</span>Lock 目前还不支持。
+thread <span class="token operator">-</span>b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出：</p>
+<ul>
+<li>Internal 表示为 JVM 内部线程，参考 <code>dashboard</code> 命令的介绍。</li>
+<li>cpuUsage 为采样间隔时间内线程的 CPU 使用率，与 <code>dashboard</code> 命令的数据一致。</li>
+<li>deltaTime 为采样间隔时间内线程的增量 CPU 时间，小于 1ms 时被取整显示为 0ms。</li>
+<li>time 为线程运行总 CPU 时间。</li>
+</ul>
+<h5 id="trace"><a href="#trace" class="headerlink" title="trace"></a><strong>trace</strong></h5><p>方法内部调用路径，并输出方法路径上的每个节点上耗时。</p>
+<p><code>trace</code> 命令在定位性能问题的时候特别有用。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span>n <span class="token number">1</span>：限制匹配次数
+# <span class="token operator">--</span>skipJDKMethod <span class="token boolean">false</span>：默认情况下，trace 不会包含 jdk 里的函数调用，如果希望 trace jdk 里的函数，需要显式设置
+# <span class="token operator">--</span>exclude<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">-</span>pattern ：排除掉指定的类
+trace javax<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>Filter <span class="token operator">*</span> <span class="token operator">-</span>n <span class="token number">1</span> <span class="token operator">--</span>skipJDKMethod <span class="token boolean">false</span> <span class="token operator">--</span>exclude<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">-</span>pattern com<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>TestFilter
+# 正则表达式匹配路径上的多个类和函数，达到多层 trace 的效果
+trace <span class="token operator">-</span><span class="token constant">E</span> com<span class="token punctuation">.</span>test<span class="token punctuation">.</span>ClassA<span class="token operator">|</span>org<span class="token punctuation">.</span>test<span class="token punctuation">.</span>ClassB method1<span class="token operator">|</span>method2<span class="token operator">|</span>method3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>动态 tradce参考：<a target="_blank" rel="noopener" href="https://arthas.aliyun.com/doc/trace.html#%E5%8A%A8%E6%80%81-trace">https://arthas.aliyun.com/doc/trace.html#动态-trace</a></p>
+<h5 id="tt"><a href="#tt" class="headerlink" title="tt"></a><strong>tt</strong></h5><p>方法执行数据的时空隧道，记录下指定方法每次调用的入参和返回信息，并能对这些不同的时间下调用进行观测。</p>
+<p>说明：</p>
+<ul>
+<li>tt 命令的实现是：把函数的入参/返回值等，保存到一个<code>Map&lt;Integer, TimeFragment&gt;</code>里，默认的大小是 100。</li>
+<li>tt 相关功能在使用完之后，需要手动释放内存，否则长时间可能导致 OOM。退出 arthas 不会自动清除 tt 的缓存 map。</li>
+<li>需要强调的是，tt 命令是将当前环境的对象引用保存起来，但仅仅也只能保存一个引用而已。如果方法内部对入参进行了变更，或者返回的对象经过了后续的处理，那么在  tt  查看的时候将无法看到当时最准确的值。这也是为什么 watch 命令存在的意义。</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span>l：显示tt记录
+tt <span class="token operator">-</span>l
+
+# <span class="token operator">-</span>s：检索tt记录，比如：<span class="token operator">-</span>s <span class="token string">'method.name=="primeFactors"'</span>
+tt <span class="token operator">-</span>s <span class="token string">'method.name=="primeFactors"'</span>
+
+# <span class="token operator">-</span>t：这个参数的表明希望记录下类 <span class="token operator">*</span>Test 的 print 方法的每次执行情况。
+tt <span class="token operator">-</span>t
+
+# 查看具体调用信息
+tt <span class="token operator">-</span>i <span class="token number">1003</span>
+
+# <span class="token operator">-</span>w：<span class="token operator">--</span>watch<span class="token operator">-</span>express 观察时空隧道使用 ognl 表达式
+tt <span class="token operator">-</span>w <span class="token string">'@demo.MathGame@random.nextInt(100)'</span>
+
+# 重做一次调用，当我们对程序做出了修改之后，希望再次调用观测结果，此时你需要 <span class="token operator">-</span>p 参数
+# <span class="token operator">--</span>replay<span class="token operator">-</span>times：指定调用次数
+# <span class="token operator">--</span>replay<span class="token operator">-</span><span class="token function">interval：指定多次调用间隔</span><span class="token punctuation">(</span>单位 ms<span class="token punctuation">,</span> 默认 <span class="token number">1000</span>ms<span class="token punctuation">)</span>
+tt <span class="token operator">-</span>i <span class="token number">1004</span> <span class="token operator">-</span>p
+
+# 通过索引删除指定的 tt 记录
+tt <span class="token operator">-</span>d <span class="token number">1001</span>
+
+# 清除所有的 tt 记录
+tt <span class="token operator">--</span><span class="token keyword">delete</span><span class="token operator">-</span>all<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Spring MVC里获取对于的 bean：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 获取Spring Context里的bean
+tt <span class="token operator">-</span>n <span class="token number">1</span> <span class="token operator">-</span>t org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>mvc<span class="token punctuation">.</span>method<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>RequestMappingHandlerAdapter invokeHandlerMethod
+tt <span class="token operator">-</span>i <span class="token number">1000</span> <span class="token operator">-</span>w <span class="token string">'target.getApplicationContext().getBean("helloWorldService").getHelloMessage()'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="watch"><a href="#watch" class="headerlink" title="watch"></a><strong>watch</strong></h5><p>函数执行数据观测，通过编写 OGNL 表达式进行对应变量的查看。</p>
+<ul>
+<li>watch 命令定义了 4 个观察事件点，即 <code>-b</code> 函数调用前，<code>-e</code> 函数异常后，<code>-s</code> 函数返回后，<code>-f</code> 函数结束后。</li>
+<li>4 个观察事件点 <code>-b</code>、<code>-e</code>、<code>-s</code> 默认关闭，<code>-f</code> 默认打开，当指定观察点被打开后，在相应事件点会对观察表达式进行求值并输出。</li>
+<li>这里要注意<code>函数入参</code>和<code>函数出参</code>的区别，有可能在中间被修改导致前后不一致，除了 <code>-b</code> 事件点 <code>params</code> 代表函数入参外，其余事件都代表函数出参。</li>
+<li>当使用 <code>-b</code> 时，由于观察事件点是在函数调用前，此时返回值或异常均不存在。</li>
+<li>在 watch 命令的结果里，会打印出<code>location</code>信息。<code>location</code>有三种可能值：<code>AtEnter</code>，<code>AtExit</code>，<code>AtExceptionExit</code>。对应函数入口，函数正常 return，函数抛出异常。</li>
+</ul>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span>x表示遍历深度，可以调整来打印具体的参数和结果内容，默认值是 <span class="token number">1</span>。
+# <span class="token operator">-</span>x最大值是 <span class="token number">4</span>，防止展开结果占用太多内存。用户可以在ognl表达式里指定更具体的 field。
+watch demo<span class="token punctuation">.</span>MathGame primeFactors <span class="token operator">-</span>x <span class="token number">3</span>
+
+# 可以使用ognl表达式进行条件过滤
+watch demo<span class="token punctuation">.</span>MathGame primeFactors <span class="token string">"&#123;params[0],target&#125;"</span> <span class="token string">"params[0]&lt;0"</span> <span class="token string">"#cost>200"</span>
+
+# 可以使用 target<span class="token punctuation">.</span>field_name 访问当前对象的某个属性
+watch demo<span class="token punctuation">.</span>MathGame primeFactors <span class="token string">'target.illegalArgumentCount'</span>
+
+#  watch 构造函数
+watch demo<span class="token punctuation">.</span>MathGame <span class="token operator">&lt;</span>init<span class="token operator">></span> <span class="token string">'&#123;params,returnObj,throwExp&#125;'</span> <span class="token operator">-</span>v
+
+# watch内部类
+watch OuterClass$InnerClass<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="JVM命令"><a href="#JVM命令" class="headerlink" title="JVM命令"></a><strong>JVM命令</strong></h4><h5 id="heapdump"><a href="#heapdump" class="headerlink" title="heapdump"></a><strong>heapdump</strong></h5><p>生成堆转储文件。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># dump 到指定文件
+heapdump arthas<span class="token operator">-</span>output<span class="token operator">/</span>dump<span class="token punctuation">.</span>hprof
+# 只 dump live 对象
+heapdump <span class="token operator">--</span>live <span class="token operator">/</span>tmp<span class="token operator">/</span>dump<span class="token punctuation">.</span>hprof<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="jfr"><a href="#jfr" class="headerlink" title="jfr"></a><strong>jfr</strong></h5><p>Java Flight Recorder (JFR) 是一种用于收集有关正在运行的 Java 应用程序的诊断和分析数据的工具。</p>
+<p>它集成到 Java 虚拟机 (JVM) 中，几乎不会造成性能开销，因此即使在负载较重的生产环境中也可以使用。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 启动 <span class="token constant">JFR</span> 记录
+jfr start
+
+# 启动 jfr 记录，指定记录名，记录持续时间，记录文件保存路径。
+# <span class="token operator">--</span>duration  <span class="token constant">JFR</span> 记录持续时间，支持单位配置，<span class="token number">60</span>s<span class="token punctuation">,</span> <span class="token number">2</span>m<span class="token punctuation">,</span> <span class="token number">5</span>h<span class="token punctuation">,</span> <span class="token number">3</span>d，不带单位就是秒，默认一直记录。
+jfr start <span class="token operator">-</span>n myRecording <span class="token operator">--</span>duration <span class="token number">60</span>s <span class="token operator">-</span>f <span class="token operator">/</span>tmp<span class="token operator">/</span>myRecording<span class="token punctuation">.</span>jfr
+
+# 查看所有 <span class="token constant">JFR</span> 记录信息
+jfr status
+
+# 查看指定记录 id 的记录信息
+jfr status <span class="token operator">-</span>r <span class="token number">1</span>
+
+# 查看指定状态的记录信息
+jfr status <span class="token operator">--</span>state closed
+
+# jfr dump 会输出从开始到运行该命令这段时间内的记录到 <span class="token constant">JFR</span> 文件，且不会停止 jfr 的记录
+# 生成的结果可以用支持 jfr 格式的工具来查看。比如：<span class="token constant">JDK</span> Mission Control ： https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>openjdk<span class="token operator">/</span>jmc
+jfr dump <span class="token operator">-</span>r <span class="token number">1</span> <span class="token operator">-</span>f <span class="token operator">/</span>tmp<span class="token operator">/</span>myRecording1<span class="token punctuation">.</span>jfr
+
+# 停止 jfr 记录
+jfr stop <span class="token operator">-</span>r <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="memory"><a href="#memory" class="headerlink" title="memory"></a><strong>memory</strong></h5><p>查看 JVM 内存信息。</p>
+<p>输出如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">Memory                           used      total      max        usage
+heap                             <span class="token number">32</span>M       <span class="token number">256</span>M       <span class="token number">4096</span>M      <span class="token number">0.79</span><span class="token operator">%</span>
+g1_eden_space                    <span class="token number">11</span>M       <span class="token number">68</span>M        <span class="token operator">-</span><span class="token number">1</span>         <span class="token number">16.18</span><span class="token operator">%</span>
+g1_old_gen                       <span class="token number">17</span>M       <span class="token number">184</span>M       <span class="token number">4096</span>M      <span class="token number">0.43</span><span class="token operator">%</span>
+g1_survivor_space                <span class="token number">4</span>M        <span class="token number">4</span>M         <span class="token operator">-</span><span class="token number">1</span>         <span class="token number">100.00</span><span class="token operator">%</span>
+nonheap                          <span class="token number">35</span>M       <span class="token number">39</span>M        <span class="token operator">-</span><span class="token number">1</span>         <span class="token number">89.55</span><span class="token operator">%</span>
+codeheap_<span class="token string">'non-nmethods'</span>          <span class="token number">1</span>M        <span class="token number">2</span>M         <span class="token number">5</span>M         <span class="token number">20.53</span><span class="token operator">%</span>
+metaspace                        <span class="token number">26</span>M       <span class="token number">27</span>M        <span class="token operator">-</span><span class="token number">1</span>         <span class="token number">96.88</span><span class="token operator">%</span>
+codeheap_<span class="token string">'profiled_nmethods'</span>     <span class="token number">4</span>M        <span class="token number">4</span>M         <span class="token number">117</span>M       <span class="token number">3.57</span><span class="token operator">%</span>
+compressed_class_space           <span class="token number">2</span>M        <span class="token number">3</span>M         <span class="token number">1024</span>M      <span class="token number">0.29</span><span class="token operator">%</span>
+codeheap_<span class="token string">'non-profiled_nmethods'</span> <span class="token number">685</span>K      <span class="token number">2496</span>K      <span class="token number">120032</span>K    <span class="token number">0.57</span><span class="token operator">%</span>
+mapped                           <span class="token number">0</span>K        <span class="token number">0</span>K         <span class="token operator">-</span>          <span class="token number">0.00</span><span class="token operator">%</span>
+direct                           <span class="token number">48</span>M       <span class="token number">48</span>M        <span class="token operator">-</span>          <span class="token number">100.00</span><span class="token operator">%</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="dashboard"><a href="#dashboard" class="headerlink" title="dashboard"></a><strong>dashboard</strong></h5><p>当前系统的实时数据面板，按 <code>ctrl+c</code> 退出。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token function">i：刷新实时数据的时间间隔</span> <span class="token punctuation">(</span>ms<span class="token punctuation">)</span>，默认 <span class="token number">5000</span>m
+# n：刷新实时数据的次数
+dashboard <span class="token operator">-</span>i <span class="token number">5000</span> <span class="token operator">-</span>n <span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>显示 ID 为 -1 的是 JVM的内部线程，JVM 内部线程包括下面几种：</p>
+<ul>
+<li>JIT 编译线程：如  <code>C1 CompilerThread0</code>, <code>C2 CompilerThread0</code>。</li>
+<li>GC 线程：如 <code>GC Thread0</code>, <code>G1 Young RemSet Sampling。</code></li>
+<li>其它内部线程：如 <code>VM Periodic Task Thread</code>, <code>VM Thread</code>, <code>Service Thread。</code></li>
+</ul>
+<p>当 JVM 堆(heap)/元数据(metaspace) 空间不足或 OOM 时， GC 线程的 CPU 占用率会明显高于其他的线程。</p>
+<h5 id="classloader"><a href="#classloader" class="headerlink" title="classloader"></a><strong>classloader</strong></h5><p><code>classloader</code> 命令将 JVM 中所有的 classloader 的信息统计出来，并可以展示继承树，urls 等。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 按类加载类型查看统计信息
+classloader
+
+# 按类加载实例查看统计信息
+classloader <span class="token operator">-</span>l
+
+# 查看 ClassLoader 的继承树
+classloader <span class="token operator">-</span>t
+
+# 查看 URLClassLoader 实际的 urls，通过 classloader <span class="token operator">-</span>l 可以获取到哈希值
+classloader <span class="token operator">-</span>c <span class="token number">3</span>d4eac69<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="logger"><a href="#logger" class="headerlink" title="logger"></a><strong>logger</strong></h5><p>查看 logger 信息，更新 logger level。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 查看所有 logger 信息
+logger
+
+# 查看指定名字的 logger 信息
+logger <span class="token operator">-</span>n org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web
+
+# 更新 logger level
+logger <span class="token operator">--</span>name <span class="token constant">ROOT</span> <span class="token operator">--</span>level debug<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="sc"><a href="#sc" class="headerlink" title="sc"></a><strong>sc</strong></h5><p>查看 JVM 已加载的类信息。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 模糊搜索
+sc demo<span class="token punctuation">.</span><span class="token operator">*</span>
+
+# 打印类的详细信息
+sc <span class="token operator">-</span>d demo<span class="token punctuation">.</span>MathGame
+
+# 打印出类的 Field 信息
+sc <span class="token operator">-</span>d <span class="token operator">-</span>f demo<span class="token punctuation">.</span>MathGame<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="mbean"><a href="#mbean" class="headerlink" title="mbean"></a><strong>mbean</strong></h5><p>查看 Mbean 的信息。</p>
+<p>所谓 MBean 就是托管的Java对象，类似于 JavaBeans 组件，遵循 JMX(Java Management Extensions，即Java管理扩展) 规范中规定的设计模式。</p>
+<p>MBean可以表示任何需要管理的资源。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 列出所有 Mbean 的名称
+mbean
+
+# 查看 Mbean 的元信息
+mbean <span class="token operator">-</span>m java<span class="token punctuation">.</span>lang<span class="token operator">:</span>type<span class="token operator">=</span>Threading
+
+# 查看 mbean 属性信息，mbean 的 name 支持通配符匹配 mbean java<span class="token punctuation">.</span>lang<span class="token operator">:</span>type<span class="token operator">=</span>Th<span class="token operator">*</span>
+mbean java<span class="token punctuation">.</span>lang<span class="token operator">:</span>type<span class="token operator">=</span>Threading
+
+#通配符匹配特定的属性字段
+mbean java<span class="token punctuation">.</span>lang<span class="token operator">:</span>type<span class="token operator">=</span>Threading <span class="token operator">*</span>Count
+
+# 实时监控使用<span class="token operator">-</span>i，使用<span class="token operator">-</span>n命令执行命令的次数（默认为 <span class="token number">100</span> 次）
+mbean <span class="token operator">-</span>i <span class="token number">1000</span> <span class="token operator">-</span>n <span class="token number">50</span> java<span class="token punctuation">.</span>lang<span class="token operator">:</span>type<span class="token operator">=</span>Threading <span class="token operator">*</span>Count<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>比如我们可以使用 <code>mbean</code> 命令来查看 Druid 连接池的属性：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">mbean com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>druid<span class="token punctuation">.</span>pool<span class="token operator">:</span>name<span class="token operator">=</span>dataSource<span class="token punctuation">,</span>type<span class="token operator">=</span>DruidDataSource<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="profiler"><a href="#profiler" class="headerlink" title="profiler"></a><strong>profiler</strong></h5><p>生成应用热点的火焰图。本质上是通过不断的采样，然后把收集到的采样结果生成火焰图。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 启动 profiler
+# 生成的是 cpu 的火焰图，即 event 为cpu。可以用<span class="token operator">--</span>event参数来指定。
+profiler start <span class="token operator">--</span>event cpu
+
+# 获取已采集的 sample 的数量
+profiler getSamples
+
+# 查看 profiler 状态
+profiler status
+
+# 停止 profiler，生成结果，结果文件是html格式，也可以用<span class="token operator">--</span>format参数指定
+profiler stop <span class="token operator">--</span>format html
+
+# 恢复采样，start和resume的区别是：start是新开始采样，resume会保留上次stop时的数据。
+profiler resume
+
+# 配置 include<span class="token operator">/</span>exclude 来过滤数据
+profiler start <span class="token operator">--</span>include <span class="token string">'java/*'</span> <span class="token operator">--</span>include <span class="token string">'demo/*'</span> <span class="token operator">--</span>exclude <span class="token string">'*Unsafe.park*'</span>
+
+# 生成 jfr 格式结果
+profiler start <span class="token operator">--</span>file <span class="token operator">/</span>tmp<span class="token operator">/</span>test<span class="token punctuation">.</span>jfr<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="vmoption"><a href="#vmoption" class="headerlink" title="vmoption"></a><strong>vmoption</strong></h5><p>查看，更新 VM 诊断相关的参数。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 查看所有的 option
+vmoption
+
+# 查看指定的 option
+vmoption PrintGC
+
+# 更新指定的 option
+vmoption PrintGC <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="vmtool"><a href="#vmtool" class="headerlink" title="vmtool"></a><strong>vmtool</strong></h5><p><code>vmtool</code>  利用 JVMTI 接口，实现查询内存对象，强制 GC 等功能。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">--</span>limit：可以限制返回值数量，避免获取超大数据时对 <span class="token constant">JVM</span> 造成压力。默认值是 <span class="token number">10</span>
+# <span class="token operator">--</span>action：执行的动作
+vmtool <span class="token operator">--</span>action getInstances <span class="token operator">--</span>className java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String <span class="token operator">--</span>limit <span class="token number">10</span>
+
+#强制 <span class="token constant">GC</span>
+vmtool <span class="token operator">--</span>action forceGc
+
+# interrupt 指定线程
+vmtool <span class="token operator">--</span>action interruptThread <span class="token operator">-</span>t <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="特殊命令"><a href="#特殊命令" class="headerlink" title="特殊命令"></a><strong>特殊命令</strong></h4><p>可以使用 <code>-v</code>  查看观察匹配表达式的执行结果</p>
+<h5 id="ognl"><a href="#ognl" class="headerlink" title="ognl"></a><strong>ognl</strong></h5><p>执行 ognl 表达式，是Arthas中最为灵活的命令。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># <span class="token operator">-</span>c：执行表达式的 ClassLoader 的 hashcode，默认值是 SystemClassLoader
+# <span class="token operator">--</span>classLoaderClass：指定执行表达式的 ClassLoader 的 <span class="token keyword">class</span> <span class="token class-name">name</span>
+# <span class="token operator">-</span>x：结果对象的展开层次，默认值 <span class="token number">1</span>
+ognl <span class="token operator">--</span>classLoaderClass org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>loader<span class="token punctuation">.</span>LaunchedURLClassLoader @org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication@logger<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>有关 ognl 语法介绍，放在下文。</p>
+<h5 id="options"><a href="#options" class="headerlink" title="options"></a><strong>options</strong></h5><p>全局开关，慎用！</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 查看所有的 options
+options
+
+# 设置指定的 option，默认情况下json<span class="token operator">-</span>format为 <span class="token boolean">false</span>，如果希望watch<span class="token operator">/</span>tt等命令结果以 json 格式输出，则可以设置json<span class="token operator">-</span>format为 <span class="token boolean">true</span>。
+options json<span class="token operator">-</span>format <span class="token boolean">true</span>
+
+# 默认情况下，watch<span class="token operator">/</span>trace<span class="token operator">/</span>tt<span class="token operator">/</span>trace<span class="token operator">/</span>monitor等命令不支持java<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">package</span> 下的类。可以设置unsafe为 <span class="token boolean">true</span>，则可以增强。
+options unsafe <span class="token boolean">true</span>
+
+# Arthas 默认启用strict模式，在ognl表达式里，禁止更新对象的 Property 或者调用setter函数
+# 用户如果确定要在ognl表达式里更新对象，可以执行options strict <span class="token boolean">false</span>，关闭strict模式。
+options strict <span class="token boolean">false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a><strong>帮助命令</strong></h4><h5 id="help"><a href="#help" class="headerlink" title="help"></a><strong>help</strong></h5><p>查看命令帮助信息，可以查看当前 arthas 版本支持的指令，或者查看具体指令的使用说明。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">help dashboard 
+或者
+dashboard  <span class="token operator">-</span>help<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="history"><a href="#history" class="headerlink" title="history"></a><strong>history</strong></h5><p>打印命令历史。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">#查看最近执行的<span class="token number">3</span>条指令
+history <span class="token number">3</span>
+
+#清空指令
+history <span class="token operator">-</span>c<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="cls"><a href="#cls" class="headerlink" title="cls"></a><strong>cls</strong></h5><p>清空当前屏幕区域。</p>
+<h5 id="quit"><a href="#quit" class="headerlink" title="quit"></a><strong>quit</strong></h5><p>仅退出当前的连接，Attach 到目标进程上的 arthas 还会继续运行，端口会保持开放，下次连接时可以直接连接上。或者直接按 <code>Q</code> 也能退出。</p>
+<h5 id="stop"><a href="#stop" class="headerlink" title="stop"></a><strong>stop</strong></h5><p>完全退出 arthas，stop 时会重置所有增强过的类。</p>
+<h5 id="reset"><a href="#reset" class="headerlink" title="reset"></a><strong>reset</strong></h5><p>重置增强类，将被 Arthas 增强过的类全部还原，Arthas 服务端 <code>stop</code> 时会重置所有增强过的类。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 还原指定类
+reset Test
+
+# 还原所有类
+reset<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Advice"><a href="#Advice" class="headerlink" title="Advice"></a><strong>Advice</strong></h3><p>无论是匹配表达式也好、观察表达式也罢，他们核心判断变量都是围绕着一个 Arthas 中的通用通知对象 <code>Advice</code> 进行。</p>
+<p>它的简略代码结构如下：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Advice</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> final ClassLoader loader<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> clazz<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final ArthasMethod method<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final Object target<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final Object<span class="token punctuation">[</span><span class="token punctuation">]</span> params<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final Object returnObj<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final Throwable throwExp<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final boolean isBefore<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final boolean isThrow<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> final boolean isReturn<span class="token punctuation">;</span>
+
+    <span class="token comment">// getter/setter</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里列一个表格来说明不同变量的含义：</p>
+<table>
+<thead>
+<tr>
+<th align="left">变量名</th>
+<th align="left">变量解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">loader</td>
+<td align="left">本次调用类所在的 ClassLoader</td>
+</tr>
+<tr>
+<td align="left">clazz</td>
+<td align="left">本次调用类的 Class 引用</td>
+</tr>
+<tr>
+<td align="left">method</td>
+<td align="left">本次调用方法反射引用</td>
+</tr>
+<tr>
+<td align="left">target</td>
+<td align="left">本次调用类的实例</td>
+</tr>
+<tr>
+<td align="left">params</td>
+<td align="left">本次调用参数列表，这是一个数组，如果方法是无参方法则为空数组</td>
+</tr>
+<tr>
+<td align="left">returnObj</td>
+<td align="left">本次调用返回的对象。当且仅当 isReturn==true 成立时候有效，表明方法调用是以正常返回的方式结束。如果当前方法无返回值 void，则值为 null</td>
+</tr>
+<tr>
+<td align="left">throwExp</td>
+<td align="left">本次调用抛出的异常。当且仅当 isThrow==true 成立时有效，表明方法调用是以抛出异常的方式结束。</td>
+</tr>
+<tr>
+<td align="left">isBefore</td>
+<td align="left">辅助判断标记，当前的通知节点有可能是在方法一开始就通知，此时 isBefore==true 成立，同时 isThrow==false 和 isReturn==false，因为在方法刚开始时，还无法确定方法调用将会如何结束。</td>
+</tr>
+<tr>
+<td align="left">isThrow</td>
+<td align="left">辅助判断标记，当前的方法调用以抛异常的形式结束。</td>
+</tr>
+<tr>
+<td align="left">isReturn</td>
+<td align="left">辅助判断标记，当前的方法调用以正常返回的形式结束。</td>
+</tr>
+</tbody></table>
+<p>所有变量都可以在表达式中直接使用，如果在表达式中编写了不符合 OGNL 脚本语法或者引入了不在表格中的变量，则退出命令的执行。</p>
+<p>用户可以根据当前的异常信息修正 <code>条件表达式</code> 或 <code>观察表达式</code>。</p>
+<h3 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a><strong>快捷键</strong></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 自动补全，命令后敲 <span class="token operator">-</span> 或 <span class="token operator">--</span> ，然后按 tab 键，可以展示出此命令具体的选项
+Tab
+
+# 退出当前连接
+<span class="token constant">Q</span>
+
+# 后台异步命令相关快捷键
+ctrl <span class="token operator">+</span> c<span class="token operator">:</span> 终止当前命令
+ctrl <span class="token operator">+</span> z<span class="token operator">:</span> 挂起当前命令，后续可以 bg<span class="token operator">/</span>fg 重新支持此命令，或 kill 掉
+ctrl <span class="token operator">+</span> a<span class="token operator">:</span> 回到行首
+ctrl <span class="token operator">+</span> e<span class="token operator">:</span> 回到行尾<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="OGNL"><a href="#OGNL" class="headerlink" title="OGNL"></a><strong>OGNL</strong></h3><p>OGNL(Object-Graph Navigation Language)是一种表达式语言(EL)，简单来说就是一种简化了的Java属性的取值语言，Arthas使用它做表达式过滤。</p>
+<p>OGNL 表达式官网：<a target="_blank" rel="noopener" href="https://commons.apache.org/dormant/commons-ognl/language-guide.htm">https://commons.apache.org/dormant/commons-ognl/language-guide.htm</a></p>
+<p><strong>变量引用</strong></p>
+<p>OGNL支持用变量来保存中间结果，并在后面的代码中再次引用它。</p>
+<p>OGNL中的所有变量，对整个表达式都是全局可见的，引用变量的方法是在变量名之前加上 <code>#</code> 号，OGNL会将当前对象保存在 “this” 变量中，这个变量也可以像其他任何变量一样引用，用 <code>#this</code> 表示当前对象。</p>
+<p>这里列举一些常用的语法：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 调用静态属性
+<span class="token string">'@全路径类目@静态属性名'</span>
+
+# 调用静态方法
+<span class="token string">'@全路径类目@静态方法名("参数")'</span>
+
+# 过滤，判断，筛选
+<span class="token string">'params[0]'</span>：查看第一个参数
+<span class="token string">'params[0].size()'</span>：查看第一个参数的size
+<span class="token string">'params[0]=="xyz"'</span>：判断字符串相等
+<span class="token string">'params[0]==123456789L'</span>：判断long型
+<span class="token string">'params[0].&#123; #this.name &#125;'</span>：将结果按name属性映射
+<span class="token string">'params[0].&#123;? #this.name == null &#125;'</span>：按条件过滤
+<span class="token string">'params[0].&#123;? #this.age > 10 &#125;.size()'</span>：过滤后统计
+<span class="token string">'params[0].&#123;^ #this.name != null&#125;'</span>：选择第一个满足条件
+<span class="token string">'params[0].&#123;$ #this.name != null&#125;'</span>：选择最后一个满足条件
+<span class="token string">'params[0].&#123;? #this.age > 10 &#125;.size().(#this > 20 ? #this - 10 : #this + 10)'</span>：子表达式求值
+<span class="token string">'name in &#123; null,"Untitled" &#125;'</span><span class="token operator">:</span>这条语句判断name是否等于<span class="token keyword">null</span>或者 Untitled
+
+
+# 构造对象
+<span class="token string">'#&#123; "foo" : "foo value", "bar" : "bar value" &#125;'</span>：构造map参数
+<span class="token string">'#@java.util.LinkedHashMap@&#123; "foo" : "foo value", "bar" : "bar value" &#125;'</span>：构造特定类型map
+<span class="token string">'new com.Test("xiaoming",18)'</span>：构造方法，<span class="token keyword">new</span> <span class="token function">全路径类名</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token string">'new int[] &#123; 1, 2, 3 &#125;'</span>：创建数组并初始化
+
+
+# 访问对象
+<span class="token string">'@com.Test@getPerson("xiaoming",18).name'</span><span class="token operator">:</span>访问复杂对象属性，用 <span class="token punctuation">.</span>属性名 访问属性
+<span class="token string">'@com.Test@getChilds(&#123;"xiaoming"&#125;)[0]'</span><span class="token operator">:</span>访问List或者数组类型，用 <span class="token punctuation">[</span>索引<span class="token punctuation">]</span> 访问
+<span class="token string">'@com.Test@getMap()["xiaoming"]'</span><span class="token operator">:</span> 访问Map对象，用 <span class="token punctuation">[</span><span class="token string">"key"</span><span class="token punctuation">]</span>，key要用双引号
+
+# 临时变量
+<span class="token string">'#value1=@com.Test@getPerson("xiaoming",18), #value2=@com.Test@setPerson(#value1) ,&#123;#value1,#value2&#125;'</span><span class="token operator">:</span> 方法<span class="token constant">A</span>的返回值当做方法<span class="token constant">B</span>的入参
+<span class="token string">'#value1=@System@getProperty("java.home"), #value2=@System@getProperty("java.runtime.name"), &#123;#value1, #value2&#125;'</span>：执行多行表达式，赋值给临时变量，返回一个List
+<span class="token string">'#obj=new com.User("xiaoming",18),@com.Test@inputObj(#obj)'</span>：先用构造函数构造一个对象，然后把这个对象当做入参传入<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="实用功能"><a href="#实用功能" class="headerlink" title="实用功能"></a><strong>实用功能</strong></h3><h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a><strong>管道</strong></h4><p>Arthas 命令后可接 <code>grep</code>  进行进一步筛选或操作，比如：</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">classloader <span class="token operator">-</span>a <span class="token operator">|</span> grep <span class="token string">"String"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="后台异步执行"><a href="#后台异步执行" class="headerlink" title="后台异步执行"></a><strong>后台异步执行</strong></h4><p>当需要排查一个问题，但是这个问题的出现时间不能确定，那我们就可以把检测命令挂在后台运行，并将保存到输出日志。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"># 比如希望执行后台执行 trace 命令，那么调用下面命令
+trace Test t <span class="token operator">&amp;</span>
+
+# 如果希望查看当前有哪些 arthas 任务在执行，可以执行 jobs 命令
+jobs
+
+# 可通过 <span class="token operator">></span> 或者 <span class="token operator">>></span> 将任务输出结果输出到指定的文件中，可以和 <span class="token operator">&amp;</span> 一起使用，实现 arthas 命令的后台异步任务。比如：
+trace Test t <span class="token operator">>></span> test<span class="token punctuation">.</span>out <span class="token operator">&amp;</span>
+
+#异步执行的命令，如果希望停止，可执行kill命令
+kill <span class="token operator">&lt;</span>job<span class="token operator">-</span>id<span class="token operator">></span>
+
+# 当任务正在前台执行，可以执行 ‘ctrl <span class="token operator">+</span> z’ 将任务暂停。通过jbos查看任务状态将会变为 Stopped，再通过bg <span class="token operator">&lt;</span>job<span class="token operator">-</span>id<span class="token operator">></span>或者fg <span class="token operator">&lt;</span>job<span class="token operator">-</span>id<span class="token operator">></span>可让任务重新开始执行
+# 可以把对应的任务转到前台继续执行。在前台执行时，无法在 console 中执行其他命令
+fg <span class="token operator">&lt;</span>job<span class="token operator">-</span>id<span class="token operator">></span>
+# 可以把对应的任务在后台继续执行
+bg <span class="token operator">&lt;</span>job<span class="token operator">-</span>id<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a><strong>实用技巧</strong></h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">#  获取接口的响应时间
+watch org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>DispatcherServlet doService <span class="token string">'&#123;params[0].getRequestURI()+" "+ #cost&#125;'</span>  <span class="token operator">-</span>n <span class="token number">5</span>  <span class="token operator">-</span>x <span class="token number">3</span> <span class="token string">'#cost>100'</span>  <span class="token operator">-</span>f
+
+# 获取指定header 头的信息，比如这里 获取 trace<span class="token operator">-</span>id
+ watch org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>web<span class="token punctuation">.</span>servlet<span class="token punctuation">.</span>DispatcherServlet doService <span class="token string">'&#123;params[0].getRequestURI()+"  header="+params[1].getHeaders("trace-id")&#125;'</span>  <span class="token operator">-</span>n <span class="token number">10</span>  <span class="token operator">-</span>x <span class="token number">3</span> <span class="token operator">-</span>f
+ 
+# 查看执行的<span class="token constant">SQL</span>，下面两个都可以
+watch java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span>Connection prepareStatement <span class="token string">'&#123;params,throwExp&#125;'</span>  <span class="token operator">-</span>n <span class="token number">5</span>  <span class="token operator">-</span>x <span class="token number">3</span> 
+watch org<span class="token punctuation">.</span>apache<span class="token punctuation">.</span>ibatis<span class="token punctuation">.</span>mapping<span class="token punctuation">.</span>BoundSql getSql <span class="token string">'&#123;params,returnObj,throwExp&#125;'</span>  <span class="token operator">-</span>n <span class="token number">5</span>  <span class="token operator">-</span>x <span class="token number">3</span> 
+
+
+# 调用任意bean中的方法
+# <span class="token number">1.</span>先获取 classLoaderHash
+sc <span class="token operator">-</span>d com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>dubbo<span class="token punctuation">.</span>config<span class="token punctuation">.</span>spring<span class="token punctuation">.</span>extension<span class="token punctuation">.</span>SpringExtensionFactor
+
+# <span class="token number">2.</span>ognl 调用对应 bean 的方法，把 <span class="token number">34</span>f5090e 替换为对于的 classLoaderHash
+ognl  <span class="token operator">-</span>c <span class="token number">34</span>f5090e <span class="token string">'#context=@com.alibaba.dubbo.config.spring.extension.SpringExtensionFactory@contexts.iterator.next,#context.getBean("userServiceImpl").find("小明")'</span>
+
+# 当传参是复杂对象时
+ognl <span class="token operator">-</span>c <span class="token number">34</span>f5090e <span class="token string">'#context=@com.alibaba.dubbo.config.spring.extension.SpringExtensionFactory@contexts.iterator.next,#data=new Children(), #query=new User(),#query.setChildren(#data),#query.setRequestId("1"), #data.setName("小明"),#context.getBean("userServiceImpl").find(#query)'</span>
+
+# vmtool 命令提供了更简单的语法，也可以调用任意bean中的方法
+vmtool <span class="token operator">--</span>action getInstances  <span class="token operator">--</span>className org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ApplicationContext <span class="token operator">--</span>express <span class="token string">'instances[0].getBean("userServiceImpl").find("小明")'</span>
+
+
+# 动态修改 bean 属性值
+# 本质原理就是先获取 bean 实例，通过反射去修改对应属性值
+ognl <span class="token operator">-</span>c <span class="token number">34</span>f5090e org<span class="token punctuation">.</span>ClassLoader
+<span class="token string">'#context=@com.alibaba.dubbo.config.spring.extension.SpringExtensionFactory@contexts.iterator.next, #instence=#context.getBean("userServiceImpl"),#fieldObj=@com.User@class.getDeclaredField("age"),#fieldObj.setAccessible(true), #fieldObj.set(#instence,18)'</span>
+
+# 除了 ognl 也可以通过 vmtool 去获取 bean
+vmtool <span class="token operator">--</span>action getInstances  <span class="token operator">--</span>className org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ApplicationContext <span class="token operator">--</span>express <span class="token string">'instances[0].getBean("userServiceImpl")'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Arthas 的强大之处确实令人惊叹！本文希望能够启发您去探索更多关于 Arthas 的用法和功能，相信它会为您的开发工作带来很大的帮助和便利。</p>
+<p>点在看，让更多看见。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">wmg</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://wumangeng.github.io/2024/06/04/arthas/">http://wumangeng.github.io/2024/06/04/arthas/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">wmg</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Arthas/">
+                                    <span class="chip bg-color">Arthas</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BF%90%E7%BB%B4/">
+                                    <span class="chip bg-color">运维</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/11/25/k8s-zu-jian/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=2353245203,2321878842&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1735405200&t=b2870db32aa7b1dba7adb1f765678c64" class="responsive-img" alt="k8s组件">
+                        
+                        <span class="card-title">k8s组件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            k8s组件
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-11-25
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/k8s/" class="post-category">
+                                    k8s
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/docker/">
+                        <span class="chip bg-color">docker</span>
+                    </a>
+                    
+                    <a href="/tags/k8s%E7%BB%84%E4%BB%B6/">
+                        <span class="chip bg-color">k8s组件</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/01/25/juc-duo-xian-cheng-ji-gao-bing-fa/">
+                    <div class="card-image">
+                        
+                        <img src="https://img2.baidu.com/it/u=3636414952,1228126126&fm=253&fmt=auto&app=138&f=JPEG?w=891&h=500" class="responsive-img" alt="JUC">
+                        
+                        <span class="card-title">JUC</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            JUC
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/JUC/" class="post-category">
+                                    JUC
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/JUC/">
+                        <span class="chip bg-color">JUC</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021-2025</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">wumangeng</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/wumangeng/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/wumangeng" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2672885962@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+<!--  -->
+<!-- 
+ -->
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2672885962" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2672885962" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+<!--  -->
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

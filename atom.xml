@@ -6,7 +6,7 @@
   <link href="http://wumangeng.github.io/atom.xml" rel="self"/>
   
   <link href="http://wumangeng.github.io/"/>
-  <updated>2025-09-06T10:27:21.679Z</updated>
+  <updated>2025-09-20T06:23:00.567Z</updated>
   <id>http://wumangeng.github.io/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Spring AI</title>
+    <link href="http://wumangeng.github.io/2025/09/20/spring-ai/"/>
+    <id>http://wumangeng.github.io/2025/09/20/spring-ai/</id>
+    <published>2025-09-20T01:10:20.000Z</published>
+    <updated>2025-09-20T06:23:00.567Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/categories/Spring/"/>
+    
+    
+    <category term="Spring" scheme="http://wumangeng.github.io/tags/Spring/"/>
+    
+    <category term="Spring AI" scheme="http://wumangeng.github.io/tags/Spring-AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Influxdb安装</title>
+    <link href="http://wumangeng.github.io/2025/09/15/influxdb/"/>
+    <id>http://wumangeng.github.io/2025/09/15/influxdb/</id>
+    <published>2025-09-15T01:10:20.000Z</published>
+    <updated>2025-09-20T06:24:45.271Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;strong&gt;官方文档：&lt;a href=&quot;https://docs.influxdata.com/influxdb3/core/&quot;&gt;InfluxDB 3 Core Documentation&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;安装&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    <category term="Influxdb" scheme="http://wumangeng.github.io/tags/Influxdb/"/>
+    
+  </entry>
   
   <entry>
     <title>Springboot集成Kafka</title>
@@ -65,6 +120,36 @@
     
     
     <category term="kafka" scheme="http://wumangeng.github.io/tags/kafka/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SQL优化技巧</title>
+    <link href="http://wumangeng.github.io/2025/06/01/sql-you-hua/"/>
+    <id>http://wumangeng.github.io/2025/06/01/sql-you-hua/</id>
+    <published>2025-06-01T01:10:20.000Z</published>
+    <updated>2025-09-20T06:25:58.828Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SQL优化技巧&quot;&gt;&lt;a href=&quot;#SQL优化技巧&quot; class=&quot;headerlink&quot; title=&quot;SQL优化技巧&quot;&gt;&lt;/a&gt;SQL优化技巧&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;sql优化技巧&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+    <category term="SQL优化" scheme="http://wumangeng.github.io/tags/SQL%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="数据库" scheme="http://wumangeng.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
@@ -332,6 +417,33 @@
   </entry>
   
   <entry>
+    <title>Arthas</title>
+    <link href="http://wumangeng.github.io/2024/06/04/arthas/"/>
+    <id>http://wumangeng.github.io/2024/06/04/arthas/</id>
+    <published>2024-06-04T01:10:20.000Z</published>
+    <updated>2025-09-09T03:05:59.672Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;当涉及到 Java 应用程序的诊断和调优时，Arthas 是一款备受推崇的开源工具，无论是线上问题的定位，还是实时&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="Arthas" scheme="http://wumangeng.github.io/categories/Arthas/"/>
+    
+    
+    <category term="Arthas" scheme="http://wumangeng.github.io/tags/Arthas/"/>
+    
+    <category term="运维" scheme="http://wumangeng.github.io/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JUC</title>
     <link href="http://wumangeng.github.io/2024/01/25/juc-duo-xian-cheng-ji-gao-bing-fa/"/>
     <id>http://wumangeng.github.io/2024/01/25/juc-duo-xian-cheng-ji-gao-bing-fa/</id>
@@ -378,11 +490,11 @@
     <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-    <category term="openEuler" scheme="http://wumangeng.github.io/tags/openEuler/"/>
+    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
     
     <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
     
-    <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
+    <category term="openEuler" scheme="http://wumangeng.github.io/tags/openEuler/"/>
     
   </entry>
   
@@ -408,11 +520,11 @@
     <category term="数据库" scheme="http://wumangeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
-    
     <category term="postgress" scheme="http://wumangeng.github.io/tags/postgress/"/>
     
     <category term="pg" scheme="http://wumangeng.github.io/tags/pg/"/>
+    
+    <category term="openGauss" scheme="http://wumangeng.github.io/tags/openGauss/"/>
     
   </entry>
   
@@ -440,108 +552,6 @@
     <category term="CICD" scheme="http://wumangeng.github.io/tags/CICD/"/>
     
     <category term="Jenkins" scheme="http://wumangeng.github.io/tags/Jenkins/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python基础</title>
-    <link href="http://wumangeng.github.io/2023/06/01/python/"/>
-    <id>http://wumangeng.github.io/2023/06/01/python/</id>
-    <published>2023-06-01T01:10:20.000Z</published>
-    <updated>2025-09-01T14:41:41.081Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Python基础&quot;&gt;&lt;a href=&quot;#Python基础&quot; class=&quot;headerlink&quot; title=&quot;Python基础&quot;&gt;&lt;/a&gt;Python基础&lt;/h1&gt;&lt;h2 id=&quot;1-变量&quot;&gt;&lt;a href=&quot;#1-变量&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Python" scheme="http://wumangeng.github.io/categories/Python/"/>
-    
-    
-    <category term="Python基础" scheme="http://wumangeng.github.io/tags/Python%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="py" scheme="http://wumangeng.github.io/tags/py/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GIT分支管理</title>
-    <link href="http://wumangeng.github.io/2023/03/25/git-fen-zhi-guan-li/"/>
-    <id>http://wumangeng.github.io/2023/03/25/git-fen-zhi-guan-li/</id>
-    <published>2023-03-25T01:10:20.000Z</published>
-    <updated>2025-08-25T13:49:54.406Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;GIT分支管理和代码提交规范&quot;&gt;&lt;a href=&quot;#GIT分支管理和代码提交规范&quot; class=&quot;headerlink&quot; title=&quot;GIT分支管理和代码提交规范&quot;&gt;&lt;/a&gt;GIT分支管理和代码提交规范&lt;/h1&gt;&lt;h1 id=&quot;一、总体说明&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="项目" scheme="http://wumangeng.github.io/categories/%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-    <category term="git" scheme="http://wumangeng.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker安装服务</title>
-    <link href="http://wumangeng.github.io/2023/03/13/docker-an-zhuang-fu-wu/"/>
-    <id>http://wumangeng.github.io/2023/03/13/docker-an-zhuang-fu-wu/</id>
-    <published>2023-03-13T01:10:20.000Z</published>
-    <updated>2025-09-01T14:05:10.628Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;docker安装服务&quot;&gt;&lt;a href=&quot;#docker安装服务&quot; class=&quot;headerlink&quot; title=&quot;docker安装服务&quot;&gt;&lt;/a&gt;docker安装服务&lt;/h1&gt;&lt;h3 id=&quot;设置yum源&quot;&gt;&lt;a href=&quot;#设置yum源&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/categories/docker/"/>
-    
-    
-    <category term="docker" scheme="http://wumangeng.github.io/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux</title>
-    <link href="http://wumangeng.github.io/2023/02/25/linux/"/>
-    <id>http://wumangeng.github.io/2023/02/25/linux/</id>
-    <published>2023-02-25T01:10:20.000Z</published>
-    <updated>2025-09-01T13:47:10.836Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;Linux系统&quot;&gt;&lt;a href=&quot;#Linux系统&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="Linux" scheme="http://wumangeng.github.io/categories/Linux/"/>
-    
-    
-    <category term="Linux" scheme="http://wumangeng.github.io/tags/Linux/"/>
     
   </entry>
   
